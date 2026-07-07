@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEXORIA</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<meta name="description" content="Law firm">
+<meta property="og:title" content="LEXORIA">
+<meta property="og:description" content="Law firm">
+<meta property="og:site_name" content="LEXORIA">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LEXORIA">
+<meta name="twitter:description" content="Law firm">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    try {
+      var cached = localStorage.getItem('lex_lang');
+      var hint = (navigator.language || 'en').toLowerCase().slice(0,2);
+      var lang = cached || (hint === 'fi' ? 'fi' : 'en');
+      document.documentElement.lang = lang;
+      document.documentElement.dataset.lang = lang;
+    } catch(e){}
+  })();
+</script>
+<style>
+  :root {
+    --paper: #ECE7DD;
+    --paper-soft: #E5E0D5;
+    --ink: #0F1419;
+    --maroon: #3B2A5C;
+    --maroon-soft: #BAADC8;
+    --pebble: #6B6B6B;
+
+    --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 32px;
+    --s-5: 48px; --s-6: 64px; --s-7: 96px; --s-8: 128px;
+    --s-9: 192px; --s-10: 256px;
+
+    --container-max: 1400px;
+    --edge-x: var(--s-5);
+  }
+  @media (max-width: 768px) { :root { --edge-x: var(--s-3); } }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body.menu-open { overflow: hidden; }
+  ::selection { background: var(--maroon); color: var(--paper); }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-left: var(--edge-x);
+    padding-right: var(--edge-x);
+  }
+
+  .chapter-block {
+    display: block;
+    margin-bottom: var(--s-6);
+  }
+  .chapter {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--s-3);
+    margin-bottom: var(--s-5);
+    padding-top: 0;
+    line-height: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .chapter .glyph {
+    display: inline-block;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--maroon);
+    letter-spacing: 0;
+    line-height: 1;
+    margin-bottom: 0;
+    text-transform: none;
+  }
+  .dark .chapter { color: var(--maroon-soft); }
+  .dark .chapter .glyph { color: var(--maroon-soft); }
+
+  .section-h {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(40px, 5.2vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+  }
+  .section-h em { font-style: italic; color: var(--maroon); }
+  .dark .section-h em { color: var(--maroon-soft); }
+
+  @media (max-width: 900px) {
+    .chapter-block { margin-bottom: var(--s-5); }
+    .chapter { margin-bottom: var(--s-4); gap: var(--s-2); }
+    .chapter .glyph { font-size: 18px; }
+  }
+
+  .caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .caption .lead { color: var(--maroon); }
+  .dark .caption { color: rgba(236, 231, 221, 0.55); }
+  .dark .caption .lead { color: var(--maroon-soft); }
+
+  .img-treated { overflow: hidden; background: var(--ink); position: relative; }
+  .img-treated img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  .img-treated::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/></svg>");
+    opacity: 0.14; mix-blend-mode: overlay; pointer-events: none;
+  }
+  .img-treated.warm img { filter: grayscale(100%) contrast(1.08) brightness(0.96) sepia(0.15); }
+  .img-treated.cold img { filter: grayscale(100%) contrast(1.15) brightness(0.85); }
+  .img-treated.neutral img { filter: grayscale(100%) contrast(1.1) brightness(0.92); }
+  .img-treated.deep img { filter: grayscale(100%) contrast(1.2) brightness(0.55); }
+
+  .ratio-portrait { aspect-ratio: 4/5; }
+  .ratio-cinema { aspect-ratio: 16/9; }
+  .ratio-square { aspect-ratio: 1/1; }
+  .ratio-wide { aspect-ratio: 21/9; }
+
+  /* ============================================================
+     00 / COLD OPEN
+     ============================================================ */
+  .cold-open {
+    height: 100vh;
+    background: var(--ink);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: var(--s-4) var(--edge-x);
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+  .cold-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-3);
+  }
+  .coord {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: rgba(236, 231, 221, 0.4);
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.4s forwards;
+  }
+  .cold-menu-trigger {
+    background: transparent;
+    border: 0;
+    color: rgba(236, 231, 221, 0.7);
+    cursor: pointer;
+    padding: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.4s forwards;
+    transition: color 0.3s;
+  }
+  .cold-menu-trigger:hover { color: var(--paper); }
+  .cold-menu-trigger .trigger-bars span { background: currentColor; }
+  .coord .blink { animation: blink 1s steps(1) infinite; }
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+  .cold-mark { display: flex; align-items: center; }
+  .cold-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+    align-items: flex-start;
+  }
+  .cold-logo {
+    width: clamp(280px, 50vw, 720px);
+    height: auto;
+    display: block;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: coldLogoIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+  }
+  @keyframes coldLogoIn { to { opacity: 1; transform: translateY(0); } }
+  .cold-slogan {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.8vw, 22px);
+    color: rgba(236, 231, 221, 0.7);
+    line-height: 1.4;
+    letter-spacing: 0;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: coldLogoIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.4s forwards;
+    white-space: nowrap;
+  }
+  .cold-slogan em { font-style: italic; color: var(--maroon-soft); }
+  @media (max-width: 768px) {
+    .cold-mark { align-items: flex-start; padding-top: var(--s-7); }
+    .cold-slogan { white-space: normal; font-size: 15px; }
+  }
+  .cold-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 221, 0.45);
+    opacity: 0;
+    animation: fadeIn 1s ease 1.8s forwards;
+  }
+  .cold-foot a { color: inherit; text-decoration: none; transition: color 0.3s; }
+  .cold-foot a:hover { color: var(--maroon-soft); }
+  @media (max-width: 768px) {
+    .cold-foot { flex-direction: column; align-items: start; gap: var(--s-2); }
+  }
+
+  /* === NAV === */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: var(--s-3) var(--edge-x);
+    transform: translateY(-100%);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s, color 0.4s;
+    background: transparent;
+    color: var(--ink);
+  }
+  nav .nav-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+  nav.in { transform: translateY(0); background: rgba(236, 231, 221, 0.9); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+  nav.in.dark { background: rgba(15, 20, 25, 0.9); color: var(--paper); }
+  .nav-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  .nav-logo img { height: 26px; width: auto; display: block; }
+  .nav-logo .lg-white { display: none; }
+  nav.in.dark .nav-logo .lg-dark { display: none; }
+  nav.in.dark .nav-logo .lg-white { display: block; }
+
+  .nav-menu-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+    opacity: 0.85;
+  }
+  .nav-menu-trigger:hover { opacity: 1; }
+  .trigger-bars {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 22px;
+  }
+  .trigger-bars span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: center;
+  }
+  .nav-menu-trigger:hover .trigger-bars span:nth-child(2),
+  .cold-menu-trigger:hover .trigger-bars span:nth-child(2) { transform: scaleX(0.6); }
+  @media (max-width: 768px) {
+    .trigger-label { display: none; }
+  }
+
+  /* === MENU OVERLAY === */
+  .menu-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: var(--paper);
+    color: var(--ink);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow-y: auto;
+  }
+  .menu-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .menu-top {
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    padding: var(--s-3) var(--edge-x);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    z-index: 2;
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+  .menu-top-logo img { height: 26px; width: auto; display: block; }
+  .menu-close {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0;
+    transition: color 0.3s;
+  }
+  .menu-close:hover { color: var(--maroon); }
+  .menu-close svg { display: block; }
+
+  .menu-grid {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--s-5) var(--edge-x) var(--s-7);
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+    gap: var(--s-7);
+    align-items: start;
+  }
+  .menu-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-bottom: var(--s-4);
+  }
+  .menu-list ol { list-style: none; }
+  .menu-list li {
+    border-top: 1px solid rgba(15, 20, 25, 0.1);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .menu-list li:last-child { border-bottom: 1px solid rgba(15, 20, 25, 0.1); }
+  .menu-overlay.open .menu-list li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .menu-overlay.open .menu-list li:nth-child(1) { transition-delay: 0.10s; }
+  .menu-overlay.open .menu-list li:nth-child(2) { transition-delay: 0.16s; }
+  .menu-overlay.open .menu-list li:nth-child(3) { transition-delay: 0.22s; }
+  .menu-overlay.open .menu-list li:nth-child(4) { transition-delay: 0.28s; }
+  .menu-overlay.open .menu-list li:nth-child(5) { transition-delay: 0.34s; }
+  .menu-overlay.open .menu-list li:nth-child(6) { transition-delay: 0.40s; }
+  .menu-overlay.open .menu-list li:nth-child(7) { transition-delay: 0.46s; }
+  .menu-overlay.open .menu-list li:nth-child(8) { transition-delay: 0.52s; }
+
+  .menu-list a {
+    display: grid;
+    grid-template-columns: 48px 1fr auto 32px;
+    gap: var(--s-3);
+    align-items: baseline;
+    padding: var(--s-3) 0;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color 0.35s;
+    position: relative;
+  }
+  .menu-list a:hover { color: var(--maroon); }
+  .menu-list .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--pebble);
+    transition: color 0.35s;
+  }
+  .menu-list a:hover .num { color: var(--maroon); }
+  .menu-list li.active .num,
+  .menu-list li.active .label { color: var(--maroon); }
+  .menu-list .label {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .menu-list .sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    text-align: right;
+    line-height: 1.4;
+    align-self: center;
+  }
+  .menu-list .arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--maroon);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    align-self: center;
+    text-align: right;
+  }
+  .menu-list a:hover .arrow { opacity: 1; transform: translateX(0); }
+
+  .menu-aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    opacity: 0;
+    transition: opacity 0.6s ease 0.55s;
+  }
+  .menu-overlay.open .menu-aside { opacity: 1; }
+  .aside-block { display: flex; flex-direction: column; gap: var(--s-1); }
+  .aside-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-bottom: var(--s-1);
+  }
+  .aside-link {
+    font-family: 'Newsreader', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .aside-link:hover { color: var(--maroon); }
+  .aside-line {
+    font-family: 'Newsreader', serif;
+    font-size: 16px;
+    color: var(--pebble);
+    line-height: 1.6;
+  }
+  .aside-langs { display: flex; gap: var(--s-3); margin-top: var(--s-1); }
+  .aside-langs button {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--pebble);
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.3s;
+    text-transform: uppercase;
+  }
+  .aside-langs button.active { color: var(--ink); }
+  .aside-langs button:hover { color: var(--maroon); }
+
+  .aside-cta { margin-top: var(--s-2); }
+  .aside-cta-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+    padding: var(--s-3) var(--s-4);
+    transition: background 0.3s, gap 0.3s;
+    width: 100%;
+    max-width: 320px;
+  }
+  .aside-cta-link:hover { background: var(--maroon); gap: var(--s-4); }
+  .aside-cta-link span {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--maroon-soft);
+    font-size: 14px;
+    transition: color 0.3s;
+  }
+  .aside-cta-link:hover span { color: var(--paper); }
+
+  @media (max-width: 900px) {
+    .menu-grid {
+      grid-template-columns: 1fr;
+      gap: var(--s-6);
+      padding-top: var(--s-3);
+      padding-bottom: var(--s-5);
+    }
+    .menu-list a { grid-template-columns: 32px 1fr auto; }
+    .menu-list .sub { display: none; }
+    .menu-list .arrow { opacity: 1; transform: none; }
+  }
+
+  main { background: var(--paper); color: var(--ink); }
+
+  /* ============================================================
+     01 / POSITSIOON - statement + trust pillars
+     ============================================================ */
+  .position-section { padding: var(--s-8) 0 var(--s-7); }
+  .statement-grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: var(--s-7);
+    align-items: end;
+  }
+  .statement-text p {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.8vw, 60px);
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: var(--s-6);
+  }
+  .statement-text p em { font-style: italic; font-weight: 400; color: var(--maroon); }
+  .statement-meta {
+    margin-top: var(--s-6);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+  .statement-meta .m-cluster { white-space: nowrap; }
+  .statement-meta .m-cluster:not(:last-child)::after {
+    content: "·";
+    padding: 0 14px;
+    color: var(--pebble);
+    opacity: 0.55;
+  }
+  .statement-meta .m-cluster > span { color: var(--ink); }
+  .statement-image { display: flex; flex-direction: column; gap: var(--s-2); }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-5);
+    margin-top: var(--s-8);
+  }
+  .pillar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .pillar-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .pillar h4 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-top: 4px;
+  }
+  .pillar h4 em { font-style: italic; color: var(--maroon); }
+  .pillar p {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--pebble);
+  }
+
+  @media (max-width: 900px) {
+    .position-section { padding: var(--s-7) 0; }
+    .statement-grid { grid-template-columns: 1fr; gap: var(--s-6); }
+    .statement-text p { font-size: 26px; }
+    .pillars-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-5); margin-top: var(--s-6); }
+  }
+  @media (max-width: 540px) {
+    .pillars-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     02 / TEENUSED - 3-card overview
+     ============================================================ */
+  .services-section {
+    background: var(--paper);
+    color: var(--ink);
+    padding: var(--s-7) 0 var(--s-8);
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+  }
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    padding: var(--s-5) var(--s-4) var(--s-4);
+    background: var(--paper-soft);
+    color: var(--ink);
+    transition: background 0.4s ease;
+  }
+  .service-card:hover { background: #DDD5C5; }
+  .service-card:hover h3 em { color: var(--maroon); }
+  .service-card h3 em { transition: color 0.4s; }
+  .card-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .service-card h3 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 36px;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  .service-card h3 em { font-style: italic; }
+  .card-desc {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--pebble);
+    margin-bottom: var(--s-2);
+  }
+  .card-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .card-list li {
+    font-family: 'Newsreader', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    padding-left: var(--s-3);
+    position: relative;
+  }
+  .card-list li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--maroon);
+  }
+  .card-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-top: var(--s-1);
+  }
+  .card-cta {
+    margin-top: auto;
+    padding-top: var(--s-4);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    transition: gap 0.3s, color 0.3s;
+    align-self: flex-start;
+  }
+  .card-cta:hover { color: var(--maroon); gap: var(--s-3); }
+  .card-cta span {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--maroon);
+  }
+
+  @media (max-width: 900px) {
+    .services-section { padding: var(--s-7) 0; }
+    .services-grid { grid-template-columns: 1fr; gap: var(--s-3); }
+    .service-card { padding: var(--s-4); }
+    .card-desc { min-height: 0; }
+  }
+
+  /* ---- Praktikavaldkonnad ---- */
+  .practice-block {
+    margin-top: var(--s-8);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--s-8);
+    row-gap: var(--s-2);
+  }
+  .practice-eyebrow {
+    grid-column: 1 / -1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-bottom: var(--s-5);
+  }
+  .practice-column-title {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--ink);
+    margin: 0 0 var(--s-4);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+  .practice-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .practice-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    align-items: baseline;
+    column-gap: var(--s-3);
+    padding: var(--s-2) 0;
+  }
+  .practice-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--maroon);
+  }
+  .practice-name {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  @media (max-width: 900px) {
+    .practice-block { margin-top: var(--s-6); column-gap: var(--s-5); row-gap: var(--s-2); }
+    .practice-eyebrow { font-size: 16px; margin-bottom: 0; }
+    .practice-column-title { font-size: 26px; margin-bottom: var(--s-3); }
+    .practice-name { font-size: 19px; }
+  }
+  @media (max-width: 640px) {
+    .practice-block { grid-template-columns: 1fr; row-gap: var(--s-6); }
+    .practice-item { padding: var(--s-1) 0; }
+  }
+
+  /* ============================================================
+     03 / CINEMA - Miks Lexoria manifesto
+     ============================================================ */
+  .cinema-section {
+    position: relative;
+    background: var(--ink);
+    color: var(--paper);
+    height: 100vh;
+  }
+  .cinema-sticky {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cinema-frame {
+    position: relative;
+    width: 100%;
+    height: 56.25vw;
+    max-height: 92vh;
+    overflow: hidden;
+  }
+  .cinema-sticky::before, .cinema-sticky::after {
+    content: ""; position: absolute; left: 0; right: 0;
+    height: calc((100vh - 56.25vw) / 2);
+    background: var(--ink); z-index: 10;
+  }
+  .cinema-sticky::before { top: 0; }
+  .cinema-sticky::after { bottom: 0; }
+  @media (max-aspect-ratio: 16/9) {
+    .cinema-sticky::before, .cinema-sticky::after { display: none; }
+    .cinema-frame { height: 100vh; max-height: 100vh; }
+  }
+  .cinema-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1481277542470-605612bd2d61?q=80&w=2400&auto=format&fit=crop');
+    background-size: cover; background-position: center;
+    filter: grayscale(100%) contrast(1.12) brightness(0.48);
+    z-index: 1;
+  }
+  .cinema-bg::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/></svg>");
+    opacity: 0.18; mix-blend-mode: overlay;
+  }
+  .cinema-vignette {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(15, 20, 25, 0.85) 0%, transparent 40%, rgba(15, 20, 25, 0.85) 100%);
+    z-index: 2;
+  }
+  .cinema-corners {
+    position: absolute;
+    inset: var(--s-4) var(--s-5);
+    z-index: 4;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: rgba(236, 231, 221, 0.55);
+    text-transform: uppercase;
+  }
+  .cinema-corners > div:nth-child(2) { text-align: right; }
+  .cinema-corners > div:nth-child(3) { align-self: end; }
+  .cinema-corners > div:nth-child(4) { align-self: end; text-align: right; }
+  .cinema-ribbon {
+    position: absolute;
+    z-index: 5;
+    left: 9%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(640px, 60%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(13px, 1.05vw, 15px);
+    line-height: 2;
+    letter-spacing: 0.015em;
+    color: var(--paper);
+    white-space: pre-wrap;
+  }
+  .cinema-ribbon .char { opacity: 0.94; }
+  .cinema-ribbon .char.em { color: var(--maroon-soft); }
+  .cinema-ribbon .cursor-block { display: none; }
+  @media (max-width: 768px) {
+    .cinema-section { height: 100vh; }
+    .cinema-ribbon { font-size: 12px; width: 84%; line-height: 1.85; left: 8%; }
+    .cinema-corners { inset: var(--s-3); font-size: 9px; }
+  }
+
+  /* ============================================================
+     04 / TRANSITION IMAGE
+     ============================================================ */
+  .transition-image {
+    background: var(--paper);
+    padding: var(--s-8) 0 var(--s-5);
+  }
+  .transition-image .img-treated { width: 100%; aspect-ratio: 21/9; }
+  .transition-image .caption { margin-top: var(--s-3); }
+  @media (max-width: 768px) {
+    .transition-image { padding: var(--s-7) 0 var(--s-4); }
+    .transition-image .img-treated { aspect-ratio: 4/3; }
+  }
+
+  /* ============================================================
+     05 / MEESKOND - 2x2 partners grid
+     ============================================================ */
+  .team-section { background: var(--ink); color: var(--paper); padding: var(--s-8) 0; }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-7) var(--s-6);
+  }
+  .team-card {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: var(--s-4);
+    align-items: start;
+  }
+  .team-card .img-treated { aspect-ratio: 4/5; }
+  .team-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .team-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 221, 0.45);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--s-1);
+  }
+  .team-rank span:last-child { color: var(--maroon-soft); }
+  .team-signature {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 34px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--maroon-soft);
+    margin-bottom: var(--s-1);
+  }
+  .team-meta h3 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .team-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 221, 0.6);
+    line-height: 1.6;
+  }
+  .team-langs {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--maroon-soft);
+    margin-top: 4px;
+  }
+
+  .team-cta-row {
+    margin-top: var(--s-7);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+  .team-cta-row .lead {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: clamp(22px, 2vw, 32px);
+    line-height: 1.3;
+    color: var(--paper);
+    max-width: 560px;
+  }
+  .team-cta-row a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    transition: gap 0.3s, color 0.3s;
+  }
+  .team-cta-row a:hover { gap: var(--s-3); color: var(--maroon-soft); }
+  .team-cta-row a span { color: var(--maroon-soft); }
+
+  @media (max-width: 900px) {
+    .team-section { padding: var(--s-7) 0; }
+    .team-grid { grid-template-columns: 1fr; gap: var(--s-6); }
+    .team-card { grid-template-columns: 1fr; gap: var(--s-3); }
+  }
+
+  /* ============================================================
+     06 / PULL QUOTE
+     ============================================================ */
+  .pullquote-section {
+    background: var(--paper);
+    color: var(--ink);
+    padding: var(--s-8) 0;
+  }
+  .pullquote-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-4);
+    max-width: 1080px;
+  }
+  .pullquote-body {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 64px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .pullquote-body em { color: var(--maroon); font-weight: 400; }
+  .pullquote-attr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    line-height: 1.7;
+  }
+  .pullquote-attr .name { color: var(--ink); }
+  @media (max-width: 900px) {
+    .pullquote-section { padding: var(--s-7) 0; }
+  }
+
+  /* ============================================================
+     06.5 / HINNAKIRI
+     ============================================================ */
+  .pricing-section {
+    background: var(--paper-soft);
+    color: var(--ink);
+    padding: var(--s-8) 0;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-6);
+    margin-top: var(--s-7);
+  }
+  .pricing-card { display: flex; flex-direction: column; gap: var(--s-3); }
+  .pricing-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .pricing-title {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .pricing-rate {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-top: var(--s-2);
+  }
+  .pricing-rate .unit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--maroon);
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .pricing-vat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    margin-top: var(--s-1);
+  }
+  .pricing-note {
+    font-family: 'Newsreader', serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-top: var(--s-3);
+    max-width: 34ch;
+  }
+  .pricing-foot {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-5) var(--s-7);
+    margin-top: var(--s-7);
+    padding-top: var(--s-5);
+    max-width: 980px;
+  }
+  .pricing-hint {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    column-gap: var(--s-3);
+    row-gap: 8px;
+    align-items: baseline;
+  }
+  .pricing-hint-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--maroon);
+    line-height: 1;
+  }
+  .pricing-hint-lead {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    line-height: 1;
+  }
+  .pricing-hint-body {
+    grid-column: 2;
+    font-family: 'Newsreader', serif;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 42ch;
+  }
+  @media (max-width: 900px) {
+    .pricing-section { padding: var(--s-7) 0; }
+    .pricing-grid { grid-template-columns: 1fr; gap: var(--s-5); margin-top: var(--s-5); }
+    .pricing-rate { font-size: 40px; }
+    .pricing-foot { grid-template-columns: 1fr; margin-top: var(--s-5); gap: var(--s-3); }
+  }
+
+  /* ============================================================
+     07 / BRONEERI - CTA + contact
+     ============================================================ */
+  .booking-section {
+    background: var(--paper);
+    color: var(--ink);
+    padding: var(--s-7) 0 var(--s-8);
+  }
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    gap: var(--s-7);
+    align-items: start;
+  }
+  .booking-cta {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--s-3);
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.2vw, 28px);
+    color: var(--ink);
+    text-decoration: none;
+    padding-bottom: var(--s-1);
+    position: relative;
+    transition: gap 0.3s, color 0.3s;
+  }
+  .booking-cta::after {
+    content: ""; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px; background: var(--maroon);
+  }
+  .booking-cta:hover { gap: var(--s-5); color: var(--maroon); }
+  .booking-cta .arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal; font-size: 18px; color: var(--maroon);
+  }
+  .booking-options {
+    margin-top: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .booking-options .row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: var(--s-3);
+    align-items: baseline;
+    padding: var(--s-1) 0;
+  }
+  .booking-options .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .booking-options dd {
+    font-family: 'Newsreader', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+    margin: 0;
+  }
+  .booking-options dd .sep {
+    color: var(--maroon);
+    margin: 0 8px;
+    font-style: normal;
+  }
+  @media (max-width: 768px) {
+    .booking-options .row { grid-template-columns: 104px 1fr; gap: var(--s-2); }
+    .booking-options .label { font-size: 12px; }
+    .booking-options dd { font-size: 15px; }
+  }
+
+  .booking-image .img-treated { aspect-ratio: 4/5; }
+
+  /* === CONTACT FORM === */
+  .contact-form { display: block; }
+  .contact-form .form-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .form-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-bottom: var(--s-2);
+  }
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+  }
+  .form-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .form-label .req { color: var(--maroon); }
+  .form-label .opt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--pebble);
+    opacity: 0.7;
+    text-transform: none;
+    letter-spacing: 0.1em;
+  }
+  .form-input,
+  .form-textarea {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(15, 20, 25, 0.18);
+    padding: var(--s-1) 0 var(--s-2);
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+  .form-input:hover,
+  .form-textarea:hover { border-bottom-color: rgba(15, 20, 25, 0.4); }
+  .form-input:focus,
+  .form-textarea:focus { border-bottom-color: var(--maroon); }
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: var(--pebble);
+    opacity: 0.55;
+    font-style: italic;
+  }
+  .form-textarea {
+    min-height: 96px;
+    resize: vertical;
+    font-family: 'Newsreader', serif;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-3);
+  }
+  .form-submit {
+    margin-top: var(--s-3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    border: 0;
+    padding: var(--s-3) var(--s-4);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    transition: background 0.3s, gap 0.3s, color 0.3s;
+    align-self: flex-start;
+    border-radius: 0;
+  }
+  .form-submit:hover { background: var(--maroon); gap: var(--s-3); }
+  .form-submit:disabled { opacity: 0.5; cursor: wait; }
+  .form-submit .arrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--maroon-soft);
+    font-size: 14px;
+  }
+  .form-submit:hover .arrow { color: var(--paper); }
+  .form-note {
+    font-family: 'Newsreader', serif;
+    font-size: 13px;
+    color: var(--pebble);
+    line-height: 1.55;
+    margin-top: var(--s-1);
+  }
+  .form-success {
+    display: none;
+    padding: var(--s-4);
+    background: var(--paper-soft);
+    border-left: 2px solid var(--maroon);
+    font-family: 'Newsreader', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .form-success em { font-style: italic; color: var(--maroon); }
+  .contact-form.is-sent .form-content { display: none; }
+  .contact-form.is-sent .form-success { display: block; }
+
+  @media (max-width: 900px) {
+    .booking-section { padding: var(--s-7) 0; }
+    .booking-grid { grid-template-columns: 1fr; gap: var(--s-6); align-items: start; }
+    .form-row { grid-template-columns: 1fr; gap: var(--s-3); }
+  }
+
+  /* ============================================================
+     COLOPHON
+     ============================================================ */
+  footer {
+    background: var(--paper);
+    color: var(--pebble);
+    padding: var(--s-5) var(--edge-x) var(--s-4);
+  }
+  .footer-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+  .footer-mark {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    padding-bottom: var(--s-4);
+  }
+  .footer-mark img {
+    width: 56px;
+    height: 56px;
+    display: block;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+  }
+  .footer-mark:hover img { opacity: 1; }
+  .footer-mark-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    color: var(--pebble);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .footer-mark-text .lead { color: var(--maroon); }
+  .footer-mark-text .name { color: var(--ink); }
+  .footer-mark-text .meta {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--pebble);
+    margin-top: 2px;
+  }
+  .colophon {
+    padding-top: var(--s-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .colophon a { color: inherit; text-decoration: none; opacity: 0.7; transition: opacity 0.3s; }
+  .colophon a:hover { opacity: 1; }
+  .colophon-meta { display: flex; gap: var(--s-4); flex-wrap: wrap; align-items: center; }
+  .colophon-langs { display: inline-flex; gap: var(--s-2); align-items: center; }
+  .colophon-langs button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+    letter-spacing: 0.22em;
+    opacity: 0.55;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .colophon-langs button:hover { opacity: 1; }
+  .colophon-langs button.active { opacity: 1; color: var(--ink); }
+  .colophon-langs .sep { opacity: 0.35; }
+  @media (max-width: 768px) {
+    .colophon {
+      flex-direction: column;
+      align-items: start;
+      gap: var(--s-3);
+      padding-top: var(--s-4);
+    }
+    .colophon-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-2) var(--s-3);
+      width: 100%;
+    }
+    .colophon-meta a { white-space: nowrap; }
+    .colophon-langs { grid-column: 1 / -1; justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 00 / COLD OPEN -->
+<section class="cold-open" id="coldOpen">
+  <div class="cold-top">
+    <div class="coord">HELSINKI · 60.1699°N · 2026<span class="blink">_</span></div>
+    <button class="cold-menu-trigger" id="coldMenuTrigger" data-i18n-aria="nav.openMenu">
+      <span class="trigger-label" data-i18n="nav.menu">Menu</span>
+      <span class="trigger-bars" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+  </div>
+  <div class="cold-mark">
+    <div class="cold-stack">
+      <img class="cold-logo" src="lexoria-logo-white.png" alt="Lexoria">
+      <p class="cold-slogan" data-i18n="cold.slogan">Clear language. Discreet counsel. Since <em>2010.</em></p>
+    </div>
+  </div>
+  <div class="cold-foot">
+    <span data-i18n="cold.footLabel">Law firm · Helsinki</span>
+    <a href="#broneeri" data-i18n="cold.footCta">Book a consultation ↓</a>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Lexoria">
+      <img class="lg-dark" src="lexoria-logo-dark.png" alt="Lexoria">
+      <img class="lg-white" src="lexoria-logo-white.png" alt="" aria-hidden="true">
+    </a>
+    <button class="nav-menu-trigger" id="menuTrigger" data-i18n-aria="nav.openMenu" aria-expanded="false" aria-controls="menuOverlay">
+      <span class="trigger-label" data-i18n="nav.menu">Menu</span>
+      <span class="trigger-bars" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+  </div>
+</nav>
+
+<!-- MENU OVERLAY -->
+<div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-hidden="true" data-i18n-aria="menu.overlayLabel">
+  <div class="menu-top">
+    <a href="#" class="menu-top-logo" aria-label="Lexoria">
+      <img src="lexoria-logo-dark.png" alt="Lexoria">
+    </a>
+    <button class="menu-close" id="menuClose" data-i18n-aria="menu.closeAria">
+      <span data-i18n="menu.close">Close</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+        <path d="M1 1 L13 13 M13 1 L1 13" stroke="currentColor" stroke-width="1" fill="none"/>
+      </svg>
+    </button>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-list">
+      <div class="menu-eyebrow" data-i18n="menu.eyebrow">Contents · 01–08</div>
+      <ol>
+        <li class="active"><a href="#" data-close>
+          <span class="num">01</span>
+          <span class="label" data-i18n="menu.01.label">Home</span>
+          <span class="sub" data-i18n="menu.01.sub">Current</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a></li>
+        <li><a href="#teenused" data-close>
+          <span class="num">02</span>
+          <span class="label" data-i18n="menu.02.label">Services</span>
+          <span class="sub" data-i18n="menu.02.sub">Private · Business</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a></li>
+        <li><a href="#dokumendipank" data-close>
+          <span class="num">03</span>
+          <span class="label" data-i18n="menu.03.label">Document bank</span>
+          <span class="sub" data-i18n="menu.03.sub">From €19</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a></li>
+        <li><a href="#meeskond" data-close>
+          <span class="num">04</span>
+          <span class="label" data-i18n="menu.04.label">Team</span>
+          <span class="sub" data-i18n="menu.04.sub">Four partners</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a></li>
+        <li><a href="#positsioon" data-close>
+          <span class="num">05</span>
+          <span class="label" data-i18n="menu.05.label">About</span>
+          <span class="sub" data-i18n="menu.05.sub">Since 2010</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a></li>
+        <li><a href="#" data-close>
+          <span class="num">06</span>
+          <span class="label" data-i18n="menu.06.label">Journal</span>
+          <span class="sub" data-i18n="menu.06.sub">Law review</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a></li>
+        <li><a href="#hinnakiri" data-close>
+          <span class="num">07</span>
+          <span class="label" data-i18n="menu.07.label">Fees</span>
+          <span class="sub" data-i18n="menu.07.sub">From €110/h</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a></li>
+        <li><a href="#broneeri" data-close>
+          <span class="num">08</span>
+          <span class="label" data-i18n="menu.08.label">Book</span>
+          <span class="sub" data-i18n="menu.08.sub">Consultation</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a></li>
+      </ol>
+    </div>
+    <aside class="menu-aside">
+      <div class="aside-block">
+        <div class="aside-label" data-i18n="aside.contact">Contact</div>
+        <a href="mailto:tere@lexoria.ee" class="aside-link">tere@lexoria.ee</a>
+        <a href="tel:+358456560060" class="aside-link">+358 45 6560060</a>
+      </div>
+      <div class="aside-block">
+        <div class="aside-label" data-i18n="aside.office">Office</div>
+        <span class="aside-line" data-i18n="aside.officeLine1">Helsinki · Finland</span>
+        <span class="aside-line" data-i18n="aside.officeLine2">Tallinn · Estonia</span>
+        <span class="aside-line" data-i18n="aside.officeLine3">Mon–Fri 9:00–18:00</span>
+      </div>
+      <div class="aside-block">
+        <div class="aside-label" data-i18n="aside.lang">Language</div>
+        <div class="aside-langs" role="group" data-i18n-aria="aside.langGroup">
+          <button type="button" data-lang="fi">FI</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+      </div>
+      <div class="aside-block aside-cta">
+        <a href="#broneeri" class="aside-cta-link" data-close data-i18n-html="aside.cta">Book a consultation <span>↗</span></a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<main>
+
+  <!-- 01 / POSITSIOON -->
+  <section class="position-section" id="positsioon">
+    <div class="wrap">
+      <div class="chapter-block">
+        <div class="chapter">
+          <span class="glyph">§ 01</span>
+          <span data-i18n="pos.chapter">Position</span>
+        </div>
+        <h2 class="section-h" data-i18n="pos.h2">Law,<br><em>that speaks plainly.</em></h2>
+      </div>
+      <div class="statement-grid">
+        <div class="statement-text">
+          <p data-i18n="pos.statement">
+            Good counsel isn't the most complex — it's the counsel that helps you <em>move forward.</em> We listen before we answer. And we answer so that you <em>understand.</em>
+          </p>
+          <div class="statement-meta">
+            <span class="m-cluster"><span data-i18n="pos.metaFoundedLabel">Founded</span> <span>2010</span></span><span class="m-cluster"><span data-i18n="pos.metaPartnersLabel">Partners</span> <span data-i18n="pos.metaPartnersValue">four</span></span><span class="m-cluster"><span data-i18n="pos.metaStaffLabel">Staff</span> <span data-i18n="pos.metaStaffValue">eighteen</span></span>
+          </div>
+        </div>
+        <div class="statement-image">
+          <div class="img-treated warm ratio-portrait">
+            <img src="img/partner-portrait.jpg" data-i18n-alt="pos.imgAlt" alt="Lexoria senior partner, portrait">
+          </div>
+          <div class="caption">
+            <span class="lead" data-i18n="pos.captionLead">PLATE 01 / PARTNER</span>
+            <span data-i18n="pos.captionBody">Dagi-Liis Leivonen · Helsinki</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar">
+          <span class="pillar-num">01</span>
+          <h4 data-i18n="pos.pillar1.title">A decade and a half</h4>
+          <p data-i18n="pos.pillar1.body">Same name, same doors. In Helsinki since 2010.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">02</span>
+          <h4 data-i18n="pos.pillar2.title">Full <em>service</em></h4>
+          <p data-i18n="pos.pillar2.body">Private, business, documents. The whole of law under one roof.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">03</span>
+          <h4 data-i18n="pos.pillar3.title">Two <em>languages</em></h4>
+          <p data-i18n="pos.pillar3.body">Finnish and English. In your language, at your pace.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">04</span>
+          <h4 data-i18n="pos.pillar4.title">Discreet <em>counsel</em></h4>
+          <p data-i18n="pos.pillar4.body">Your matters stay with us. You talk to the public.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 / TEENUSED -->
+  <section class="services-section" id="teenused">
+    <div class="wrap">
+      <div class="chapter-block">
+        <div class="chapter">
+          <span class="glyph">§ 02</span>
+          <span data-i18n="svc.chapter">Services</span>
+        </div>
+        <h2 class="section-h" data-i18n="svc.h2">Three <em>radars.</em><br>One team.</h2>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="card-eyebrow" data-i18n="svc.card1.eyebrow">01 / Person</div>
+          <h3 data-i18n="svc.card1.title">For <em>private clients</em></h3>
+          <p class="card-desc" data-i18n="svc.card1.desc">Inheritance, family, property, employment. Matters that touch your life — not just your business.</p>
+          <ul class="card-list">
+            <li data-i18n="svc.card1.li1">Inheritance law</li>
+            <li data-i18n="svc.card1.li2">Family law</li>
+            <li data-i18n="svc.card1.li3">Real-estate transactions</li>
+            <li data-i18n="svc.card1.li4">Employment law</li>
+          </ul>
+          <a href="#" class="card-cta" data-i18n-html="svc.card1.cta">See services <span>→</span></a>
+        </div>
+
+        <div class="service-card">
+          <div class="card-eyebrow" data-i18n="svc.card2.eyebrow">02 / Business</div>
+          <h3 data-i18n="svc.card2.title">For <em>companies</em></h3>
+          <p class="card-desc" data-i18n="svc.card2.desc">Corporate law, contracts, M&amp;A, disputes, tax. The whole transaction — from opening to judgment.</p>
+          <ul class="card-list">
+            <li data-i18n="svc.card2.li1">Corporate law</li>
+            <li data-i18n="svc.card2.li2">Contracts</li>
+            <li data-i18n="svc.card2.li3">Mergers &amp; acquisitions</li>
+            <li data-i18n="svc.card2.li4">Disputes &amp; arbitration</li>
+            <li data-i18n="svc.card2.li5">Tax law</li>
+            <li data-i18n="svc.card2.li6">Bankruptcy &amp; restructuring</li>
+          </ul>
+          <a href="#" class="card-cta" data-i18n-html="svc.card2.cta">See services <span>→</span></a>
+        </div>
+
+        <div class="service-card" id="dokumendipank">
+          <div class="card-eyebrow" data-i18n="svc.card3.eyebrow">03 / Shop</div>
+          <h3 data-i18n="svc.card3.title">Document <em>bank</em></h3>
+          <p class="card-desc" data-i18n="svc.card3.desc">Ready-made, legally sound documents. Fill in online, download PDF or DOC.</p>
+          <ul class="card-list">
+            <li data-i18n="svc.card3.li1">Employment contracts</li>
+            <li data-i18n="svc.card3.li2">Lease agreements</li>
+            <li data-i18n="svc.card3.li3">NDAs &amp; collaboration agreements</li>
+            <li data-i18n="svc.card3.li4">Powers of attorney &amp; declarations</li>
+          </ul>
+          <span class="card-price" data-i18n="svc.card3.price">From €19</span>
+          <a href="#" class="card-cta" data-i18n-html="svc.card3.cta">Browse documents <span>→</span></a>
+        </div>
+
+      </div>
+
+      <div class="practice-block">
+        <div class="practice-eyebrow" data-i18n="svc.practice.eyebrow">Practice areas</div>
+        <div class="practice-column">
+          <h4 class="practice-column-title" data-i18n="svc.practice.privateTitle">Private clients.</h4>
+          <ol class="practice-list">
+            <li class="practice-item"><span class="practice-num">01</span><span class="practice-name" data-i18n="svc.practice.p1">Family law</span></li>
+            <li class="practice-item"><span class="practice-num">02</span><span class="practice-name" data-i18n="svc.practice.p2">Inheritance &amp; wills</span></li>
+            <li class="practice-item"><span class="practice-num">03</span><span class="practice-name" data-i18n="svc.practice.p3">Real estate &amp; property</span></li>
+            <li class="practice-item"><span class="practice-num">04</span><span class="practice-name" data-i18n="svc.practice.p4">Employment law</span></li>
+            <li class="practice-item"><span class="practice-num">05</span><span class="practice-name" data-i18n="svc.practice.p5">Criminal &amp; civil matters</span></li>
+            <li class="practice-item"><span class="practice-num">06</span><span class="practice-name" data-i18n="svc.practice.p6">Damages</span></li>
+            <li class="practice-item"><span class="practice-num">07</span><span class="practice-name" data-i18n="svc.practice.p7">Tax law</span></li>
+            <li class="practice-item"><span class="practice-num">08</span><span class="practice-name" data-i18n="svc.practice.p8">Contracts &amp; disputes</span></li>
+          </ol>
+        </div>
+        <div class="practice-column">
+          <h4 class="practice-column-title" data-i18n="svc.practice.corpTitle">Companies.</h4>
+          <ol class="practice-list">
+            <li class="practice-item"><span class="practice-num">01</span><span class="practice-name" data-i18n="svc.practice.c1">Corporate law</span></li>
+            <li class="practice-item"><span class="practice-num">02</span><span class="practice-name" data-i18n="svc.practice.c2">Mergers &amp; acquisitions</span></li>
+            <li class="practice-item"><span class="practice-num">03</span><span class="practice-name" data-i18n="svc.practice.c3">Contracts</span></li>
+            <li class="practice-item"><span class="practice-num">04</span><span class="practice-name" data-i18n="svc.practice.c4">Disputes &amp; arbitration</span></li>
+            <li class="practice-item"><span class="practice-num">05</span><span class="practice-name" data-i18n="svc.practice.c5">Employment law</span></li>
+            <li class="practice-item"><span class="practice-num">06</span><span class="practice-name" data-i18n="svc.practice.c6">Tax law</span></li>
+            <li class="practice-item"><span class="practice-num">07</span><span class="practice-name" data-i18n="svc.practice.c7">Construction &amp; land use</span></li>
+            <li class="practice-item"><span class="practice-num">08</span><span class="practice-name" data-i18n="svc.practice.c8">Restructuring &amp; bankruptcy</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 / CINEMA - Miks Lexoria -->
+  <section class="cinema-section" id="miks">
+    <div class="cinema-sticky">
+      <div class="cinema-frame">
+        <div class="cinema-bg"></div>
+        <div class="cinema-vignette"></div>
+        <div class="cinema-corners">
+          <div data-i18n="cinema.c1">ROLL 01 / MANIFESTO</div>
+          <div>2010 – 2026</div>
+          <div data-i18n="cinema.c3">HELSINKI</div>
+          <div data-i18n-html="cinema.c4">RUNTIME 01:48<span class="blink">_</span></div>
+        </div>
+        <div class="cinema-ribbon" id="ribbon"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 / TRANSITION IMAGE -->
+  <section class="transition-image">
+    <div class="wrap">
+      <div class="img-treated warm ratio-wide">
+        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2400&auto=format&fit=crop" data-i18n-alt="trans.imgAlt" alt="Law firm library, leather-bound files">
+      </div>
+      <div class="caption">
+        <span class="lead" data-i18n="trans.captionLead">PLATE 02 / FOUNDATION</span>
+        <span data-i18n="trans.captionBody">Case practice · Since 2010</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 / MEESKOND -->
+  <section class="team-section dark" id="meeskond">
+    <div class="wrap">
+      <div class="chapter-block">
+        <div class="chapter">
+          <span class="glyph">§ 03</span>
+          <span data-i18n="team.chapter">Team</span>
+        </div>
+        <h2 class="section-h" data-i18n="team.h2">The people<br>who <em>walk into the room.</em></h2>
+      </div>
+      <div class="team-grid">
+
+        <div class="team-card">
+          <div class="img-treated deep ratio-portrait">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=900&auto=format&fit=crop" data-i18n-alt="team.p1.imgAlt" alt="Andres Nõmm portrait">
+          </div>
+          <div class="team-meta">
+            <div class="team-rank">
+              <span data-i18n="team.p1.rank">Partner · 01</span>
+              <span data-i18n="team.p1.since">Since 2010</span>
+            </div>
+            <div class="team-signature">A. Nõmm</div>
+            <h3>Andres Nõmm</h3>
+            <div class="team-role" data-i18n="team.p1.role">Managing partner · M&amp;A &amp; corporate law</div>
+            <div class="team-langs">FI · EN · ET</div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="img-treated neutral ratio-portrait">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=900&auto=format&fit=crop" data-i18n-alt="team.p2.imgAlt" alt="Sofia Lindberg portrait">
+          </div>
+          <div class="team-meta">
+            <div class="team-rank">
+              <span data-i18n="team.p2.rank">Partner · 02</span>
+              <span data-i18n="team.p2.since">Since 2012</span>
+            </div>
+            <div class="team-signature">S. Lindberg</div>
+            <h3>Sofia Lindberg</h3>
+            <div class="team-role" data-i18n="team.p2.role">Partner · Disputes &amp; arbitration</div>
+            <div class="team-langs">FI · EN · SV</div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="img-treated warm ratio-portrait">
+            <img src="img/mari-tamm.jpg" data-i18n-alt="team.p3.imgAlt" alt="Dagi-Liis Leivonen portrait">
+          </div>
+          <div class="team-meta">
+            <div class="team-rank">
+              <span data-i18n="team.p3.rank">Partner · 03</span>
+              <span data-i18n="team.p3.since">Helsinki</span>
+            </div>
+            <div class="team-signature">D. Leivonen</div>
+            <h3>Dagi-Liis Leivonen</h3>
+            <div class="team-role" data-i18n="team.p3.role">MA, licensed jurist · Legal aid in Finland</div>
+            <div class="team-langs">FI · EN · ET</div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="img-treated cold ratio-portrait">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=900&auto=format&fit=crop" data-i18n-alt="team.p4.imgAlt" alt="Kristjan Põldsoo portrait">
+          </div>
+          <div class="team-meta">
+            <div class="team-rank">
+              <span data-i18n="team.p4.rank">Partner · 04</span>
+              <span data-i18n="team.p4.since">Since 2018</span>
+            </div>
+            <div class="team-signature">K. Põldsoo</div>
+            <h3>Kristjan Põldsoo</h3>
+            <div class="team-role" data-i18n="team.p4.role">Attorney-at-law · Tax law &amp; restructuring</div>
+            <div class="team-langs">FI · EN · DE</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="team-cta-row">
+        <div class="lead" data-i18n="team.ctaLead">A team that answers you <em>personally</em> — not through a ticket number.</div>
+        <a href="#broneeri" data-i18n-html="team.ctaLink">Meet everyone <span>↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 / PULL QUOTE -->
+  <section class="pullquote-section">
+    <div class="wrap">
+      <div class="pullquote-stack">
+        <blockquote class="pullquote-body" data-i18n="pull.body">
+          Law is simple, once you let go of the need <em>to look complicated.</em>
+        </blockquote>
+        <div class="pullquote-attr" data-i18n-html="pull.attr">
+          <span class="name">A. Nõmm</span> · Managing partner · On counsel
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06.5 / HINNAKIRI -->
+  <section class="pricing-section" id="hinnakiri">
+    <div class="wrap">
+      <div class="chapter-block">
+        <div class="chapter">
+          <span class="glyph">§ 04</span>
+          <span data-i18n="price.chapter">Fees</span>
+        </div>
+        <h2 class="section-h" data-i18n="price.h2">Clear<br><em>numbers.</em></h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <span class="pricing-eyebrow" data-i18n="price.card1.eyebrow">01 / Private</span>
+          <h3 class="pricing-title" data-i18n="price.card1.title">Your <em>life, your rights.</em></h3>
+          <div class="pricing-rate" data-i18n-html="price.card1.rate">240–280<span class="unit">€ / h</span></div>
+          <div class="pricing-vat" data-i18n="price.card1.vat">Incl. VAT 25.5% · 301–351 €/h</div>
+          <p class="pricing-note" data-i18n="price.card1.note">The hourly rate depends on complexity. For more demanding or non-Finnish-language work, we agree the rate separately.</p>
+        </div>
+        <div class="pricing-card">
+          <span class="pricing-eyebrow" data-i18n="price.card2.eyebrow">02 / Business</span>
+          <h3 class="pricing-title" data-i18n="price.card2.title">Business, <em>settled.</em></h3>
+          <div class="pricing-rate" data-i18n-html="price.card2.rate">240–300<span class="unit">€ / h</span></div>
+          <div class="pricing-vat" data-i18n="price.card2.vat">Incl. VAT 25.5% · 301–376 €/h</div>
+          <p class="pricing-note" data-i18n="price.card2.note">Everyday matters, larger transactions, court and arbitration proceedings. For large-scale projects — a fixed fee.</p>
+        </div>
+        <div class="pricing-card">
+          <span class="pricing-eyebrow" data-i18n="price.card3.eyebrow">03 / State legal aid</span>
+          <h3 class="pricing-title" data-i18n="price.card3.title">When <em>income is low.</em></h3>
+          <div class="pricing-rate" data-i18n-html="price.card3.rate">110<span class="unit">€ / h</span></div>
+          <div class="pricing-vat" data-i18n="price.card3.vat">Incl. VAT 25.5% · 138 €/h</div>
+          <p class="pricing-note" data-i18n="price.card3.note">The Finnish state pays for legal help at lower income levels. At the first meeting we explain the process and required documents.</p>
+        </div>
+      </div>
+      <div class="pricing-foot">
+        <div class="pricing-hint">
+          <span class="pricing-hint-num">01</span>
+          <span class="pricing-hint-lead" data-i18n="price.foot1.lead">First consultation</span>
+          <span class="pricing-hint-body" data-i18n="price.foot1.body">Up to 30 minutes free. If no client agreement is signed, no fee is charged.</span>
+        </div>
+        <div class="pricing-hint">
+          <span class="pricing-hint-num">02</span>
+          <span class="pricing-hint-lead" data-i18n="price.foot2.lead">Legal expenses insurance</span>
+          <span class="pricing-hint-body" data-i18n="price.foot2.body">The legal-expenses cover that comes with your home insurance may reimburse the lawyer's fee and court costs.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 / BRONEERI -->
+  <section class="booking-section" id="broneeri">
+    <div class="wrap">
+      <div class="chapter-block">
+        <div class="chapter">
+          <span class="glyph">§ 05</span>
+          <span data-i18n="book.chapter">Book</span>
+        </div>
+        <h2 class="section-h" data-i18n="book.h2">Book a<br><em>consultation.</em></h2>
+      </div>
+      <div class="booking-grid">
+        <div class="booking-main">
+          <a href="mailto:tere@lexoria.ee" class="booking-cta">
+            tere@lexoria.ee <span class="arrow">↗</span>
+          </a>
+          <dl class="booking-options">
+            <div class="row"><dt class="label" data-i18n="book.opt.client.label">Client</dt><dd data-i18n-html="book.opt.client.value">Private <span class="sep">·</span> Business</dd></div>
+            <div class="row"><dt class="label" data-i18n="book.opt.first.label">First</dt><dd data-i18n-html="book.opt.first.value">30 min <span class="sep">·</span> free</dd></div>
+            <div class="row"><dt class="label" data-i18n="book.opt.loc.label">Location</dt><dd data-i18n-html="book.opt.loc.value">Video <span class="sep">·</span> Office <span class="sep">·</span> On-site</dd></div>
+            <div class="row"><dt class="label" data-i18n="book.opt.office.label">Office</dt><dd data-i18n-html="book.opt.office.value">Helsinki <span class="sep">·</span> Tallinn</dd></div>
+            <div class="row"><dt class="label" data-i18n="book.opt.phone.label">Phone</dt><dd>+358 45 6560060</dd></div>
+            <div class="row"><dt class="label" data-i18n="book.opt.adv.label">Advisor</dt><dd data-i18n-html="book.opt.adv.value">Dagi-Liis Leivonen <span class="sep">·</span> in Finnish</dd></div>
+          </dl>
+        </div>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-content">
+            <div class="form-eyebrow" data-i18n="form.eyebrow">Send an enquiry · we reply within 24h</div>
+            <div class="form-field">
+              <label class="form-label" for="cf-nimi" data-i18n-html="form.name.label">
+                Name <span class="req" aria-hidden="true">*</span>
+              </label>
+              <input class="form-input" type="text" id="cf-nimi" name="nimi" required autocomplete="name" data-i18n-ph="form.name.ph" placeholder="Your name">
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label" for="cf-email" data-i18n-html="form.email.label">
+                  Email <span class="req" aria-hidden="true">*</span>
+                </label>
+                <input class="form-input" type="email" id="cf-email" name="email" required autocomplete="email" data-i18n-ph="form.email.ph" placeholder="name@example.com">
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="cf-tel" data-i18n-html="form.tel.label">
+                  Phone <span class="opt">optional</span>
+                </label>
+                <input class="form-input" type="tel" id="cf-tel" name="tel" autocomplete="tel" data-i18n-ph="form.tel.ph" placeholder="+358 ...">
+              </div>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="cf-info" data-i18n="form.info.label">
+                Details
+              </label>
+              <textarea class="form-textarea" id="cf-info" name="info" data-i18n-ph="form.info.ph" placeholder="A short description of your question or wish..."></textarea>
+            </div>
+            <button class="form-submit" type="submit" data-i18n-html="form.submit">
+              Send enquiry <span class="arrow">↗</span>
+            </button>
+            <p class="form-note" data-i18n="form.note">The form is encrypted. We use your details only to reply.</p>
+          </div>
+          <div class="form-success" role="status" aria-live="polite" data-i18n-html="form.success">
+            <em>Thank you.</em><br>
+            We received your enquiry. We'll be in touch within 24 hours.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-mark">
+      <img src="bar-mark.png" alt="Suomen Asianajajaliitto - jäsenmerkki" loading="lazy">
+      <div class="footer-mark-text">
+        <span class="lead" data-i18n="foot.bar.lead">Member</span>
+        <span class="name">Suomen Asianajajaliitto</span>
+        <span class="meta" data-i18n="foot.bar.meta">Defensor Legis · since 2010</span>
+      </div>
+    </div>
+    <div class="colophon">
+      <span data-i18n="foot.reg">© 2026 · Lexoria · Reg 0123456-7</span>
+      <div class="colophon-meta">
+        <a href="#" data-i18n="foot.imprint">Imprint</a>
+        <a href="#" data-i18n="foot.privacy">Privacy</a>
+        <a href="#" data-i18n="foot.terms">Terms</a>
+        <span class="colophon-langs" role="group" data-i18n-aria="aside.langGroup">
+          <button type="button" data-lang="fi">FI</button>
+          <span class="sep" aria-hidden="true">·</span>
+          <button type="button" data-lang="en">EN</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // =====================================================
+  //  i18n dictionary
+  // =====================================================
+  const I18N = {
+    en: {
+      'nav.menu': 'Menu',
+      'nav.openMenu': 'Open menu',
+      'menu.close': 'Close',
+      'menu.closeAria': 'Close menu',
+      'menu.overlayLabel': 'Primary menu',
+      'menu.eyebrow': 'Contents · 01–08',
+      'menu.01.label': 'Home', 'menu.01.sub': 'Current',
+      'menu.02.label': 'Services', 'menu.02.sub': 'Private · Business',
+      'menu.03.label': 'Document bank', 'menu.03.sub': 'From €19',
+      'menu.04.label': 'Team', 'menu.04.sub': 'Four partners',
+      'menu.05.label': 'About', 'menu.05.sub': 'Since 2010',
+      'menu.06.label': 'Journal', 'menu.06.sub': 'Law review',
+      'menu.07.label': 'Fees', 'menu.07.sub': 'From €110/h',
+      'menu.08.label': 'Book', 'menu.08.sub': 'Consultation',
+      'aside.contact': 'Contact',
+      'aside.office': 'Office',
+      'aside.officeLine1': 'Helsinki · Finland',
+      'aside.officeLine2': 'Tallinn · Estonia',
+      'aside.officeLine3': 'Mon–Fri 9:00–18:00',
+      'aside.lang': 'Language',
+      'aside.langGroup': 'Language',
+      'aside.cta': 'Book a consultation <span>↗</span>',
+      'cold.slogan': 'Clear language. Discreet counsel. Since <em>2010.</em>',
+      'cold.footLabel': 'Law firm · Helsinki',
+      'cold.footCta': 'Book a consultation ↓',
+      'pos.chapter': 'Position',
+      'pos.h2': 'Law,<br><em>that speaks plainly.</em>',
+      'pos.statement': "Good counsel isn't the most complex — it's the counsel that helps you <em>move forward.</em> We listen before we answer. And we answer so that you <em>understand.</em>",
+      'pos.metaFoundedLabel': 'Founded',
+      'pos.metaPartnersLabel': 'Partners',
+      'pos.metaPartnersValue': 'four',
+      'pos.metaStaffLabel': 'Staff',
+      'pos.metaStaffValue': 'eighteen',
+      'pos.imgAlt': 'Lexoria senior partner, portrait',
+      'pos.captionLead': 'PLATE 01 / PARTNER',
+      'pos.captionBody': 'Dagi-Liis Leivonen · Helsinki',
+      'pos.pillar1.title': 'A decade and a half',
+      'pos.pillar1.body': 'Same name, same doors. In Helsinki since 2010.',
+      'pos.pillar2.title': 'Full <em>service</em>',
+      'pos.pillar2.body': 'Private, business, documents. The whole of law under one roof.',
+      'pos.pillar3.title': 'Two <em>languages</em>',
+      'pos.pillar3.body': 'Finnish and English. In your language, at your pace.',
+      'pos.pillar4.title': 'Discreet <em>counsel</em>',
+      'pos.pillar4.body': 'Your matters stay with us. You talk to the public.',
+      'svc.chapter': 'Services',
+      'svc.h2': 'Three <em>radars.</em><br>One team.',
+      'svc.card1.eyebrow': '01 / Person',
+      'svc.card1.title': 'For <em>private clients</em>',
+      'svc.card1.desc': 'Inheritance, family, property, employment. Matters that touch your life — not just your business.',
+      'svc.card1.li1': 'Inheritance law', 'svc.card1.li2': 'Family law',
+      'svc.card1.li3': 'Real-estate transactions', 'svc.card1.li4': 'Employment law',
+      'svc.card1.cta': 'See services <span>→</span>',
+      'svc.card2.eyebrow': '02 / Business',
+      'svc.card2.title': 'For <em>companies</em>',
+      'svc.card2.desc': 'Corporate law, contracts, M&amp;A, disputes, tax. The whole transaction — from opening to judgment.',
+      'svc.card2.li1': 'Corporate law', 'svc.card2.li2': 'Contracts',
+      'svc.card2.li3': 'Mergers &amp; acquisitions', 'svc.card2.li4': 'Disputes &amp; arbitration',
+      'svc.card2.li5': 'Tax law', 'svc.card2.li6': 'Bankruptcy &amp; restructuring',
+      'svc.card2.cta': 'See services <span>→</span>',
+      'svc.card3.eyebrow': '03 / Shop',
+      'svc.card3.title': 'Document <em>bank</em>',
+      'svc.card3.desc': 'Ready-made, legally sound documents. Fill in online, download PDF or DOC.',
+      'svc.card3.li1': 'Employment contracts', 'svc.card3.li2': 'Lease agreements',
+      'svc.card3.li3': 'NDAs &amp; collaboration agreements', 'svc.card3.li4': 'Powers of attorney &amp; declarations',
+      'svc.card3.price': 'From €19',
+      'svc.card3.cta': 'Browse documents <span>→</span>',
+      'svc.practice.eyebrow': 'Practice areas',
+      'svc.practice.privateTitle': 'Private clients.',
+      'svc.practice.p1': 'Family law', 'svc.practice.p2': 'Inheritance &amp; wills',
+      'svc.practice.p3': 'Real estate &amp; property', 'svc.practice.p4': 'Employment law',
+      'svc.practice.p5': 'Criminal &amp; civil matters', 'svc.practice.p6': 'Damages',
+      'svc.practice.p7': 'Tax law', 'svc.practice.p8': 'Contracts &amp; disputes',
+      'svc.practice.corpTitle': 'Companies.',
+      'svc.practice.c1': 'Corporate law', 'svc.practice.c2': 'Mergers &amp; acquisitions',
+      'svc.practice.c3': 'Contracts', 'svc.practice.c4': 'Disputes &amp; arbitration',
+      'svc.practice.c5': 'Employment law', 'svc.practice.c6': 'Tax law',
+      'svc.practice.c7': 'Construction &amp; land use', 'svc.practice.c8': 'Restructuring &amp; bankruptcy',
+      'cinema.c1': 'ROLL 01 / MANIFESTO',
+      'cinema.c3': 'HELSINKI',
+      'cinema.c4': 'RUNTIME 01:48<span class="blink">_</span>',
+      'trans.imgAlt': 'Law firm library, leather-bound files',
+      'trans.captionLead': 'PLATE 02 / FOUNDATION',
+      'trans.captionBody': 'Case practice · Since 2010',
+      'team.chapter': 'Team',
+      'team.h2': 'The people<br>who <em>walk into the room.</em>',
+      'team.p1.rank': 'Partner · 01', 'team.p1.since': 'Since 2010',
+      'team.p1.role': 'Managing partner · M&amp;A &amp; corporate law',
+      'team.p1.imgAlt': 'Andres Nõmm portrait',
+      'team.p2.rank': 'Partner · 02', 'team.p2.since': 'Since 2012',
+      'team.p2.role': 'Partner · Disputes &amp; arbitration',
+      'team.p2.imgAlt': 'Sofia Lindberg portrait',
+      'team.p3.rank': 'Partner · 03', 'team.p3.since': 'Helsinki',
+      'team.p3.role': 'MA, licensed jurist · Legal aid in Finland',
+      'team.p3.imgAlt': 'Dagi-Liis Leivonen portrait',
+      'team.p4.rank': 'Partner · 04', 'team.p4.since': 'Since 2018',
+      'team.p4.role': 'Attorney-at-law · Tax law &amp; restructuring',
+      'team.p4.imgAlt': 'Kristjan Põldsoo portrait',
+      'team.ctaLead': 'A team that answers you <em>personally</em> — not through a ticket number.',
+      'team.ctaLink': 'Meet everyone <span>↗</span>',
+      'pull.body': 'Law is simple, once you let go of the need <em>to look complicated.</em>',
+      'pull.attr': '<span class="name">A. Nõmm</span> · Managing partner · On counsel',
+      'price.chapter': 'Fees',
+      'price.h2': 'Clear<br><em>numbers.</em>',
+      'price.card1.eyebrow': '01 / Private',
+      'price.card1.title': 'Your <em>life, your rights.</em>',
+      'price.card1.rate': '240–280<span class="unit">€ / h</span>',
+      'price.card1.vat': 'Incl. VAT 25.5% · 301–351 €/h',
+      'price.card1.note': 'The hourly rate depends on complexity. For more demanding or non-Finnish-language work, we agree the rate separately.',
+      'price.card2.eyebrow': '02 / Business',
+      'price.card2.title': 'Business, <em>settled.</em>',
+      'price.card2.rate': '240–300<span class="unit">€ / h</span>',
+      'price.card2.vat': 'Incl. VAT 25.5% · 301–376 €/h',
+      'price.card2.note': 'Everyday matters, larger transactions, court and arbitration proceedings. For large-scale projects — a fixed fee.',
+      'price.card3.eyebrow': '03 / State legal aid',
+      'price.card3.title': 'When <em>income is low.</em>',
+      'price.card3.rate': '110<span class="unit">€ / h</span>',
+      'price.card3.vat': 'Incl. VAT 25.5% · 138 €/h',
+      'price.card3.note': 'The Finnish state pays for legal help at lower income levels. At the first meeting we explain the process and required documents.',
+      'price.foot1.lead': 'First consultation',
+      'price.foot1.body': 'Up to 30 minutes free. If no client agreement is signed, no fee is charged.',
+      'price.foot2.lead': 'Legal expenses insurance',
+      'price.foot2.body': "The legal-expenses cover that comes with your home insurance may reimburse the lawyer's fee and court costs.",
+      'book.chapter': 'Book',
+      'book.h2': 'Book a<br><em>consultation.</em>',
+      'book.opt.client.label': 'Client',
+      'book.opt.client.value': 'Private <span class="sep">·</span> Business',
+      'book.opt.first.label': 'First',
+      'book.opt.first.value': '30 min <span class="sep">·</span> free',
+      'book.opt.loc.label': 'Location',
+      'book.opt.loc.value': 'Video <span class="sep">·</span> Office <span class="sep">·</span> On-site',
+      'book.opt.office.label': 'Office',
+      'book.opt.office.value': 'Helsinki <span class="sep">·</span> Tallinn',
+      'book.opt.phone.label': 'Phone',
+      'book.opt.adv.label': 'Advisor',
+      'book.opt.adv.value': 'Dagi-Liis Leivonen <span class="sep">·</span> in Finnish',
+      'form.eyebrow': 'Send an enquiry · we reply within 24h',
+      'form.name.label': 'Name <span class="req" aria-hidden="true">*</span>',
+      'form.name.ph': 'Your name',
+      'form.email.label': 'Email <span class="req" aria-hidden="true">*</span>',
+      'form.email.ph': 'name@example.com',
+      'form.tel.label': 'Phone <span class="opt">optional</span>',
+      'form.tel.ph': '+358 ...',
+      'form.info.label': 'Details',
+      'form.info.ph': 'A short description of your question or wish...',
+      'form.submit': 'Send enquiry <span class="arrow">↗</span>',
+      'form.submitSending': 'Sending... <span class="arrow">·</span>',
+      'form.note': 'The form is encrypted. We use your details only to reply.',
+      'form.success': '<em>Thank you.</em><br>We received your enquiry. We\'ll be in touch within 24 hours.',
+      'foot.bar.lead': 'Member',
+      'foot.bar.meta': 'Defensor Legis · since 2010',
+      'foot.reg': '© 2026 · Lexoria · Reg 0123456-7',
+      'foot.imprint': 'Imprint',
+      'foot.privacy': 'Privacy',
+      'foot.terms': 'Terms',
+      'ribbon': `Why Lexoria.
+
+One. Clear language.
+Law you can read
+without a lawyer beside you.
+
+Two. Practical outcome.
+A solution that works today —
+not a protocol for tomorrow.
+
+Three. Discreet counsel.
+Your matters stay with us.
+You talk to the public.
+
+Four. Fifteen years.
+Same name. Same doors.
+In Helsinki since 2010.
+
+The question is always new.
+The answer is always yours.`,
+      'ribbon.em': ['One.', 'Two.', 'Three.', 'Four.', 'Why', 'Lexoria.']
+    },
+    fi: {
+      'nav.menu': 'Valikko',
+      'nav.openMenu': 'Avaa valikko',
+      'menu.close': 'Sulje',
+      'menu.closeAria': 'Sulje valikko',
+      'menu.overlayLabel': 'Päävalikko',
+      'menu.eyebrow': 'Sisältö · 01–08',
+      'menu.01.label': 'Etusivu', 'menu.01.sub': 'Nykyinen',
+      'menu.02.label': 'Palvelut', 'menu.02.sub': 'Yksityinen · Yritys',
+      'menu.03.label': 'Asiakirjapankki', 'menu.03.sub': 'Alkaen 19 €',
+      'menu.04.label': 'Tiimi', 'menu.04.sub': 'Neljä partneria',
+      'menu.05.label': 'Meistä', 'menu.05.sub': 'Vuodesta 2010',
+      'menu.06.label': 'Artikkelit', 'menu.06.sub': 'Oikeuslehti',
+      'menu.07.label': 'Hinnasto', 'menu.07.sub': 'Alkaen 110 €/h',
+      'menu.08.label': 'Varaa', 'menu.08.sub': 'Konsultaatio',
+      'aside.contact': 'Yhteys',
+      'aside.office': 'Toimisto',
+      'aside.officeLine1': 'Helsinki · Suomi',
+      'aside.officeLine2': 'Tallinna · Viro',
+      'aside.officeLine3': 'Ma–Pe 9:00–18:00',
+      'aside.lang': 'Kieli',
+      'aside.langGroup': 'Kieli',
+      'aside.cta': 'Varaa konsultaatio <span>↗</span>',
+      'cold.slogan': 'Selkeää kieltä. Diskreettiä neuvontaa. Vuodesta <em>2010.</em>',
+      'cold.footLabel': 'Asianajotoimisto · Helsinki',
+      'cold.footCta': 'Varaa konsultaatio ↓',
+      'pos.chapter': 'Asema',
+      'pos.h2': 'Oikeutta,<br><em>joka puhuu selkeästi.</em>',
+      'pos.statement': 'Hyvä oikeusapu ei ole monimutkaisin — se on se, joka auttaa teitä <em>etenemään.</em> Kuuntelemme ennen kuin vastaamme. Ja vastaamme niin, että te <em>ymmärrätte.</em>',
+      'pos.metaFoundedLabel': 'Perustettu',
+      'pos.metaPartnersLabel': 'Partnerit',
+      'pos.metaPartnersValue': 'neljä',
+      'pos.metaStaffLabel': 'Henkilöstö',
+      'pos.metaStaffValue': 'kahdeksantoista',
+      'pos.imgAlt': 'Lexorian vanhempi partneri, muotokuva',
+      'pos.captionLead': 'LEVY 01 / PARTNERI',
+      'pos.captionBody': 'Dagi-Liis Leivonen · Helsinki',
+      'pos.pillar1.title': 'Puolitoista <em>vuosikymmentä</em>',
+      'pos.pillar1.body': 'Sama nimi, samat ovet. Helsingissä vuodesta 2010.',
+      'pos.pillar2.title': 'Täys<em>palvelu</em>',
+      'pos.pillar2.body': 'Yksityinen, yritys, asiakirjat. Koko oikeus saman katon alla.',
+      'pos.pillar3.title': 'Kaksi <em>kieltä</em>',
+      'pos.pillar3.body': 'Suomi ja englanti. Teidän kielellänne, teidän tahtiinne.',
+      'pos.pillar4.title': 'Diskreetti <em>neuvonta</em>',
+      'pos.pillar4.body': 'Teidän asianne pysyvät meillä. Julkisuudelle puhutte te.',
+      'svc.chapter': 'Palvelut',
+      'svc.h2': 'Kolme <em>tutkaa.</em><br>Yksi tiimi.',
+      'svc.card1.eyebrow': '01 / Ihminen',
+      'svc.card1.title': 'Yksityis<em>asiakkaalle</em>',
+      'svc.card1.desc': 'Perintö, perhe, kiinteistö, työ. Asiat, jotka koskevat elämäänne — eivät vain yritystä.',
+      'svc.card1.li1': 'Perintöoikeus', 'svc.card1.li2': 'Perheoikeus',
+      'svc.card1.li3': 'Kiinteistökaupat', 'svc.card1.li4': 'Työoikeus',
+      'svc.card1.cta': 'Katso palvelut <span>→</span>',
+      'svc.card2.eyebrow': '02 / Liiketoiminta',
+      'svc.card2.title': 'Yri<em>tykselle</em>',
+      'svc.card2.desc': 'Yritysoikeus, sopimukset, yritysjärjestelyt, riidat, verot. Koko toimeksianto — alusta tuomioon.',
+      'svc.card2.li1': 'Yhtiö- ja yritysoikeus', 'svc.card2.li2': 'Sopimukset',
+      'svc.card2.li3': 'Yritysjärjestelyt', 'svc.card2.li4': 'Riidat &amp; välimiesmenettely',
+      'svc.card2.li5': 'Vero-oikeus', 'svc.card2.li6': 'Konkurssi &amp; saneeraus',
+      'svc.card2.cta': 'Katso palvelut <span>→</span>',
+      'svc.card3.eyebrow': '03 / Kauppa',
+      'svc.card3.title': 'Asiakirja<em>pankki</em>',
+      'svc.card3.desc': 'Valmiit ja juridisesti oikeat asiakirjat. Täytä verkossa, lataa PDF tai DOC.',
+      'svc.card3.li1': 'Työsopimukset', 'svc.card3.li2': 'Vuokrasopimukset',
+      'svc.card3.li3': 'Salassapito- ja yhteistyösopimukset', 'svc.card3.li4': 'Valtakirjat ja ilmoitukset',
+      'svc.card3.price': 'Alkaen 19 €',
+      'svc.card3.cta': 'Selaa asiakirjoja <span>→</span>',
+      'svc.practice.eyebrow': 'Osaamisalueet',
+      'svc.practice.privateTitle': 'Yksityisasiakkaalle.',
+      'svc.practice.p1': 'Perheoikeus', 'svc.practice.p2': 'Perintöoikeus &amp; testamentit',
+      'svc.practice.p3': 'Kiinteistö &amp; omistusoikeus', 'svc.practice.p4': 'Työoikeus',
+      'svc.practice.p5': 'Rikos- ja siviiliasiat', 'svc.practice.p6': 'Vahingonkorvaus',
+      'svc.practice.p7': 'Vero-oikeus', 'svc.practice.p8': 'Sopimukset &amp; riidat',
+      'svc.practice.corpTitle': 'Yritykselle.',
+      'svc.practice.c1': 'Yhtiöoikeus', 'svc.practice.c2': 'Yritysjärjestelyt',
+      'svc.practice.c3': 'Sopimukset', 'svc.practice.c4': 'Riidat &amp; välimiesmenettely',
+      'svc.practice.c5': 'Työoikeus', 'svc.practice.c6': 'Vero-oikeus',
+      'svc.practice.c7': 'Rakentaminen &amp; maankäyttö', 'svc.practice.c8': 'Saneeraus &amp; konkurssi',
+      'cinema.c1': 'RULLA 01 / MANIFESTI',
+      'cinema.c3': 'HELSINKI',
+      'cinema.c4': 'KESTO 01:48<span class="blink">_</span>',
+      'trans.imgAlt': 'Asianajotoimiston kirjasto, nahkakansiot',
+      'trans.captionLead': 'LEVY 02 / PERUSTA',
+      'trans.captionBody': 'Oikeuskäytäntö · Vuodesta 2010',
+      'team.chapter': 'Tiimi',
+      'team.h2': 'Ihmiset,<br>jotka <em>tulevat huoneeseen.</em>',
+      'team.p1.rank': 'Partneri · 01', 'team.p1.since': 'Vuodesta 2010',
+      'team.p1.role': 'Johtava partneri · Yritysjärjestelyt &amp; yritysoikeus',
+      'team.p1.imgAlt': 'Andres Nõmm muotokuva',
+      'team.p2.rank': 'Partneri · 02', 'team.p2.since': 'Vuodesta 2012',
+      'team.p2.role': 'Partneri · Riidat &amp; välimiesmenettely',
+      'team.p2.imgAlt': 'Sofia Lindberg muotokuva',
+      'team.p3.rank': 'Partneri · 03', 'team.p3.since': 'Helsinki',
+      'team.p3.role': 'MA, luvan saanut oikeudenkäyntiavustaja · Oikeusapu Suomessa',
+      'team.p3.imgAlt': 'Dagi-Liis Leivonen muotokuva',
+      'team.p4.rank': 'Partneri · 04', 'team.p4.since': 'Vuodesta 2018',
+      'team.p4.role': 'Asianajaja · Vero-oikeus &amp; saneeraus',
+      'team.p4.imgAlt': 'Kristjan Põldsoo muotokuva',
+      'team.ctaLead': 'Tiimi, joka vastaa teille <em>henkilökohtaisesti</em> — ei numeron kautta.',
+      'team.ctaLink': 'Tutustu kaikkiin <span>↗</span>',
+      'pull.body': 'Oikeus on yksinkertaista, kun luovutte tarpeesta <em>näyttää monimutkaiselta.</em>',
+      'pull.attr': '<span class="name">A. Nõmm</span> · Johtava partneri · Neuvonnasta',
+      'price.chapter': 'Hinnasto',
+      'price.h2': 'Selkeitä<br><em>lukuja.</em>',
+      'price.card1.eyebrow': '01 / Yksityinen',
+      'price.card1.title': 'Elämänne, <em>oikeutenne.</em>',
+      'price.card1.rate': '240–280<span class="unit">€ / h</span>',
+      'price.card1.vat': 'Sis. ALV 25,5 % · 301–351 €/h',
+      'price.card1.note': 'Tuntiveloitus riippuu tehtävän vaativuudesta. Vaativammassa tai vieraskielisessä työssä sovimme veloituksesta erikseen.',
+      'price.card2.eyebrow': '02 / Yritys',
+      'price.card2.title': 'Liiketoiminta <em>rauhoittuu.</em>',
+      'price.card2.rate': '240–300<span class="unit">€ / h</span>',
+      'price.card2.vat': 'Sis. ALV 25,5 % · 301–376 €/h',
+      'price.card2.note': 'Päivittäiset asiat, laajemmat toimeksiannot, tuomioistuin- ja välimiesmenettelyt. Suurissa projekteissa — kiinteä hinta.',
+      'price.card3.eyebrow': '03 / Valtion oikeusapu',
+      'price.card3.title': 'Kun <em>tulot ovat pienet.</em>',
+      'price.card3.rate': '110<span class="unit">€ / h</span>',
+      'price.card3.vat': 'Sis. ALV 25,5 % · 138 €/h',
+      'price.card3.note': 'Suomen valtio korvaa juristin palkkion pienempituloisille. Ensitapaamisessa selitämme menettelyn ja tarvittavat asiakirjat.',
+      'price.foot1.lead': 'Ensimmäinen konsultaatio',
+      'price.foot1.body': 'Enintään 30 minuuttia maksutta. Jos toimeksiantoa ei synny, palkkiota ei peritä.',
+      'price.foot2.lead': 'Oikeusturvavakuutus',
+      'price.foot2.body': 'Kotivakuutukseenne kuuluva oikeusturvaosa voi korvata juristin palkkion ja oikeudenkäyntikulut.',
+      'book.chapter': 'Varaa',
+      'book.h2': 'Varaa<br><em>konsultaatio.</em>',
+      'book.opt.client.label': 'Asiakas',
+      'book.opt.client.value': 'Yksityinen <span class="sep">·</span> Yritys',
+      'book.opt.first.label': 'Ensimmäinen',
+      'book.opt.first.value': '30 min <span class="sep">·</span> maksuton',
+      'book.opt.loc.label': 'Paikka',
+      'book.opt.loc.value': 'Video <span class="sep">·</span> Toimisto <span class="sep">·</span> Asiakkaan luona',
+      'book.opt.office.label': 'Toimisto',
+      'book.opt.office.value': 'Helsinki <span class="sep">·</span> Tallinna',
+      'book.opt.phone.label': 'Puhelin',
+      'book.opt.adv.label': 'Neuvoja',
+      'book.opt.adv.value': 'Dagi-Liis Leivonen <span class="sep">·</span> suomeksi',
+      'form.eyebrow': 'Lähetä kysely · vastaamme 24 h kuluessa',
+      'form.name.label': 'Nimi <span class="req" aria-hidden="true">*</span>',
+      'form.name.ph': 'Teidän nimenne',
+      'form.email.label': 'Sähköposti <span class="req" aria-hidden="true">*</span>',
+      'form.email.ph': 'nimi@esimerkki.fi',
+      'form.tel.label': 'Puhelin <span class="opt">vapaaehtoinen</span>',
+      'form.tel.ph': '+358 ...',
+      'form.info.label': 'Lisätiedot',
+      'form.info.ph': 'Lyhyt kuvaus kysymyksestänne tai toiveestanne...',
+      'form.submit': 'Lähetä kysely <span class="arrow">↗</span>',
+      'form.submitSending': 'Lähetetään... <span class="arrow">·</span>',
+      'form.note': 'Lomake on salattu. Käytämme tietojanne vain vastaamiseen.',
+      'form.success': '<em>Kiitos.</em><br>Saimme kyselynne. Otamme yhteyttä 24 tunnin kuluessa.',
+      'foot.bar.lead': 'Jäsen',
+      'foot.bar.meta': 'Defensor Legis · vuodesta 2010',
+      'foot.reg': '© 2026 · Lexoria · Y-tunnus 0123456-7',
+      'foot.imprint': 'Impressum',
+      'foot.privacy': 'Tietosuoja',
+      'foot.terms': 'Ehdot',
+      'ribbon': `Miksi Lexoria.
+
+Yksi. Selkeä kieli.
+Oikeutta, jota voi lukea
+ilman juristia vieressä.
+
+Kaksi. Käytännön tulos.
+Ratkaisu, joka toimii tänään —
+ei pöytäkirja huomiseksi.
+
+Kolme. Diskreetti neuvonta.
+Asianne pysyvät meillä.
+Julkisuudelle puhutte te.
+
+Neljä. Puolitoista vuosikymmentä.
+Sama nimi. Samat ovet.
+Helsingissä vuodesta 2010.
+
+Kysymys on aina uusi.
+Vastaus on aina teidän.`,
+      'ribbon.em': ['Yksi.', 'Kaksi.', 'Kolme.', 'Neljä.', 'Miksi', 'Lexoria.']
+    }
+  };
+
+  // =====================================================
+  //  Language application
+  // =====================================================
+  let currentLang = document.documentElement.lang === 'fi' ? 'fi' : 'en';
+
+  function applyLang(lang) {
+    if (!I18N[lang]) lang = 'en';
+    currentLang = lang;
+    const dict = I18N[lang];
+    document.documentElement.lang = lang;
+    document.documentElement.dataset.lang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] != null) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (dict[key] != null) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const key = el.getAttribute('data-i18n-aria');
+      if (dict[key] != null) el.setAttribute('aria-label', dict[key]);
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const key = el.getAttribute('data-i18n-alt');
+      if (dict[key] != null) el.setAttribute('alt', dict[key]);
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const key = el.getAttribute('data-i18n-ph');
+      if (dict[key] != null) el.setAttribute('placeholder', dict[key]);
+    });
+
+    document.querySelectorAll('[data-lang]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    if (typeof buildRibbon === 'function') buildRibbon();
+  }
+
+  function setLang(lang, persist) {
+    if (!I18N[lang]) return;
+    if (persist) {
+      try { localStorage.setItem('lex_lang', lang); } catch(e){}
+    }
+    applyLang(lang);
+  }
+
+  document.querySelectorAll('[data-lang]').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.dataset.lang, true));
+  });
+
+  applyLang(currentLang);
+
+  // Geo IP resolution — only for first visit (no cache)
+  (function(){
+    try {
+      if (localStorage.getItem('lex_lang')) return;
+    } catch(e) {}
+    fetch('https://ipapi.co/country/', { cache: 'no-store' })
+      .then(r => r.ok ? r.text() : Promise.reject())
+      .then(code => {
+        const lang = (code || '').trim().toUpperCase() === 'FI' ? 'fi' : 'en';
+        setLang(lang, true);
+      })
+      .catch(() => {});
+  })();
+
+  // =====================================================
+  //  NAV
+  // =====================================================
+  const nav = document.getElementById('nav');
+  const coldOpen = document.getElementById('coldOpen');
+  const cinema = document.getElementById('miks');
+  const meeskond = document.getElementById('meeskond');
+
+  function updateNav() {
+    const y = window.scrollY;
+    nav.classList.toggle('in', y > coldOpen.offsetHeight * 0.7);
+    const navY = 24;
+    const overDark = [cinema, meeskond].some(s => {
+      const r = s.getBoundingClientRect();
+      return r.top <= navY && r.bottom >= navY;
+    });
+    nav.classList.toggle('dark', overDark);
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  // === MENU OVERLAY ===
+  const menuTrigger = document.getElementById('menuTrigger');
+  const menuClose = document.getElementById('menuClose');
+  const menuOverlay = document.getElementById('menuOverlay');
+
+  function openMenu() {
+    menuOverlay.classList.add('open');
+    menuOverlay.setAttribute('aria-hidden', 'false');
+    menuTrigger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+  }
+  function closeMenu() {
+    menuOverlay.classList.remove('open');
+    menuOverlay.setAttribute('aria-hidden', 'true');
+    menuTrigger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+  }
+  menuTrigger.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  const coldMenuTrigger = document.getElementById('coldMenuTrigger');
+  if (coldMenuTrigger) coldMenuTrigger.addEventListener('click', openMenu);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuOverlay.classList.contains('open')) closeMenu();
+  });
+  menuOverlay.querySelectorAll('[data-close]').forEach(a => {
+    a.addEventListener('click', () => {
+      setTimeout(closeMenu, 80);
+    });
+  });
+
+  // === CONTACT FORM ===
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nimi = contactForm.querySelector('#cf-nimi');
+      const email = contactForm.querySelector('#cf-email');
+      if (!nimi.value.trim() || !email.checkValidity()) {
+        if (!nimi.value.trim()) nimi.focus();
+        else email.focus();
+        return;
+      }
+      const btn = contactForm.querySelector('.form-submit');
+      btn.disabled = true;
+      btn.innerHTML = I18N[currentLang]['form.submitSending'];
+      setTimeout(() => {
+        contactForm.classList.add('is-sent');
+        contactForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 600);
+    });
+  }
+
+  // === CINEMA RIBBON ===
+  function buildRibbon() {
+    const ribbon = document.getElementById('ribbon');
+    if (!ribbon) return;
+    const text = I18N[currentLang]['ribbon'];
+    const emWords = I18N[currentLang]['ribbon.em'] || [];
+    ribbon.innerHTML = '';
+    text.split(/(\s+)/).forEach(word => {
+      if (/\s/.test(word)) {
+        word.split('').forEach(ch => {
+          const s = document.createElement('span');
+          s.className = 'char';
+          if (ch === '\n') s.innerHTML = '<br>'; else s.textContent = ch;
+          ribbon.appendChild(s);
+        });
+      } else {
+        const em = emWords.some(e => word.includes(e.replace('.', '')));
+        word.split('').forEach(ch => {
+          const s = document.createElement('span');
+          s.className = 'char' + (em ? ' em' : '');
+          s.textContent = ch;
+          ribbon.appendChild(s);
+        });
+      }
+    });
+  }
+  buildRibbon();
+
+  console.log('%cLexoria', 'font: italic 400 32px "Newsreader", serif; color: #ECE7DD; background: #0F1419; padding: 10px 16px;');
+  console.log('%c2010 - 2026 · Helsinki', 'font: 10px "JetBrains Mono", monospace; color: #6E3144; letter-spacing: 0.25em;');
+</script>
+
+</body>
+</html>
