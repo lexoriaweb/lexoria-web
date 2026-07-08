@@ -247,17 +247,11 @@
   @media (max-width: 768px) {
     .cold-mark { align-items: center; }
     .cold-logo { width: clamp(240px, 72vw, 360px); }
-    .cold-info { margin-top: var(--s-4); gap: var(--s-1); }
+    .cold-info { margin-top: var(--s-2); gap: var(--s-1); }
     .cold-info .cold-tag { font-size: 13px; letter-spacing: 0.16em; }
     .cold-info .cold-locations { font-size: 11px; letter-spacing: 0.22em; }
-    .cold-cta {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      margin-top: var(--s-4);
-      padding: 18px 22px;
-      font-size: 12px;
-    }
+    .cold-ctas { width: 100%; margin-top: var(--s-3); }
+    .cold-cta { padding: 18px 22px; font-size: 12px; }
   }
   .cold-info {
     display: flex;
@@ -269,7 +263,15 @@
     opacity: 0;
     animation: fadeIn 1s ease 1.4s forwards;
     text-align: left;
-    margin-top: var(--s-4);
+    margin-top: var(--s-2);
+  }
+  .cold-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    margin-top: var(--s-3);
+    width: 340px;
+    max-width: 100%;
   }
   .cold-info .cold-tag {
     font-size: clamp(14px, 1.15vw, 16px);
@@ -284,11 +286,11 @@
     line-height: 1.4;
   }
   .cold-cta {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--s-2);
-    margin-top: var(--s-4);
-    padding: 18px 34px;
+    padding: 18px 24px;
     border: 1px solid rgba(236, 231, 221, 0.55);
     color: var(--paper);
     text-decoration: none;
@@ -299,10 +301,9 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     cursor: pointer;
+    width: 100%;
   }
-  .cold-cta::after {
-    content: '↓';
-    font-size: 1em;
+  .cold-cta .icon {
     display: inline-block;
     transition: transform 0.35s ease;
   }
@@ -312,7 +313,10 @@
     border-color: var(--paper);
     letter-spacing: 0.24em;
   }
-  .cold-cta:hover::after { transform: translateY(3px); }
+  .cold-cta.cold-cta--primary:hover .icon { transform: translateY(3px); }
+  .cold-cta.cold-cta--alt:hover .icon { transform: translateX(3px); }
+  .cold-cta.cold-cta--alt { border-color: rgba(236, 231, 221, 0.3); color: rgba(236, 231, 221, 0.85); }
+  .cold-cta.cold-cta--alt:hover { color: var(--ink); }
 
   /* === NAV === */
   nav {
@@ -1545,7 +1549,16 @@
       <div class="cold-info">
         <span class="cold-tag" data-i18n="cold.footTag">Attorney at law. Since 2010.</span>
         <span class="cold-locations" data-i18n="cold.footLocations">Helsinki - Tallinn</span>
-        <a class="cold-cta" href="#broneeri" data-i18n="cold.footCta">Book a consultation</a>
+        <div class="cold-ctas">
+          <a class="cold-cta cold-cta--primary" href="#broneeri">
+            <span data-i18n="cold.footCta">Book a consultation</span>
+            <span class="icon" aria-hidden="true">↓</span>
+          </a>
+          <a class="cold-cta cold-cta--alt" href="#dokumendipank">
+            <span data-i18n="cold.docsCta">Document bank</span>
+            <span class="icon" aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -2059,6 +2072,7 @@
       'cold.footTag': 'Attorney at law. Since 2010.',
       'cold.footLocations': 'Helsinki - Tallinn',
       'cold.footCta': 'Book a consultation',
+      'cold.docsCta': 'Document bank',
       'cold.scroll': 'Scroll',
       'pos.chapter': 'Position',
       'pos.h2': 'Law,<br><em>that speaks plainly.</em>',
@@ -2226,6 +2240,7 @@ The answer is always yours.`,
       'cold.footTag': 'Asianajaja. Vuodesta 2010.',
       'cold.footLocations': 'Helsinki - Tallinna',
       'cold.footCta': 'Varaa konsultaatio',
+      'cold.docsCta': 'Asiakirjapankki',
       'cold.scroll': 'Vieritä',
       'pos.chapter': 'Asema',
       'pos.h2': 'Oikeutta,<br><em>joka puhuu selkeästi.</em>',
