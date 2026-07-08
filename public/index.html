@@ -155,10 +155,11 @@
      00 / COLD OPEN
      ============================================================ */
   .cold-open {
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100svh;
     background: var(--ink);
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr auto;
     padding: var(--s-4) var(--edge-x);
     max-width: var(--container-max);
     margin: 0 auto;
@@ -215,8 +216,48 @@
     animation: coldLogoIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
   }
   @keyframes coldLogoIn { to { opacity: 1; transform: translateY(0); } }
+  .cold-scroll {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 221, 0.35);
+    padding-top: var(--s-3);
+    opacity: 0;
+    animation: fadeIn 1s ease 2s forwards;
+  }
+  .cold-scroll::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: rgba(236, 231, 221, 0.35);
+  }
+  .cold-scroll .arrow {
+    display: inline-block;
+    animation: bounceDown 2.4s ease-in-out infinite;
+  }
+  @keyframes bounceDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
   @media (max-width: 768px) {
-    .cold-mark { align-items: flex-start; padding-top: var(--s-7); }
+    .cold-mark { align-items: center; }
+    .cold-logo { width: clamp(240px, 72vw, 360px); }
+    .cold-info { margin-top: var(--s-4); gap: var(--s-1); }
+    .cold-info .cold-tag { font-size: 13px; letter-spacing: 0.16em; }
+    .cold-info .cold-locations { font-size: 11px; letter-spacing: 0.22em; }
+    .cold-cta {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: var(--s-4);
+      padding: 18px 22px;
+      font-size: 12px;
+    }
   }
   .cold-info {
     display: flex;
@@ -272,10 +313,6 @@
     letter-spacing: 0.24em;
   }
   .cold-cta:hover::after { transform: translateY(3px); }
-  @media (max-width: 768px) {
-    .cold-info { margin-top: var(--s-3); }
-    .cold-cta { padding: 14px 26px; margin-top: var(--s-3); }
-  }
 
   /* === NAV === */
   nav {
@@ -1512,6 +1549,10 @@
       </div>
     </div>
   </div>
+  <div class="cold-scroll" aria-hidden="true">
+    <span data-i18n="cold.scroll">Scroll</span>
+    <span class="arrow">↓</span>
+  </div>
 </section>
 
 <!-- NAV -->
@@ -2018,6 +2059,7 @@
       'cold.footTag': 'Attorney at law. Since 2010.',
       'cold.footLocations': 'Helsinki - Tallinn',
       'cold.footCta': 'Book a consultation',
+      'cold.scroll': 'Scroll',
       'pos.chapter': 'Position',
       'pos.h2': 'Law,<br><em>that speaks plainly.</em>',
       'pos.statement': "Good counsel isn't the most complex - it's the counsel that helps you <em>move forward.</em> We listen before we answer. And we answer so that you <em>understand.</em>",
@@ -2184,6 +2226,7 @@ The answer is always yours.`,
       'cold.footTag': 'Asianajaja. Vuodesta 2010.',
       'cold.footLocations': 'Helsinki - Tallinna',
       'cold.footCta': 'Varaa konsultaatio',
+      'cold.scroll': 'Vieritä',
       'pos.chapter': 'Asema',
       'pos.h2': 'Oikeutta,<br><em>joka puhuu selkeästi.</em>',
       'pos.statement': 'Hyvä oikeusapu ei ole monimutkaisin - se on se, joka auttaa teitä <em>etenemään.</em> Kuuntelemme ennen kuin vastaamme. Ja vastaamme niin, että te <em>ymmärrätte.</em>',
