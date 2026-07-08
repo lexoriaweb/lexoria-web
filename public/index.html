@@ -158,7 +158,7 @@
     height: 100vh;
     background: var(--ink);
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr;
     padding: var(--s-4) var(--edge-x);
     max-width: var(--container-max);
     margin: 0 auto;
@@ -199,12 +199,12 @@
   .coord .blink { animation: blink 1s steps(1) infinite; }
   @keyframes fadeIn { to { opacity: 1; } }
   @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
-  .cold-mark { display: flex; align-items: center; justify-content: center; }
+  .cold-mark { display: flex; align-items: center; justify-content: flex-start; }
   .cold-stack {
     display: flex;
     flex-direction: column;
-    gap: var(--s-1);
-    align-items: center;
+    gap: var(--s-3);
+    align-items: flex-start;
   }
   .cold-logo {
     width: clamp(280px, 50vw, 720px);
@@ -218,22 +218,23 @@
   @media (max-width: 768px) {
     .cold-mark { align-items: flex-start; padding-top: var(--s-7); }
   }
-  .cold-foot {
+  .cold-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--s-2);
+    align-items: flex-start;
+    gap: var(--s-1);
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: rgba(236, 231, 221, 0.55);
     opacity: 0;
-    animation: fadeIn 1s ease 1.8s forwards;
-    text-align: center;
+    animation: fadeIn 1s ease 1.4s forwards;
+    text-align: left;
+    margin-top: var(--s-2);
   }
-  .cold-foot .cold-tag { color: rgba(236, 231, 221, 0.75); }
-  .cold-foot .cold-locations { color: rgba(236, 231, 221, 0.45); }
+  .cold-info .cold-tag { color: rgba(236, 231, 221, 0.75); }
+  .cold-info .cold-locations { color: rgba(236, 231, 221, 0.45); }
   .cold-cta {
     display: inline-block;
     margin-top: var(--s-3);
@@ -1477,12 +1478,12 @@
   <div class="cold-mark">
     <div class="cold-stack">
       <img class="cold-logo" src="lexoria-logo-white.png" alt="Lexoria">
+      <div class="cold-info">
+        <span class="cold-tag" data-i18n="cold.footTag">Attorney at law. Since 2008.</span>
+        <span class="cold-locations" data-i18n="cold.footLocations">Helsinki — Tallinn</span>
+        <a class="cold-cta" href="#broneeri" data-i18n="cold.footCta">Book a consultation</a>
+      </div>
     </div>
-  </div>
-  <div class="cold-foot">
-    <span class="cold-tag" data-i18n="cold.footTag">Attorney at law. Since 2008.</span>
-    <span class="cold-locations" data-i18n="cold.footLocations">Helsinki — Tallinn</span>
-    <a class="cold-cta" href="#broneeri" data-i18n="cold.footCta">Book a consultation</a>
   </div>
 </section>
 
