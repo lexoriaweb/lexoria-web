@@ -165,22 +165,6 @@
     max-width: var(--container-max);
     margin: 0 auto;
   }
-  .cold-badge {
-    position: absolute;
-    right: var(--edge-x);
-    bottom: var(--s-4);
-    width: clamp(64px, 6vw, 96px);
-    height: auto;
-    opacity: 0;
-    transition: opacity 0.35s ease, transform 0.35s ease;
-    animation: fadeIn 1.2s ease 2.2s forwards;
-    filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.4));
-    z-index: 4;
-  }
-  .cold-badge:hover { opacity: 1 !important; transform: translateY(-2px); }
-  @media (max-width: 768px) {
-    .cold-badge { width: 56px; bottom: var(--s-3); right: var(--edge-x); }
-  }
   .cold-top {
     display: flex;
     justify-content: space-between;
@@ -234,7 +218,7 @@
   }
   @keyframes coldLogoIn { to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 768px) {
-    .cold-mark { align-items: flex-start; padding-top: var(--s-6); }
+    .cold-mark { align-items: flex-start; padding-top: var(--s-7); }
     .cold-logo { width: clamp(240px, 72vw, 360px); }
     .cold-info { margin-top: var(--s-2); gap: var(--s-1); }
     .cold-info .cold-tag { font-size: 13px; letter-spacing: 0.16em; }
@@ -1610,7 +1594,6 @@
       </div>
     </div>
   </div>
-  <img class="cold-badge" src="asianajaja-badge.png" alt="Suomen Asianajajaliitto - jäsenmerkki" loading="lazy">
 </section>
 
 <!-- NAV -->
