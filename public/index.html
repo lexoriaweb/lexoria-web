@@ -32,8 +32,8 @@
     --paper: #ECE7DD;
     --paper-soft: #E5E0D5;
     --ink: #0F1419;
-    --maroon: #391B68;
-    --maroon-soft: #BAADC8;
+    --maroon: #6D28D9;
+    --maroon-soft: #C4B5FD;
     --pebble: #6B6B6B;
 
     --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 32px;
@@ -2566,6 +2566,7 @@ Vastaus on aina teidän.`,
     nav.classList.toggle('in', y > coldOpen.offsetHeight * 0.7);
     const navY = 24;
     const overDark = [cinema, meeskond].some(s => {
+      if (!s) return false;
       const r = s.getBoundingClientRect();
       return r.top <= navY && r.bottom >= navY;
     });
