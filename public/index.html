@@ -981,9 +981,30 @@
      PARTNERS
      ============================================================ */
   .partners-section {
+    position: relative;
     background: var(--paper);
     color: var(--ink);
     padding: var(--s-8) 0;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .partners-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1481277542470-605612bd2d61?q=80&w=2400&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%) brightness(1.08) contrast(0.88);
+    z-index: -2;
+    opacity: 0.55;
+  }
+  .partners-section::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at center, rgba(236, 231, 221, 0.55) 0%, rgba(236, 231, 221, 0.9) 90%),
+      linear-gradient(180deg, rgba(236, 231, 221, 0.85) 0%, rgba(236, 231, 221, 0.7) 50%, rgba(236, 231, 221, 0.95) 100%);
+    z-index: -1;
   }
   .partners-grid {
     display: grid;
@@ -991,6 +1012,7 @@
     gap: var(--s-5) var(--s-4);
     align-items: center;
     justify-items: center;
+    position: relative;
   }
   .partner-logo {
     display: flex;
@@ -998,13 +1020,13 @@
     justify-content: center;
     min-height: 96px;
     padding: var(--s-2);
-    opacity: 0.78;
+    opacity: 0.85;
     transition: opacity 0.4s ease, transform 0.4s ease;
-    color: var(--ink);
+    color: #0F1419;
   }
   .partner-logo:hover { opacity: 1; transform: translateY(-2px); }
-  .pw { display: inline-block; line-height: 1; color: var(--ink); white-space: nowrap; }
-  .pw em { color: var(--maroon); font-style: normal; }
+  .pw { display: inline-block; line-height: 1; color: #0F1419; white-space: nowrap; }
+  .pw em { color: #0F1419; font-style: normal; font-weight: 600; }
   .pw-1 { font-family: 'Newsreader', serif; font-weight: 500; font-size: 30px; letter-spacing: 0.06em; }
   .pw-2 { font-family: 'Newsreader', serif; font-style: italic; font-weight: 400; font-size: 34px; }
   .pw-3 { font-family: 'Newsreader', serif; font-weight: 400; font-size: 26px; letter-spacing: 0.14em; }
@@ -1927,18 +1949,6 @@
     </div>
   </section>
 
-  <!-- 04 / TRANSITION IMAGE -->
-  <section class="transition-image">
-    <div class="wrap">
-      <div class="img-treated warm ratio-wide">
-        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2400&auto=format&fit=crop" data-i18n-alt="trans.imgAlt" alt="Law firm library, leather-bound files">
-      </div>
-      <div class="caption">
-        <span class="lead" data-i18n="trans.captionLead">PLATE 02 / FOUNDATION</span>
-        <span data-i18n="trans.captionBody">Case practice · Since 2010</span>
-      </div>
-    </div>
-  </section>
 
   <!-- 05 / MEESKOND -->
   <section class="team-section dark" id="meeskond">
@@ -2219,9 +2229,6 @@
       'cinema.c1': 'ROLL 01 / MANIFESTO',
       'cinema.c3': 'HELSINKI',
       'cinema.c4': 'RUNTIME 01:48<span class="blink">_</span>',
-      'trans.imgAlt': 'Law firm library, leather-bound files',
-      'trans.captionLead': 'PLATE 02 / FOUNDATION',
-      'trans.captionBody': 'Case practice · Since 2010',
       'team.chapter': 'Team',
       'team.h2': 'The people<br>who <em>walk into the room.</em>',
       'team.p3.rank': 'CEO · Partner',
@@ -2389,9 +2396,6 @@ The answer is always yours.`,
       'cinema.c1': 'RULLA 01 / MANIFESTI',
       'cinema.c3': 'HELSINKI',
       'cinema.c4': 'KESTO 01:48<span class="blink">_</span>',
-      'trans.imgAlt': 'Asianajotoimiston kirjasto, nahkakansiot',
-      'trans.captionLead': 'LEVY 02 / PERUSTA',
-      'trans.captionBody': 'Oikeuskäytäntö · Vuodesta 2010',
       'team.chapter': 'Tiimi',
       'team.h2': 'Ihmiset,<br>jotka <em>tulevat huoneeseen.</em>',
       'team.p3.rank': 'Toimitusjohtaja · Partneri',
