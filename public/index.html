@@ -224,34 +224,57 @@
     align-items: flex-start;
     gap: var(--s-1);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(236, 231, 221, 0.55);
     opacity: 0;
     animation: fadeIn 1s ease 1.4s forwards;
     text-align: left;
-    margin-top: var(--s-2);
+    margin-top: var(--s-4);
   }
-  .cold-info .cold-tag { color: rgba(236, 231, 221, 0.75); }
-  .cold-info .cold-locations { color: rgba(236, 231, 221, 0.45); }
+  .cold-info .cold-tag {
+    font-size: clamp(14px, 1.15vw, 16px);
+    letter-spacing: 0.18em;
+    color: rgba(236, 231, 221, 0.85);
+    line-height: 1.4;
+  }
+  .cold-info .cold-locations {
+    font-size: clamp(12px, 0.95vw, 13px);
+    letter-spacing: 0.24em;
+    color: rgba(236, 231, 221, 0.5);
+    line-height: 1.4;
+  }
   .cold-cta {
-    display: inline-block;
-    margin-top: var(--s-3);
-    padding: 14px 28px;
-    border: 1px solid rgba(236, 231, 221, 0.5);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    margin-top: var(--s-4);
+    padding: 18px 34px;
+    border: 1px solid rgba(236, 231, 221, 0.55);
     color: var(--paper);
     text-decoration: none;
     background: transparent;
-    transition: background 0.3s, color 0.3s, border-color 0.3s;
+    transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, letter-spacing 0.35s ease;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
+    font-size: clamp(13px, 1vw, 14px);
+    letter-spacing: 0.2em;
     text-transform: uppercase;
+    cursor: pointer;
   }
-  .cold-cta:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  .cold-cta::after {
+    content: '↓';
+    font-size: 1em;
+    display: inline-block;
+    transition: transform 0.35s ease;
+  }
+  .cold-cta:hover {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--paper);
+    letter-spacing: 0.24em;
+  }
+  .cold-cta:hover::after { transform: translateY(3px); }
   @media (max-width: 768px) {
-    .cold-cta { padding: 12px 22px; }
+    .cold-info { margin-top: var(--s-3); }
+    .cold-cta { padding: 14px 26px; margin-top: var(--s-3); }
   }
 
   /* === NAV === */
