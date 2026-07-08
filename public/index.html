@@ -218,12 +218,13 @@
   }
   @keyframes coldLogoIn { to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 768px) {
-    .cold-mark { align-items: flex-start; padding-top: var(--s-7); }
+    .cold-mark { align-items: stretch; padding-top: var(--s-7); }
+    .cold-stack { width: 100%; align-items: stretch; }
     .cold-logo { width: clamp(240px, 72vw, 360px); }
-    .cold-info { margin-top: var(--s-2); gap: var(--s-1); }
+    .cold-info { width: 100%; margin-top: var(--s-2); gap: var(--s-1); }
     .cold-info .cold-tag { font-size: 13px; letter-spacing: 0.16em; }
     .cold-info .cold-locations { font-size: 11px; letter-spacing: 0.22em; }
-    .cold-ctas { width: 100%; margin-top: var(--s-3); }
+    .cold-ctas { width: 100%; max-width: 100%; margin-top: var(--s-3); }
     .cold-cta { padding: 18px 22px; font-size: 12px; }
   }
   .cold-info {
