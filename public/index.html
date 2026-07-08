@@ -199,12 +199,12 @@
   .coord .blink { animation: blink 1s steps(1) infinite; }
   @keyframes fadeIn { to { opacity: 1; } }
   @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
-  .cold-mark { display: flex; align-items: center; }
+  .cold-mark { display: flex; align-items: center; justify-content: center; }
   .cold-stack {
     display: flex;
     flex-direction: column;
     gap: var(--s-1);
-    align-items: flex-start;
+    align-items: center;
   }
   .cold-logo {
     width: clamp(280px, 50vw, 720px);
@@ -215,41 +215,42 @@
     animation: coldLogoIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
   }
   @keyframes coldLogoIn { to { opacity: 1; transform: translateY(0); } }
-  .cold-slogan {
-    font-family: 'Newsreader', serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(16px, 1.8vw, 22px);
-    color: rgba(236, 231, 221, 0.7);
-    line-height: 1.4;
-    letter-spacing: 0;
-    margin: 0;
-    opacity: 0;
-    transform: translateY(12px);
-    animation: coldLogoIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.4s forwards;
-    white-space: nowrap;
-  }
-  .cold-slogan em { font-style: italic; color: var(--maroon-soft); }
   @media (max-width: 768px) {
     .cold-mark { align-items: flex-start; padding-top: var(--s-7); }
-    .cold-slogan { white-space: normal; font-size: 15px; }
   }
   .cold-foot {
     display: flex;
-    justify-content: space-between;
-    align-items: end;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-2);
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(236, 231, 221, 0.45);
+    color: rgba(236, 231, 221, 0.55);
     opacity: 0;
     animation: fadeIn 1s ease 1.8s forwards;
+    text-align: center;
   }
-  .cold-foot a { color: inherit; text-decoration: none; transition: color 0.3s; }
-  .cold-foot a:hover { color: var(--maroon-soft); }
+  .cold-foot .cold-tag { color: rgba(236, 231, 221, 0.75); }
+  .cold-foot .cold-locations { color: rgba(236, 231, 221, 0.45); }
+  .cold-cta {
+    display: inline-block;
+    margin-top: var(--s-3);
+    padding: 14px 28px;
+    border: 1px solid rgba(236, 231, 221, 0.5);
+    color: var(--paper);
+    text-decoration: none;
+    background: transparent;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .cold-cta:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
   @media (max-width: 768px) {
-    .cold-foot { flex-direction: column; align-items: start; gap: var(--s-2); }
+    .cold-cta { padding: 12px 22px; }
   }
 
   /* === NAV === */
@@ -1476,12 +1477,12 @@
   <div class="cold-mark">
     <div class="cold-stack">
       <img class="cold-logo" src="lexoria-logo-white.png" alt="Lexoria">
-      <p class="cold-slogan" data-i18n="cold.slogan">Clear language. Discreet counsel. Since <em>2010.</em></p>
     </div>
   </div>
   <div class="cold-foot">
-    <span data-i18n="cold.footLabel">Law firm · Helsinki</span>
-    <a href="#broneeri" data-i18n="cold.footCta">Book a consultation ↓</a>
+    <span class="cold-tag" data-i18n="cold.footTag">Attorney at law. Since 2008.</span>
+    <span class="cold-locations" data-i18n="cold.footLocations">Helsinki — Tallinn</span>
+    <a class="cold-cta" href="#broneeri" data-i18n="cold.footCta">Book a consultation</a>
   </div>
 </section>
 
@@ -2039,9 +2040,9 @@
       'aside.lang': 'Language',
       'aside.langGroup': 'Language',
       'aside.cta': 'Book a consultation <span>↗</span>',
-      'cold.slogan': 'Clear language. Discreet counsel. Since <em>2010.</em>',
-      'cold.footLabel': 'Law firm · Helsinki',
-      'cold.footCta': 'Book a consultation ↓',
+      'cold.footTag': 'Attorney at law. Since 2008.',
+      'cold.footLocations': 'Helsinki — Tallinn',
+      'cold.footCta': 'Book a consultation',
       'pos.chapter': 'Position',
       'pos.h2': 'Law,<br><em>that speaks plainly.</em>',
       'pos.statement': "Good counsel isn't the most complex — it's the counsel that helps you <em>move forward.</em> We listen before we answer. And we answer so that you <em>understand.</em>",
@@ -2216,9 +2217,9 @@ The answer is always yours.`,
       'aside.lang': 'Kieli',
       'aside.langGroup': 'Kieli',
       'aside.cta': 'Varaa konsultaatio <span>↗</span>',
-      'cold.slogan': 'Selkeää kieltä. Diskreettiä neuvontaa. Vuodesta <em>2010.</em>',
-      'cold.footLabel': 'Asianajotoimisto · Helsinki',
-      'cold.footCta': 'Varaa konsultaatio ↓',
+      'cold.footTag': 'Asianajaja. Vuodesta 2008.',
+      'cold.footLocations': 'Helsinki — Tallinna',
+      'cold.footCta': 'Varaa konsultaatio',
       'pos.chapter': 'Asema',
       'pos.h2': 'Oikeutta,<br><em>joka puhuu selkeästi.</em>',
       'pos.statement': 'Hyvä oikeusapu ei ole monimutkaisin — se on se, joka auttaa teitä <em>etenemään.</em> Kuuntelemme ennen kuin vastaamme. Ja vastaamme niin, että te <em>ymmärrätte.</em>',
