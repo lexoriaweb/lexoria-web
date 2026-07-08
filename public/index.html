@@ -981,59 +981,62 @@
      PARTNERS
      ============================================================ */
   .partners-section {
-    position: relative;
+    background: var(--paper);
+    color: var(--ink);
     padding: var(--s-8) 0;
-    overflow: hidden;
-    background: var(--ink);
-    isolation: isolate;
   }
-  .partners-bg {
-    position: absolute; inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1481277542470-605612bd2d61?q=80&w=2400&auto=format&fit=crop');
-    background-size: cover; background-position: center;
-    filter: grayscale(100%) contrast(1.1) brightness(0.28);
-    z-index: 1;
-  }
-  .partners-vignette {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse at center, rgba(15, 20, 25, 0.55) 0%, rgba(15, 20, 25, 0.92) 90%),
-      linear-gradient(180deg, rgba(15, 20, 25, 0.85) 0%, rgba(15, 20, 25, 0.6) 50%, rgba(15, 20, 25, 0.95) 100%);
-    z-index: 2;
-  }
-  .partners-content { position: relative; z-index: 3; }
   .partners-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-3);
-    margin-top: var(--s-5);
+    gap: var(--s-5) var(--s-4);
+    align-items: center;
+    justify-items: center;
   }
   .partner-logo {
-    aspect-ratio: 3 / 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(236, 231, 221, 0.14);
-    background: rgba(15, 20, 25, 0.55);
-    color: rgba(236, 231, 221, 0.4);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    transition: border-color 0.35s ease, color 0.35s ease, background 0.35s ease, transform 0.35s ease;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    min-height: 96px;
+    padding: var(--s-2);
+    opacity: 0.78;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    color: var(--ink);
   }
-  .partner-logo:hover {
-    border-color: rgba(236, 231, 221, 0.4);
-    color: rgba(236, 231, 221, 0.85);
-    background: rgba(15, 20, 25, 0.75);
-    transform: translateY(-2px);
+  .partner-logo:hover { opacity: 1; transform: translateY(-2px); }
+  .pw { display: inline-block; line-height: 1; color: var(--ink); white-space: nowrap; }
+  .pw em { color: var(--maroon); font-style: normal; }
+  .pw-1 { font-family: 'Newsreader', serif; font-weight: 500; font-size: 30px; letter-spacing: 0.06em; }
+  .pw-2 { font-family: 'Newsreader', serif; font-style: italic; font-weight: 400; font-size: 34px; }
+  .pw-3 { font-family: 'Newsreader', serif; font-weight: 400; font-size: 26px; letter-spacing: 0.14em; }
+  .pw-4 { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 32px; letter-spacing: 0.28em; }
+  .pw-5 { font-family: 'Newsreader', serif; font-weight: 400; font-size: 28px; letter-spacing: 0.34em; }
+  .pw-6 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 26px;
+    text-align: center;
+  }
+  .pw-6::before {
+    content: 'THE';
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--pebble);
+    display: block;
+    margin-bottom: 4px;
   }
   @media (max-width: 768px) {
     .partners-section { padding: var(--s-7) 0; }
-    .partners-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-2); margin-top: var(--s-4); }
-    .partner-logo { font-size: 10px; letter-spacing: 0.2em; }
+    .partners-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-4) var(--s-2); }
+    .partner-logo { min-height: 72px; }
+    .pw-1 { font-size: 22px; }
+    .pw-2 { font-size: 26px; }
+    .pw-3 { font-size: 20px; letter-spacing: 0.12em; }
+    .pw-4 { font-size: 24px; letter-spacing: 0.22em; }
+    .pw-5 { font-size: 22px; letter-spacing: 0.28em; }
+    .pw-6 { font-size: 20px; }
   }
 
   /* ============================================================
@@ -1910,42 +1913,16 @@
     </div>
   </section>
 
-  <!-- 03 / CINEMA - Miks Lexoria -->
-  <section class="cinema-section" id="miks">
-    <div class="cinema-sticky">
-      <div class="cinema-frame">
-        <div class="cinema-bg"></div>
-        <div class="cinema-vignette"></div>
-        <div class="cinema-corners">
-          <div data-i18n="cinema.c1">ROLL 01 / MANIFESTO</div>
-          <div>2010 - 2026</div>
-          <div data-i18n="cinema.c3">HELSINKI</div>
-          <div data-i18n-html="cinema.c4">RUNTIME 01:48<span class="blink">_</span></div>
-        </div>
-        <div class="cinema-ribbon" id="ribbon"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03b / PARTNERS -->
+  <!-- 03 / PARTNERS -->
   <section class="partners-section" id="partnerid">
-    <div class="partners-bg"></div>
-    <div class="partners-vignette"></div>
-    <div class="partners-content wrap">
-      <div class="chapter-block">
-        <div class="chapter">
-          <span class="glyph">§ 04</span>
-          <span data-i18n="partners.chapter">Partnerships</span>
-        </div>
-        <h2 class="section-h" data-i18n-html="partners.h2">Trusted<br><em>collaborators.</em></h2>
-      </div>
+    <div class="wrap">
       <div class="partners-grid">
-        <div class="partner-logo"><span>Partner 01</span></div>
-        <div class="partner-logo"><span>Partner 02</span></div>
-        <div class="partner-logo"><span>Partner 03</span></div>
-        <div class="partner-logo"><span>Partner 04</span></div>
-        <div class="partner-logo"><span>Partner 05</span></div>
-        <div class="partner-logo"><span>Partner 06</span></div>
+        <div class="partner-logo"><span class="pw pw-1">LEGAL <em>500</em></span></div>
+        <div class="partner-logo"><span class="pw pw-2">Chambers</span></div>
+        <div class="partner-logo"><span class="pw pw-3">IFLR<em>1000</em></span></div>
+        <div class="partner-logo"><span class="pw pw-4">IBA</span></div>
+        <div class="partner-logo"><span class="pw pw-5">CCBE</span></div>
+        <div class="partner-logo"><span class="pw pw-6">The Lawyer</span></div>
       </div>
     </div>
   </section>
@@ -2185,8 +2162,6 @@
       'cold.footCta': 'Book a consultation',
       'cold.docsCta': 'Document bank',
       'cold.scroll': 'Scroll',
-      'partners.chapter': 'Partnerships',
-      'partners.h2': 'Trusted<br><em>collaborators.</em>',
       'cold.member.lead': 'Member',
       'cold.member.meta': 'Defensor Legis · since 2010',
       'pos.chapter': 'Position',
@@ -2357,8 +2332,6 @@ The answer is always yours.`,
       'cold.footCta': 'Varaa konsultaatio',
       'cold.docsCta': 'Asiakirjapankki',
       'cold.scroll': 'Vieritä',
-      'partners.chapter': 'Yhteistyökumppanit',
-      'partners.h2': 'Luotettuja<br><em>yhteistyökumppaneita.</em>',
       'cold.member.lead': 'Jäsen',
       'cold.member.meta': 'Defensor Legis · vuodesta 2010',
       'pos.chapter': 'Asema',
