@@ -1551,6 +1551,17 @@
     .booking-grid { grid-template-columns: 1fr; gap: var(--s-6); align-items: start; }
     .form-row { grid-template-columns: 1fr; gap: var(--s-3); }
   }
+  @media (max-width: 768px) {
+    .form-submit {
+      align-self: stretch;
+      width: 100%;
+      justify-content: space-between;
+      padding: 18px 22px;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+    }
+    .form-submit .arrow { font-size: 18px; line-height: 1; }
+  }
 
   /* ============================================================
      COLOPHON
