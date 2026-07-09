@@ -283,8 +283,9 @@
     border-color: var(--paper);
     letter-spacing: 0.24em;
   }
+  .cold-cta .icon--diag { transform: rotate(-135deg); }
   .cold-cta.cold-cta--primary:hover .icon { transform: translateY(3px); }
-  .cold-cta.cold-cta--alt:hover .icon { transform: translateX(3px); }
+  .cold-cta.cold-cta--alt:hover .icon--diag { transform: rotate(-135deg) translateY(-3px); }
   .cold-cta.cold-cta--alt { color: rgba(236, 231, 221, 0.85); }
   .cold-cta.cold-cta--alt:hover { color: var(--ink); }
 
@@ -1673,7 +1674,7 @@
           </a>
           <a class="cold-cta cold-cta--alt" href="#dokumendipank">
             <span data-i18n="cold.docsCta">Document bank</span>
-            <span class="icon" aria-hidden="true">↗</span>
+            <span class="icon icon--diag" aria-hidden="true">↓</span>
           </a>
         </div>
       </div>
