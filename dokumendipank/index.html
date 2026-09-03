@@ -839,7 +839,8 @@
     /* Grid mode: two compact columns, no swipe */
     .product-grid.view-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      width: 100%;
       gap: var(--s-2);
       margin: 0;
       padding: 0;
@@ -848,12 +849,15 @@
     }
     .product-grid.view-grid .product-card {
       flex: none;
+      min-width: 0;
+      width: auto;
       padding: var(--s-3) var(--s-2) var(--s-2);
       scroll-snap-align: none;
     }
     .product-grid.view-grid .card-top { margin-bottom: var(--s-2); }
     .product-grid.view-grid .card-format { display: none; }
-    .product-grid.view-grid .card-num { font-size: 9px; letter-spacing: 0.18em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+    .product-grid.view-grid .card-num { font-size: 9px; letter-spacing: 0.18em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    .product-grid.view-grid .card-top { min-width: 0; }
     .product-grid.view-grid .card-title { font-size: 14px; letter-spacing: 0.06em; line-height: 1.25; margin-bottom: var(--s-2); }
     .product-grid.view-grid .card-lede,
     .product-grid.view-grid .card-features { display: none; }
