@@ -806,8 +806,64 @@
     .shop-section { padding: var(--s-7) 0; }
   }
   .swipe-nav { display: none; }
+  .view-toggle { display: none; }
 
   @media (max-width: 640px) {
+    .view-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: var(--s-3) 0 var(--s-4);
+      border: 1px solid rgba(15, 20, 25, 0.25);
+    }
+    .view-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 0;
+      background: transparent;
+      border: 0;
+      color: var(--ink);
+      opacity: 0.6;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+    }
+    .view-btn + .view-btn { border-left: 1px solid rgba(15, 20, 25, 0.25); }
+    .view-btn.active { background: var(--ink); color: var(--paper); opacity: 1; }
+    .view-btn .ico { display: block; }
+
+    /* Grid mode: two compact columns, no swipe */
+    .product-grid.view-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-2);
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      scroll-snap-type: none;
+    }
+    .product-grid.view-grid .product-card {
+      flex: none;
+      padding: var(--s-3) var(--s-2) var(--s-2);
+      scroll-snap-align: none;
+    }
+    .product-grid.view-grid .card-top { margin-bottom: var(--s-2); }
+    .product-grid.view-grid .card-format { display: none; }
+    .product-grid.view-grid .card-num { font-size: 9px; letter-spacing: 0.18em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+    .product-grid.view-grid .card-title { font-size: 14px; letter-spacing: 0.06em; line-height: 1.25; margin-bottom: var(--s-2); }
+    .product-grid.view-grid .card-lede,
+    .product-grid.view-grid .card-features { display: none; }
+    .product-grid.view-grid .card-foot { padding-top: var(--s-2); gap: var(--s-2); }
+    .product-grid.view-grid .card-price .amount { font-size: 26px; }
+    .product-grid.view-grid .card-price .vat { display: none; }
+    .product-grid.view-grid .card-actions { grid-template-columns: 1fr; gap: 6px; }
+    .product-grid.view-grid .card-btn { padding: 12px 8px; font-size: 9px; letter-spacing: 0.18em; }
+    .product-grid.view-grid + .swipe-nav { display: none; }
+
     .product-grid {
       display: flex;
       grid-template-columns: none;
@@ -1564,6 +1620,17 @@
       <span class="count-note" data-i18n-html="shop.note">All prices incl. <em>VAT 25.5%</em></span>
     </div>
 
+    <div class="view-toggle" role="group" aria-label="Catalog view" id="viewToggle">
+      <button type="button" class="view-btn active" data-view="swipe" aria-pressed="true">
+        <svg class="ico" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3.5" y="1.5" width="7" height="11" rx="0.5" fill="none" stroke="currentColor"/><path d="M0.5 4v6M13.5 4v6" stroke="currentColor"/></svg>
+        <span data-i18n="shop.viewSwipe">Swipe</span>
+      </button>
+      <button type="button" class="view-btn" data-view="grid" aria-pressed="false">
+        <svg class="ico" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.5" y="1.5" width="4.5" height="4.5" fill="none" stroke="currentColor"/><rect x="8" y="1.5" width="4.5" height="4.5" fill="none" stroke="currentColor"/><rect x="1.5" y="8" width="4.5" height="4.5" fill="none" stroke="currentColor"/><rect x="8" y="8" width="4.5" height="4.5" fill="none" stroke="currentColor"/></svg>
+        <span data-i18n="shop.viewGrid">Grid</span>
+      </button>
+    </div>
+
     <div class="product-grid" id="productGrid">
       <!-- 01 -->
       <article class="product-card" data-sku="doc-01" data-price="19">
@@ -1943,6 +2010,8 @@
       'shop.eyebrow': '<em>6</em> documents · Finland &amp; Estonia',
       'shop.note': 'All prices incl. <em>VAT 25.5%</em>',
       'shop.swipe': 'Swipe',
+      'shop.viewSwipe': 'Swipe',
+      'shop.viewGrid': 'Grid',
       'cat.employment': 'Employment',
       'cat.realestate': 'Real estate',
       'cat.confidentiality': 'Confidentiality',
@@ -2052,6 +2121,8 @@
       'shop.eyebrow': '<em>6</em> asiakirjaa · Suomi &amp; Viro',
       'shop.note': 'Kaikki hinnat sis. <em>ALV 25,5 %</em>',
       'shop.swipe': 'Pyyhkäise',
+      'shop.viewSwipe': 'Pyyhkäise',
+      'shop.viewGrid': 'Ruudukko',
       'cat.employment': 'Työsuhde',
       'cat.realestate': 'Kiinteistöt',
       'cat.confidentiality': 'Salassapito',
@@ -2381,6 +2452,26 @@
     };
     productGrid.addEventListener('scroll', updateDots, { passive: true });
     window.addEventListener('resize', updateDots, { passive: true });
+  }
+
+  // Catalog view toggle (mobile): swipe strip vs. two-column grid
+  const viewBtns = document.querySelectorAll('#viewToggle .view-btn');
+  if (productGrid && viewBtns.length) {
+    const setView = (v) => {
+      productGrid.classList.toggle('view-grid', v === 'grid');
+      viewBtns.forEach(b => {
+        const on = b.dataset.view === v;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    };
+    let saved = 'swipe';
+    try { saved = localStorage.getItem('lex_view') || 'swipe'; } catch(e){}
+    setView(saved);
+    viewBtns.forEach(b => b.addEventListener('click', () => {
+      setView(b.dataset.view);
+      try { localStorage.setItem('lex_view', b.dataset.view); } catch(e){}
+    }));
   }
 </script>
 
