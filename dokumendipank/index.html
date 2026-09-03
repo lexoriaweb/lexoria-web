@@ -609,9 +609,11 @@
     .hero { padding: var(--s-7) 0; }
     .hero-grid { grid-template-columns: 1fr; gap: var(--s-5); align-items: start; }
     .hero-lede { font-size: 17px; }
-    .hero-meta { gap: var(--s-2); margin-top: 0; }
-    .hero-meta-row { grid-template-columns: 96px 1fr; }
-    .hero-meta-row .v { font-size: 17px; }
+    .hero-meta { gap: var(--s-3); margin-top: 0; }
+    /* Stack key over value so each value keeps one line */
+    .hero-meta-row { grid-template-columns: 1fr; gap: 6px; align-items: start; }
+    .hero-meta-row .v { font-size: 18px; white-space: nowrap; }
+    .hero-meta-row .v .sep { margin: 0 6px; }
   }
 
   /* ============================================================
@@ -1856,7 +1858,7 @@
       </div>
     </a>
     <div class="colophon">
-      <span data-i18n="foot.reg">© 2026 · Lexoria Document Bank · Reg 0123456-7</span>
+      <span data-i18n="foot.reg">© 2026 · Lexoria · Reg 0123456-7</span>
       <div class="colophon-meta">
         <a href="https://lexoriaweb.vercel.app" data-i18n="foot.main">Lexoria.fi</a>
         <a href="#" data-i18n="foot.terms">Terms</a>
@@ -2016,7 +2018,7 @@
       'toast.added': 'Added to cart',
       'foot.lead': 'Part of',
       'foot.meta': 'Attorney at law · since 2010',
-      'foot.reg': '© 2026 · Lexoria Document Bank · Reg 0123456-7',
+      'foot.reg': '© 2026 · Lexoria · Reg 0123456-7',
       'foot.main': 'Lexoria.fi',
       'foot.terms': 'Terms',
       'foot.privacy': 'Privacy',
@@ -2125,7 +2127,7 @@
       'toast.added': 'Lisätty koriin',
       'foot.lead': 'Osa',
       'foot.meta': 'Asianajaja · vuodesta 2010',
-      'foot.reg': '© 2026 · Lexoria Asiakirjapankki · Reg 0123456-7',
+      'foot.reg': '© 2026 · Lexoria · Reg 0123456-7',
       'foot.main': 'Lexoria.fi',
       'foot.terms': 'Ehdot',
       'foot.privacy': 'Tietosuoja',
