@@ -856,7 +856,9 @@
     }
     .product-grid.view-grid .card-top { margin-bottom: var(--s-2); }
     .product-grid.view-grid .card-format { display: none; }
-    .product-grid.view-grid .card-num { font-size: 9px; letter-spacing: 0.18em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    /* Grid cells are narrow: drop the "01 ·" prefix (a bare text node) and keep the category */
+    .product-grid.view-grid .card-num { font-size: 0; letter-spacing: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    .product-grid.view-grid .card-num > span { font-size: 9px; letter-spacing: 0.18em; }
     .product-grid.view-grid .card-top { min-width: 0; }
     .product-grid.view-grid .card-title { font-size: 14px; letter-spacing: 0.06em; line-height: 1.25; margin-bottom: var(--s-2); }
     .product-grid.view-grid .card-lede,
