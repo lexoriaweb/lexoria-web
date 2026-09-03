@@ -236,7 +236,7 @@
   .cold-ctas {
     display: flex;
     flex-direction: column;
-    gap: var(--s-2);
+    gap: 0;
     margin-top: var(--s-3);
     width: 340px;
     max-width: 100%;
@@ -258,12 +258,13 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--s-2);
-    padding: 18px 24px;
-    border: 1px solid rgba(236, 231, 221, 0.55);
+    padding: 16px 0;
+    border: 0;
+    border-bottom: 1px solid rgba(236, 231, 221, 0.35);
     color: var(--paper);
     text-decoration: none;
     background: transparent;
-    transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, letter-spacing 0.35s ease;
+    transition: border-color 0.35s ease, color 0.35s ease, letter-spacing 0.35s ease;
     font-family: 'JetBrains Mono', monospace;
     font-size: clamp(13px, 1vw, 14px);
     letter-spacing: 0.2em;
@@ -278,16 +279,15 @@
     line-height: 1;
   }
   .cold-cta:hover {
-    background: var(--paper);
-    color: var(--ink);
-    border-color: var(--paper);
+    color: var(--paper);
+    border-bottom-color: var(--paper);
     letter-spacing: 0.24em;
   }
-  .cold-cta .icon--diag { transform: rotate(-135deg); }
+  .cold-cta .icon--diag { transform: rotate(-90deg); }
   .cold-cta.cold-cta--primary:hover .icon { transform: translateY(3px); }
-  .cold-cta.cold-cta--alt:hover .icon--diag { transform: rotate(-135deg) translateY(-3px); }
-  .cold-cta.cold-cta--alt { color: rgba(236, 231, 221, 0.85); }
-  .cold-cta.cold-cta--alt:hover { color: var(--ink); }
+  .cold-cta.cold-cta--alt:hover .icon--diag { transform: rotate(-90deg) translateY(3px); }
+  .cold-cta.cold-cta--alt { color: rgba(236, 231, 221, 0.7); }
+  .cold-cta.cold-cta--alt:hover { color: var(--paper); }
 
   .cold-membership {
     display: flex;
@@ -343,7 +343,7 @@
     .cold-info .cold-tag { font-size: 13px; letter-spacing: 0.16em; }
     .cold-info .cold-locations { font-size: 11px; letter-spacing: 0.22em; }
     .cold-ctas { width: 100%; max-width: 100%; margin-top: var(--s-3); }
-    .cold-cta { padding: 18px 22px; font-size: 12px; width: 100%; }
+    .cold-cta { padding: 16px 0; font-size: 12px; width: 100%; }
     .cold-membership { padding-top: var(--s-6); gap: var(--s-2); }
     .cold-membership-mark { width: 52px; height: 52px; }
     .cold-membership-text .name { font-size: 11px; }
