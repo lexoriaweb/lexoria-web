@@ -31,6 +31,8 @@
   :root {
     --paper: #ECE7DD;
     --paper-soft: #E5E0D5;
+    --paper-hover: #DDD5C5;
+    --nav-bg: rgba(236, 231, 221, 0.72);
     --ink: #0F1419;
     --maroon: #5B21B6;
     --maroon-soft: #C7BEE5;
@@ -182,6 +184,7 @@
     color: rgba(236, 231, 221, 0.4);
     opacity: 0;
     animation: fadeIn 1.2s ease 0.4s forwards;
+    white-space: nowrap;
   }
   .cold-menu-trigger {
     background: transparent;
@@ -348,12 +351,17 @@
     .cold-membership-mark { width: 52px; height: 52px; }
     .cold-membership-text .name { font-size: 11px; }
     .cold-membership-text .meta { font-size: 12px; }
+    .coord { font-size: 10px; letter-spacing: 0.16em; }
+    .cold-menu-trigger { font-size: 10px; letter-spacing: 0.16em; }
+  }
+  @media (max-width: 400px) {
+    .coord { font-size: 9px; letter-spacing: 0.12em; }
   }
 
   /* === NAV === */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: var(--s-3) var(--edge-x);
+    padding: var(--s-3) 0;
     transform: translateY(-100%);
     transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s, color 0.4s;
     background: transparent;
@@ -362,12 +370,20 @@
   nav .nav-inner {
     max-width: var(--container-max);
     margin: 0 auto;
+    padding: 0 var(--edge-x);
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
   }
-  nav.in { transform: translateY(0); background: rgba(236, 231, 221, 0.9); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
-  nav.in.dark { background: rgba(15, 20, 25, 0.9); color: var(--paper); }
+  nav.in {
+    transform: translateY(0);
+    background: var(--nav-bg);
+    /* Glass: soft diffuse shadow separates it from same-tone content without a hard line */
+    box-shadow: 0 12px 40px -12px rgba(15, 20, 25, 0.12);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  }
+  nav.in.dark { background: rgba(15, 20, 25, 0.85); color: var(--paper); box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.5); }
   .nav-logo {
     display: inline-flex;
     align-items: center;
@@ -700,12 +716,13 @@
   .pillar h4 {
     font-family: 'Newsreader', serif;
     font-weight: 400;
-    font-size: 24px;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
-    margin-top: 4px;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-top: var(--s-1);
   }
-  .pillar h4 em { font-style: italic; color: var(--ink); }
+  .pillar h4 em { font-style: italic; color: var(--maroon); }
   .pillar p {
     font-family: 'Newsreader', serif;
     font-weight: 300;
@@ -741,12 +758,12 @@
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
-    padding: var(--s-5) var(--s-4) var(--s-4);
+    padding: var(--s-4);
     background: var(--paper-soft);
     color: var(--ink);
     transition: background 0.4s ease;
   }
-  .service-card:hover { background: #DDD5C5; }
+  .service-card:hover { background: var(--paper-hover); }
   .service-card:hover h3 em { color: var(--maroon); }
   .service-card h3 em { transition: color 0.4s; }
   .card-eyebrow {
@@ -759,12 +776,13 @@
   .service-card h3 {
     font-family: 'Newsreader', serif;
     font-weight: 400;
-    font-size: 36px;
-    letter-spacing: -0.015em;
-    line-height: 1.05;
+    font-size: 24px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.2;
     color: var(--ink);
   }
-  .service-card h3 em { font-style: italic; }
+  .service-card h3 em { font-style: italic; color: var(--maroon); }
   .card-desc {
     font-family: 'Newsreader', serif;
     font-weight: 300;
@@ -849,13 +867,13 @@
   }
   .practice-column-title {
     font-family: 'Newsreader', serif;
-    font-style: italic;
     font-weight: 400;
-    font-size: 32px;
+    font-size: 20px;
+    text-transform: uppercase;
     color: var(--ink);
     margin: 0 0 var(--s-4);
-    letter-spacing: -0.015em;
-    line-height: 1.15;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
   }
   .practice-list {
     list-style: none;
@@ -887,7 +905,7 @@
   @media (max-width: 900px) {
     .practice-block { margin-top: var(--s-6); column-gap: var(--s-5); row-gap: var(--s-2); }
     .practice-eyebrow { font-size: 16px; margin-bottom: 0; }
-    .practice-column-title { font-size: 26px; margin-bottom: var(--s-3); }
+    .practice-column-title { font-size: 18px; margin-bottom: var(--s-3); }
     .practice-name { font-size: 19px; }
   }
   @media (max-width: 640px) {
@@ -1133,9 +1151,10 @@
   .team-meta h3 {
     font-family: 'Newsreader', serif;
     font-weight: 400;
-    font-size: 26px;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.2;
   }
   .team-role {
     font-family: 'JetBrains Mono', monospace;
@@ -1253,14 +1272,15 @@
   }
   .pricing-title {
     font-family: 'Newsreader', serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: 28px;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--ink);
     margin: 0;
   }
+  .pricing-title em { font-style: italic; color: var(--maroon); }
   .pricing-rate {
     font-family: 'Newsreader', serif;
     font-weight: 300;
@@ -1502,29 +1522,33 @@
   .form-submit {
     margin-top: var(--s-3);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
+    font-size: 12px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--paper);
-    background: var(--ink);
+    color: var(--ink);
+    background: transparent;
     border: 0;
-    padding: var(--s-3) var(--s-4);
+    border-bottom: 1px solid rgba(15, 20, 25, 0.35);
+    padding: 16px 0;
     cursor: pointer;
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--s-2);
-    transition: background 0.3s, gap 0.3s, color 0.3s;
-    align-self: flex-start;
+    width: 100%;
+    transition: border-color 0.35s ease, letter-spacing 0.35s ease;
     border-radius: 0;
   }
-  .form-submit:hover { background: var(--maroon); gap: var(--s-3); }
+  .form-submit:hover { border-bottom-color: var(--ink); letter-spacing: 0.24em; }
   .form-submit:disabled { opacity: 0.5; cursor: wait; }
   .form-submit .arrow {
     font-family: 'JetBrains Mono', monospace;
-    color: var(--maroon-soft);
-    font-size: 14px;
+    color: var(--maroon);
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.35s ease;
   }
-  .form-submit:hover .arrow { color: var(--paper); }
+  .form-submit:hover .arrow { transform: translate(2px, -2px); }
   .form-note {
     font-family: 'Newsreader', serif;
     font-size: 13px;
@@ -1552,28 +1576,20 @@
     .form-row { grid-template-columns: 1fr; gap: var(--s-3); }
   }
   @media (max-width: 768px) {
-    .form-submit {
-      align-self: stretch;
-      width: 100%;
-      justify-content: space-between;
-      padding: 18px 22px;
-      font-size: 12px;
-      letter-spacing: 0.2em;
-    }
-    .form-submit .arrow { font-size: 18px; line-height: 1; }
   }
 
   /* ============================================================
      COLOPHON
      ============================================================ */
   footer {
-    background: var(--paper);
-    color: var(--pebble);
-    padding: var(--s-5) var(--edge-x) var(--s-4);
+    background: var(--ink);
+    color: rgba(236, 231, 221, 0.55);
+    padding: var(--s-5) 0 var(--s-4);
   }
   .footer-inner {
     max-width: var(--container-max);
     margin: 0 auto;
+    padding: 0 var(--edge-x);
   }
   .footer-mark {
     display: flex;
@@ -1595,24 +1611,24 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     line-height: 1.6;
-    color: var(--pebble);
+    color: rgba(236, 231, 221, 0.55);
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
-  .footer-mark-text .lead { color: var(--maroon); }
-  .footer-mark-text .name { color: var(--ink); }
+  .footer-mark-text .lead { color: var(--maroon-soft); }
+  .footer-mark-text .name { color: var(--paper); }
   .footer-mark-text .meta {
     font-family: 'Newsreader', serif;
     font-style: italic;
     font-size: 12px;
     letter-spacing: 0;
     text-transform: none;
-    color: var(--pebble);
+    color: rgba(236, 231, 221, 0.55);
     margin-top: 2px;
   }
   .colophon {
-    padding-top: var(--s-3);
+    padding-top: var(--s-4);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1639,7 +1655,7 @@
     transition: opacity 0.3s, color 0.3s;
   }
   .colophon-langs button:hover { opacity: 1; }
-  .colophon-langs button.active { opacity: 1; color: var(--ink); }
+  .colophon-langs button.active { opacity: 1; color: var(--paper); }
   .colophon-langs .sep { opacity: 0.35; }
   @media (max-width: 768px) {
     .colophon {
@@ -1657,14 +1673,57 @@
     .colophon-meta a { white-space: nowrap; }
     .colophon-langs { grid-column: 1 / -1; justify-content: flex-start; }
   }
+
+  /* === PAPER TOGGLE (beige / white comparison) === */
+  html.theme-white {
+    --paper: #FFFFFF;
+    --paper-soft: #F4F4F1;
+    --paper-hover: #EAEAE5;
+    --nav-bg: rgba(255, 255, 255, 0.65);
+  }
+  .paper-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 90;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid rgba(236, 231, 221, 0.18);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .paper-toggle button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    cursor: pointer;
+    opacity: 0.45;
+    transition: opacity 0.3s;
+  }
+  .paper-toggle button:hover { opacity: 0.8; }
+  .paper-toggle button.active { opacity: 1; color: var(--maroon-soft); }
+  .paper-toggle .sep { opacity: 0.35; }
 </style>
+<script>
+  (function(){ try { if (localStorage.getItem('lex_paper') === 'white') document.documentElement.classList.add('theme-white'); } catch(e){} })();
+</script>
 </head>
 <body>
 
 <!-- 00 / COLD OPEN -->
 <section class="cold-open" id="coldOpen">
   <div class="cold-top">
-    <div class="coord">HELSINKI · 60.1699°N · 2026<span class="blink">_</span></div>
+    <div class="coord">HELSINKI 60.1699°N 2026<span class="blink">_</span></div>
     <button class="cold-menu-trigger" id="coldMenuTrigger" data-i18n-aria="nav.openMenu">
       <span class="trigger-label" data-i18n="nav.menu">Menu</span>
       <span class="trigger-bars" aria-hidden="true">
@@ -1683,7 +1742,7 @@
             <span data-i18n="cold.footCta">Book a consultation</span>
             <span class="icon" aria-hidden="true">↓</span>
           </a>
-          <a class="cold-cta cold-cta--alt" href="#dokumendipank">
+          <a class="cold-cta cold-cta--alt" href="https://dokumendipank.vercel.app" target="_blank" rel="noopener">
             <span data-i18n="cold.docsCta">Document bank</span>
             <span class="icon icon--diag" aria-hidden="true">↓</span>
           </a>
@@ -1746,7 +1805,7 @@
           <span class="sub" data-i18n="menu.02.sub">Private · Business</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a></li>
-        <li><a href="#dokumendipank" data-close>
+        <li><a href="https://dokumendipank.vercel.app" target="_blank" rel="noopener">
           <span class="num">03</span>
           <span class="label" data-i18n="menu.03.label">Document bank</span>
           <span class="sub" data-i18n="menu.03.sub">From €19</span>
@@ -1918,7 +1977,7 @@
             <li data-i18n="svc.card3.li4">Powers of attorney &amp; declarations</li>
           </ul>
           <span class="card-price" data-i18n="svc.card3.price">From €19</span>
-          <a href="#" class="card-cta" data-i18n-html="svc.card3.cta">Browse documents <span>→</span></a>
+          <a href="https://dokumendipank.vercel.app" target="_blank" rel="noopener" class="card-cta" data-i18n-html="svc.card3.cta">Browse documents <span>↗</span></a>
         </div>
 
       </div>
@@ -1980,7 +2039,7 @@
         </div>
         <h2 class="section-h" data-i18n="team.h2">The people<br>who <em>walk into the room.</em></h2>
       </div>
-      <div class="team-grid team-grid--solo">
+      <div class="team-grid">
 
         <div class="team-card">
           <div class="img-treated warm ratio-portrait">
@@ -1993,6 +2052,21 @@
             <div class="team-signature">D. Leivonen</div>
             <h3>Dagi-Liis Leivonen</h3>
             <div class="team-role" data-i18n="team.p3.role">CEO · Attorney at law · Partner</div>
+            <div class="team-langs">FI · EN · ET</div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="img-treated warm ratio-portrait">
+            <img src="img/vivian-berg.jpg" data-i18n-alt="team.p4.imgAlt" alt="Vivian Berg portrait">
+          </div>
+          <div class="team-meta">
+            <div class="team-rank">
+              <span data-i18n="team.p4.rank">Sales &amp; Marketing</span>
+            </div>
+            <div class="team-signature">V. Berg</div>
+            <h3>Vivian Berg</h3>
+            <div class="team-role" data-i18n="team.p4.role">Sales &amp; Marketing Manager</div>
             <div class="team-langs">FI · EN · ET</div>
           </div>
         </div>
@@ -2234,7 +2308,7 @@
       'svc.card3.li1': 'Employment contracts', 'svc.card3.li2': 'Lease agreements',
       'svc.card3.li3': 'NDAs &amp; collaboration agreements', 'svc.card3.li4': 'Powers of attorney &amp; declarations',
       'svc.card3.price': 'From €19',
-      'svc.card3.cta': 'Browse documents <span>→</span>',
+      'svc.card3.cta': 'Browse documents <span>↗</span>',
       'svc.practice.eyebrow': 'Practice areas',
       'svc.practice.privateTitle': 'Private clients.',
       'svc.practice.p1': 'Family law', 'svc.practice.p2': 'Inheritance &amp; wills',
@@ -2254,6 +2328,9 @@
       'team.p3.rank': 'CEO · Partner',
       'team.p3.role': 'CEO · Attorney at law · Partner',
       'team.p3.imgAlt': 'Dagi-Liis Leivonen portrait',
+      'team.p4.rank': 'Sales & Marketing',
+      'team.p4.role': 'Sales & Marketing Manager',
+      'team.p4.imgAlt': 'Vivian Berg portrait',
       'pull.body': 'Law is simple, once you let go of the need <em>to look complicated.</em>',
       'pull.attr': '<span class="name">A. Nõmm</span> · Managing partner · On counsel',
       'price.chapter': 'Fees',
@@ -2401,7 +2478,7 @@ The answer is always yours.`,
       'svc.card3.li1': 'Työsopimukset', 'svc.card3.li2': 'Vuokrasopimukset',
       'svc.card3.li3': 'Salassapito- ja yhteistyösopimukset', 'svc.card3.li4': 'Valtakirjat ja ilmoitukset',
       'svc.card3.price': 'Alkaen 19 €',
-      'svc.card3.cta': 'Selaa asiakirjoja <span>→</span>',
+      'svc.card3.cta': 'Selaa asiakirjoja <span>↗</span>',
       'svc.practice.eyebrow': 'Osaamisalueet',
       'svc.practice.privateTitle': 'Yksityisasiakkaalle.',
       'svc.practice.p1': 'Perheoikeus', 'svc.practice.p2': 'Perintöoikeus &amp; testamentit',
@@ -2421,6 +2498,9 @@ The answer is always yours.`,
       'team.p3.rank': 'Toimitusjohtaja · Partneri',
       'team.p3.role': 'Toimitusjohtaja · Asianajaja · Partneri',
       'team.p3.imgAlt': 'Dagi-Liis Leivonen muotokuva',
+      'team.p4.rank': 'Myynti & Markkinointi',
+      'team.p4.role': 'Myynti- ja markkinointipäällikkö',
+      'team.p4.imgAlt': 'Vivian Berg muotokuva',
       'pull.body': 'Oikeus on yksinkertaista, kun luovutte tarpeesta <em>näyttää monimutkaiselta.</em>',
       'pull.attr': '<span class="name">A. Nõmm</span> · Johtava partneri · Neuvonnasta',
       'price.chapter': 'Hinnasto',
@@ -2674,5 +2754,29 @@ Vastaus on aina teidän.`,
   console.log('%c2010 - 2026 · Helsinki', 'font: 10px "JetBrains Mono", monospace; color: #6E3144; letter-spacing: 0.25em;');
 </script>
 
+<script>
+  // Local preview: when opened as a file, cross-site links point at the sibling local HTML instead of the live site.
+  if (location.protocol === 'file:') {
+    document.querySelectorAll('a[href^="https://dokumendipank.vercel.app"]').forEach(function (a) {
+      a.href = a.getAttribute('href').replace('https://dokumendipank.vercel.app', '../dokumendipank/index.html').replace('index.html/#', 'index.html#');
+      a.removeAttribute('target');
+    });
+  }
+</script>
+<div class="paper-toggle" role="group" aria-label="Background colour">
+  <button type="button" data-paper="beige">Beige</button><span class="sep">·</span><button type="button" data-paper="white">White</button>
+</div>
+<script>
+  (function(){
+    var root = document.documentElement, btns = document.querySelectorAll('.paper-toggle button');
+    function sync(){ var w = root.classList.contains('theme-white'); btns.forEach(function(b){ b.classList.toggle('active', (b.dataset.paper === 'white') === w); }); }
+    btns.forEach(function(b){ b.addEventListener('click', function(){
+      root.classList.toggle('theme-white', b.dataset.paper === 'white');
+      try { localStorage.setItem('lex_paper', b.dataset.paper); } catch(e){}
+      sync();
+    }); });
+    sync();
+  })();
+</script>
 </body>
 </html>

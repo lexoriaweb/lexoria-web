@@ -1,0 +1,2394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Bank · LEXORIA</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=2">
+<meta name="description" content="Ready-made, legally sound documents. Fill in online, download PDF or DOC. By Lexoria — attorney at law since 2010.">
+<meta property="og:title" content="Document Bank · LEXORIA">
+<meta property="og:description" content="Ready-made, legally sound documents. From €15.">
+<meta property="og:site_name" content="LEXORIA">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Document Bank · LEXORIA">
+<meta name="twitter:description" content="Ready-made, legally sound documents. From €15.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    try {
+      var cached = localStorage.getItem('lex_lang');
+      var hint = (navigator.language || 'en').toLowerCase().slice(0,2);
+      var lang = cached || (hint === 'fi' ? 'fi' : 'en');
+      document.documentElement.lang = lang;
+      document.documentElement.dataset.lang = lang;
+    } catch(e){}
+  })();
+</script>
+<style>
+  :root {
+    --paper: #ECE7DD;
+    --paper-soft: #E5E0D5;
+    --paper-hover: #DDD5C5;
+    --ink: #0F1419;
+    --maroon: #5B21B6;
+    --maroon-soft: #C7BEE5;
+    --pebble: #6B6B6B;
+
+    --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 32px;
+    --s-5: 48px; --s-6: 64px; --s-7: 96px; --s-8: 128px;
+    --s-9: 192px; --s-10: 256px;
+
+    --container-max: 1400px;
+    --edge-x: var(--s-5);
+  }
+  @media (max-width: 768px) { :root { --edge-x: 40px; } }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; overscroll-behavior-x: none; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
+    touch-action: pan-y;
+    max-width: 100vw;
+  }
+  body.cart-open, body.menu-open { overflow: hidden; }
+  ::selection { background: var(--maroon); color: var(--paper); }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-left: var(--edge-x);
+    padding-right: var(--edge-x);
+  }
+
+  /* === TYPOGRAPHY PRIMITIVES === */
+  .chapter-block { display: block; margin-bottom: var(--s-6); }
+  .chapter {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--s-3);
+    margin-bottom: var(--s-4);
+    line-height: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .chapter-block:last-child { margin-bottom: 0; }
+  .chapter:last-child { margin-bottom: 0; }
+  .chapter .glyph {
+    display: inline-block;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--maroon);
+    letter-spacing: 0;
+    line-height: 1;
+    text-transform: none;
+  }
+  .section-h {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(40px, 5.2vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+  }
+  .section-h em { font-style: italic; color: var(--maroon); }
+  @media (max-width: 900px) {
+    .chapter-block { margin-bottom: var(--s-4); }
+    .chapter { margin-bottom: var(--s-4); gap: var(--s-2); }
+    .chapter .glyph { font-size: 18px; }
+  }
+
+  .caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    line-height: 1.7;
+  }
+  .caption .lead { color: var(--maroon); }
+
+  /* === NAV === */
+  nav.top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: var(--ink);
+    padding: var(--s-3) 0;
+    color: var(--paper);
+  }
+  .nav-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--edge-x);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: var(--s-4);
+  }
+  .nav-left {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+  }
+  .nav-right {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    justify-self: end;
+  }
+  .nav-burger {
+    display: none;
+    align-items: center;
+    gap: var(--s-2);
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: var(--paper);
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+  }
+  .nav-burger:hover { opacity: 1; color: var(--maroon-soft); }
+  .burger-bars {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 22px;
+  }
+  .burger-bars span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: currentColor;
+    transition: background 0.3s ease;
+    transform-origin: center;
+  }
+
+  .nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    text-decoration: none;
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    transition: opacity 0.3s, gap 0.3s, color 0.3s;
+  }
+  .nav-back:hover { opacity: 1; color: var(--maroon-soft); gap: var(--s-3); }
+  .nav-back .arrow { color: var(--maroon-soft); font-size: 13px; }
+  .nav-back .nav-back-label { display: inline; }
+
+  .nav-brand {
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    text-decoration: none;
+    color: var(--paper);
+    line-height: 1;
+  }
+  .nav-brand img { height: 44px; width: auto; display: block; }
+  .nav-brand .brand-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon-soft);
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    height: 44px;
+  }
+
+  .nav-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-1);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: rgba(236, 231, 221, 0.6);
+  }
+  .nav-lang button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: rgba(236, 231, 221, 0.6);
+    font: inherit;
+    letter-spacing: inherit;
+    opacity: 0.55;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .nav-lang button:hover { opacity: 1; color: var(--maroon-soft); }
+  .nav-lang button.active { opacity: 1; color: var(--paper); }
+  .nav-lang .sep { opacity: 0.35; }
+
+  .nav-cart {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    background: transparent;
+    border: 1px solid rgba(236, 231, 221, 0.4);
+    padding: 10px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .nav-cart:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  .cart-icon { width: 18px; height: 18px; display: block; flex-shrink: 0; }
+  .nav-cart .count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: var(--maroon);
+    color: var(--paper);
+    border-radius: 999px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    transition: transform 0.3s;
+  }
+  .nav-cart.pulse .count { animation: pulse 0.5s ease; }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.35); }
+    100% { transform: scale(1); }
+  }
+
+  @media (max-width: 768px) {
+    nav.top-nav { padding: 14px 0; }
+    .nav-inner {
+      grid-template-columns: 1fr auto 1fr;
+      gap: var(--s-3);
+      min-height: 32px;
+      align-items: center;
+    }
+    .nav-back { display: none; }
+    .nav-burger {
+      display: inline-flex;
+      justify-self: start;
+      height: 32px;
+    }
+    .nav-lang { display: none; }
+    .nav-brand {
+      display: inline-flex;
+      justify-self: center;
+      gap: 0;
+      height: 32px;
+      align-items: center;
+    }
+    .nav-brand img { height: 22px; }
+    .nav-brand .brand-tag { display: none; }
+    .nav-right { gap: 0; justify-self: end; }
+    .nav-cart {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      gap: 0;
+      position: relative;
+      height: 32px;
+      width: 32px;
+      justify-content: flex-end;
+    }
+    .nav-cart:hover { background: transparent; color: var(--maroon-soft); border: 0; }
+    .nav-cart .cart-label { display: none; }
+    .cart-icon { width: 22px; height: 22px; }
+    .nav-cart .count {
+      position: absolute;
+      top: 2px;
+      right: -6px;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      font-size: 9px;
+    }
+    .burger-label { display: none; }
+  }
+
+  /* ============================================================
+     MENU OVERLAY
+     ============================================================ */
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: var(--paper);
+    color: var(--ink);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .menu-overlay.open { opacity: 1; pointer-events: auto; }
+  .menu-top {
+    padding: var(--s-3) var(--edge-x);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    width: 100%;
+    gap: var(--s-3);
+  }
+  .menu-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    text-decoration: none;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .menu-brand img { height: 30px; width: auto; display: block; }
+  .menu-brand .brand-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+  }
+  .menu-close {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0;
+    transition: color 0.3s;
+  }
+  .menu-close:hover { color: var(--maroon); }
+  .menu-close [aria-hidden] { font-size: 20px; line-height: 1; }
+
+  @media (max-width: 640px) {
+    .menu-top { align-items: flex-start; }
+    .menu-brand {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .menu-brand img { height: 26px; }
+    .menu-brand .brand-tag {
+      height: auto;
+      white-space: nowrap;
+    }
+    .menu-close { padding-top: 6px; }
+  }
+
+  .menu-body {
+    flex: 1 1 auto;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    width: 100%;
+    padding: var(--s-5) var(--edge-x) var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+  .menu-list { list-style: none; }
+  .menu-list li {
+    border-top: 1px solid rgba(15, 20, 25, 0.1);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .menu-list li:last-child { border-bottom: 1px solid rgba(15, 20, 25, 0.1); }
+  .menu-overlay.open .menu-list li { opacity: 1; transform: translateY(0); }
+  .menu-overlay.open .menu-list li:nth-child(1) { transition-delay: 0.08s; }
+  .menu-overlay.open .menu-list li:nth-child(2) { transition-delay: 0.14s; }
+  .menu-overlay.open .menu-list li:nth-child(3) { transition-delay: 0.20s; }
+  .menu-overlay.open .menu-list li:nth-child(4) { transition-delay: 0.26s; }
+  .menu-list a {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: var(--s-3);
+    align-items: center;
+    padding: var(--s-3) 0;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color 0.35s, padding-left 0.35s;
+  }
+  .menu-list a:hover { color: var(--maroon); padding-left: 6px; }
+  .menu-list .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--pebble);
+    transition: color 0.35s;
+  }
+  .menu-list a:hover .num { color: var(--maroon); }
+  .menu-list .label {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(32px, 8vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .menu-list .arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    color: var(--maroon);
+    opacity: 0.5;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .menu-list a:hover .arrow { opacity: 1; transform: translateX(4px); }
+
+  .menu-aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    opacity: 0;
+    transition: opacity 0.5s ease 0.35s;
+  }
+  .menu-overlay.open .menu-aside { opacity: 1; }
+  .menu-aside-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .menu-aside-lead {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .menu-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    color: var(--pebble);
+  }
+  .menu-lang button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: var(--pebble);
+    font: inherit;
+    letter-spacing: inherit;
+    opacity: 0.55;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .menu-lang button:hover { opacity: 1; color: var(--maroon); }
+  .menu-lang button.active { opacity: 1; color: var(--ink); }
+  .menu-lang .sep { opacity: 0.35; }
+  .menu-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2);
+    padding: 18px 22px;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: background 0.3s, letter-spacing 0.3s;
+    align-self: flex-start;
+    width: 100%;
+    max-width: 360px;
+  }
+  .menu-cta:hover { background: var(--maroon); letter-spacing: 0.26em; }
+  .menu-cta .arrow { color: var(--maroon-soft); font-size: 14px; }
+  .menu-cta:hover .arrow { color: var(--paper); }
+
+  @media (max-width: 768px) {
+    .menu-cta { max-width: 100%; }
+  }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    padding: var(--s-8) 0;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero .chapter { color: var(--maroon-soft); }
+  .hero .chapter .glyph { color: var(--maroon-soft); }
+  .hero .section-h { color: var(--paper); }
+  .hero .section-h em { color: var(--maroon-soft); }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: var(--s-7);
+    align-items: stretch;
+  }
+  .hero-copy { display: flex; flex-direction: column; gap: var(--s-3); }
+  .hero-lede {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: clamp(18px, 1.4vw, 22px);
+    line-height: 1.55;
+    color: rgba(236, 231, 221, 0.7);
+    max-width: 44ch;
+  }
+  .hero-lede em { font-style: italic; color: var(--paper); font-weight: 400; }
+
+  .hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    /* Measured: value cap-top sits ~4.6px below the row line box; pull up so it meets the heading cap-top. */
+    margin-top: -4px;
+  }
+  .hero-meta-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--s-3);
+    align-items: baseline;
+    padding: 0;
+  }
+  .hero-meta-row .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon-soft);
+  }
+  .hero-meta-row .v {
+    font-family: 'Newsreader', serif;
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--paper);
+  }
+  .hero-meta-row .v em { font-style: italic; color: var(--maroon-soft); font-weight: 400; }
+  .hero-meta-row .v .sep { color: var(--maroon-soft); margin: 0 8px; }
+
+  @media (max-width: 900px) {
+    .hero { padding: var(--s-7) 0; }
+    .hero-grid { grid-template-columns: 1fr; gap: var(--s-5); align-items: start; }
+    .hero-lede { font-size: 17px; }
+    .hero-meta { gap: var(--s-2); margin-top: 0; }
+    .hero-meta-row { grid-template-columns: 96px 1fr; }
+    .hero-meta-row .v { font-size: 17px; }
+  }
+
+  /* ============================================================
+     PRODUCT GRID
+     ============================================================ */
+  .shop-section {
+    padding: var(--s-8) 0;
+    background: var(--paper);
+  }
+  .shop-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s-4);
+    margin-bottom: var(--s-4);
+    padding-bottom: 0;
+  }
+  .shop-head .count-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pebble);
+  }
+  .shop-head .count-note em { color: var(--maroon); font-style: normal; }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+  }
+
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--paper-soft);
+    color: var(--ink);
+    padding: var(--s-4);
+    position: relative;
+    transition: background 0.4s ease, transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    min-height: 460px;
+    border: 1.5px solid rgba(15, 20, 25, 0.22);
+  }
+  .product-card:hover {
+    background: var(--paper-hover);
+    border-color: rgba(15, 20, 25, 0.55);
+  }
+  .product-card:hover .card-title em { color: var(--maroon); }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--s-3);
+  }
+  .card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .card-format {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pebble);
+  }
+  .card-title {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: var(--s-2);
+  }
+  .card-title em { font-style: italic; color: var(--maroon); transition: color 0.4s; }
+  .card-lede {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--pebble);
+    margin-bottom: var(--s-3);
+  }
+  .card-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: var(--s-4);
+  }
+  .card-features li {
+    font-family: 'Newsreader', serif;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    padding-left: var(--s-3);
+    position: relative;
+  }
+  .card-features li::before {
+    content: "·";
+    position: absolute;
+    left: 4px;
+    color: var(--maroon);
+    font-weight: 400;
+  }
+
+  .card-foot {
+    margin-top: auto;
+    padding-top: var(--s-3);
+    border-top: 1px solid rgba(15, 20, 25, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .card-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-2);
+  }
+  .card-price .amount {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .card-price .amount .unit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--maroon);
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .card-price .vat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    text-align: right;
+    line-height: 1.4;
+  }
+  .card-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .card-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-1);
+    padding: 14px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, gap 0.3s ease, letter-spacing 0.3s ease;
+    white-space: nowrap;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+  }
+  .card-btn:hover { gap: var(--s-2); letter-spacing: 0.22em; }
+  .card-btn .arrow { font-size: 12px; transition: transform 0.3s ease; }
+  .card-add:hover { background: var(--ink); color: var(--paper); }
+  .card-add.added { background: var(--maroon); border-color: var(--maroon); color: var(--paper); }
+  .card-buy {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .card-buy .arrow { color: var(--maroon-soft); }
+  .card-buy:hover { background: var(--maroon); border-color: var(--maroon); }
+  .card-buy:hover .arrow { color: var(--paper); transform: translateX(3px); }
+
+  @media (max-width: 1024px) {
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .shop-section { padding: var(--s-7) 0; }
+  }
+  .swipe-nav { display: none; }
+
+  @media (max-width: 640px) {
+    .product-grid {
+      display: flex;
+      grid-template-columns: none;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      gap: var(--s-3);
+      margin-left: calc(-1 * var(--edge-x));
+      margin-right: calc(-1 * var(--edge-x));
+      padding: 4px var(--edge-x);
+      scroll-padding-left: var(--edge-x);
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .product-grid::-webkit-scrollbar { display: none; }
+    .product-card {
+      min-height: 0;
+      padding: var(--s-4);
+      flex: 0 0 min(78vw, 340px);
+      scroll-snap-align: start;
+    }
+    .card-title { font-size: 20px; }
+    .shop-head { flex-direction: column; align-items: flex-start; gap: var(--s-2); }
+
+    .swipe-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-3);
+      margin-top: var(--s-4);
+      padding: 0 4px;
+    }
+    .swipe-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--maroon);
+    }
+    .swipe-hint .arrow {
+      display: inline-block;
+      font-size: 13px;
+      animation: swipe-nudge 1.6s infinite ease-in-out;
+    }
+    @keyframes swipe-nudge {
+      0%, 100% { transform: translateX(0); opacity: 0.7; }
+      50% { transform: translateX(5px); opacity: 1; }
+    }
+    .swipe-nav.scrolled .swipe-hint { opacity: 0; transition: opacity 0.4s; }
+    .swipe-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .swipe-dots .dot {
+      width: 6px;
+      height: 6px;
+      background: rgba(15, 20, 25, 0.2);
+      border-radius: 999px;
+      transition: background 0.3s, width 0.3s;
+    }
+    .swipe-dots .dot.active {
+      background: var(--maroon);
+      width: 20px;
+    }
+  }
+
+  /* ============================================================
+     HOW IT WORKS (3 steps)
+     ============================================================ */
+  .how-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: var(--s-8) 0;
+  }
+  .how-section .chapter { color: var(--maroon-soft); }
+  .how-section .chapter .glyph { color: var(--maroon-soft); }
+  .how-section .section-h { color: var(--paper); }
+  .how-section .section-h em { color: var(--maroon-soft); }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon-soft);
+  }
+  .step h4 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    color: var(--paper);
+  }
+  .step h4 em { font-style: italic; color: var(--maroon-soft); }
+  .step p {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(236, 231, 221, 0.7);
+    max-width: 34ch;
+    margin-top: var(--s-1);
+  }
+  @media (max-width: 900px) {
+    .how-section { padding: var(--s-7) 0; }
+    .steps-grid { grid-template-columns: 1fr; gap: var(--s-4); }
+  }
+
+  /* ============================================================
+     TRUST STRIP
+     ============================================================ */
+  .trust-strip {
+    background: var(--paper-soft);
+    padding: var(--s-7) 0;
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+  .trust-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .trust-cell .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .trust-cell .v {
+    font-family: 'Newsreader', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+  .trust-cell .v em { font-style: italic; color: var(--maroon); }
+  @media (max-width: 900px) {
+    .trust-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-4); }
+  }
+  @media (max-width: 640px) {
+    .trust-strip { padding: var(--s-6) 0; }
+    .trust-grid { grid-template-columns: 1fr; gap: var(--s-3); }
+    .trust-cell { padding-bottom: var(--s-3); border-bottom: 1px solid rgba(15, 20, 25, 0.1); }
+    .trust-cell:last-child { border-bottom: 0; padding-bottom: 0; }
+    .trust-cell .v { font-size: 20px; }
+  }
+
+  /* ============================================================
+     CUSTOM CTA (need something custom?)
+     ============================================================ */
+  .custom-section {
+    background: var(--paper);
+    padding: var(--s-8) 0;
+  }
+  .custom-grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: var(--s-7);
+    align-items: start;
+  }
+  .custom-copy { display: flex; flex-direction: column; gap: var(--s-5); }
+  .custom-cta-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    /* Optical: first row's cap-top meets the heading's cap-top */
+    margin-top: -4px;
+  }
+  .custom-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2);
+    padding: 16px 0;
+    border: 0;
+    border-bottom: 1px solid rgba(15, 20, 25, 0.25);
+    color: var(--ink);
+    text-decoration: none;
+    background: transparent;
+    transition: border-color 0.35s ease, color 0.35s ease, letter-spacing 0.35s ease;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    width: 100%;
+  }
+  .custom-cta .icon { font-size: 18px; line-height: 1; color: var(--maroon); transition: transform 0.35s ease; }
+  .custom-cta:hover { border-bottom-color: var(--ink); letter-spacing: 0.24em; }
+  .custom-cta:not(.primary) { color: rgba(15, 20, 25, 0.65); }
+  .custom-cta:not(.primary):hover { color: var(--ink); }
+  .custom-cta.primary:hover .icon { transform: translateY(3px); }
+  .custom-cta:not(.primary) .icon { transform: rotate(-135deg); }
+  .custom-cta:not(.primary):hover .icon { transform: rotate(-135deg) translateY(-3px); }
+  @media (max-width: 900px) {
+    .custom-section { padding: var(--s-7) 0; }
+    .custom-grid { grid-template-columns: 1fr; gap: var(--s-5); align-items: start; }
+    .custom-cta-row { max-width: 100%; }
+  }
+
+  /* ============================================================
+     CART DRAWER
+     ============================================================ */
+  .cart-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 20, 25, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 90;
+  }
+  .cart-backdrop.open { opacity: 1; pointer-events: auto; }
+
+  .cart-drawer {
+    position: fixed;
+    top: 0; right: 0;
+    height: 100dvh;
+    width: min(480px, 100vw);
+    background: var(--paper);
+    color: var(--ink);
+    z-index: 100;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -20px 0 60px rgba(15, 20, 25, 0.12);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+
+  .cart-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--s-4) var(--s-4);
+    border-bottom: 1px solid rgba(15, 20, 25, 0.12);
+  }
+  .cart-head h3 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+  }
+  .cart-head h3 em { font-style: italic; color: var(--maroon); }
+  .cart-close {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0;
+    transition: color 0.3s;
+  }
+  .cart-close:hover { color: var(--maroon); }
+
+  .cart-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: var(--s-2) var(--s-4);
+  }
+  .cart-empty {
+    padding: var(--s-6) 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .cart-empty .lead {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .cart-empty .msg {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .cart-empty .hint {
+    font-family: 'Newsreader', serif;
+    font-size: 14px;
+    color: var(--pebble);
+    margin-top: var(--s-2);
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--s-2);
+    padding: var(--s-3) 0;
+    border-top: 1px solid rgba(15, 20, 25, 0.1);
+    align-items: start;
+  }
+  .cart-item:first-child { border-top: 0; }
+  .cart-item-title {
+    font-family: 'Newsreader', serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .cart-item-title em { font-style: italic; color: var(--maroon); }
+  .cart-item-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    margin-top: 4px;
+  }
+  .cart-item-price {
+    font-family: 'Newsreader', serif;
+    font-size: 20px;
+    color: var(--ink);
+    text-align: right;
+    line-height: 1;
+  }
+  .cart-remove {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin-top: 6px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    text-align: right;
+    transition: color 0.3s;
+  }
+  .cart-remove:hover { color: var(--maroon); }
+
+  .cart-foot {
+    padding: var(--s-4);
+    border-top: 1px solid rgba(15, 20, 25, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .cart-total .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .cart-total .v {
+    font-family: 'Newsreader', serif;
+    font-size: 32px;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    line-height: 1;
+  }
+  .cart-vat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pebble);
+  }
+  .cart-checkout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2);
+    padding: 18px 22px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s, letter-spacing 0.3s;
+  }
+  .cart-checkout:hover:not(:disabled) { background: var(--maroon); letter-spacing: 0.26em; }
+  .cart-checkout:disabled { opacity: 0.35; cursor: not-allowed; }
+  .cart-checkout .arrow { color: var(--maroon-soft); }
+  .cart-checkout:hover:not(:disabled) .arrow { color: var(--paper); }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer.site-foot {
+    background: var(--ink);
+    color: rgba(236, 231, 221, 0.55);
+    padding: var(--s-5) 0 var(--s-4);
+  }
+  .footer-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--edge-x);
+  }
+  .footer-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-2);
+    padding-bottom: var(--s-5);
+    text-decoration: none;
+    color: inherit;
+  }
+  .footer-mark img {
+    height: 32px;
+    width: auto;
+    display: block;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+  }
+  .footer-mark:hover img { opacity: 1; }
+  .footer-mark-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    color: rgba(236, 231, 221, 0.55);
+    text-align: left;
+  }
+  .footer-mark-text .part-of {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .footer-mark-text .lead { color: var(--maroon-soft); }
+  .footer-mark-text .name { color: var(--paper); }
+  .colophon {
+    padding-top: var(--s-4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .colophon a { color: inherit; text-decoration: none; opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
+  .colophon a:hover { opacity: 1; color: var(--maroon-soft); }
+  .colophon-meta { display: flex; gap: var(--s-4); flex-wrap: wrap; align-items: center; }
+  .colophon-langs { display: inline-flex; gap: var(--s-2); align-items: center; }
+  .colophon-langs button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+    letter-spacing: 0.22em;
+    opacity: 0.55;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .colophon-langs button:hover { opacity: 1; }
+  .colophon-langs button.active { opacity: 1; color: var(--paper); }
+  .colophon-langs .sep { opacity: 0.35; }
+  @media (max-width: 768px) {
+    footer.site-foot { padding: var(--s-5) 0 var(--s-4); }
+    .footer-mark { padding-bottom: var(--s-4); gap: var(--s-2); }
+    .footer-mark img { height: 28px; }
+    .footer-mark-text { font-size: 10px; letter-spacing: 0.2em; }
+    .colophon {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--s-4);
+      padding-top: var(--s-4);
+      }
+    .colophon > span:first-child { font-size: 9px; line-height: 1.7; letter-spacing: 0.2em; }
+    .colophon-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-3) var(--s-4);
+      width: 100%;
+    }
+    .colophon-meta a { white-space: nowrap; font-size: 10px; letter-spacing: 0.2em; }
+    .colophon-langs {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
+      padding-top: var(--s-2);
+      border-top: 1px solid rgba(15, 20, 25, 0.06);
+      margin-top: var(--s-1);
+      width: 100%;
+      font-size: 11px;
+    }
+  }
+
+  /* === TOAST === */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: var(--s-5);
+    transform: translateX(-50%) translateY(24px);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+  }
+  .toast .glyph { color: var(--maroon-soft); font-size: 14px; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+  /* === PAPER TOGGLE (beige / white comparison) === */
+  html.theme-white {
+    --paper: #FFFFFF;
+    --paper-soft: #F4F4F1;
+    --paper-hover: #EAEAE5;
+  }
+  .paper-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 90;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid rgba(236, 231, 221, 0.18);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .paper-toggle button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    cursor: pointer;
+    opacity: 0.45;
+    transition: opacity 0.3s;
+  }
+  .paper-toggle button:hover { opacity: 0.8; }
+  .paper-toggle button.active { opacity: 1; color: var(--maroon-soft); }
+  .paper-toggle .sep { opacity: 0.35; }
+</style>
+<script>
+  (function(){ try { if (localStorage.getItem('lex_paper') === 'white') document.documentElement.classList.add('theme-white'); } catch(e){} })();
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <button class="nav-burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+        <span class="burger-bars" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="burger-label" data-i18n="nav.menu">Menu</span>
+      </button>
+      <a class="nav-back" href="https://lexoria-web.vercel.app" aria-label="Back to Lexoria">
+        <span class="arrow" aria-hidden="true">←</span>
+        <span class="nav-back-label" data-i18n="nav.back">Lexoria.fi</span>
+      </a>
+    </div>
+    <a class="nav-brand" href="./">
+      <img src="lexoria-logo-white.png" alt="Lexoria">
+      <span class="brand-tag" data-i18n="nav.brand">Document Bank</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-lang" role="group" aria-label="Language">
+        <button type="button" data-lang="fi">FI</button>
+        <span class="sep" aria-hidden="true">·</span>
+        <button type="button" data-lang="en">EN</button>
+      </span>
+      <button class="nav-cart" id="cartBtn" aria-label="Open cart">
+        <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 8h12l-1 12H7L6 8z"/>
+          <path d="M9 8V5a3 3 0 0 1 6 0v3"/>
+        </svg>
+        <span class="cart-label" data-i18n="nav.cart">Cart</span>
+        <span class="count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MENU OVERLAY -->
+<div class="menu-overlay" id="menuOverlay" aria-hidden="true" aria-label="Menu">
+  <div class="menu-top">
+    <a class="menu-brand" href="./" data-menu-close>
+      <img src="lexoria-logo-dark.png" alt="Lexoria">
+      <span class="brand-tag" data-i18n="nav.brand">Document Bank</span>
+    </a>
+    <button class="menu-close" id="menuClose" aria-label="Close menu">
+      <span data-i18n="menu.close">Close</span>
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="menu-body">
+    <ol class="menu-list">
+      <li>
+        <a href="#shop" data-menu-close>
+          <span class="num">01</span>
+          <span class="label" data-i18n="menu.catalog">Catalog</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="#how" data-menu-close>
+          <span class="num">02</span>
+          <span class="label" data-i18n="menu.how">How it works</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="#custom" data-menu-close>
+          <span class="num">03</span>
+          <span class="label" data-i18n="menu.bespoke">Bespoke</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://lexoria-web.vercel.app">
+          <span class="num">04</span>
+          <span class="label" data-i18n="menu.main">Lexoria.fi</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+    </ol>
+    <div class="menu-aside">
+      <div class="menu-aside-block">
+        <span class="menu-aside-lead" data-i18n="menu.lang">Language</span>
+        <div class="menu-lang">
+          <button type="button" data-lang="fi">FI</button>
+          <span class="sep" aria-hidden="true">·</span>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+      </div>
+      <a class="menu-cta" href="https://lexoria-web.vercel.app/#broneeri">
+        <span data-i18n="menu.book">Book a consultation</span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1 class="section-h" data-i18n-html="hero.h1">Ready-made,<br><em>legally sound.</em></h1>
+        <p class="hero-lede" data-i18n-html="hero.lede">Documents drafted by attorneys. Fill in online, download <em>PDF or DOC</em>, sign the same day. No lawyer beside you.</p>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-row">
+          <span class="k" data-i18n="hero.meta.author">Drafted by</span>
+          <span class="v" data-i18n-html="hero.meta.authorVal">Lexoria <span class="sep">·</span> <em>attorneys at law</em></span>
+        </div>
+        <div class="hero-meta-row">
+          <span class="k" data-i18n="hero.meta.jur">Jurisdiction</span>
+          <span class="v" data-i18n-html="hero.meta.jurVal">Finland <span class="sep">·</span> Estonia</span>
+        </div>
+        <div class="hero-meta-row">
+          <span class="k" data-i18n="hero.meta.formats">Formats</span>
+          <span class="v" data-i18n-html="hero.meta.formatsVal">PDF <span class="sep">·</span> DOC <span class="sep">·</span> instant download</span>
+        </div>
+        <div class="hero-meta-row">
+          <span class="k" data-i18n="hero.meta.updated">Reviewed</span>
+          <span class="v" data-i18n-html="hero.meta.updatedVal">2026 <span class="sep">·</span> updated with the law</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT GRID -->
+<section class="shop-section" id="shop">
+  <div class="wrap">
+    <div class="chapter-block">
+      <div class="chapter">
+        <span class="glyph">§ 01</span>
+        <span data-i18n="shop.chapter">Catalog</span>
+      </div>
+      <h2 class="section-h" data-i18n-html="shop.h2">Six documents.<br><em>One shelf.</em></h2>
+    </div>
+    <div class="shop-head">
+      <span class="count-note" data-i18n-html="shop.eyebrow"><em>6</em> documents · Finland &amp; Estonia</span>
+      <span class="count-note" data-i18n-html="shop.note">All prices incl. <em>VAT 25.5%</em></span>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+      <!-- 01 -->
+      <article class="product-card" data-sku="doc-01" data-price="19">
+        <div class="card-top">
+          <span class="card-num">01 · <span data-i18n="cat.employment">Employment</span></span>
+          <span class="card-format">PDF · DOC</span>
+        </div>
+        <h3 class="card-title" data-i18n-html="p1.title">Employment <em>contract</em></h3>
+        <p class="card-lede" data-i18n="p1.lede">Open-ended employment contract for a Finnish employer. Compliant with the Employment Contracts Act.</p>
+        <ul class="card-features">
+          <li data-i18n="p1.f1">Trial period &amp; notice clauses</li>
+          <li data-i18n="p1.f2">Salary, benefits &amp; working time</li>
+          <li data-i18n="p1.f3">Confidentiality &amp; non-solicit</li>
+        </ul>
+        <div class="card-foot">
+          <div class="card-price">
+            <span class="amount">19<span class="unit">€</span></span>
+            <span class="vat" data-i18n="price.vat">Incl. VAT · 15.14 € net</span>
+          </div>
+          <div class="card-actions">
+            <button class="card-btn card-add" data-add>
+              <span data-i18n="btn.add">Add</span>
+            </button>
+            <button class="card-btn card-buy" data-buy>
+              <span data-i18n="btn.buy">Buy now</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="product-card" data-sku="doc-02" data-price="19">
+        <div class="card-top">
+          <span class="card-num">02 · <span data-i18n="cat.realestate">Real estate</span></span>
+          <span class="card-format">PDF · DOC</span>
+        </div>
+        <h3 class="card-title" data-i18n-html="p2.title">Residential <em>lease</em></h3>
+        <p class="card-lede" data-i18n="p2.lede">Fixed-term or indefinite residential lease under the Act on Residential Leases.</p>
+        <ul class="card-features">
+          <li data-i18n="p2.f1">Deposit &amp; rent index clauses</li>
+          <li data-i18n="p2.f2">Maintenance &amp; utilities</li>
+          <li data-i18n="p2.f3">Termination &amp; hand-back</li>
+        </ul>
+        <div class="card-foot">
+          <div class="card-price">
+            <span class="amount">19<span class="unit">€</span></span>
+            <span class="vat" data-i18n="price.vat">Incl. VAT · 15.14 € net</span>
+          </div>
+          <div class="card-actions">
+            <button class="card-btn card-add" data-add>
+              <span data-i18n="btn.add">Add</span>
+            </button>
+            <button class="card-btn card-buy" data-buy>
+              <span data-i18n="btn.buy">Buy now</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="product-card" data-sku="doc-03" data-price="19">
+        <div class="card-top">
+          <span class="card-num">03 · <span data-i18n="cat.confidentiality">Confidentiality</span></span>
+          <span class="card-format">PDF · DOC</span>
+        </div>
+        <h3 class="card-title" data-i18n-html="p3.title">Non-disclosure <em>agreement</em></h3>
+        <p class="card-lede" data-i18n="p3.lede">Mutual or one-way NDA for negotiations, joint ventures and hires.</p>
+        <ul class="card-features">
+          <li data-i18n="p3.f1">Definition of confidential info</li>
+          <li data-i18n="p3.f2">Term, return &amp; destruction</li>
+          <li data-i18n="p3.f3">Penalty clause &amp; jurisdiction</li>
+        </ul>
+        <div class="card-foot">
+          <div class="card-price">
+            <span class="amount">19<span class="unit">€</span></span>
+            <span class="vat" data-i18n="price.vat">Incl. VAT · 15.14 € net</span>
+          </div>
+          <div class="card-actions">
+            <button class="card-btn card-add" data-add>
+              <span data-i18n="btn.add">Add</span>
+            </button>
+            <button class="card-btn card-buy" data-buy>
+              <span data-i18n="btn.buy">Buy now</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="product-card" data-sku="doc-04" data-price="15">
+        <div class="card-top">
+          <span class="card-num">04 · <span data-i18n="cat.authority">Authority</span></span>
+          <span class="card-format">PDF · DOC</span>
+        </div>
+        <h3 class="card-title" data-i18n-html="p4.title">Power <em>of attorney</em></h3>
+        <p class="card-lede" data-i18n="p4.lede">General or limited power of attorney for administrative, banking and property matters.</p>
+        <ul class="card-features">
+          <li data-i18n="p4.f1">Scope &amp; substitution rights</li>
+          <li data-i18n="p4.f2">Validity period &amp; revocation</li>
+          <li data-i18n="p4.f3">Witness &amp; notary block</li>
+        </ul>
+        <div class="card-foot">
+          <div class="card-price">
+            <span class="amount">15<span class="unit">€</span></span>
+            <span class="vat" data-i18n="price.vat15">Incl. VAT · 11.95 € net</span>
+          </div>
+          <div class="card-actions">
+            <button class="card-btn card-add" data-add>
+              <span data-i18n="btn.add">Add</span>
+            </button>
+            <button class="card-btn card-buy" data-buy>
+              <span data-i18n="btn.buy">Buy now</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article class="product-card" data-sku="doc-05" data-price="29">
+        <div class="card-top">
+          <span class="card-num">05 · <span data-i18n="cat.business">Business</span></span>
+          <span class="card-format">PDF · DOC</span>
+        </div>
+        <h3 class="card-title" data-i18n-html="p5.title">Consulting <em>agreement</em></h3>
+        <p class="card-lede" data-i18n="p5.lede">Independent consultant contract with IP, deliverables and payment schedule.</p>
+        <ul class="card-features">
+          <li data-i18n="p5.f1">Scope, milestones &amp; fees</li>
+          <li data-i18n="p5.f2">IP transfer &amp; work-for-hire</li>
+          <li data-i18n="p5.f3">Termination &amp; liability caps</li>
+        </ul>
+        <div class="card-foot">
+          <div class="card-price">
+            <span class="amount">29<span class="unit">€</span></span>
+            <span class="vat" data-i18n="price.vat29">Incl. VAT · 23.11 € net</span>
+          </div>
+          <div class="card-actions">
+            <button class="card-btn card-add" data-add>
+              <span data-i18n="btn.add">Add</span>
+            </button>
+            <button class="card-btn card-buy" data-buy>
+              <span data-i18n="btn.buy">Buy now</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 -->
+      <article class="product-card" data-sku="doc-06" data-price="39">
+        <div class="card-top">
+          <span class="card-num">06 · <span data-i18n="cat.estate">Estate</span></span>
+          <span class="card-format">PDF · DOC</span>
+        </div>
+        <h3 class="card-title" data-i18n-html="p6.title">Last will <em>&amp; testament</em></h3>
+        <p class="card-lede" data-i18n="p6.lede">Statutory will template with legacies, executor and witnessing block.</p>
+        <ul class="card-features">
+          <li data-i18n="p6.f1">Legacies &amp; residuary clause</li>
+          <li data-i18n="p6.f2">Guardianship &amp; executor</li>
+          <li data-i18n="p6.f3">Witness attestation block</li>
+        </ul>
+        <div class="card-foot">
+          <div class="card-price">
+            <span class="amount">39<span class="unit">€</span></span>
+            <span class="vat" data-i18n="price.vat39">Incl. VAT · 31.08 € net</span>
+          </div>
+          <div class="card-actions">
+            <button class="card-btn card-add" data-add>
+              <span data-i18n="btn.add">Add</span>
+            </button>
+            <button class="card-btn card-buy" data-buy>
+              <span data-i18n="btn.buy">Buy now</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="swipe-nav" aria-hidden="true">
+      <div class="swipe-hint">
+        <span data-i18n="shop.swipe">Swipe</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="swipe-dots" id="swipeDots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="trust-strip">
+  <div class="wrap">
+    <div class="trust-grid">
+      <div class="trust-cell">
+        <span class="k" data-i18n="trust.k1">Drafted by</span>
+        <span class="v" data-i18n-html="trust.v1"><em>Attorneys</em> at law</span>
+      </div>
+      <div class="trust-cell">
+        <span class="k" data-i18n="trust.k2">Format</span>
+        <span class="v" data-i18n-html="trust.v2">PDF &amp; <em>editable</em> DOC</span>
+      </div>
+      <div class="trust-cell">
+        <span class="k" data-i18n="trust.k3">Delivery</span>
+        <span class="v" data-i18n-html="trust.v3"><em>Instant</em> download</span>
+      </div>
+      <div class="trust-cell">
+        <span class="k" data-i18n="trust.k4">Review</span>
+        <span class="v" data-i18n-html="trust.v4">Updated <em>2026</em></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="wrap">
+    <div class="chapter-block">
+      <div class="chapter">
+        <span class="glyph">§ 02</span>
+        <span data-i18n="how.chapter">How it works</span>
+      </div>
+      <h2 class="section-h" data-i18n-html="how.h2">Three steps.<br><em>Signed today.</em></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <span class="step-num" data-i18n="how.s1.num">01 / Browse</span>
+        <h4 data-i18n-html="how.s1.title">Pick the <em>document</em></h4>
+        <p data-i18n="how.s1.body">Six templates covering the questions we get asked most. Read the description before you buy.</p>
+      </div>
+      <div class="step">
+        <span class="step-num" data-i18n="how.s2.num">02 / Fill in</span>
+        <h4 data-i18n-html="how.s2.title">Answer <em>plain questions</em></h4>
+        <p data-i18n="how.s2.body">A guided form in Finnish or English. No legalese. Save your progress and finish later.</p>
+      </div>
+      <div class="step">
+        <span class="step-num" data-i18n="how.s3.num">03 / Download</span>
+        <h4 data-i18n-html="how.s3.title">Sign <em>the same day</em></h4>
+        <p data-i18n="how.s3.body">Instant PDF and editable DOC. Sign on paper or with an electronic signature service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOM CTA -->
+<section class="custom-section" id="custom">
+  <div class="wrap">
+    <div class="chapter-block">
+      <div class="chapter">
+        <span class="glyph">§ 03</span>
+        <span data-i18n="custom.chapter">Bespoke</span>
+      </div>
+    </div>
+    <div class="custom-grid">
+      <div class="custom-copy">
+        <h2 class="section-h" data-i18n-html="custom.h2">If it doesn't fit,<br><em>we write it.</em></h2>
+      </div>
+      <div class="custom-cta-row">
+        <a class="custom-cta primary" href="https://lexoria-web.vercel.app/#broneeri">
+          <span data-i18n="custom.cta.book">Book a consultation</span>
+          <span class="icon" aria-hidden="true">↓</span>
+        </a>
+        <a class="custom-cta" href="https://lexoria-web.vercel.app">
+          <span data-i18n="custom.cta.back">Visit Lexoria.fi</span>
+          <span class="icon" aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-foot">
+  <div class="footer-inner">
+    <a class="footer-mark" href="https://lexoria-web.vercel.app" aria-label="Lexoria">
+      <img src="lexoria-logo-white.png" alt="Lexoria">
+      <div class="footer-mark-text">
+        <span class="part-of">
+          <span class="lead" data-i18n="foot.lead">Part of</span>
+          <span class="name">Lexoria</span>
+        </span>
+        <span data-i18n="foot.meta">Attorney at law · since 2010</span>
+      </div>
+    </a>
+    <div class="colophon">
+      <span data-i18n="foot.reg">© 2026 · Lexoria Document Bank · Reg 0123456-7</span>
+      <div class="colophon-meta">
+        <a href="https://lexoria-web.vercel.app" data-i18n="foot.main">Lexoria.fi</a>
+        <a href="#" data-i18n="foot.terms">Terms</a>
+        <a href="#" data-i18n="foot.privacy">Privacy</a>
+        <a href="#" data-i18n="foot.refunds">Refunds</a>
+        <span class="colophon-langs" role="group" aria-label="Language">
+          <button type="button" data-lang="fi">FI</button>
+          <span class="sep" aria-hidden="true">·</span>
+          <button type="button" data-lang="en">EN</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-backdrop" id="cartBackdrop" aria-hidden="true"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Cart" aria-hidden="true">
+  <div class="cart-head">
+    <h3 data-i18n-html="cart.h">Your <em>cart</em></h3>
+    <button class="cart-close" id="cartClose" aria-label="Close cart">
+      <span data-i18n="cart.close">Close</span>
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty" id="cartEmpty">
+      <span class="lead" data-i18n="cart.empty.lead">Cart is empty</span>
+      <span class="msg" data-i18n-html="cart.empty.msg">Add a document to <em>start.</em></span>
+      <span class="hint" data-i18n="cart.empty.hint">Six templates. From €15.</span>
+    </div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total">
+      <span class="k" data-i18n="cart.total">Total</span>
+      <span class="v" id="cartTotal">0 €</span>
+    </div>
+    <span class="cart-vat" data-i18n="cart.vat">Incl. VAT 25.5%</span>
+    <button class="cart-checkout" id="cartCheckout" disabled>
+      <span data-i18n="cart.checkout">Continue to checkout</span>
+      <span class="arrow">↗</span>
+    </button>
+  </div>
+</aside>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="glyph">§</span>
+  <span id="toastMsg" data-i18n="toast.added">Added to cart</span>
+</div>
+
+<script>
+  // =====================================================
+  // i18n dictionary
+  // =====================================================
+  const I18N = {
+    en: {
+      'nav.back': 'Lexoria.fi',
+      'nav.brand': 'Document Bank',
+      'nav.cart': 'Cart',
+      'nav.menu': 'Menu',
+      'menu.close': 'Close',
+      'menu.catalog': 'Catalog',
+      'menu.how': 'How it works',
+      'menu.bespoke': 'Bespoke',
+      'menu.main': 'Lexoria.fi',
+      'menu.lang': 'Language',
+      'menu.book': 'Book a consultation',
+      'hero.chapter': 'Document Bank',
+      'hero.h1': 'Ready-made,<br><em>legally sound.</em>',
+      'hero.lede': "Documents drafted by attorneys. Fill in online, download <em>PDF or DOC</em>, sign the same day. No lawyer beside you.",
+      'hero.meta.author': 'Drafted by',
+      'hero.meta.authorVal': 'Lexoria <span class="sep">·</span> <em>attorneys at law</em>',
+      'hero.meta.jur': 'Jurisdiction',
+      'hero.meta.jurVal': 'Finland <span class="sep">·</span> Estonia',
+      'hero.meta.formats': 'Formats',
+      'hero.meta.formatsVal': 'PDF <span class="sep">·</span> DOC <span class="sep">·</span> instant download',
+      'hero.meta.updated': 'Reviewed',
+      'hero.meta.updatedVal': '2026 <span class="sep">·</span> updated with the law',
+      'shop.chapter': 'Catalog',
+      'shop.h2': 'Six documents.<br><em>One shelf.</em>',
+      'shop.eyebrow': '<em>6</em> documents · Finland &amp; Estonia',
+      'shop.note': 'All prices incl. <em>VAT 25.5%</em>',
+      'shop.swipe': 'Swipe',
+      'cat.employment': 'Employment',
+      'cat.realestate': 'Real estate',
+      'cat.confidentiality': 'Confidentiality',
+      'cat.authority': 'Authority',
+      'cat.business': 'Business',
+      'cat.estate': 'Estate',
+      'p1.title': 'Employment <em>contract</em>',
+      'p1.lede': 'Open-ended employment contract for a Finnish employer. Compliant with the Employment Contracts Act.',
+      'p1.f1': 'Trial period & notice clauses',
+      'p1.f2': 'Salary, benefits & working time',
+      'p1.f3': 'Confidentiality & non-solicit',
+      'p2.title': 'Residential <em>lease</em>',
+      'p2.lede': 'Fixed-term or indefinite residential lease under the Act on Residential Leases.',
+      'p2.f1': 'Deposit & rent index clauses',
+      'p2.f2': 'Maintenance & utilities',
+      'p2.f3': 'Termination & hand-back',
+      'p3.title': 'Non-disclosure <em>agreement</em>',
+      'p3.lede': 'Mutual or one-way NDA for negotiations, joint ventures and hires.',
+      'p3.f1': 'Definition of confidential info',
+      'p3.f2': 'Term, return & destruction',
+      'p3.f3': 'Penalty clause & jurisdiction',
+      'p4.title': 'Power <em>of attorney</em>',
+      'p4.lede': 'General or limited power of attorney for administrative, banking and property matters.',
+      'p4.f1': 'Scope & substitution rights',
+      'p4.f2': 'Validity period & revocation',
+      'p4.f3': 'Witness & notary block',
+      'p5.title': 'Consulting <em>agreement</em>',
+      'p5.lede': 'Independent consultant contract with IP, deliverables and payment schedule.',
+      'p5.f1': 'Scope, milestones & fees',
+      'p5.f2': 'IP transfer & work-for-hire',
+      'p5.f3': 'Termination & liability caps',
+      'p6.title': 'Last will <em>& testament</em>',
+      'p6.lede': 'Statutory will template with legacies, executor and witnessing block.',
+      'p6.f1': 'Legacies & residuary clause',
+      'p6.f2': 'Guardianship & executor',
+      'p6.f3': 'Witness attestation block',
+      'price.vat': 'Incl. VAT · 15.14 € net',
+      'price.vat15': 'Incl. VAT · 11.95 € net',
+      'price.vat29': 'Incl. VAT · 23.11 € net',
+      'price.vat39': 'Incl. VAT · 31.08 € net',
+      'btn.add': 'Add',
+      'btn.added': 'Added',
+      'btn.buy': 'Buy now',
+      'trust.k1': 'Drafted by', 'trust.v1': '<em>Attorneys</em> at law',
+      'trust.k2': 'Format', 'trust.v2': 'PDF & <em>editable</em> DOC',
+      'trust.k3': 'Delivery', 'trust.v3': '<em>Instant</em> download',
+      'trust.k4': 'Review', 'trust.v4': 'Updated <em>2026</em>',
+      'how.chapter': 'How it works',
+      'how.h2': 'Three steps.<br><em>Signed today.</em>',
+      'how.s1.num': '01 / Browse',
+      'how.s1.title': 'Pick the <em>document</em>',
+      'how.s1.body': 'Six templates covering the questions we get asked most. Read the description before you buy.',
+      'how.s2.num': '02 / Fill in',
+      'how.s2.title': 'Answer <em>plain questions</em>',
+      'how.s2.body': 'A guided form in Finnish or English. No legalese. Save your progress and finish later.',
+      'how.s3.num': '03 / Download',
+      'how.s3.title': 'Sign <em>the same day</em>',
+      'how.s3.body': 'Instant PDF and editable DOC. Sign on paper or with an electronic signature service.',
+      'custom.chapter': 'Bespoke',
+      'custom.h2': "If it doesn't fit,<br><em>we write it.</em>",
+      'custom.cta.book': 'Book a consultation',
+      'custom.cta.back': 'Visit Lexoria.fi',
+      'cart.h': 'Your <em>cart</em>',
+      'cart.close': 'Close',
+      'cart.empty.lead': 'Cart is empty',
+      'cart.empty.msg': 'Add a document to <em>start.</em>',
+      'cart.empty.hint': 'Six templates. From €15.',
+      'cart.total': 'Total',
+      'cart.vat': 'Incl. VAT 25.5%',
+      'cart.checkout': 'Continue to checkout',
+      'cart.remove': 'Remove',
+      'cart.itemMeta': 'PDF · DOC · instant',
+      'toast.added': 'Added to cart',
+      'foot.lead': 'Part of',
+      'foot.meta': 'Attorney at law · since 2010',
+      'foot.reg': '© 2026 · Lexoria Document Bank · Reg 0123456-7',
+      'foot.main': 'Lexoria.fi',
+      'foot.terms': 'Terms',
+      'foot.privacy': 'Privacy',
+      'foot.refunds': 'Refunds'
+    },
+    fi: {
+      'nav.back': 'Lexoria.fi',
+      'nav.brand': 'Asiakirjapankki',
+      'nav.cart': 'Kori',
+      'nav.menu': 'Valikko',
+      'menu.close': 'Sulje',
+      'menu.catalog': 'Valikoima',
+      'menu.how': 'Näin se toimii',
+      'menu.bespoke': 'Räätälöity',
+      'menu.main': 'Lexoria.fi',
+      'menu.lang': 'Kieli',
+      'menu.book': 'Varaa konsultaatio',
+      'hero.chapter': 'Asiakirjapankki',
+      'hero.h1': 'Valmiit asiakirjat,<br><em>oikeudellisesti pätevät.</em>',
+      'hero.lede': 'Asianajajien laatimat asiakirjat. Täytä verkossa, lataa <em>PDF tai DOC</em>, allekirjoita samana päivänä. Ilman lakimiestä vieressä.',
+      'hero.meta.author': 'Laatija',
+      'hero.meta.authorVal': 'Lexoria <span class="sep">·</span> <em>asianajajat</em>',
+      'hero.meta.jur': 'Lainsäädäntö',
+      'hero.meta.jurVal': 'Suomi <span class="sep">·</span> Viro',
+      'hero.meta.formats': 'Muodot',
+      'hero.meta.formatsVal': 'PDF <span class="sep">·</span> DOC <span class="sep">·</span> heti ladattavissa',
+      'hero.meta.updated': 'Tarkastettu',
+      'hero.meta.updatedVal': '2026 <span class="sep">·</span> päivitetty lain mukaan',
+      'shop.chapter': 'Valikoima',
+      'shop.h2': 'Kuusi asiakirjaa.<br><em>Yksi hylly.</em>',
+      'shop.eyebrow': '<em>6</em> asiakirjaa · Suomi &amp; Viro',
+      'shop.note': 'Kaikki hinnat sis. <em>ALV 25,5 %</em>',
+      'shop.swipe': 'Pyyhkäise',
+      'cat.employment': 'Työsuhde',
+      'cat.realestate': 'Kiinteistöt',
+      'cat.confidentiality': 'Salassapito',
+      'cat.authority': 'Valtuutus',
+      'cat.business': 'Liiketoiminta',
+      'cat.estate': 'Perintö',
+      'p1.title': 'Työ<em>sopimus</em>',
+      'p1.lede': 'Toistaiseksi voimassa oleva työsopimus suomalaiselle työnantajalle. Työsopimuslain mukainen.',
+      'p1.f1': 'Koeaika- ja irtisanomisehdot',
+      'p1.f2': 'Palkka, edut ja työaika',
+      'p1.f3': 'Salassapito ja rekrytointikielto',
+      'p2.title': 'Asunnon <em>vuokrasopimus</em>',
+      'p2.lede': 'Määräaikainen tai toistaiseksi voimassa oleva vuokrasopimus asuinhuoneiston vuokrauksesta annetun lain mukaisesti.',
+      'p2.f1': 'Vakuus- ja indeksiehdot',
+      'p2.f2': 'Kunnossapito ja vastikkeet',
+      'p2.f3': 'Irtisanominen ja luovutus',
+      'p3.title': 'Salassapito<em>sopimus</em>',
+      'p3.lede': 'Molemminpuolinen tai yksipuolinen NDA neuvotteluihin, yhteisyrityksiin ja rekrytointeihin.',
+      'p3.f1': 'Luottamuksellisen tiedon määrittely',
+      'p3.f2': 'Voimassaolo, palautus ja hävitys',
+      'p3.f3': 'Sopimussakko ja toimivalta',
+      'p4.title': 'Valta<em>kirja</em>',
+      'p4.lede': 'Yleis- tai erityisvaltakirja hallinnollisia, pankki- ja kiinteistöasioita varten.',
+      'p4.f1': 'Laajuus ja sijaisen nimeäminen',
+      'p4.f2': 'Voimassaoloaika ja peruutus',
+      'p4.f3': 'Todistaja- ja notaarikohta',
+      'p5.title': 'Konsultointi<em>sopimus</em>',
+      'p5.lede': 'Itsenäisen konsultin sopimus, sisältää IP-oikeudet, toimitukset ja maksuaikataulun.',
+      'p5.f1': 'Laajuus, välitavoitteet ja palkkiot',
+      'p5.f2': 'IP-oikeuksien siirto ja työsuhdeteokset',
+      'p5.f3': 'Irtisanominen ja vastuurajaukset',
+      'p6.title': 'Testa<em>mentti</em>',
+      'p6.lede': 'Perintökaaren mukainen testamenttipohja legaatteineen, testamentin toimeenpanijoineen ja todistajineen.',
+      'p6.f1': 'Legaatit ja jäännösomaisuus',
+      'p6.f2': 'Holhous ja toimeenpanija',
+      'p6.f3': 'Todistajien vahvistuslauseke',
+      'price.vat': 'Sis. ALV · 15,14 € netto',
+      'price.vat15': 'Sis. ALV · 11,95 € netto',
+      'price.vat29': 'Sis. ALV · 23,11 € netto',
+      'price.vat39': 'Sis. ALV · 31,08 € netto',
+      'btn.add': 'Lisää',
+      'btn.added': 'Lisätty',
+      'btn.buy': 'Osta heti',
+      'trust.k1': 'Laatija', 'trust.v1': '<em>Asianajajat</em>',
+      'trust.k2': 'Muoto', 'trust.v2': 'PDF &amp; <em>muokattava</em> DOC',
+      'trust.k3': 'Toimitus', 'trust.v3': '<em>Heti</em> ladattavissa',
+      'trust.k4': 'Tarkastus', 'trust.v4': 'Päivitetty <em>2026</em>',
+      'how.chapter': 'Näin se toimii',
+      'how.h2': 'Kolme askelta.<br><em>Allekirjoita tänään.</em>',
+      'how.s1.num': '01 / Selaa',
+      'how.s1.title': 'Valitse <em>asiakirja</em>',
+      'how.s1.body': 'Kuusi mallia yleisimpiin kysymyksiin. Lue kuvaus ennen kuin ostat.',
+      'how.s2.num': '02 / Täytä',
+      'how.s2.title': 'Vastaa <em>selkeisiin kysymyksiin</em>',
+      'how.s2.body': 'Opastettu lomake suomeksi tai englanniksi. Ei juristikieltä. Tallenna kesken ja jatka myöhemmin.',
+      'how.s3.num': '03 / Lataa',
+      'how.s3.title': 'Allekirjoita <em>samana päivänä</em>',
+      'how.s3.body': 'Heti PDF ja muokattava DOC. Allekirjoita paperilla tai sähköisellä palvelulla.',
+      'custom.chapter': 'Räätälöity',
+      'custom.h2': 'Jos ei sovi,<br><em>kirjoitamme sen.</em>',
+      'custom.cta.book': 'Varaa konsultaatio',
+      'custom.cta.back': 'Lexoria.fi',
+      'cart.h': 'Sinun <em>korisi</em>',
+      'cart.close': 'Sulje',
+      'cart.empty.lead': 'Kori on tyhjä',
+      'cart.empty.msg': 'Lisää asiakirja <em>aloittaaksesi.</em>',
+      'cart.empty.hint': 'Kuusi mallia. Alkaen 15 €.',
+      'cart.total': 'Yhteensä',
+      'cart.vat': 'Sis. ALV 25,5 %',
+      'cart.checkout': 'Siirry kassalle',
+      'cart.remove': 'Poista',
+      'cart.itemMeta': 'PDF · DOC · heti',
+      'toast.added': 'Lisätty koriin',
+      'foot.lead': 'Osa',
+      'foot.meta': 'Asianajaja · vuodesta 2010',
+      'foot.reg': '© 2026 · Lexoria Asiakirjapankki · Reg 0123456-7',
+      'foot.main': 'Lexoria.fi',
+      'foot.terms': 'Ehdot',
+      'foot.privacy': 'Tietosuoja',
+      'foot.refunds': 'Palautukset'
+    }
+  };
+
+  // =====================================================
+  // i18n apply
+  // =====================================================
+  const langButtons = document.querySelectorAll('[data-lang]');
+  function setLang(lang) {
+    if (!I18N[lang]) lang = 'en';
+    const dict = I18N[lang];
+    document.documentElement.lang = lang;
+    document.documentElement.dataset.lang = lang;
+    try { localStorage.setItem('lex_lang', lang); } catch(e){}
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (dict[k] != null) el.textContent = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const k = el.getAttribute('data-i18n-html');
+      if (dict[k] != null) el.innerHTML = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const k = el.getAttribute('data-i18n-ph');
+      if (dict[k] != null) el.setAttribute('placeholder', dict[k]);
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const k = el.getAttribute('data-i18n-aria');
+      if (dict[k] != null) el.setAttribute('aria-label', dict[k]);
+    });
+
+    langButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+
+    renderCart();
+  }
+
+  langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  // =====================================================
+  // Cart state
+  // =====================================================
+  const cart = [];
+
+  const cartBtn = document.getElementById('cartBtn');
+  const cartDrawer = document.getElementById('cartDrawer');
+  const cartBackdrop = document.getElementById('cartBackdrop');
+  const cartClose = document.getElementById('cartClose');
+  const cartBody = document.getElementById('cartBody');
+  const cartCount = document.getElementById('cartCount');
+  const cartTotalEl = document.getElementById('cartTotal');
+  const cartCheckout = document.getElementById('cartCheckout');
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toastMsg');
+
+  function openCart() {
+    cartDrawer.classList.add('open');
+    cartBackdrop.classList.add('open');
+    cartDrawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('cart-open');
+  }
+  function closeCart() {
+    cartDrawer.classList.remove('open');
+    cartBackdrop.classList.remove('open');
+    cartDrawer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('cart-open');
+  }
+  cartBtn.addEventListener('click', openCart);
+  cartClose.addEventListener('click', closeCart);
+  cartBackdrop.addEventListener('click', closeCart);
+
+  // Menu overlay
+  const burgerBtn = document.getElementById('burgerBtn');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuClose = document.getElementById('menuClose');
+  function openMenu() {
+    menuOverlay.classList.add('open');
+    menuOverlay.setAttribute('aria-hidden', 'false');
+    burgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+  }
+  function closeMenu() {
+    menuOverlay.classList.remove('open');
+    menuOverlay.setAttribute('aria-hidden', 'true');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+  }
+  burgerBtn.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  menuOverlay.querySelectorAll('[data-menu-close]').forEach(el => {
+    el.addEventListener('click', closeMenu);
+  });
+  menuOverlay.querySelectorAll('.menu-list a[href^="#"]').forEach(a => {
+    a.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeCart(); closeMenu(); }
+  });
+
+  function fmtEUR(n) {
+    const lang = document.documentElement.dataset.lang || 'en';
+    if (lang === 'fi') return n.toFixed(0).replace('.', ',') + ' €';
+    return n.toFixed(0) + ' €';
+  }
+
+  function renderCart() {
+    const lang = document.documentElement.dataset.lang || 'en';
+    const dict = I18N[lang];
+
+    cartCount.textContent = cart.length;
+    if (cart.length === 0) {
+      cartBody.innerHTML = `
+        <div class="cart-empty">
+          <span class="lead">${dict['cart.empty.lead']}</span>
+          <span class="msg">${dict['cart.empty.msg']}</span>
+          <span class="hint">${dict['cart.empty.hint']}</span>
+        </div>`;
+      cartCheckout.disabled = true;
+      cartTotalEl.textContent = fmtEUR(0);
+      return;
+    }
+
+    cartCheckout.disabled = false;
+    let html = '';
+    cart.forEach((item, idx) => {
+      const titleKey = item.sku.replace('doc-0', 'p') + '.title';
+      const title = dict[titleKey] || item.title;
+      html += `
+        <div class="cart-item">
+          <div>
+            <div class="cart-item-title">${title}</div>
+            <div class="cart-item-meta">${dict['cart.itemMeta']}</div>
+            <button class="cart-remove" data-remove="${idx}">${dict['cart.remove']} ×</button>
+          </div>
+          <div class="cart-item-price">${fmtEUR(item.price)}</div>
+        </div>`;
+    });
+    cartBody.innerHTML = html;
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    cartTotalEl.textContent = fmtEUR(total);
+
+    cartBody.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = parseInt(btn.dataset.remove, 10);
+        cart.splice(i, 1);
+        renderCart();
+      });
+    });
+  }
+
+  function addToCart(card) {
+    const sku = card.dataset.sku;
+    const price = parseFloat(card.dataset.price);
+    const title = card.querySelector('.card-title').textContent.trim();
+    if (cart.some(i => i.sku === sku)) {
+      showToast('already');
+      return;
+    }
+    cart.push({ sku, price, title });
+    renderCart();
+
+    // Pulse cart badge
+    cartBtn.classList.remove('pulse');
+    void cartBtn.offsetWidth;
+    cartBtn.classList.add('pulse');
+
+    showToast('added');
+  }
+
+  let toastTimer;
+  function showToast(kind) {
+    const lang = document.documentElement.dataset.lang || 'en';
+    const map = {
+      added: I18N[lang]['toast.added'],
+      already: lang === 'fi' ? 'Jo korissa' : 'Already in cart'
+    };
+    toastMsg.textContent = map[kind] || map.added;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+
+  document.querySelectorAll('[data-add]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.product-card');
+      addToCart(card);
+      btn.classList.add('added');
+      const label = btn.querySelector('[data-i18n]');
+      const orig = label.getAttribute('data-i18n');
+      label.setAttribute('data-i18n', 'btn.added');
+      const lang = document.documentElement.dataset.lang || 'en';
+      label.textContent = I18N[lang]['btn.added'];
+      setTimeout(() => {
+        btn.classList.remove('added');
+        label.setAttribute('data-i18n', orig);
+        label.textContent = I18N[lang]['btn.add'];
+      }, 1600);
+    });
+  });
+
+  document.querySelectorAll('[data-buy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.product-card');
+      const sku = card.dataset.sku;
+      if (!cart.some(i => i.sku === sku)) addToCart(card);
+      openCart();
+    });
+  });
+
+  cartCheckout.addEventListener('click', () => {
+    if (cart.length === 0) return;
+    const lang = document.documentElement.dataset.lang || 'en';
+    const msg = lang === 'fi'
+      ? 'Kassa avautuu pian. Kiitos kärsivällisyydestä.'
+      : 'Checkout coming soon. Thank you for your patience.';
+    alert(msg);
+  });
+
+  // Initial language (bootstrap script set the attr already) — must run after cart refs exist
+  const bootLang = document.documentElement.dataset.lang || 'en';
+  setLang(bootLang);
+
+  renderCart();
+
+  // =====================================================
+  // Swipe dots — track scroll position on mobile grid
+  // =====================================================
+  const productGrid = document.getElementById('productGrid');
+  const swipeNav = document.querySelector('.swipe-nav');
+  const swipeDots = document.querySelectorAll('#swipeDots .dot');
+  if (productGrid && swipeDots.length) {
+    let hasScrolled = false;
+    const updateDots = () => {
+      const cards = productGrid.querySelectorAll('.product-card');
+      const gridLeft = productGrid.getBoundingClientRect().left;
+      let activeIdx = 0;
+      let closest = Infinity;
+      cards.forEach((card, i) => {
+        const dist = Math.abs(card.getBoundingClientRect().left - gridLeft);
+        if (dist < closest) { closest = dist; activeIdx = i; }
+      });
+      swipeDots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+      if (!hasScrolled && productGrid.scrollLeft > 20) {
+        hasScrolled = true;
+        swipeNav && swipeNav.classList.add('scrolled');
+      }
+    };
+    productGrid.addEventListener('scroll', updateDots, { passive: true });
+    window.addEventListener('resize', updateDots, { passive: true });
+  }
+</script>
+
+<script>
+  // Local preview: when opened as a file, cross-site links point at the sibling local HTML instead of the live site.
+  if (location.protocol === 'file:') {
+    document.querySelectorAll('a[href^="https://lexoria-web.vercel.app"]').forEach(function (a) {
+      a.href = a.getAttribute('href').replace('https://lexoria-web.vercel.app', '../public/index.html').replace('index.html/#', 'index.html#');
+      a.removeAttribute('target');
+    });
+  }
+</script>
+<div class="paper-toggle" role="group" aria-label="Background colour">
+  <button type="button" data-paper="beige">Beige</button><span class="sep">·</span><button type="button" data-paper="white">White</button>
+</div>
+<script>
+  (function(){
+    var root = document.documentElement, btns = document.querySelectorAll('.paper-toggle button');
+    function sync(){ var w = root.classList.contains('theme-white'); btns.forEach(function(b){ b.classList.toggle('active', (b.dataset.paper === 'white') === w); }); }
+    btns.forEach(function(b){ b.addEventListener('click', function(){
+      root.classList.toggle('theme-white', b.dataset.paper === 'white');
+      try { localStorage.setItem('lex_paper', b.dataset.paper); } catch(e){}
+      sync();
+    }); });
+    sync();
+  })();
+</script>
+</body>
+</html>
