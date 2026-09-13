@@ -144,7 +144,9 @@ module.exports = async (req, res) => {
   if (!r.ok) {
     const detail = await r.text().catch(() => '');
     console.error('resend error', r.status, detail);
-    res.status(502).json({ ok: false, error: 'send_failed' });
+    // Unverified-domain test mode: Resend only delivers to the account owner's own address
+    const testOnly = r.status === 403 && /own email address/i.test(detail);
+    res.status(testOnly ? 422 : 502).json({ ok: false, error: testOnly ? 'test_recipient' : 'send_failed' });
     return;
   }
   const data = await r.json().catch(() => ({}));

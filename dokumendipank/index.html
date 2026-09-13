@@ -2097,6 +2097,7 @@
       'co.close': 'Close',
       'co.errGeneric': 'Sending failed. Please try again or e-mail info@lexoria.fi.',
       'co.errMail': 'Mail delivery is not configured yet.',
+      'co.errTest': 'Test mode: until the lexoria.fi domain is verified, e-mails can only be delivered to the shop owner\'s address.',
       'co.errFields': 'Please fill in your name and a valid e-mail.',
       'toast.added': 'Added to cart',
       'foot.lead': 'Part of',
@@ -2216,6 +2217,7 @@
       'co.close': 'Sulje',
       'co.errGeneric': 'Lähetys epäonnistui. Yritä uudelleen tai lähetä sähköpostia info@lexoria.fi.',
       'co.errMail': 'Sähköpostin lähetystä ei ole vielä otettu käyttöön.',
+      'co.errTest': 'Testitila: kunnes lexoria.fi-verkkotunnus on vahvistettu, sähköposti toimitetaan vain kaupan omistajan osoitteeseen.',
       'co.errFields': 'Täytä nimi ja toimiva sähköpostiosoite.',
       'toast.added': 'Lisätty koriin',
       'foot.lead': 'Osa',
@@ -2547,7 +2549,7 @@
       renderFoot();
     } catch (e) {
       coStep = 'checkout';
-      renderCheckout(e.message === 'mail_not_configured' ? t('co.errMail') : t('co.errGeneric'));
+      renderCheckout(e.message === 'mail_not_configured' ? t('co.errMail') : e.message === 'test_recipient' ? t('co.errTest') : t('co.errGeneric'));
       renderFoot();
     }
   }
