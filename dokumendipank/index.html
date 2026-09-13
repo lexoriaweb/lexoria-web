@@ -1290,6 +1290,36 @@
   .cart-checkout .arrow { color: var(--maroon-soft); }
   .cart-checkout:hover:not(:disabled) .arrow { color: var(--paper); }
 
+
+  /* Checkout step inside the cart drawer */
+  [hidden] { display: none !important; }
+  .co-summary { display:flex; flex-direction:column; gap: 10px; padding-bottom: var(--s-3); border-bottom: 1px solid rgba(15,20,25,0.12); margin-bottom: var(--s-3); }
+  .co-line { display:flex; justify-content:space-between; gap: var(--s-2); font-family: 'Newsreader', serif; font-size: 16px; line-height: 1.25; }
+  .co-line em { font-style: italic; color: var(--maroon); }
+  .co-line .p { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--pebble); white-space: nowrap; }
+  .co-h { font-family: 'Newsreader', serif; font-weight: 400; font-size: 26px; letter-spacing: -0.015em; line-height: 1.1; margin: 0 0 var(--s-3); }
+  .co-h em { font-style: italic; color: var(--maroon); }
+  .co-field { display:flex; flex-direction:column; gap: 8px; margin-bottom: var(--s-3); }
+  .co-field label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--maroon); }
+  .co-field input { width: 100%; background: transparent; border: 0; border-bottom: 1px solid rgba(15,20,25,0.35); border-radius: 0; padding: 10px 0; font-family: 'Newsreader', serif; font-size: 18px; color: var(--ink); outline: none; transition: border-color .3s; -webkit-appearance: none; }
+  .co-field input:focus { border-bottom-color: var(--maroon); }
+  .co-field input.err { border-bottom-color: #B3261E; }
+  .co-field .hint { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pebble); }
+  .co-test { display:flex; gap: 10px; align-items:flex-start; padding: 12px 14px; border: 1px dashed rgba(15,20,25,0.3); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; color: var(--pebble); }
+  .co-test .glyph { color: var(--maroon); font-size: 14px; line-height: 1.1; }
+  .co-err { margin-top: var(--s-2); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; color: #B3261E; }
+  .co-back { background: transparent; border: 0; padding: 0; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pebble); text-align: left; transition: color .3s; }
+  .co-back:hover { color: var(--maroon); }
+  .co-done { display:flex; flex-direction:column; justify-content:center; min-height: 100%; }
+  .co-done .glyph { font-family: 'Newsreader', serif; font-size: 56px; line-height: 1; color: var(--maroon); margin-bottom: var(--s-3); }
+  .co-done .msg { font-family: 'Newsreader', serif; font-size: 18px; line-height: 1.4; color: var(--ink); }
+  .co-done .addr { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--ink); margin-top: 6px; word-break: break-all; }
+  .co-done .hint { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pebble); margin-top: var(--s-3); line-height: 1.6; }
+  .co-done ul { list-style: none; margin: var(--s-3) 0 0; padding: var(--s-2) 0 0; border-top: 1px solid rgba(15,20,25,0.12); }
+  .co-done li { font-family: 'Newsreader', serif; font-size: 16px; padding: 6px 0; }
+  .co-done li em { font-style: italic; color: var(--maroon); }
+  .cart-checkout.busy { opacity: 0.6; cursor: progress; }
+
   /* ============================================================
      FOOTER
      ============================================================ */
@@ -1619,10 +1649,10 @@
         <span class="glyph">§ 01</span>
         <span data-i18n="shop.chapter">Catalog</span>
       </div>
-      <h2 class="section-h" data-i18n-html="shop.h2">Six documents.<br><em>One shelf.</em></h2>
+      <h2 class="section-h" data-i18n-html="shop.h2">Five documents.<br><em>One shelf.</em></h2>
     </div>
     <div class="shop-head">
-      <span class="count-note" data-i18n-html="shop.eyebrow"><em>6</em> documents · Finland &amp; Estonia</span>
+      <span class="count-note" data-i18n-html="shop.eyebrow"><em>5</em> documents · Finland &amp; Estonia</span>
       <span class="count-note" data-i18n-html="shop.note">All prices incl. <em>VAT 25.5%</em></span>
     </div>
 
@@ -1639,137 +1669,17 @@
 
     <div class="product-grid" id="productGrid">
       <!-- 01 -->
-      <article class="product-card" data-sku="doc-01" data-price="19">
+      <article class="product-card" data-sku="doc-01" data-price="29">
         <div class="card-top">
-          <span class="card-num">01 · <span data-i18n="cat.employment">Employment</span></span>
-          <span class="card-format">PDF · DOC</span>
+          <span class="card-num">01 · <span data-i18n="cat.engagement">Engagement</span></span>
+          <span class="card-format">PDF</span>
         </div>
-        <h3 class="card-title" data-i18n-html="p1.title">Employment <em>contract</em></h3>
-        <p class="card-lede" data-i18n="p1.lede">Open-ended employment contract for a Finnish employer. Compliant with the Employment Contracts Act.</p>
+        <h3 class="card-title" data-i18n-html="p1.title">Engagement <em>agreement</em></h3>
+        <p class="card-lede" data-i18n="p1.lede">Attorney–client engagement agreement (toimeksiantosopimus) as used by Finnish law firms. Client identification, conflict check, fees and legal expenses cover.</p>
         <ul class="card-features">
-          <li data-i18n="p1.f1">Trial period &amp; notice clauses</li>
-          <li data-i18n="p1.f2">Salary, benefits &amp; working time</li>
-          <li data-i18n="p1.f3">Confidentiality &amp; non-solicit</li>
-        </ul>
-        <div class="card-foot">
-          <div class="card-price">
-            <span class="amount">19<span class="unit">€</span></span>
-            <span class="vat" data-i18n="price.vat">Incl. VAT · 15.14 € net</span>
-          </div>
-          <div class="card-actions">
-            <button class="card-btn card-add" data-add>
-              <span data-i18n="btn.add">Add</span>
-            </button>
-            <button class="card-btn card-buy" data-buy>
-              <span data-i18n="btn.buy">Buy now</span>
-              <span class="arrow">→</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- 02 -->
-      <article class="product-card" data-sku="doc-02" data-price="19">
-        <div class="card-top">
-          <span class="card-num">02 · <span data-i18n="cat.realestate">Real estate</span></span>
-          <span class="card-format">PDF · DOC</span>
-        </div>
-        <h3 class="card-title" data-i18n-html="p2.title">Residential <em>lease</em></h3>
-        <p class="card-lede" data-i18n="p2.lede">Fixed-term or indefinite residential lease under the Act on Residential Leases.</p>
-        <ul class="card-features">
-          <li data-i18n="p2.f1">Deposit &amp; rent index clauses</li>
-          <li data-i18n="p2.f2">Maintenance &amp; utilities</li>
-          <li data-i18n="p2.f3">Termination &amp; hand-back</li>
-        </ul>
-        <div class="card-foot">
-          <div class="card-price">
-            <span class="amount">19<span class="unit">€</span></span>
-            <span class="vat" data-i18n="price.vat">Incl. VAT · 15.14 € net</span>
-          </div>
-          <div class="card-actions">
-            <button class="card-btn card-add" data-add>
-              <span data-i18n="btn.add">Add</span>
-            </button>
-            <button class="card-btn card-buy" data-buy>
-              <span data-i18n="btn.buy">Buy now</span>
-              <span class="arrow">→</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- 03 -->
-      <article class="product-card" data-sku="doc-03" data-price="19">
-        <div class="card-top">
-          <span class="card-num">03 · <span data-i18n="cat.confidentiality">Confidentiality</span></span>
-          <span class="card-format">PDF · DOC</span>
-        </div>
-        <h3 class="card-title" data-i18n-html="p3.title">Non-disclosure <em>agreement</em></h3>
-        <p class="card-lede" data-i18n="p3.lede">Mutual or one-way NDA for negotiations, joint ventures and hires.</p>
-        <ul class="card-features">
-          <li data-i18n="p3.f1">Definition of confidential info</li>
-          <li data-i18n="p3.f2">Term, return &amp; destruction</li>
-          <li data-i18n="p3.f3">Penalty clause &amp; jurisdiction</li>
-        </ul>
-        <div class="card-foot">
-          <div class="card-price">
-            <span class="amount">19<span class="unit">€</span></span>
-            <span class="vat" data-i18n="price.vat">Incl. VAT · 15.14 € net</span>
-          </div>
-          <div class="card-actions">
-            <button class="card-btn card-add" data-add>
-              <span data-i18n="btn.add">Add</span>
-            </button>
-            <button class="card-btn card-buy" data-buy>
-              <span data-i18n="btn.buy">Buy now</span>
-              <span class="arrow">→</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- 04 -->
-      <article class="product-card" data-sku="doc-04" data-price="15">
-        <div class="card-top">
-          <span class="card-num">04 · <span data-i18n="cat.authority">Authority</span></span>
-          <span class="card-format">PDF · DOC</span>
-        </div>
-        <h3 class="card-title" data-i18n-html="p4.title">Power <em>of attorney</em></h3>
-        <p class="card-lede" data-i18n="p4.lede">General or limited power of attorney for administrative, banking and property matters.</p>
-        <ul class="card-features">
-          <li data-i18n="p4.f1">Scope &amp; substitution rights</li>
-          <li data-i18n="p4.f2">Validity period &amp; revocation</li>
-          <li data-i18n="p4.f3">Witness &amp; notary block</li>
-        </ul>
-        <div class="card-foot">
-          <div class="card-price">
-            <span class="amount">15<span class="unit">€</span></span>
-            <span class="vat" data-i18n="price.vat15">Incl. VAT · 11.95 € net</span>
-          </div>
-          <div class="card-actions">
-            <button class="card-btn card-add" data-add>
-              <span data-i18n="btn.add">Add</span>
-            </button>
-            <button class="card-btn card-buy" data-buy>
-              <span data-i18n="btn.buy">Buy now</span>
-              <span class="arrow">→</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- 05 -->
-      <article class="product-card" data-sku="doc-05" data-price="29">
-        <div class="card-top">
-          <span class="card-num">05 · <span data-i18n="cat.business">Business</span></span>
-          <span class="card-format">PDF · DOC</span>
-        </div>
-        <h3 class="card-title" data-i18n-html="p5.title">Consulting <em>agreement</em></h3>
-        <p class="card-lede" data-i18n="p5.lede">Independent consultant contract with IP, deliverables and payment schedule.</p>
-        <ul class="card-features">
-          <li data-i18n="p5.f1">Scope, milestones &amp; fees</li>
-          <li data-i18n="p5.f2">IP transfer &amp; work-for-hire</li>
-          <li data-i18n="p5.f3">Termination &amp; liability caps</li>
+          <li data-i18n="p1.f1">Client ID &amp; conflict-of-interest check</li>
+          <li data-i18n="p1.f2">Hourly fee, advance &amp; invoicing terms</li>
+          <li data-i18n="p1.f3">Legal expenses insurance &amp; legal aid</li>
         </ul>
         <div class="card-foot">
           <div class="card-price">
@@ -1788,23 +1698,113 @@
         </div>
       </article>
 
-      <!-- 06 -->
-      <article class="product-card" data-sku="doc-06" data-price="39">
+      <!-- 02 -->
+      <article class="product-card" data-sku="doc-02" data-price="39">
         <div class="card-top">
-          <span class="card-num">06 · <span data-i18n="cat.estate">Estate</span></span>
-          <span class="card-format">PDF · DOC</span>
+          <span class="card-num">02 · <span data-i18n="cat.inheritance">Inheritance</span></span>
+          <span class="card-format">PDF</span>
         </div>
-        <h3 class="card-title" data-i18n-html="p6.title">Last will <em>&amp; testament</em></h3>
-        <p class="card-lede" data-i18n="p6.lede">Statutory will template with legacies, executor and witnessing block.</p>
+        <h3 class="card-title" data-i18n-html="p2.title">Will, <em>Finnish–Estonian</em></h3>
+        <p class="card-lede" data-i18n="p2.lede">Bilingual will for an Estonian citizen living in Finland. Choice of Estonian law under the EU Succession Regulation.</p>
         <ul class="card-features">
-          <li data-i18n="p6.f1">Legacies &amp; residuary clause</li>
-          <li data-i18n="p6.f2">Guardianship &amp; executor</li>
-          <li data-i18n="p6.f3">Witness attestation block</li>
+          <li data-i18n="p2.f1">Parallel Finnish and Estonian text</li>
+          <li data-i18n="p2.f2">Choice of law (EU 650/2012)</li>
+          <li data-i18n="p2.f3">Assets in both countries, witness block</li>
         </ul>
         <div class="card-foot">
           <div class="card-price">
             <span class="amount">39<span class="unit">€</span></span>
             <span class="vat" data-i18n="price.vat39">Incl. VAT · 31.08 € net</span>
+          </div>
+          <div class="card-actions">
+            <button class="card-btn card-add" data-add>
+              <span data-i18n="btn.add">Add</span>
+            </button>
+            <button class="card-btn card-buy" data-buy>
+              <span data-i18n="btn.buy">Buy now</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="product-card" data-sku="doc-03" data-price="29">
+        <div class="card-top">
+          <span class="card-num">03 · <span data-i18n="cat.inheritance">Inheritance</span></span>
+          <span class="card-format">PDF</span>
+        </div>
+        <h3 class="card-title" data-i18n-html="p3.title">Will with <em>executor</em></h3>
+        <p class="card-lede" data-i18n="p3.lede">Finnish will naming a sole heir and an executor. Excludes marital rights, covers digital assets and a substitute heir.</p>
+        <ul class="card-features">
+          <li data-i18n="p3.f1">Executor&#39;s powers</li>
+          <li data-i18n="p3.f2">Marital-right exclusion &amp; substitute heir</li>
+          <li data-i18n="p3.f3">Digital assets &amp; witness attestation</li>
+        </ul>
+        <div class="card-foot">
+          <div class="card-price">
+            <span class="amount">29<span class="unit">€</span></span>
+            <span class="vat" data-i18n="price.vat29">Incl. VAT · 23.11 € net</span>
+          </div>
+          <div class="card-actions">
+            <button class="card-btn card-add" data-add>
+              <span data-i18n="btn.add">Add</span>
+            </button>
+            <button class="card-btn card-buy" data-buy>
+              <span data-i18n="btn.buy">Buy now</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="product-card" data-sku="doc-04" data-price="39">
+        <div class="card-top">
+          <span class="card-num">04 · <span data-i18n="cat.authority">Authority</span></span>
+          <span class="card-format">PDF</span>
+        </div>
+        <h3 class="card-title" data-i18n-html="p4.title">Continuing <em>power of attorney</em></h3>
+        <p class="card-lede" data-i18n="p4.lede">Edunvalvontavaltuutus: appoint someone to manage your finances, property and personal matters if you lose capacity. Confirmed by the DVV.</p>
+        <ul class="card-features">
+          <li data-i18n="p4.f1">Attorney, substitute &amp; special wishes</li>
+          <li data-i18n="p4.f2">Banking, property, tax &amp; authorities</li>
+          <li data-i18n="p4.f3">Digital assets, health data, witnesses</li>
+        </ul>
+        <div class="card-foot">
+          <div class="card-price">
+            <span class="amount">39<span class="unit">€</span></span>
+            <span class="vat" data-i18n="price.vat39">Incl. VAT · 31.08 € net</span>
+          </div>
+          <div class="card-actions">
+            <button class="card-btn card-add" data-add>
+              <span data-i18n="btn.add">Add</span>
+            </button>
+            <button class="card-btn card-buy" data-buy>
+              <span data-i18n="btn.buy">Buy now</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article class="product-card" data-sku="doc-05" data-price="15">
+        <div class="card-top">
+          <span class="card-num">05 · <span data-i18n="cat.office">Office</span></span>
+          <span class="card-format">PDF</span>
+        </div>
+        <h3 class="card-title" data-i18n-html="p5.title">Lexoria <em>letterhead</em></h3>
+        <p class="card-lede" data-i18n="p5.lede">Official Asianajotoimisto Lexoria Oy letter template with the bar-association mark, address block and footer.</p>
+        <ul class="card-features">
+          <li data-i18n="p5.f1">Header with bar mark</li>
+          <li data-i18n="p5.f2">Date, recipient &amp; subject lines</li>
+          <li data-i18n="p5.f3">Signature &amp; company footer</li>
+        </ul>
+        <div class="card-foot">
+          <div class="card-price">
+            <span class="amount">15<span class="unit">€</span></span>
+            <span class="vat" data-i18n="price.vat15">Incl. VAT · 11.95 € net</span>
           </div>
           <div class="card-actions">
             <button class="card-btn card-add" data-add>
@@ -1826,7 +1826,6 @@
       </div>
       <div class="swipe-dots" id="swipeDots">
         <span class="dot active"></span>
-        <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
@@ -1874,7 +1873,7 @@
       <div class="step">
         <span class="step-num" data-i18n="how.s1.num">01 / Browse</span>
         <h4 data-i18n-html="how.s1.title">Pick the <em>document</em></h4>
-        <p data-i18n="how.s1.body">Six templates covering the questions we get asked most. Read the description before you buy.</p>
+        <p data-i18n="how.s1.body">Five templates covering the questions we get asked most. Read the description before you buy.</p>
       </div>
       <div class="step">
         <span class="step-num" data-i18n="how.s2.num">02 / Fill in</span>
@@ -1961,7 +1960,7 @@
     <div class="cart-empty" id="cartEmpty">
       <span class="lead" data-i18n="cart.empty.lead">Cart is empty</span>
       <span class="msg" data-i18n-html="cart.empty.msg">Add a document to <em>start.</em></span>
-      <span class="hint" data-i18n="cart.empty.hint">Six templates. From €15.</span>
+      <span class="hint" data-i18n="cart.empty.hint">Five templates. From €15.</span>
     </div>
   </div>
   <div class="cart-foot">
@@ -1971,9 +1970,10 @@
     </div>
     <span class="cart-vat" data-i18n="cart.vat">Incl. VAT 25.5%</span>
     <button class="cart-checkout" id="cartCheckout" disabled>
-      <span data-i18n="cart.checkout">Continue to checkout</span>
-      <span class="arrow">↗</span>
+      <span id="cartCheckoutLabel" data-i18n="cart.checkout">Continue to checkout</span>
+      <span class="arrow" id="cartCheckoutArrow">↗</span>
     </button>
+    <button class="co-back" id="coBack" hidden data-i18n="co.back">← Back to cart</button>
   </div>
 </aside>
 
@@ -2002,58 +2002,51 @@
       'menu.book': 'Book a consultation',
       'hero.chapter': 'Document Bank',
       'hero.h1': 'Ready-made,<br><em>legally sound.</em>',
-      'hero.lede': "Documents drafted by attorneys. Fill in online, download <em>PDF or DOC</em>, sign the same day. No lawyer beside you.",
+      'hero.lede': 'Documents drafted by attorneys. Pay, receive the <em>PDF by e-mail</em>, fill in and sign the same day.',
       'hero.meta.author': 'Drafted by',
       'hero.meta.authorVal': 'Lexoria <span class="sep">·</span> <em>attorneys at law</em>',
       'hero.meta.jur': 'Jurisdiction',
       'hero.meta.jurVal': 'Finland <span class="sep">·</span> Estonia',
       'hero.meta.formats': 'Formats',
-      'hero.meta.formatsVal': 'PDF <span class="sep">·</span> DOC <span class="sep">·</span> instant download',
+      'hero.meta.formatsVal': 'PDF <span class="sep">·</span> delivered by e-mail',
       'hero.meta.updated': 'Reviewed',
       'hero.meta.updatedVal': '2026 <span class="sep">·</span> updated with the law',
       'shop.chapter': 'Catalog',
-      'shop.h2': 'Six documents.<br><em>One shelf.</em>',
-      'shop.eyebrow': '<em>6</em> documents · Finland &amp; Estonia',
+      'shop.h2': 'Five documents.<br><em>One shelf.</em>',
+      'shop.eyebrow': '<em>5</em> documents · Finland &amp; Estonia',
       'shop.note': 'All prices incl. <em>VAT 25.5%</em>',
       'shop.swipe': 'Swipe',
       'shop.viewSwipe': 'Swipe',
       'shop.viewGrid': 'Grid',
-      'cat.employment': 'Employment',
-      'cat.realestate': 'Real estate',
-      'cat.confidentiality': 'Confidentiality',
+      'cat.engagement': 'Engagement',
+      'cat.inheritance': 'Inheritance',
       'cat.authority': 'Authority',
-      'cat.business': 'Business',
-      'cat.estate': 'Estate',
-      'p1.title': 'Employment <em>contract</em>',
-      'p1.lede': 'Open-ended employment contract for a Finnish employer. Compliant with the Employment Contracts Act.',
-      'p1.f1': 'Trial period & notice clauses',
-      'p1.f2': 'Salary, benefits & working time',
-      'p1.f3': 'Confidentiality & non-solicit',
-      'p2.title': 'Residential <em>lease</em>',
-      'p2.lede': 'Fixed-term or indefinite residential lease under the Act on Residential Leases.',
-      'p2.f1': 'Deposit & rent index clauses',
-      'p2.f2': 'Maintenance & utilities',
-      'p2.f3': 'Termination & hand-back',
-      'p3.title': 'Non-disclosure <em>agreement</em>',
-      'p3.lede': 'Mutual or one-way NDA for negotiations, joint ventures and hires.',
-      'p3.f1': 'Definition of confidential info',
-      'p3.f2': 'Term, return & destruction',
-      'p3.f3': 'Penalty clause & jurisdiction',
-      'p4.title': 'Power <em>of attorney</em>',
-      'p4.lede': 'General or limited power of attorney for administrative, banking and property matters.',
-      'p4.f1': 'Scope & substitution rights',
-      'p4.f2': 'Validity period & revocation',
-      'p4.f3': 'Witness & notary block',
-      'p5.title': 'Consulting <em>agreement</em>',
-      'p5.lede': 'Independent consultant contract with IP, deliverables and payment schedule.',
-      'p5.f1': 'Scope, milestones & fees',
-      'p5.f2': 'IP transfer & work-for-hire',
-      'p5.f3': 'Termination & liability caps',
-      'p6.title': 'Last will <em>& testament</em>',
-      'p6.lede': 'Statutory will template with legacies, executor and witnessing block.',
-      'p6.f1': 'Legacies & residuary clause',
-      'p6.f2': 'Guardianship & executor',
-      'p6.f3': 'Witness attestation block',
+      'cat.office': 'Office',
+      'p1.title': 'Engagement <em>agreement</em>',
+      'p1.lede': 'Attorney–client engagement agreement (toimeksiantosopimus) as used by Finnish law firms. Client identification, conflict check, fees and legal expenses cover.',
+      'p1.f1': 'Client ID & conflict-of-interest check',
+      'p1.f2': 'Hourly fee, advance & invoicing terms',
+      'p1.f3': 'Legal expenses insurance & legal aid',
+      'p2.title': 'Will, <em>Finnish–Estonian</em>',
+      'p2.lede': 'Bilingual will for an Estonian citizen living in Finland. Choice of Estonian law under the EU Succession Regulation.',
+      'p2.f1': 'Parallel Finnish and Estonian text',
+      'p2.f2': 'Choice of law (EU 650/2012)',
+      'p2.f3': 'Assets in both countries, witness block',
+      'p3.title': 'Will with <em>executor</em>',
+      'p3.lede': 'Finnish will naming a sole heir and an executor. Excludes marital rights, covers digital assets and a substitute heir.',
+      'p3.f1': 'Executor\'s powers',
+      'p3.f2': 'Marital-right exclusion & substitute heir',
+      'p3.f3': 'Digital assets & witness attestation',
+      'p4.title': 'Continuing <em>power of attorney</em>',
+      'p4.lede': 'Edunvalvontavaltuutus: appoint someone to manage your finances, property and personal matters if you lose capacity. Confirmed by the DVV.',
+      'p4.f1': 'Attorney, substitute & special wishes',
+      'p4.f2': 'Banking, property, tax & authorities',
+      'p4.f3': 'Digital assets, health data, witnesses',
+      'p5.title': 'Lexoria <em>letterhead</em>',
+      'p5.lede': 'Official Asianajotoimisto Lexoria Oy letter template with the bar-association mark, address block and footer.',
+      'p5.f1': 'Header with bar mark',
+      'p5.f2': 'Date, recipient & subject lines',
+      'p5.f3': 'Signature & company footer',
       'price.vat': 'Incl. VAT · 15.14 € net',
       'price.vat15': 'Incl. VAT · 11.95 € net',
       'price.vat29': 'Incl. VAT · 23.11 € net',
@@ -2062,20 +2055,20 @@
       'btn.added': 'Added',
       'btn.buy': 'Buy now',
       'trust.k1': 'Drafted by', 'trust.v1': '<em>Attorneys</em> at law',
-      'trust.k2': 'Format', 'trust.v2': 'PDF & <em>editable</em> DOC',
-      'trust.k3': 'Delivery', 'trust.v3': '<em>Instant</em> download',
+      'trust.k2': 'Format', 'trust.v2': 'Print-ready <em>PDF</em>',
+      'trust.k3': 'Delivery', 'trust.v3': 'By e-mail, <em>instantly</em>',
       'trust.k4': 'Review', 'trust.v4': 'Updated <em>2026</em>',
       'how.chapter': 'How it works',
       'how.h2': 'Three steps.<br><em>Signed today.</em>',
       'how.s1.num': '01 / Browse',
       'how.s1.title': 'Pick the <em>document</em>',
-      'how.s1.body': 'Six templates covering the questions we get asked most. Read the description before you buy.',
-      'how.s2.num': '02 / Fill in',
-      'how.s2.title': 'Answer <em>plain questions</em>',
-      'how.s2.body': 'A guided form in Finnish or English. No legalese. Save your progress and finish later.',
-      'how.s3.num': '03 / Download',
-      'how.s3.title': 'Sign <em>the same day</em>',
-      'how.s3.body': 'Instant PDF and editable DOC. Sign on paper or with an electronic signature service.',
+      'how.s1.body': 'Five templates covering the questions we get asked most. Read the description before you buy.',
+      'how.s2.num': '02 / Pay',
+      'how.s2.title': 'Checkout in <em>a minute</em>',
+      'how.s2.body': 'Name and e-mail, then pay. Finnish bank payments and cards via Montonio.',
+      'how.s3.num': '03 / Receive',
+      'how.s3.title': 'PDF in <em>your inbox</em>',
+      'how.s3.body': 'The document lands in your e-mail right after payment. Print or fill in digitally, sign on paper or electronically.',
       'custom.chapter': 'Bespoke',
       'custom.h2': "If it doesn't fit,<br><em>we write it.</em>",
       'custom.cta.book': 'Book a consultation',
@@ -2084,12 +2077,27 @@
       'cart.close': 'Close',
       'cart.empty.lead': 'Cart is empty',
       'cart.empty.msg': 'Add a document to <em>start.</em>',
-      'cart.empty.hint': 'Six templates. From €15.',
+      'cart.empty.hint': 'Five templates. From €15.',
       'cart.total': 'Total',
       'cart.vat': 'Incl. VAT 25.5%',
       'cart.checkout': 'Continue to checkout',
       'cart.remove': 'Remove',
-      'cart.itemMeta': 'PDF · DOC · instant',
+      'cart.itemMeta': 'PDF · by e-mail',
+      'co.h': 'Check<em>out</em>',
+      'co.name': 'Name',
+      'co.email': 'E-mail',
+      'co.emailHint': 'The PDF is sent to this address.',
+      'co.test': 'Test mode · no money is charged. Montonio bank payments and cards go live next.',
+      'co.pay': 'Pay',
+      'co.back': '← Back to cart',
+      'co.sending': 'Sending…',
+      'co.done.h': 'Sent to <em>your inbox</em>',
+      'co.done.msg': 'Your documents were sent to',
+      'co.done.hint': 'Not there in a minute? Check the spam folder.',
+      'co.close': 'Close',
+      'co.errGeneric': 'Sending failed. Please try again or e-mail info@lexoria.fi.',
+      'co.errMail': 'Mail delivery is not configured yet.',
+      'co.errFields': 'Please fill in your name and a valid e-mail.',
       'toast.added': 'Added to cart',
       'foot.lead': 'Part of',
       'foot.meta': 'Attorney at law · since 2010',
@@ -2113,58 +2121,51 @@
       'menu.book': 'Varaa konsultaatio',
       'hero.chapter': 'Asiakirjapankki',
       'hero.h1': 'Valmiit asiakirjat,<br><em>oikeudellisesti pätevät.</em>',
-      'hero.lede': 'Asianajajien laatimat asiakirjat. Täytä verkossa, lataa <em>PDF tai DOC</em>, allekirjoita samana päivänä. Ilman lakimiestä vieressä.',
+      'hero.lede': 'Asianajajien laatimat asiakirjat. Maksa, saat <em>PDF:n sähköpostiisi</em>, täytä ja allekirjoita samana päivänä.',
       'hero.meta.author': 'Laatija',
       'hero.meta.authorVal': 'Lexoria <span class="sep">·</span> <em>asianajajat</em>',
       'hero.meta.jur': 'Lainsäädäntö',
       'hero.meta.jurVal': 'Suomi <span class="sep">·</span> Viro',
       'hero.meta.formats': 'Muodot',
-      'hero.meta.formatsVal': 'PDF <span class="sep">·</span> DOC <span class="sep">·</span> heti ladattavissa',
+      'hero.meta.formatsVal': 'PDF <span class="sep">·</span> toimitus sähköpostiin',
       'hero.meta.updated': 'Tarkastettu',
       'hero.meta.updatedVal': '2026 <span class="sep">·</span> päivitetty lain mukaan',
       'shop.chapter': 'Valikoima',
-      'shop.h2': 'Kuusi asiakirjaa.<br><em>Yksi hylly.</em>',
-      'shop.eyebrow': '<em>6</em> asiakirjaa · Suomi &amp; Viro',
+      'shop.h2': 'Viisi asiakirjaa.<br><em>Yksi hylly.</em>',
+      'shop.eyebrow': '<em>5</em> asiakirjaa · Suomi &amp; Viro',
       'shop.note': 'Kaikki hinnat sis. <em>ALV 25,5 %</em>',
       'shop.swipe': 'Pyyhkäise',
       'shop.viewSwipe': 'Pyyhkäise',
       'shop.viewGrid': 'Ruudukko',
-      'cat.employment': 'Työsuhde',
-      'cat.realestate': 'Kiinteistöt',
-      'cat.confidentiality': 'Salassapito',
+      'cat.engagement': 'Toimeksianto',
+      'cat.inheritance': 'Perintö',
       'cat.authority': 'Valtuutus',
-      'cat.business': 'Liiketoiminta',
-      'cat.estate': 'Perintö',
-      'p1.title': 'Työ<em>sopimus</em>',
-      'p1.lede': 'Toistaiseksi voimassa oleva työsopimus suomalaiselle työnantajalle. Työsopimuslain mukainen.',
-      'p1.f1': 'Koeaika- ja irtisanomisehdot',
-      'p1.f2': 'Palkka, edut ja työaika',
-      'p1.f3': 'Salassapito ja rekrytointikielto',
-      'p2.title': 'Asunnon <em>vuokrasopimus</em>',
-      'p2.lede': 'Määräaikainen tai toistaiseksi voimassa oleva vuokrasopimus asuinhuoneiston vuokrauksesta annetun lain mukaisesti.',
-      'p2.f1': 'Vakuus- ja indeksiehdot',
-      'p2.f2': 'Kunnossapito ja vastikkeet',
-      'p2.f3': 'Irtisanominen ja luovutus',
-      'p3.title': 'Salassapito<em>sopimus</em>',
-      'p3.lede': 'Molemminpuolinen tai yksipuolinen NDA neuvotteluihin, yhteisyrityksiin ja rekrytointeihin.',
-      'p3.f1': 'Luottamuksellisen tiedon määrittely',
-      'p3.f2': 'Voimassaolo, palautus ja hävitys',
-      'p3.f3': 'Sopimussakko ja toimivalta',
-      'p4.title': 'Valta<em>kirja</em>',
-      'p4.lede': 'Yleis- tai erityisvaltakirja hallinnollisia, pankki- ja kiinteistöasioita varten.',
-      'p4.f1': 'Laajuus ja sijaisen nimeäminen',
-      'p4.f2': 'Voimassaoloaika ja peruutus',
-      'p4.f3': 'Todistaja- ja notaarikohta',
-      'p5.title': 'Konsultointi<em>sopimus</em>',
-      'p5.lede': 'Itsenäisen konsultin sopimus, sisältää IP-oikeudet, toimitukset ja maksuaikataulun.',
-      'p5.f1': 'Laajuus, välitavoitteet ja palkkiot',
-      'p5.f2': 'IP-oikeuksien siirto ja työsuhdeteokset',
-      'p5.f3': 'Irtisanominen ja vastuurajaukset',
-      'p6.title': 'Testa<em>mentti</em>',
-      'p6.lede': 'Perintökaaren mukainen testamenttipohja legaatteineen, testamentin toimeenpanijoineen ja todistajineen.',
-      'p6.f1': 'Legaatit ja jäännösomaisuus',
-      'p6.f2': 'Holhous ja toimeenpanija',
-      'p6.f3': 'Todistajien vahvistuslauseke',
+      'cat.office': 'Toimisto',
+      'p1.title': 'Toimeksianto<em>sopimus</em>',
+      'p1.lede': 'Asianajotoimiston ja asiakkaan välinen toimeksiantosopimus. Asiakkaan tunnistaminen, esteellisyystarkastus, palkkio ja oikeusturva.',
+      'p1.f1': 'Asiakkaan tunnistaminen & esteellisyys',
+      'p1.f2': 'Tuntipalkkio, ennakko & laskutus',
+      'p1.f3': 'Oikeusturvavakuutus & oikeusapu',
+      'p2.title': 'Testamentti <em>suomi–viro</em>',
+      'p2.lede': 'Kaksikielinen testamentti Suomessa asuvalle Viron kansalaiselle. Viron lain valinta EU:n perintöasetuksen mukaan.',
+      'p2.f1': 'Rinnakkainen suomen- ja vironkielinen teksti',
+      'p2.f2': 'Lainvalinta (EU 650/2012)',
+      'p2.f3': 'Omaisuus molemmissa maissa, todistajat',
+      'p3.title': 'Testamentti <em>toimeenpanijalla</em>',
+      'p3.lede': 'Suomalainen testamentti, jossa yksi perillinen ja toimeenpanija. Avio-oikeuden poissulkeminen, digitaalinen omaisuus ja sijaantulomääräys.',
+      'p3.f1': 'Toimeenpanijan valtuudet',
+      'p3.f2': 'Avio-oikeuden poissulkeminen & sijaantulo',
+      'p3.f3': 'Digitaalinen omaisuus & todistuslauseke',
+      'p4.title': 'Edunvalvonta<em>valtuutus</em>',
+      'p4.lede': 'Määrää, kuka hoitaa talous-, omaisuus- ja henkilöasiasi, jos et itse kykene. Vahvistetaan Digi- ja väestötietovirastossa.',
+      'p4.f1': 'Valtuutettu, varavaltuutettu & erityinen tahto',
+      'p4.f2': 'Pankki-, kiinteistö-, vero- & viranomaisasiat',
+      'p4.f3': 'Digitaalinen omaisuus, terveystiedot, todistajat',
+      'p5.title': 'Lexorian <em>kirjepohja</em>',
+      'p5.lede': 'Asianajotoimisto Lexoria Oy:n virallinen kirjepohja asianajajaliiton merkillä, osoitetiedoilla ja alatunnisteella.',
+      'p5.f1': 'Ylätunniste ja liiton merkki',
+      'p5.f2': 'Päiväys, vastaanottaja & asia',
+      'p5.f3': 'Allekirjoitus & yrityksen alatunniste',
       'price.vat': 'Sis. ALV · 15,14 € netto',
       'price.vat15': 'Sis. ALV · 11,95 € netto',
       'price.vat29': 'Sis. ALV · 23,11 € netto',
@@ -2173,20 +2174,20 @@
       'btn.added': 'Lisätty',
       'btn.buy': 'Osta heti',
       'trust.k1': 'Laatija', 'trust.v1': '<em>Asianajajat</em>',
-      'trust.k2': 'Muoto', 'trust.v2': 'PDF &amp; <em>muokattava</em> DOC',
-      'trust.k3': 'Toimitus', 'trust.v3': '<em>Heti</em> ladattavissa',
+      'trust.k2': 'Muoto', 'trust.v2': 'Tulostusvalmis <em>PDF</em>',
+      'trust.k3': 'Toimitus', 'trust.v3': 'Sähköpostiin, <em>heti</em>',
       'trust.k4': 'Tarkastus', 'trust.v4': 'Päivitetty <em>2026</em>',
       'how.chapter': 'Näin se toimii',
       'how.h2': 'Kolme askelta.<br><em>Allekirjoita tänään.</em>',
       'how.s1.num': '01 / Selaa',
       'how.s1.title': 'Valitse <em>asiakirja</em>',
-      'how.s1.body': 'Kuusi mallia yleisimpiin kysymyksiin. Lue kuvaus ennen kuin ostat.',
-      'how.s2.num': '02 / Täytä',
-      'how.s2.title': 'Vastaa <em>selkeisiin kysymyksiin</em>',
-      'how.s2.body': 'Opastettu lomake suomeksi tai englanniksi. Ei juristikieltä. Tallenna kesken ja jatka myöhemmin.',
-      'how.s3.num': '03 / Lataa',
-      'how.s3.title': 'Allekirjoita <em>samana päivänä</em>',
-      'how.s3.body': 'Heti PDF ja muokattava DOC. Allekirjoita paperilla tai sähköisellä palvelulla.',
+      'how.s1.body': 'Viisi mallia, jotka kattavat useimmin kysytyt asiat. Lue kuvaus ennen ostoa.',
+      'how.s2.num': '02 / Maksa',
+      'how.s2.title': 'Kassa <em>minuutissa</em>',
+      'how.s2.body': 'Nimi ja sähköposti, sitten maksu. Suomalaiset pankkimaksut ja kortit Montonion kautta.',
+      'how.s3.num': '03 / Vastaanota',
+      'how.s3.title': 'PDF <em>sähköpostiisi</em>',
+      'how.s3.body': 'Asiakirja saapuu sähköpostiisi heti maksun jälkeen. Tulosta tai täytä sähköisesti, allekirjoita paperilla tai sähköisesti.',
       'custom.chapter': 'Räätälöity',
       'custom.h2': 'Jos ei sovi,<br><em>kirjoitamme sen.</em>',
       'custom.cta.book': 'Varaa konsultaatio',
@@ -2195,12 +2196,27 @@
       'cart.close': 'Sulje',
       'cart.empty.lead': 'Kori on tyhjä',
       'cart.empty.msg': 'Lisää asiakirja <em>aloittaaksesi.</em>',
-      'cart.empty.hint': 'Kuusi mallia. Alkaen 15 €.',
+      'cart.empty.hint': 'Viisi mallia. Alkaen 15 €.',
       'cart.total': 'Yhteensä',
       'cart.vat': 'Sis. ALV 25,5 %',
       'cart.checkout': 'Siirry kassalle',
       'cart.remove': 'Poista',
-      'cart.itemMeta': 'PDF · DOC · heti',
+      'cart.itemMeta': 'PDF · sähköpostitse',
+      'co.h': 'Kas<em>sa</em>',
+      'co.name': 'Nimi',
+      'co.email': 'Sähköposti',
+      'co.emailHint': 'PDF lähetetään tähän osoitteeseen.',
+      'co.test': 'Testitila · rahaa ei veloiteta. Montonion pankkimaksut ja kortit tulevat seuraavaksi.',
+      'co.pay': 'Maksa',
+      'co.back': '← Takaisin koriin',
+      'co.sending': 'Lähetetään…',
+      'co.done.h': 'Lähetetty <em>sähköpostiisi</em>',
+      'co.done.msg': 'Asiakirjasi lähetettiin osoitteeseen',
+      'co.done.hint': 'Eikö näy minuutissa? Tarkista roskaposti.',
+      'co.close': 'Sulje',
+      'co.errGeneric': 'Lähetys epäonnistui. Yritä uudelleen tai lähetä sähköpostia info@lexoria.fi.',
+      'co.errMail': 'Sähköpostin lähetystä ei ole vielä otettu käyttöön.',
+      'co.errFields': 'Täytä nimi ja toimiva sähköpostiosoite.',
       'toast.added': 'Lisätty koriin',
       'foot.lead': 'Osa',
       'foot.meta': 'Asianajaja · vuodesta 2010',
@@ -2264,6 +2280,7 @@
   const toastMsg = document.getElementById('toastMsg');
 
   function openCart() {
+    if (typeof coStep !== 'undefined' && coStep === 'done') { coStep = 'cart'; renderCart(); }
     cartDrawer.classList.add('open');
     cartBackdrop.classList.add('open');
     cartDrawer.setAttribute('aria-hidden', 'false');
@@ -2319,6 +2336,12 @@
     const dict = I18N[lang];
 
     cartCount.textContent = cart.length;
+    if (typeof coStep !== 'undefined' && coStep !== 'cart') {
+      if (coStep === 'checkout') renderCheckout();
+      renderFoot();
+      return;
+    }
+    if (typeof renderFoot === 'function') renderFoot();
     if (cart.length === 0) {
       cartBody.innerHTML = `
         <div class="cart-empty">
@@ -2418,14 +2441,128 @@
     });
   });
 
-  cartCheckout.addEventListener('click', () => {
-    if (cart.length === 0) return;
+  // =====================================================
+  // Checkout (simulated payment; Montonio to be wired in)
+  // =====================================================
+  const coBack = document.getElementById('coBack');
+  const coLabel = document.getElementById('cartCheckoutLabel');
+  const coArrow = document.getElementById('cartCheckoutArrow');
+  const cartVatEl = document.querySelector('.cart-vat');
+  var coStep = 'cart'; // cart | checkout | sending | done
+  var coData = { name: '', email: '' };
+
+  function t(key) { const lang = document.documentElement.dataset.lang || 'en'; return I18N[lang][key] || I18N.en[key] || key; }
+  function cartTotal() { return cart.reduce((s, i) => s + i.price, 0); }
+  function itemTitle(item) { return t(item.sku.replace('doc-0', 'p') + '.title'); }
+
+  function renderFoot() {
+    const total = cartTotal();
+    cartTotalEl.textContent = fmtEUR(total);
+    coBack.hidden = coStep !== 'checkout';
+    cartVatEl.hidden = coStep === 'done';
+    cartTotalEl.parentElement.hidden = coStep === 'done';
+    cartCheckout.classList.toggle('busy', coStep === 'sending');
+    if (coStep === 'cart') {
+      coLabel.textContent = t('cart.checkout'); coArrow.textContent = '↗';
+      cartCheckout.disabled = cart.length === 0;
+    } else if (coStep === 'checkout') {
+      coLabel.textContent = t('co.pay') + ' ' + fmtEUR(total); coArrow.textContent = '→';
+      cartCheckout.disabled = false;
+    } else if (coStep === 'sending') {
+      coLabel.textContent = t('co.sending'); coArrow.textContent = '…';
+      cartCheckout.disabled = true;
+    } else {
+      coLabel.textContent = t('co.close'); coArrow.textContent = '×';
+      cartCheckout.disabled = false;
+    }
+  }
+
+  function renderCheckout(err) {
+    const lines = cart.map(i => `<div class="co-line"><span>${itemTitle(i)}</span><span class="p">${fmtEUR(i.price)}</span></div>`).join('');
+    cartBody.innerHTML = `
+      <h3 class="co-h">${t('co.h')}</h3>
+      <div class="co-summary">${lines}</div>
+      <form id="coForm" novalidate>
+        <div class="co-field">
+          <label for="coName">${t('co.name')}</label>
+          <input id="coName" name="name" type="text" autocomplete="name" value="${coData.name.replace(/"/g,'&quot;')}" required>
+        </div>
+        <div class="co-field">
+          <label for="coEmail">${t('co.email')}</label>
+          <input id="coEmail" name="email" type="email" autocomplete="email" inputmode="email" value="${coData.email.replace(/"/g,'&quot;')}" required>
+          <span class="hint">${t('co.emailHint')}</span>
+        </div>
+        <div class="co-test"><span class="glyph">§</span><span>${t('co.test')}</span></div>
+        ${err ? `<div class="co-err">${err}</div>` : ''}
+        <button type="submit" hidden></button>
+      </form>`;
+    const form = document.getElementById('coForm');
+    form.addEventListener('submit', e => { e.preventDefault(); submitCheckout(); });
+    form.querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => { coData[inp.name] = inp.value; inp.classList.remove('err'); }));
+    if (!coData.name) setTimeout(() => document.getElementById('coName').focus(), 350);
+  }
+
+  function renderDone(email, items) {
+    const list = items.map(i => `<li>${itemTitle(i)}</li>`).join('');
+    cartBody.innerHTML = `
+      <div class="co-done">
+        <div class="glyph">§</div>
+        <h3 class="co-h">${t('co.done.h')}</h3>
+        <div class="msg">${t('co.done.msg')}</div>
+        <div class="addr">${email}</div>
+        <ul>${list}</ul>
+        <div class="hint">${t('co.done.hint')}</div>
+      </div>`;
+  }
+
+  async function submitCheckout() {
+    const nameEl = document.getElementById('coName');
+    const emailEl = document.getElementById('coEmail');
+    const name = nameEl.value.trim();
+    const email = emailEl.value.trim();
+    const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    if (!name || !okEmail) {
+      nameEl.classList.toggle('err', !name);
+      emailEl.classList.toggle('err', !okEmail);
+      const errEl = document.querySelector('.co-err');
+      if (errEl) errEl.textContent = t('co.errFields');
+      else document.getElementById('coForm').insertAdjacentHTML('beforeend', `<div class="co-err">${t('co.errFields')}</div>`);
+      return;
+    }
+    coStep = 'sending'; renderFoot();
     const lang = document.documentElement.dataset.lang || 'en';
-    const msg = lang === 'fi'
-      ? 'Kassa avautuu pian. Kiitos kärsivällisyydestä.'
-      : 'Checkout coming soon. Thank you for your patience.';
-    alert(msg);
+    const items = cart.slice();
+    try {
+      const r = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, lang, skus: items.map(i => i.sku) })
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || !data.ok) throw new Error(data.error || 'send_failed');
+      cart.length = 0;
+      cartCount.textContent = '0';
+      coStep = 'done';
+      renderDone(email, items);
+      renderFoot();
+    } catch (e) {
+      coStep = 'checkout';
+      renderCheckout(e.message === 'mail_not_configured' ? t('co.errMail') : t('co.errGeneric'));
+      renderFoot();
+    }
+  }
+
+  cartCheckout.addEventListener('click', () => {
+    if (coStep === 'cart') {
+      if (cart.length === 0) return;
+      coStep = 'checkout'; renderCheckout(); renderFoot();
+    } else if (coStep === 'checkout') {
+      submitCheckout();
+    } else if (coStep === 'done') {
+      coStep = 'cart'; closeCart(); setTimeout(() => { renderCart(); }, 500);
+    }
   });
+  coBack.addEventListener('click', () => { coStep = 'cart'; renderCart(); });
 
   // Initial language (bootstrap script set the attr already) — must run after cart refs exist
   const bootLang = document.documentElement.dataset.lang || 'en';
