@@ -2233,7 +2233,7 @@
   // =====================================================
   // i18n apply
   // =====================================================
-  const langButtons = document.querySelectorAll('[data-lang]');
+  const langButtons = document.querySelectorAll('button[data-lang]');
   function setLang(lang) {
     if (!I18N[lang]) lang = 'en';
     const dict = I18N[lang];
