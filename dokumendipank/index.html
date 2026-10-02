@@ -547,24 +547,22 @@
      HERO
      ============================================================ */
   .hero {
-    padding: var(--s-8) 0;
+    padding: var(--s-7) 0 0;
     background: var(--ink);
     color: var(--paper);
     position: relative;
     overflow: hidden;
   }
   .hero .wrap { position: relative; z-index: 1; }
-  .hero .chapter { color: var(--maroon-soft); }
-  .hero .chapter .glyph { color: var(--maroon-soft); }
   .hero .section-h { color: var(--paper); }
   .hero .section-h em { color: var(--maroon-soft); }
   .hero-grid {
     display: grid;
     grid-template-columns: 7fr 5fr;
-    gap: var(--s-7);
+    gap: var(--s-5);
     align-items: stretch;
   }
-  .hero-copy { display: flex; flex-direction: column; gap: var(--s-3); }
+  .hero-copy { display: flex; flex-direction: column; gap: var(--s-3); padding-bottom: var(--s-7); }
   .hero-lede {
     font-family: 'Newsreader', serif;
     font-weight: 300;
@@ -574,186 +572,294 @@
     max-width: 44ch;
   }
   .hero-lede em { font-style: italic; color: var(--paper); font-weight: 400; }
-
-  .hero-meta {
+  .hero-actions {
     display: flex;
-    flex-direction: column;
-    gap: var(--s-2);
-    /* Measured: value cap-top sits ~4.6px below the row line box; pull up so it meets the heading cap-top. */
-    margin-top: -4px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3) var(--s-4);
+    margin-top: var(--s-2);
   }
-  .hero-meta-row {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: var(--s-3);
-    align-items: baseline;
-    padding: 0;
-  }
-  .hero-meta-row .k {
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding: 18px 22px;
+    background: var(--paper);
+    color: var(--ink);
+    text-decoration: none;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--maroon-soft);
+    transition: background 0.3s, letter-spacing 0.3s;
   }
-  .hero-meta-row .v {
-    font-family: 'Newsreader', serif;
-    font-size: 20px;
-    line-height: 1.4;
-    color: var(--paper);
-  }
-  .hero-meta-row .v em { font-style: italic; color: var(--maroon-soft); font-weight: 400; }
-  .hero-meta-row .v .sep { color: var(--maroon-soft); margin: 0 8px; }
-
-  @media (max-width: 900px) {
-    .hero { padding: var(--s-7) 0; }
-    .hero-grid { grid-template-columns: 1fr; gap: var(--s-5); align-items: start; }
-    .hero-lede { font-size: 17px; }
-    .hero-meta { gap: var(--s-3); margin-top: 0; }
-    /* Stack key over value so each value keeps one line */
-    .hero-meta-row { grid-template-columns: 1fr; gap: 6px; align-items: start; }
-    .hero-meta-row .v { font-size: 18px; white-space: nowrap; }
-    .hero-meta-row .v .sep { margin: 0 6px; }
-  }
-
-  /* ============================================================
-     PRODUCT GRID
-     ============================================================ */
-  .shop-section {
-    padding: var(--s-8) 0;
-    background: var(--paper);
-  }
-  .shop-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--s-4);
-    margin-bottom: var(--s-4);
-    padding-bottom: 0;
-  }
-  .shop-head .count-note {
+  .hero-cta:hover { background: var(--maroon-soft); letter-spacing: 0.26em; }
+  .hero-cta .arrow { color: var(--maroon); font-size: 14px; }
+  .hero-link {
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(236, 231, 221, 0.3);
+    color: rgba(236, 231, 221, 0.75);
+    text-decoration: none;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--pebble);
+    transition: color 0.3s, border-color 0.3s;
   }
-  .shop-head .count-note em { color: var(--maroon); font-style: normal; }
-
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-4);
-  }
-
-  .product-card {
+  .hero-link:hover { color: var(--paper); border-bottom-color: var(--maroon-soft); }
+  .hero-points {
+    list-style: none;
     display: flex;
-    flex-direction: column;
-    background: var(--paper-soft);
-    color: var(--ink);
-    padding: var(--s-4);
-    position: relative;
-    transition: background 0.4s ease, transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-    min-height: 460px;
-    border: 1.5px solid rgba(15, 20, 25, 0.22);
-  }
-  .product-card:hover {
-    background: var(--paper-hover);
-    border-color: rgba(15, 20, 25, 0.55);
-  }
-  .product-card:hover .card-title em { color: var(--maroon); }
-
-  .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: var(--s-3);
-  }
-  .card-num {
+    flex-wrap: wrap;
+    gap: 8px var(--s-3);
+    margin-top: var(--s-3);
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--maroon);
+    color: rgba(236, 231, 221, 0.55);
   }
-  .card-format {
+  .hero-points li::before { content: "✓"; margin-right: 8px; color: var(--maroon-soft); }
+
+  /* Fanned document previews that bleed off the bottom edge of the hero */
+  .hero-stack { position: relative; min-height: 420px; }
+  .hero-sheet {
+    position: absolute;
+    width: 74%;
+    height: auto;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 40px 80px -20px rgba(0, 0, 0, 0.65);
+    animation: sheet-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero-sheet:nth-child(1) { left: 0; top: 24%; rotate: -8deg; filter: brightness(0.8); animation-delay: 0.05s; }
+  .hero-sheet:nth-child(2) { left: 13%; top: 12%; rotate: -1.5deg; filter: brightness(0.9); animation-delay: 0.15s; }
+  .hero-sheet:nth-child(3) { left: 26%; top: 20%; rotate: 6deg; animation-delay: 0.25s; }
+  @keyframes sheet-in {
+    from { opacity: 0; translate: 0 60px; }
+    to { opacity: 1; translate: 0 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .hero-sheet { animation: none; } }
+
+  @media (max-width: 900px) {
+    .hero { padding: var(--s-6) 0 0; }
+    .hero-grid { grid-template-columns: 1fr; gap: 0; }
+    .hero-copy { padding-bottom: var(--s-5); }
+    .hero-lede { font-size: 17px; }
+    .hero-stack { min-height: 0; height: 220px; }
+    .hero-sheet { width: 54%; }
+    .hero-sheet:nth-child(1) { left: 2%; top: 16%; }
+    .hero-sheet:nth-child(2) { left: 23%; top: 4%; }
+    .hero-sheet:nth-child(3) { left: 44%; top: 12%; }
+  }
+  @media (max-width: 640px) {
+    .hero-cta { width: 100%; }
+  }
+
+  /* ============================================================
+     CATALOG
+     ============================================================ */
+  .shop-section {
+    padding: var(--s-7) 0 var(--s-8);
+    background: var(--paper);
+  }
+  .shop-section .chapter-block { margin-bottom: var(--s-5); }
+
+  .shop-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-3);
+    padding: var(--s-2) 0;
+    margin-bottom: var(--s-4);
+    border-top: 1px solid rgba(15, 20, 25, 0.12);
+    border-bottom: 1px solid rgba(15, 20, 25, 0.12);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: transparent;
+    border: 1px solid rgba(15, 20, 25, 0.22);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .chip .n { color: var(--pebble); letter-spacing: 0.08em; transition: color 0.3s; }
+  .chip:hover { border-color: var(--ink); }
+  .chip.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .chip.active .n { color: var(--maroon-soft); }
+  .shop-tools { display: flex; align-items: center; gap: var(--s-2); flex: 0 0 auto; }
+  .sort {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid rgba(15, 20, 25, 0.22);
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  .sort:hover { border-color: var(--ink); }
+  .sort:focus-within { outline: 2px solid var(--maroon); outline-offset: 2px; }
+  .sort .k { color: var(--pebble); }
+  .sort::after {
+    content: "";
+    width: 10px;
+    height: 6px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%230F1419' stroke-width='1.2'/%3E%3C/svg%3E") no-repeat center;
+  }
+  /* Native select laid invisibly over the label: system picker, and 16px so iOS does not zoom */
+  .sort select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .view-toggle { display: none; }
+  .view-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 38px;
+    background: transparent;
+    border: 1px solid rgba(15, 20, 25, 0.22);
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .view-btn + .view-btn { border-left: 0; }
+  .view-btn svg { opacity: 0.55; }
+  .view-btn.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .view-btn.active svg { opacity: 1; }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-5) var(--s-4);
+  }
+  .product-card { display: flex; flex-direction: column; min-width: 0; }
+  .card-media {
+    position: relative;
+    display: block;
+    aspect-ratio: 5 / 4;
+    background: var(--paper-soft);
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+  }
+  .card-sheet {
+    position: absolute;
+    left: 50%;
+    top: 14%;
+    width: 72%;
+    height: auto;
+    translate: -50% 0;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(15, 20, 25, 0.1), 0 24px 48px -16px rgba(15, 20, 25, 0.35);
+    transition: translate 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    padding: 6px 9px;
+    background: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .card-quick {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    z-index: 1;
+    translate: -50% 12px;
+    opacity: 0;
+    padding: 11px 16px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: opacity 0.35s, translate 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @media (hover: hover) {
+    .card-media:hover .card-sheet { translate: -50% -12px; }
+    .card-media:hover .card-quick,
+    .card-media:focus-visible .card-quick { opacity: 1; translate: -50% 0; }
+  }
+  .card-info { display: flex; flex-direction: column; flex: 1; padding-top: var(--s-2); }
+  .card-meta {
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
     color: var(--pebble);
   }
   .card-title {
+    margin-bottom: 8px;
     font-family: 'Newsreader', serif;
     font-weight: 400;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.2;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--ink);
-    margin-bottom: var(--s-2);
+    overflow-wrap: anywhere;
   }
-  .card-title em { font-style: italic; color: var(--maroon); transition: color 0.4s; }
+  .card-title a { color: inherit; text-decoration: none; }
+  .card-title em { font-style: italic; color: var(--maroon); }
   .card-lede {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: var(--s-2);
     font-family: 'Newsreader', serif;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
     color: var(--pebble);
-    margin-bottom: var(--s-3);
   }
-  .card-features {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: var(--s-4);
-  }
-  .card-features li {
-    font-family: 'Newsreader', serif;
-    font-size: 15px;
-    line-height: 1.55;
-    color: var(--ink);
-    padding-left: var(--s-3);
-    position: relative;
-  }
-  .card-features li::before {
-    content: "·";
-    position: absolute;
-    left: 4px;
-    color: var(--maroon);
-    font-weight: 400;
-  }
-
-  .card-foot {
+  .card-row {
     margin-top: auto;
-    padding-top: var(--s-3);
-    border-top: 1px solid rgba(15, 20, 25, 0.12);
     display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
-  }
-  .card-price {
-    display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: var(--s-2);
+    padding-top: var(--s-2);
+    border-top: 1px solid rgba(15, 20, 25, 0.12);
   }
+  .card-price { display: flex; align-items: baseline; gap: 8px; }
   .card-price .amount {
     font-family: 'Newsreader', serif;
     font-weight: 400;
-    font-size: 40px;
+    font-size: 28px;
     line-height: 1;
     letter-spacing: -0.015em;
-    color: var(--ink);
-  }
-  .card-price .amount .unit {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--maroon);
-    margin-left: 4px;
-    vertical-align: middle;
+    white-space: nowrap;
   }
   .card-price .vat {
     font-family: 'JetBrains Mono', monospace;
@@ -761,138 +867,138 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--pebble);
-    text-align: right;
-    line-height: 1.4;
+    white-space: nowrap;
   }
-  .card-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-  }
-  .card-btn {
+  .card-add {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--s-1);
-    padding: 14px 14px;
+    gap: 8px;
+    padding: 12px 16px;
+    background: transparent;
+    border: 1px solid var(--ink);
+    color: var(--ink);
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, gap 0.3s ease, letter-spacing 0.3s ease;
     white-space: nowrap;
-    border: 1px solid var(--ink);
-    background: transparent;
-    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
   }
-  .card-btn:hover { gap: var(--s-2); letter-spacing: 0.22em; }
-  .card-btn .arrow { font-size: 12px; transition: transform 0.3s ease; }
+  .card-add .ico { font-size: 13px; line-height: 1; }
   .card-add:hover { background: var(--ink); color: var(--paper); }
-  .card-add.added { background: var(--maroon); border-color: var(--maroon); color: var(--paper); }
-  .card-buy {
+  .card-add.in-cart { background: var(--maroon); border-color: var(--maroon); color: var(--paper); }
+
+  .promo-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--s-4);
+    min-width: 0;
+    padding: var(--s-4);
     background: var(--ink);
     color: var(--paper);
-    border-color: var(--ink);
+    text-decoration: none;
+    transition: background 0.4s;
   }
-  .card-buy .arrow { color: var(--maroon-soft); }
-  .card-buy:hover { background: var(--maroon); border-color: var(--maroon); }
-  .card-buy:hover .arrow { color: var(--paper); transform: translateX(3px); }
+  .promo-card:hover { background: var(--maroon); }
+  .promo-card .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon-soft);
+  }
+  .promo-card .h {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(26px, 2.6vw, 38px);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+  }
+  .promo-card .h em { font-style: italic; color: var(--maroon-soft); }
+  .promo-card .cta {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--s-2);
+    padding-top: var(--s-2);
+    border-top: 1px solid rgba(236, 231, 221, 0.25);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
 
-  @media (max-width: 1024px) {
-    .product-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 900px) {
-    .shop-section { padding: var(--s-7) 0; }
+  .shop-note {
+    margin-top: var(--s-5);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1.7;
+    color: var(--pebble);
   }
   .swipe-nav { display: none; }
-  .view-toggle { display: none; }
 
+  @media (max-width: 1024px) {
+    .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .shop-bar { flex-direction: column; align-items: stretch; gap: 12px; padding: 12px 0; }
+    .shop-tools { justify-content: space-between; }
+  }
   @media (max-width: 640px) {
-    .view-toggle {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      margin: var(--s-3) 0 var(--s-4);
-      border: 1px solid rgba(15, 20, 25, 0.25);
+    .shop-section { padding: var(--s-6) 0 var(--s-7); }
+    .chips {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin: 0 calc(-1 * var(--edge-x));
+      padding: 0 var(--edge-x);
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
-    .view-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 13px 0;
-      background: transparent;
-      border: 0;
-      color: var(--ink);
-      opacity: 0.6;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.3s ease, color 0.3s ease, opacity 0.3s ease;
-    }
-    .view-btn + .view-btn { border-left: 1px solid rgba(15, 20, 25, 0.25); }
-    .view-btn.active { background: var(--ink); color: var(--paper); opacity: 1; }
-    .view-btn .ico { display: block; }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip { flex: 0 0 auto; }
+    .view-toggle { display: inline-flex; }
 
-    /* Grid mode: two compact columns, no swipe */
-    .product-grid.view-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      width: 100%;
-      gap: var(--s-2);
-      margin: 0;
-      padding: 0;
-      overflow: visible;
-      scroll-snap-type: none;
-    }
-    .product-grid.view-grid .product-card {
-      flex: none;
-      min-width: 0;
-      width: auto;
-      padding: var(--s-3) var(--s-2) var(--s-2);
-      scroll-snap-align: none;
-    }
-    .product-grid.view-grid .card-top { margin-bottom: var(--s-2); }
-    .product-grid.view-grid .card-format { display: none; }
-    /* Grid cells are narrow: drop the "01 ·" prefix (a bare text node) and keep the category */
-    .product-grid.view-grid .card-num { font-size: 0; letter-spacing: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-    .product-grid.view-grid .card-num > span { font-size: 9px; letter-spacing: 0.18em; }
-    .product-grid.view-grid .card-top { min-width: 0; }
-    .product-grid.view-grid .card-title { font-size: 14px; letter-spacing: 0.06em; line-height: 1.25; margin-bottom: var(--s-2); }
-    .product-grid.view-grid .card-lede,
-    .product-grid.view-grid .card-features { display: none; }
-    .product-grid.view-grid .card-foot { padding-top: var(--s-2); gap: var(--s-2); }
-    .product-grid.view-grid .card-price .amount { font-size: 26px; }
-    .product-grid.view-grid .card-price .vat { display: none; }
-    .product-grid.view-grid .card-actions { grid-template-columns: 1fr; gap: 6px; }
-    .product-grid.view-grid .card-btn { padding: 12px 8px; font-size: 9px; letter-spacing: 0.18em; }
-    .product-grid.view-grid + .swipe-nav { display: none; }
-
+    /* Swipe mode: one card per screen, snapping */
     .product-grid {
       display: flex;
-      grid-template-columns: none;
       overflow-x: auto;
       overflow-y: hidden;
       scroll-snap-type: x mandatory;
       gap: var(--s-3);
-      margin-left: calc(-1 * var(--edge-x));
-      margin-right: calc(-1 * var(--edge-x));
+      margin: 0 calc(-1 * var(--edge-x));
       padding: 4px var(--edge-x);
       scroll-padding-left: var(--edge-x);
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
     }
     .product-grid::-webkit-scrollbar { display: none; }
-    .product-card {
-      min-height: 0;
-      padding: var(--s-4);
-      flex: 0 0 min(78vw, 340px);
-      scroll-snap-align: start;
+    .product-grid > * { flex: 0 0 min(78vw, 340px); scroll-snap-align: start; }
+
+    /* Grid mode: two compact columns */
+    .product-grid.view-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--s-4) var(--s-2);
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      scroll-snap-type: none;
     }
-    .card-title { font-size: 20px; }
-    .shop-head { flex-direction: column; align-items: flex-start; gap: var(--s-2); }
+    .view-grid .card-tag,
+    .view-grid .card-meta,
+    .view-grid .card-lede,
+    .view-grid .card-price .vat { display: none; }
+    .view-grid .card-info { padding-top: 12px; }
+    /* Narrow columns: sentence case so long Finnish compounds fit on a line */
+    .view-grid .card-title { margin-bottom: 0; font-size: 15px; letter-spacing: 0; line-height: 1.25; text-transform: none; hyphens: auto; }
+    .view-grid .card-row { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 10px; border-top: 0; }
+    .view-grid .card-price .amount { font-size: 22px; }
+    .view-grid .card-add { justify-content: center; padding: 12px 6px; font-size: 9px; letter-spacing: 0.16em; }
+    .view-grid .promo-card { gap: var(--s-3); padding: var(--s-2); }
+    .view-grid .promo-card .h { font-size: 20px; }
+    .view-grid .promo-card .cta { font-size: 9px; letter-spacing: 0.16em; }
+    .product-grid.view-grid + .swipe-nav { display: none; }
 
     .swipe-nav {
       display: flex;
@@ -922,11 +1028,7 @@
       50% { transform: translateX(5px); opacity: 1; }
     }
     .swipe-nav.scrolled .swipe-hint { opacity: 0; transition: opacity 0.4s; }
-    .swipe-dots {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
+    .swipe-dots { display: inline-flex; align-items: center; gap: 5px; }
     .swipe-dots .dot {
       width: 6px;
       height: 6px;
@@ -934,10 +1036,271 @@
       border-radius: 999px;
       transition: background 0.3s, width 0.3s;
     }
-    .swipe-dots .dot.active {
-      background: var(--maroon);
-      width: 20px;
+    .swipe-dots .dot.active { background: var(--maroon); width: 20px; }
+    .shop-note { margin-top: var(--s-4); font-size: 9px; }
+  }
+
+  /* ============================================================
+     PRODUCT VIEW (dialog on desktop, full-screen sheet on mobile)
+     ============================================================ */
+  body.pdp-open { overflow: hidden; }
+  .pdp-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 94;
+    background: rgba(15, 20, 25, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .pdp-backdrop.open { opacity: 1; pointer-events: auto; }
+  .pdp {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 95;
+    width: min(1120px, calc(100vw - 64px));
+    max-height: calc(100dvh - 64px);
+    translate: -50% calc(-50% + 20px);
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 40px 120px -20px rgba(15, 20, 25, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, translate 0.45s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.45s;
+  }
+  .pdp.open { opacity: 1; visibility: visible; pointer-events: auto; translate: -50% -50%; transition-delay: 0s; }
+  .pdp-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    border: 1px solid rgba(15, 20, 25, 0.2);
+    color: var(--ink);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .pdp-close:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .pdp-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+  .pdp-grid { display: grid; grid-template-columns: 5fr 6fr; align-items: stretch; }
+  .pdp-media { background: var(--paper-soft); padding: var(--s-5); }
+  .pdp-media-in { position: sticky; top: var(--s-5); }
+  .pdp-sheet {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(15, 20, 25, 0.1), 0 30px 60px -20px rgba(15, 20, 25, 0.35);
+    -webkit-mask-image: linear-gradient(#000 70%, transparent);
+    mask-image: linear-gradient(#000 70%, transparent);
+  }
+  .pdp-cap {
+    display: block;
+    margin-top: 4px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pebble);
+  }
+  .pdp-info { display: flex; flex-direction: column; min-width: 0; padding: var(--s-5); }
+  .pdp-cat {
+    margin-bottom: var(--s-2);
+    padding-right: 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .pdp-title {
+    margin-bottom: var(--s-2);
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(30px, 3.2vw, 44px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+  }
+  .pdp-title em { font-style: italic; color: var(--maroon); }
+  .pdp-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-bottom: var(--s-3); }
+  .pdp-price .amount { font-family: 'Newsreader', serif; font-size: 34px; line-height: 1; letter-spacing: -0.015em; }
+  .pdp-price .vat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pebble);
+  }
+  .pdp-lede {
+    margin-bottom: var(--s-3);
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(15, 20, 25, 0.8);
+  }
+  .pdp-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: var(--s-2); }
+  .pdp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 16px;
+    border: 1px solid var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .pdp-add { background: transparent; color: var(--ink); }
+  .pdp-add:hover { background: var(--ink); color: var(--paper); }
+  .pdp-add.in-cart { background: var(--maroon); border-color: var(--maroon); color: var(--paper); }
+  .pdp-buy { background: var(--ink); color: var(--paper); }
+  .pdp-buy:hover { background: var(--maroon); border-color: var(--maroon); }
+  .pdp-points {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px var(--s-3);
+    margin-bottom: var(--s-4);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    color: var(--pebble);
+  }
+  .pdp-points li::before { content: "✓"; margin-right: 8px; color: var(--maroon); }
+  .pdp-h {
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .pdp-features { list-style: none; margin-bottom: var(--s-4); border-bottom: 1px solid rgba(15, 20, 25, 0.1); }
+  .pdp-features li {
+    position: relative;
+    padding: 10px 0 10px var(--s-3);
+    border-top: 1px solid rgba(15, 20, 25, 0.1);
+    font-family: 'Newsreader', serif;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+  .pdp-features li::before { content: "·"; position: absolute; left: 6px; color: var(--maroon); }
+  .pdp-specs {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    margin-bottom: var(--s-3);
+    border-top: 1px solid rgba(15, 20, 25, 0.1);
+  }
+  .pdp-specs dt, .pdp-specs dd { padding: 10px 0; border-bottom: 1px solid rgba(15, 20, 25, 0.1); }
+  .pdp-specs dt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 2.2;
+    color: var(--pebble);
+  }
+  .pdp-specs dd { font-family: 'Newsreader', serif; font-size: 16px; line-height: 1.45; }
+  .pdp-acc { border-bottom: 1px solid rgba(15, 20, 25, 0.12); }
+  .pdp-acc summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 16px 0;
+    list-style: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  .pdp-acc summary::-webkit-details-marker { display: none; }
+  .pdp-acc summary::after { content: "+"; font-size: 16px; line-height: 1; color: var(--maroon); }
+  .pdp-acc[open] summary::after { content: "–"; }
+  .pdp-acc summary:hover { color: var(--maroon); }
+  .pdp-acc p {
+    padding-bottom: 16px;
+    font-family: 'Newsreader', serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(15, 20, 25, 0.8);
+  }
+  .pdp-acc a { color: var(--maroon); text-underline-offset: 3px; white-space: nowrap; }
+  .pdp-more { margin-top: var(--s-4); }
+  .more-item {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: var(--s-2);
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(15, 20, 25, 0.1);
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .more-item:hover { color: var(--maroon); }
+  .doc-thumb { display: block; width: 44px; height: 54px; background: var(--paper-soft); overflow: hidden; }
+  .doc-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .more-item .t { font-family: 'Newsreader', serif; font-size: 16px; line-height: 1.3; }
+  .more-item .t em { font-style: italic; }
+  .more-item .p { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--pebble); white-space: nowrap; }
+  .pdp-bar { display: none; }
+
+  @media (max-width: 768px) {
+    .pdp {
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100dvh;
+      max-height: none;
+      translate: 0 24px;
+      box-shadow: none;
     }
+    .pdp.open { translate: 0 0; }
+    .pdp-grid { grid-template-columns: 1fr; }
+    .pdp-media { max-height: 280px; overflow: hidden; padding: var(--s-4) var(--s-4) 0; }
+    .pdp-media-in { position: static; }
+    .pdp-sheet { width: 74%; margin: 0 auto; -webkit-mask-image: none; mask-image: none; }
+    .pdp-cap { display: none; }
+    .pdp-info { padding: var(--s-3) var(--s-3) var(--s-5); }
+    .pdp-cat { padding-right: 0; }
+    .pdp-actions { display: none; }
+    .pdp-specs { grid-template-columns: 96px 1fr; }
+    .pdp-bar {
+      flex: 0 0 auto;
+      display: grid;
+      grid-template-columns: auto 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+      padding: 12px var(--s-3) calc(12px + env(safe-area-inset-bottom));
+      border-top: 1px solid rgba(15, 20, 25, 0.12);
+      background: var(--paper);
+    }
+    .pdp-bar .amount { padding-right: 8px; font-family: 'Newsreader', serif; font-size: 24px; line-height: 1; white-space: nowrap; }
+    .pdp-bar .pdp-btn { padding: 15px 6px; gap: 6px; font-size: 9.5px; letter-spacing: 0.14em; }
   }
 
   /* ============================================================
@@ -1102,7 +1465,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease;
-    z-index: 90;
+    z-index: 99;
   }
   .cart-backdrop.open { opacity: 1; pointer-events: auto; }
 
@@ -1188,7 +1551,7 @@
 
   .cart-item {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 44px 1fr auto;
     gap: var(--s-2);
     padding: var(--s-3) 0;
     border-top: 1px solid rgba(15, 20, 25, 0.1);
@@ -1234,6 +1597,30 @@
     transition: color 0.3s;
   }
   .cart-remove:hover { color: var(--maroon); }
+  .cart-browse {
+    align-self: center;
+    margin-top: var(--s-3);
+    padding: 14px 18px;
+    background: transparent;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+  .cart-browse:hover { background: var(--ink); color: var(--paper); }
+  .cart-secure {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.7;
+    text-align: center;
+    color: var(--pebble);
+  }
 
   .cart-foot {
     padding: var(--s-4);
@@ -1866,31 +2253,30 @@
     <div class="hero-grid">
       <div class="hero-copy">
         <h1 class="section-h" data-i18n-html="hero.h1">Ready-made,<br><em>legally sound.</em></h1>
-        <p class="hero-lede" data-i18n-html="hero.lede">Documents drafted by attorneys. Fill in online, download <em>PDF or DOC</em>, sign the same day. No lawyer beside you.</p>
+        <p class="hero-lede" data-i18n-html="hero.lede">Documents drafted by attorneys. Pay, receive the <em>PDF by e-mail</em>, fill in and sign the same day.</p>
+        <div class="hero-actions">
+          <a class="hero-cta" href="#shop">
+            <span data-i18n="hero.cta">Browse documents</span>
+            <span class="arrow" aria-hidden="true">↓</span>
+          </a>
+          <a class="hero-link" href="#how" data-i18n="hero.link">How it works</a>
+        </div>
+        <ul class="hero-points">
+          <li data-i18n="hero.p1">PDF by e-mail in minutes</li>
+          <li data-i18n="hero.p2">Prices incl. VAT</li>
+          <li data-i18n="hero.p3">From 15 €</li>
+        </ul>
       </div>
-      <div class="hero-meta">
-        <div class="hero-meta-row">
-          <span class="k" data-i18n="hero.meta.author">Drafted by</span>
-          <span class="v" data-i18n-html="hero.meta.authorVal">Lexoria <span class="sep">·</span> <em>attorneys at law</em></span>
-        </div>
-        <div class="hero-meta-row">
-          <span class="k" data-i18n="hero.meta.jur">Jurisdiction</span>
-          <span class="v" data-i18n-html="hero.meta.jurVal">Finland <span class="sep">·</span> Estonia</span>
-        </div>
-        <div class="hero-meta-row">
-          <span class="k" data-i18n="hero.meta.formats">Formats</span>
-          <span class="v" data-i18n-html="hero.meta.formatsVal">PDF <span class="sep">·</span> DOC <span class="sep">·</span> instant download</span>
-        </div>
-        <div class="hero-meta-row">
-          <span class="k" data-i18n="hero.meta.updated">Reviewed</span>
-          <span class="v" data-i18n-html="hero.meta.updatedVal">2026 <span class="sep">·</span> updated with the law</span>
-        </div>
+      <div class="hero-stack" aria-hidden="true">
+        <img class="hero-sheet" src="img/doc-04.webp" alt="" width="720" height="734">
+        <img class="hero-sheet" src="img/doc-01.webp" alt="" width="720" height="734">
+        <img class="hero-sheet" src="img/doc-02.webp" alt="" width="720" height="734">
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRODUCT GRID -->
+<!-- CATALOG -->
 <section class="shop-section" id="shop">
   <div class="wrap">
     <div class="chapter-block">
@@ -1900,187 +2286,37 @@
       </div>
       <h2 class="section-h" data-i18n-html="shop.h2">Five documents.<br><em>One shelf.</em></h2>
     </div>
-    <div class="shop-head">
-      <span class="count-note" data-i18n-html="shop.eyebrow"><em>5</em> documents · Finland &amp; Estonia</span>
-      <span class="count-note" data-i18n-html="shop.note">All prices incl. <em>VAT 25.5%</em></span>
+
+    <div class="shop-bar">
+      <div class="chips" id="catChips" role="group" aria-label="Category"></div>
+      <div class="shop-tools">
+        <label class="sort">
+          <span class="k" data-i18n="shop.sort">Sort</span>
+          <span id="sortVal">Featured</span>
+          <select id="sortSel" aria-label="Sort"></select>
+        </label>
+        <div class="view-toggle" role="group" aria-label="Catalog view" id="viewToggle">
+          <button type="button" class="view-btn active" data-view="swipe" aria-pressed="true" aria-label="Swipe" data-i18n-aria="shop.viewSwipe">
+            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3.5" y="1.5" width="7" height="11" rx="0.5" fill="none" stroke="currentColor"/><path d="M0.5 4v6M13.5 4v6" stroke="currentColor"/></svg>
+          </button>
+          <button type="button" class="view-btn" data-view="grid" aria-pressed="false" aria-label="Grid" data-i18n-aria="shop.viewGrid">
+            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.5" y="1.5" width="4.5" height="4.5" fill="none" stroke="currentColor"/><rect x="8" y="1.5" width="4.5" height="4.5" fill="none" stroke="currentColor"/><rect x="1.5" y="8" width="4.5" height="4.5" fill="none" stroke="currentColor"/><rect x="8" y="8" width="4.5" height="4.5" fill="none" stroke="currentColor"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="view-toggle" role="group" aria-label="Catalog view" id="viewToggle">
-      <button type="button" class="view-btn active" data-view="swipe" aria-pressed="true">
-        <svg class="ico" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3.5" y="1.5" width="7" height="11" rx="0.5" fill="none" stroke="currentColor"/><path d="M0.5 4v6M13.5 4v6" stroke="currentColor"/></svg>
-        <span data-i18n="shop.viewSwipe">Swipe</span>
-      </button>
-      <button type="button" class="view-btn" data-view="grid" aria-pressed="false">
-        <svg class="ico" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.5" y="1.5" width="4.5" height="4.5" fill="none" stroke="currentColor"/><rect x="8" y="1.5" width="4.5" height="4.5" fill="none" stroke="currentColor"/><rect x="1.5" y="8" width="4.5" height="4.5" fill="none" stroke="currentColor"/><rect x="8" y="8" width="4.5" height="4.5" fill="none" stroke="currentColor"/></svg>
-        <span data-i18n="shop.viewGrid">Grid</span>
-      </button>
-    </div>
-
-    <div class="product-grid" id="productGrid">
-      <!-- 01 -->
-      <article class="product-card" data-sku="doc-01" data-price="29">
-        <div class="card-top">
-          <span class="card-num">01 · <span data-i18n="cat.engagement">Engagement</span></span>
-          <span class="card-format">PDF</span>
-        </div>
-        <h3 class="card-title" data-i18n-html="p1.title">Engagement <em>agreement</em></h3>
-        <p class="card-lede" data-i18n="p1.lede">Attorney–client engagement agreement (toimeksiantosopimus) as used by Finnish law firms. Client identification, conflict check, fees and legal expenses cover.</p>
-        <ul class="card-features">
-          <li data-i18n="p1.f1">Client ID &amp; conflict-of-interest check</li>
-          <li data-i18n="p1.f2">Hourly fee, advance &amp; invoicing terms</li>
-          <li data-i18n="p1.f3">Legal expenses insurance &amp; legal aid</li>
-        </ul>
-        <div class="card-foot">
-          <div class="card-price">
-            <span class="amount">29<span class="unit">€</span></span>
-            <span class="vat" data-i18n="price.vat29">Incl. VAT · 23.11 € net</span>
-          </div>
-          <div class="card-actions">
-            <button class="card-btn card-add" data-add>
-              <span data-i18n="btn.add">Add</span>
-            </button>
-            <button class="card-btn card-buy" data-buy>
-              <span data-i18n="btn.buy">Buy now</span>
-              <span class="arrow">→</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- 02 -->
-      <article class="product-card" data-sku="doc-02" data-price="39">
-        <div class="card-top">
-          <span class="card-num">02 · <span data-i18n="cat.inheritance">Inheritance</span></span>
-          <span class="card-format">PDF</span>
-        </div>
-        <h3 class="card-title" data-i18n-html="p2.title">Will, <em>Finnish–Estonian</em></h3>
-        <p class="card-lede" data-i18n="p2.lede">Bilingual will for an Estonian citizen living in Finland. Choice of Estonian law under the EU Succession Regulation.</p>
-        <ul class="card-features">
-          <li data-i18n="p2.f1">Parallel Finnish and Estonian text</li>
-          <li data-i18n="p2.f2">Choice of law (EU 650/2012)</li>
-          <li data-i18n="p2.f3">Assets in both countries, witness block</li>
-        </ul>
-        <div class="card-foot">
-          <div class="card-price">
-            <span class="amount">39<span class="unit">€</span></span>
-            <span class="vat" data-i18n="price.vat39">Incl. VAT · 31.08 € net</span>
-          </div>
-          <div class="card-actions">
-            <button class="card-btn card-add" data-add>
-              <span data-i18n="btn.add">Add</span>
-            </button>
-            <button class="card-btn card-buy" data-buy>
-              <span data-i18n="btn.buy">Buy now</span>
-              <span class="arrow">→</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- 03 -->
-      <article class="product-card" data-sku="doc-03" data-price="29">
-        <div class="card-top">
-          <span class="card-num">03 · <span data-i18n="cat.inheritance">Inheritance</span></span>
-          <span class="card-format">PDF</span>
-        </div>
-        <h3 class="card-title" data-i18n-html="p3.title">Will with <em>executor</em></h3>
-        <p class="card-lede" data-i18n="p3.lede">Finnish will naming a sole heir and an executor. Excludes marital rights, covers digital assets and a substitute heir.</p>
-        <ul class="card-features">
-          <li data-i18n="p3.f1">Executor&#39;s powers</li>
-          <li data-i18n="p3.f2">Marital-right exclusion &amp; substitute heir</li>
-          <li data-i18n="p3.f3">Digital assets &amp; witness attestation</li>
-        </ul>
-        <div class="card-foot">
-          <div class="card-price">
-            <span class="amount">29<span class="unit">€</span></span>
-            <span class="vat" data-i18n="price.vat29">Incl. VAT · 23.11 € net</span>
-          </div>
-          <div class="card-actions">
-            <button class="card-btn card-add" data-add>
-              <span data-i18n="btn.add">Add</span>
-            </button>
-            <button class="card-btn card-buy" data-buy>
-              <span data-i18n="btn.buy">Buy now</span>
-              <span class="arrow">→</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- 04 -->
-      <article class="product-card" data-sku="doc-04" data-price="39">
-        <div class="card-top">
-          <span class="card-num">04 · <span data-i18n="cat.authority">Authority</span></span>
-          <span class="card-format">PDF</span>
-        </div>
-        <h3 class="card-title" data-i18n-html="p4.title">Continuing <em>power of attorney</em></h3>
-        <p class="card-lede" data-i18n="p4.lede">Edunvalvontavaltuutus: appoint someone to manage your finances, property and personal matters if you lose capacity. Confirmed by the DVV.</p>
-        <ul class="card-features">
-          <li data-i18n="p4.f1">Attorney, substitute &amp; special wishes</li>
-          <li data-i18n="p4.f2">Banking, property, tax &amp; authorities</li>
-          <li data-i18n="p4.f3">Digital assets, health data, witnesses</li>
-        </ul>
-        <div class="card-foot">
-          <div class="card-price">
-            <span class="amount">39<span class="unit">€</span></span>
-            <span class="vat" data-i18n="price.vat39">Incl. VAT · 31.08 € net</span>
-          </div>
-          <div class="card-actions">
-            <button class="card-btn card-add" data-add>
-              <span data-i18n="btn.add">Add</span>
-            </button>
-            <button class="card-btn card-buy" data-buy>
-              <span data-i18n="btn.buy">Buy now</span>
-              <span class="arrow">→</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <!-- 05 -->
-      <article class="product-card" data-sku="doc-05" data-price="15">
-        <div class="card-top">
-          <span class="card-num">05 · <span data-i18n="cat.office">Office</span></span>
-          <span class="card-format">PDF</span>
-        </div>
-        <h3 class="card-title" data-i18n-html="p5.title">Lexoria <em>letterhead</em></h3>
-        <p class="card-lede" data-i18n="p5.lede">Official Asianajotoimisto Lexoria Oy letter template with the bar-association mark, address block and footer.</p>
-        <ul class="card-features">
-          <li data-i18n="p5.f1">Header with bar mark</li>
-          <li data-i18n="p5.f2">Date, recipient &amp; subject lines</li>
-          <li data-i18n="p5.f3">Signature &amp; company footer</li>
-        </ul>
-        <div class="card-foot">
-          <div class="card-price">
-            <span class="amount">15<span class="unit">€</span></span>
-            <span class="vat" data-i18n="price.vat15">Incl. VAT · 11.95 € net</span>
-          </div>
-          <div class="card-actions">
-            <button class="card-btn card-add" data-add>
-              <span data-i18n="btn.add">Add</span>
-            </button>
-            <button class="card-btn card-buy" data-buy>
-              <span data-i18n="btn.buy">Buy now</span>
-              <span class="arrow">→</span>
-            </button>
-          </div>
-        </div>
-      </article>
-    </div>
+    <div class="product-grid" id="productGrid"></div>
 
     <div class="swipe-nav" aria-hidden="true">
       <div class="swipe-hint">
         <span data-i18n="shop.swipe">Swipe</span>
         <span class="arrow">→</span>
       </div>
-      <div class="swipe-dots" id="swipeDots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
+      <div class="swipe-dots" id="swipeDots"></div>
     </div>
+
+    <p class="shop-note" data-i18n="shop.footnote">All prices incl. VAT 25.5% · delivered as PDF by e-mail</p>
   </div>
 </section>
 
@@ -2253,8 +2489,17 @@
       <span class="arrow" id="cartCheckoutArrow">↗</span>
     </button>
     <button class="co-back" id="coBack" hidden data-i18n="co.back">← Back to cart</button>
+    <span class="cart-secure" data-i18n="cart.secure">Online bank · Visa · Mastercard · secure payment via Montonio</span>
   </div>
 </aside>
+
+<!-- PRODUCT VIEW -->
+<div class="pdp-backdrop" id="pdpBackdrop" aria-hidden="true"></div>
+<div class="pdp" id="pdp" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="pdpTitle">
+  <button class="pdp-close" id="pdpClose" aria-label="Close" data-i18n-aria="menu.close"><span aria-hidden="true">×</span></button>
+  <div class="pdp-scroll" id="pdpScroll"></div>
+  <div class="pdp-bar" id="pdpBar"></div>
+</div>
 
 <!-- LEGAL OVERLAY -->
 <div class="legal-overlay" id="legalOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="legalTitle">
@@ -2283,7 +2528,7 @@
 
 <!-- STORAGE NOTICE -->
 <div class="store-notice" id="storeNotice" role="region" aria-label="Storage notice" hidden>
-  <span data-i18n-html="notice.text">No tracking. This shop only saves your language and display choices in your browser. <a href="#cookies" data-legal="cookies">Read more</a></span>
+  <span data-i18n-html="notice.text">No tracking. This shop only saves your language, display choices and cart in your browser. <a href="#cookies" data-legal="cookies">Read more</a></span>
   <button type="button" id="storeNoticeOk" data-i18n="notice.ok">OK</button>
 </div>
 
@@ -2361,7 +2606,7 @@
       'price.vat15': 'Incl. VAT · 11.95 € net',
       'price.vat29': 'Incl. VAT · 23.11 € net',
       'price.vat39': 'Incl. VAT · 31.08 € net',
-      'btn.add': 'Add',
+      'btn.add': 'Add to cart',
       'btn.added': 'Added',
       'btn.buy': 'Buy now',
       'trust.k1': 'Drafted by', 'trust.v1': '<em>Attorneys</em> at law',
@@ -2412,8 +2657,50 @@
       'co.consent': 'I accept the <a href="#terms" data-legal="terms">terms of sale</a> and the <a href="#privacy" data-legal="privacy">privacy policy</a>. I ask for the PDF to be delivered immediately and understand that I lose my 14-day right of withdrawal once it has been sent.',
       'co.errConsent': 'Please accept the terms to continue.',
       'legal.tag': 'Terms & policies',
-      'notice.text': 'No tracking. This shop only saves your language and display choices in your browser. <a href="#cookies" data-legal="cookies">Read more</a>',
+      'notice.text': 'No tracking. This shop only saves your language, display choices and cart in your browser. <a href="#cookies" data-legal="cookies">Read more</a>',
       'notice.ok': 'OK',
+      'hero.cta': 'Browse documents',
+      'hero.link': 'How it works',
+      'hero.p1': 'PDF by e-mail in minutes',
+      'hero.p2': 'Prices incl. VAT',
+      'hero.p3': 'From 15 €',
+      'shop.all': 'All',
+      'shop.sort': 'Sort',
+      'shop.footnote': 'All prices incl. VAT 25.5% · delivered as PDF by e-mail',
+      'sort.featured': 'Featured',
+      'sort.priceAsc': 'Price, low to high',
+      'sort.priceDesc': 'Price, high to low',
+      'sort.name': 'Name, A–Z',
+      'card.quick': 'Quick view',
+      'card.page': 'page',
+      'card.pages': 'pages',
+      'card.vat': 'incl. VAT',
+      'btn.inCart': 'In cart',
+      'promo.k': 'Bespoke',
+      'promo.h': 'Need it drafted <em>for you?</em>',
+      'promo.cta': 'Book a consultation',
+      'pdp.preview': 'Preview · page 1 of {n}',
+      'pdp.p1': 'PDF by e-mail in minutes',
+      'pdp.p2': 'Drafted by attorneys',
+      'pdp.p3': 'Secure payment via Montonio',
+      'pdp.inside': 'What is inside',
+      'pdp.spec.format': 'Format',
+      'pdp.spec.formatVal': 'PDF, A4, print-ready',
+      'pdp.spec.length': 'Length',
+      'pdp.spec.lang': 'Language',
+      'pdp.spec.delivery': 'Delivery',
+      'pdp.spec.deliveryVal': 'By e-mail, within minutes',
+      'lang.fi': 'Finnish',
+      'lang.fiet': 'Finnish and Estonian, side by side',
+      'pdp.acc.delivery': 'Delivery',
+      'pdp.acc.deliveryBody': 'The PDF is sent to the e-mail address you give at checkout, normally within minutes of payment. Nothing is sent by post. <a href="#payment" data-legal="payment">Payment &amp; delivery</a>',
+      'pdp.acc.use': 'Use and licence',
+      'pdp.acc.useBody': 'Fill in, print and sign the template as many times as you need for your own matters. It is a general model, not legal advice on your situation, and it may not be resold or shared. <a href="#terms" data-legal="terms">Terms of sale</a>',
+      'pdp.acc.refund': 'Withdrawal and refunds',
+      'pdp.acc.refundBody': 'Because the PDF is delivered immediately, the 14-day right of withdrawal ends once it has been sent. If a file is faulty or does not arrive, we send it again or refund you. <a href="#refunds" data-legal="refunds">Withdrawal &amp; refunds</a>',
+      'pdp.more': 'You may also need',
+      'cart.browse': 'Browse documents',
+      'cart.secure': 'Online bank · Visa · Mastercard · secure payment via Montonio',
       'toast.added': 'Added to cart',
       'foot.lead': 'Part of',
       'foot.meta': 'Attorney at law · since 2010',
@@ -2496,7 +2783,7 @@
       'price.vat15': 'Sis. ALV · 11,95 € netto',
       'price.vat29': 'Sis. ALV · 23,11 € netto',
       'price.vat39': 'Sis. ALV · 31,08 € netto',
-      'btn.add': 'Lisää',
+      'btn.add': 'Lisää koriin',
       'btn.added': 'Lisätty',
       'btn.buy': 'Osta heti',
       'trust.k1': 'Laatija', 'trust.v1': '<em>Asianajajat</em>',
@@ -2547,8 +2834,50 @@
       'co.consent': 'Hyväksyn <a href="#terms" data-legal="terms">tilaus- ja toimitusehdot</a> ja <a href="#privacy" data-legal="privacy">tietosuojaselosteen</a>. Pyydän, että PDF toimitetaan heti, ja ymmärrän, että menetän 14 päivän peruuttamisoikeuden, kun asiakirja on lähetetty.',
       'co.errConsent': 'Hyväksy ehdot jatkaaksesi.',
       'legal.tag': 'Ehdot ja tietosuoja',
-      'notice.text': 'Ei seurantaa. Kauppa tallentaa selaimeesi vain kieli- ja näkymävalintasi. <a href="#cookies" data-legal="cookies">Lue lisää</a>',
+      'notice.text': 'Ei seurantaa. Kauppa tallentaa selaimeesi vain kieli- ja näkymävalintasi sekä ostoskorisi. <a href="#cookies" data-legal="cookies">Lue lisää</a>',
       'notice.ok': 'OK',
+      'hero.cta': 'Selaa asiakirjoja',
+      'hero.link': 'Näin se toimii',
+      'hero.p1': 'PDF sähköpostiin minuuteissa',
+      'hero.p2': 'Hinnat sis. ALV',
+      'hero.p3': 'Alkaen 15 €',
+      'shop.all': 'Kaikki',
+      'shop.sort': 'Järjestä',
+      'shop.footnote': 'Kaikki hinnat sis. ALV 25,5 % · toimitus PDF-tiedostona sähköpostiin',
+      'sort.featured': 'Suositellut',
+      'sort.priceAsc': 'Hinta, halvin ensin',
+      'sort.priceDesc': 'Hinta, kallein ensin',
+      'sort.name': 'Nimi, A–Ö',
+      'card.quick': 'Pikakatselu',
+      'card.page': 'sivu',
+      'card.pages': 'sivua',
+      'card.vat': 'sis. ALV',
+      'btn.inCart': 'Korissa',
+      'promo.k': 'Räätälöity',
+      'promo.h': 'Tarvitsetko <em>sinulle laaditun?</em>',
+      'promo.cta': 'Varaa konsultaatio',
+      'pdp.preview': 'Esikatselu · sivu 1/{n}',
+      'pdp.p1': 'PDF sähköpostiin minuuteissa',
+      'pdp.p2': 'Asianajajien laatima',
+      'pdp.p3': 'Turvallinen maksu Montonion kautta',
+      'pdp.inside': 'Sisältö',
+      'pdp.spec.format': 'Muoto',
+      'pdp.spec.formatVal': 'PDF, A4, tulostusvalmis',
+      'pdp.spec.length': 'Pituus',
+      'pdp.spec.lang': 'Kieli',
+      'pdp.spec.delivery': 'Toimitus',
+      'pdp.spec.deliveryVal': 'Sähköpostiin, muutamassa minuutissa',
+      'lang.fi': 'suomi',
+      'lang.fiet': 'suomi ja viro rinnakkain',
+      'pdp.acc.delivery': 'Toimitus',
+      'pdp.acc.deliveryBody': 'PDF lähetetään kassalla antamaasi sähköpostiosoitteeseen, yleensä muutamassa minuutissa maksusta. Postitoimitusta ei ole. <a href="#payment" data-legal="payment">Maksu ja toimitus</a>',
+      'pdp.acc.use': 'Käyttö ja käyttöoikeus',
+      'pdp.acc.useBody': 'Saat täyttää, tulostaa ja allekirjoittaa mallin niin monta kertaa kuin omissa asioissasi tarvitset. Malli on yleinen pohja, ei tilanteeseesi annettua oikeudellista neuvontaa, eikä sitä saa myydä tai jakaa edelleen. <a href="#terms" data-legal="terms">Tilaus- ja toimitusehdot</a>',
+      'pdp.acc.refund': 'Peruutus ja palautukset',
+      'pdp.acc.refundBody': 'Koska PDF toimitetaan heti, 14 päivän peruuttamisoikeus päättyy, kun asiakirja on lähetetty. Jos tiedosto on virheellinen tai ei saavu, lähetämme sen uudelleen tai palautamme maksun. <a href="#refunds" data-legal="refunds">Peruutus ja palautukset</a>',
+      'pdp.more': 'Saatat tarvita myös',
+      'cart.browse': 'Selaa asiakirjoja',
+      'cart.secure': 'Verkkopankki · Visa · Mastercard · turvallinen maksu Montonion kautta',
       'toast.added': 'Lisätty koriin',
       'foot.lead': 'Osa',
       'foot.meta': 'Asianajaja · vuodesta 2010',
@@ -2602,6 +2931,8 @@
 
     renderCart();
     renderLegal();
+    renderCatalog();
+    if (pdpSku) renderPdp();
   }
 
   langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
@@ -2666,9 +2997,11 @@
 
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
-    // Legal sits on top of the cart; closing it must not drop the checkout underneath
+    // Close only the topmost layer: legal, then cart, then product view, then menu
     if (legalOverlay.classList.contains('open')) { closeLegal(); return; }
-    closeCart(); closeMenu();
+    if (cartDrawer.classList.contains('open')) { closeCart(); return; }
+    if (pdp.classList.contains('open')) { closeProduct(); return; }
+    closeMenu();
   });
 
   function fmtEUR(n) {
@@ -2694,6 +3027,7 @@
           <span class="lead">${dict['cart.empty.lead']}</span>
           <span class="msg">${dict['cart.empty.msg']}</span>
           <span class="hint">${dict['cart.empty.hint']}</span>
+          <button type="button" class="cart-browse" data-cart-browse>${dict['cart.browse']}</button>
         </div>`;
       cartCheckout.disabled = true;
       cartTotalEl.textContent = fmtEUR(0);
@@ -2707,6 +3041,7 @@
       const title = dict[titleKey] || item.title;
       html += `
         <div class="cart-item">
+          <span class="doc-thumb"><img src="img/${item.sku}.webp" alt=""></span>
           <div>
             <div class="cart-item-title">${title}</div>
             <div class="cart-item-meta">${dict['cart.itemMeta']}</div>
@@ -2723,68 +3058,283 @@
       btn.addEventListener('click', () => {
         const i = parseInt(btn.dataset.remove, 10);
         cart.splice(i, 1);
+        cartChanged();
         renderCart();
       });
     });
   }
 
-  function addToCart(card) {
-    const sku = card.dataset.sku;
-    const price = parseFloat(card.dataset.price);
-    const title = card.querySelector('.card-title').textContent.trim();
-    if (cart.some(i => i.sku === sku)) {
-      showToast('already');
-      return;
-    }
-    cart.push({ sku, price, title });
+  // =====================================================
+  // Catalog — cards, filters and sort rendered from PRODUCTS
+  // =====================================================
+  const PRODUCTS = [
+    { sku: 'doc-01', n: 'p1', price: 29, cat: 'engagement', pages: 4, langs: 'fi' },
+    { sku: 'doc-02', n: 'p2', price: 39, cat: 'inheritance', pages: 3, langs: 'fiet' },
+    { sku: 'doc-03', n: 'p3', price: 29, cat: 'inheritance', pages: 3, langs: 'fi' },
+    { sku: 'doc-04', n: 'p4', price: 39, cat: 'authority', pages: 5, langs: 'fi' },
+    { sku: 'doc-05', n: 'p5', price: 15, cat: 'office', pages: 1, langs: 'fi' }
+  ];
+  const CATS = ['engagement', 'inheritance', 'authority', 'office'];
+  const SORTS = ['featured', 'priceAsc', 'priceDesc', 'name'];
+  const productGrid = document.getElementById('productGrid');
+  const catChips = document.getElementById('catChips');
+  const sortSel = document.getElementById('sortSel');
+  const sortVal = document.getElementById('sortVal');
+  const swipeDots = document.getElementById('swipeDots');
+  const swipeNav = document.querySelector('.swipe-nav');
+  var shopCat = 'all';
+  var shopSort = 'featured';
+
+  function prod(sku) { return PRODUCTS.find(p => p.sku === sku); }
+  function inCart(sku) { return cart.some(i => i.sku === sku); }
+  function pTitle(p) { return t(p.n + '.title'); }
+  function plain(html) { return html.replace(/<[^>]+>/g, ''); }
+  function pagesLabel(p) { return p.pages + ' ' + t(p.pages === 1 ? 'card.page' : 'card.pages'); }
+
+  function visibleProducts() {
+    const list = PRODUCTS.filter(p => shopCat === 'all' || p.cat === shopCat);
+    if (shopSort === 'priceAsc') list.sort((a, b) => a.price - b.price);
+    else if (shopSort === 'priceDesc') list.sort((a, b) => b.price - a.price);
+    else if (shopSort === 'name') list.sort((a, b) => plain(pTitle(a)).localeCompare(plain(pTitle(b)), document.documentElement.lang));
+    return list;
+  }
+
+  function cardHtml(p) {
+    return `
+      <article class="product-card" data-sku="${p.sku}">
+        <a class="card-media" href="#${p.sku}" data-open="${p.sku}" aria-label="${plain(pTitle(p))}">
+          <span class="card-tag">${t('cat.' + p.cat)}</span>
+          <img class="card-sheet" src="img/${p.sku}.webp" alt="" width="720" height="734" loading="lazy">
+          <span class="card-quick">${t('card.quick')}</span>
+        </a>
+        <div class="card-info">
+          <span class="card-meta">PDF · ${pagesLabel(p)}</span>
+          <h3 class="card-title"><a href="#${p.sku}" data-open="${p.sku}">${pTitle(p)}</a></h3>
+          <p class="card-lede">${t(p.n + '.lede')}</p>
+          <div class="card-row">
+            <span class="card-price"><span class="amount">${fmtEUR(p.price)}</span><span class="vat">${t('card.vat')}</span></span>
+            <button type="button" class="card-add" data-add="${p.sku}"></button>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function renderCatalog() {
+    catChips.innerHTML = ['all'].concat(CATS).map(c => {
+      const n = c === 'all' ? PRODUCTS.length : PRODUCTS.filter(p => p.cat === c).length;
+      return `<button type="button" class="chip${c === shopCat ? ' active' : ''}" data-cat="${c}" aria-pressed="${c === shopCat}">${t(c === 'all' ? 'shop.all' : 'cat.' + c)}<span class="n">${n}</span></button>`;
+    }).join('');
+    sortSel.innerHTML = SORTS.map(s => `<option value="${s}"${s === shopSort ? ' selected' : ''}>${t('sort.' + s)}</option>`).join('');
+    sortVal.textContent = t('sort.' + shopSort);
+
+    const list = visibleProducts();
+    productGrid.innerHTML = list.map(cardHtml).join('') + `
+      <a class="promo-card" href="https://lexoriaweb.vercel.app/#broneeri">
+        <span class="k">${t('promo.k')}</span>
+        <span class="h">${t('promo.h')}</span>
+        <span class="cta"><span>${t('promo.cta')}</span><span aria-hidden="true">↗</span></span>
+      </a>`;
+    swipeDots.innerHTML = Array.from(productGrid.children, () => '<span class="dot"></span>').join('');
+    syncCartButtons();
+    updateDots();
+  }
+
+  // Every add button (cards, product view) mirrors whether its document is in the cart
+  function syncCartButtons() {
+    document.querySelectorAll('[data-add]').forEach(btn => {
+      const on = inCart(btn.dataset.add);
+      btn.classList.toggle('in-cart', on);
+      btn.innerHTML = `<span class="ico" aria-hidden="true">${on ? '✓' : '+'}</span><span>${t(on ? 'btn.inCart' : 'btn.add')}</span>`;
+    });
+  }
+
+  function cartChanged() {
+    try { localStorage.setItem('lex_cart', JSON.stringify(cart.map(i => i.sku))); } catch(e){}
+    syncCartButtons();
+  }
+  try {
+    JSON.parse(localStorage.getItem('lex_cart') || '[]').forEach(sku => {
+      const p = prod(sku);
+      if (p && !inCart(sku)) cart.push({ sku, price: p.price });
+    });
+  } catch(e){}
+
+  function addToCart(sku, quiet) {
+    const p = prod(sku);
+    if (!p || inCart(sku)) return;
+    cart.push({ sku, price: p.price });
+    cartChanged();
     renderCart();
+    if (quiet) return;
 
     // Pulse cart badge
     cartBtn.classList.remove('pulse');
     void cartBtn.offsetWidth;
     cartBtn.classList.add('pulse');
+    showToast();
+  }
 
-    showToast('added');
+  function buyNow(sku) {
+    addToCart(sku, true);
+    openCart();
+    coStep = 'checkout'; renderCheckout(); renderFoot();
   }
 
   let toastTimer;
-  function showToast(kind) {
-    const lang = document.documentElement.dataset.lang || 'en';
-    const map = {
-      added: I18N[lang]['toast.added'],
-      already: lang === 'fi' ? 'Jo korissa' : 'Already in cart'
-    };
-    toastMsg.textContent = map[kind] || map.added;
+  function showToast() {
+    toastMsg.textContent = t('toast.added');
     toast.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
   }
 
-  document.querySelectorAll('[data-add]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.product-card');
-      addToCart(card);
-      btn.classList.add('added');
-      const label = btn.querySelector('[data-i18n]');
-      const orig = label.getAttribute('data-i18n');
-      label.setAttribute('data-i18n', 'btn.added');
-      const lang = document.documentElement.dataset.lang || 'en';
-      label.textContent = I18N[lang]['btn.added'];
-      setTimeout(() => {
-        btn.classList.remove('added');
-        label.setAttribute('data-i18n', orig);
-        label.textContent = I18N[lang]['btn.add'];
-      }, 1600);
+  // Swipe dots track the scroll position of the mobile strip
+  var gridScrolled = false;
+  function updateDots() {
+    const gridLeft = productGrid.getBoundingClientRect().left;
+    let activeIdx = 0;
+    let closest = Infinity;
+    Array.from(productGrid.children).forEach((card, i) => {
+      const dist = Math.abs(card.getBoundingClientRect().left - gridLeft);
+      if (dist < closest) { closest = dist; activeIdx = i; }
     });
-  });
+    Array.from(swipeDots.children).forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+    if (!gridScrolled && productGrid.scrollLeft > 20) {
+      gridScrolled = true;
+      swipeNav.classList.add('scrolled');
+    }
+  }
+  productGrid.addEventListener('scroll', updateDots, { passive: true });
+  window.addEventListener('resize', updateDots, { passive: true });
 
-  document.querySelectorAll('[data-buy]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.product-card');
-      const sku = card.dataset.sku;
-      if (!cart.some(i => i.sku === sku)) addToCart(card);
-      openCart();
+  sortSel.addEventListener('change', () => { shopSort = sortSel.value; renderCatalog(); productGrid.scrollLeft = 0; });
+
+  // Catalog view toggle (mobile): swipe strip vs. two-column grid
+  const viewBtns = document.querySelectorAll('#viewToggle .view-btn');
+  function setView(v) {
+    productGrid.classList.toggle('view-grid', v === 'grid');
+    viewBtns.forEach(b => {
+      const on = b.dataset.view === v;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
+  }
+  try { setView(localStorage.getItem('lex_view') || 'swipe'); } catch(e){ setView('swipe'); }
+  viewBtns.forEach(b => b.addEventListener('click', () => {
+    setView(b.dataset.view);
+    try { localStorage.setItem('lex_view', b.dataset.view); } catch(e){}
+  }));
+
+  // =====================================================
+  // Product view — deep-linkable by hash (#doc-01)
+  // =====================================================
+  const pdp = document.getElementById('pdp');
+  const pdpBackdrop = document.getElementById('pdpBackdrop');
+  const pdpScroll = document.getElementById('pdpScroll');
+  const pdpBar = document.getElementById('pdpBar');
+  const pdpClose = document.getElementById('pdpClose');
+  var pdpSku = null;
+  var pdpReturn = null;
+
+  function renderPdp() {
+    const p = prod(pdpSku);
+    if (!p) return;
+    const actions = `
+      <button type="button" class="pdp-btn pdp-add" data-add="${p.sku}"></button>
+      <button type="button" class="pdp-btn pdp-buy" data-buy="${p.sku}"><span>${t('btn.buy')}</span><span aria-hidden="true">→</span></button>`;
+    // Same category first, then the rest
+    const others = PRODUCTS.filter(o => o !== p).sort((a, b) => (b.cat === p.cat) - (a.cat === p.cat)).slice(0, 3);
+    const acc = k => `<details class="pdp-acc"><summary>${t('pdp.acc.' + k)}</summary><p>${t('pdp.acc.' + k + 'Body')}</p></details>`;
+    pdpScroll.innerHTML = `
+      <div class="pdp-grid">
+        <div class="pdp-media"><div class="pdp-media-in">
+          <img class="pdp-sheet" src="img/${p.sku}.webp" alt="${plain(pTitle(p))}" width="720" height="734">
+          <span class="pdp-cap">${t('pdp.preview').replace('{n}', p.pages)}</span>
+        </div></div>
+        <div class="pdp-info">
+          <span class="pdp-cat">${p.sku.slice(-2)} · ${t('cat.' + p.cat)}</span>
+          <h2 class="pdp-title" id="pdpTitle">${pTitle(p)}</h2>
+          <div class="pdp-price"><span class="amount">${fmtEUR(p.price)}</span><span class="vat">${t('price.vat' + p.price)}</span></div>
+          <p class="pdp-lede">${t(p.n + '.lede')}</p>
+          <div class="pdp-actions">${actions}</div>
+          <ul class="pdp-points"><li>${t('pdp.p1')}</li><li>${t('pdp.p2')}</li><li>${t('pdp.p3')}</li></ul>
+          <h3 class="pdp-h">${t('pdp.inside')}</h3>
+          <ul class="pdp-features"><li>${t(p.n + '.f1')}</li><li>${t(p.n + '.f2')}</li><li>${t(p.n + '.f3')}</li></ul>
+          <dl class="pdp-specs">
+            <dt>${t('pdp.spec.format')}</dt><dd>${t('pdp.spec.formatVal')}</dd>
+            <dt>${t('pdp.spec.length')}</dt><dd>${pagesLabel(p)}</dd>
+            <dt>${t('pdp.spec.lang')}</dt><dd>${t('lang.' + p.langs)}</dd>
+            <dt>${t('pdp.spec.delivery')}</dt><dd>${t('pdp.spec.deliveryVal')}</dd>
+          </dl>
+          ${acc('delivery')}${acc('use')}${acc('refund')}
+          <div class="pdp-more">
+            <h3 class="pdp-h">${t('pdp.more')}</h3>
+            ${others.map(o => `
+              <a class="more-item" href="#${o.sku}" data-open="${o.sku}">
+                <span class="doc-thumb"><img src="img/${o.sku}.webp" alt="" loading="lazy"></span>
+                <span class="t">${pTitle(o)}</span>
+                <span class="p">${fmtEUR(o.price)}</span>
+              </a>`).join('')}
+          </div>
+        </div>
+      </div>`;
+    pdpBar.innerHTML = `<span class="amount">${fmtEUR(p.price)}</span>${actions}`;
+    syncCartButtons();
+  }
+
+  function setHash(hash) {
+    try { history.replaceState(null, '', hash || location.pathname + location.search); } catch(e){}
+  }
+  function openProduct(sku) {
+    if (!prod(sku)) return;
+    const wasOpen = pdp.classList.contains('open');
+    if (!wasOpen) pdpReturn = document.activeElement;
+    pdpSku = sku;
+    renderPdp();
+    pdpScroll.scrollTop = 0;
+    pdp.classList.add('open');
+    pdpBackdrop.classList.add('open');
+    pdp.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('pdp-open');
+    setHash('#' + sku);
+    pdpClose.focus();
+  }
+  function closeProduct() {
+    if (!pdp.classList.contains('open')) return;
+    pdp.classList.remove('open');
+    pdpBackdrop.classList.remove('open');
+    pdp.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('pdp-open');
+    pdpSku = null;
+    setHash('');
+    if (pdpReturn && pdpReturn.isConnected) pdpReturn.focus();
+  }
+  pdpClose.addEventListener('click', closeProduct);
+  pdpBackdrop.addEventListener('click', closeProduct);
+
+  document.addEventListener('click', e => {
+    const add = e.target.closest('[data-add]');
+    if (add) {
+      if (inCart(add.dataset.add)) openCart(); else addToCart(add.dataset.add);
+      return;
+    }
+    const buy = e.target.closest('[data-buy]');
+    if (buy) { buyNow(buy.dataset.buy); return; }
+    const open = e.target.closest('[data-open]');
+    if (open) { e.preventDefault(); openProduct(open.dataset.open); return; }
+    const chip = e.target.closest('[data-cat]');
+    if (chip) {
+      shopCat = chip.dataset.cat;
+      renderCatalog();
+      productGrid.scrollLeft = 0;
+      catChips.querySelector('.active').focus();
+      return;
+    }
+    if (e.target.closest('[data-cart-browse]')) {
+      closeCart();
+      closeProduct();
+      document.getElementById('shop').scrollIntoView();
+    }
   });
 
   // =====================================================
@@ -2898,6 +3448,7 @@
       if (!r.ok || !data.ok) throw new Error(data.error || 'send_failed');
       cart.length = 0;
       coData.consent = false;
+      cartChanged();
       cartCount.textContent = '0';
       coStep = 'done';
       renderDone(email, items);
@@ -3007,9 +3558,9 @@
             <dt>lex_lang</dt><dd>Language you selected</dd>
             <dt>lex_view</dt><dd>Catalog view on mobile (swipe or grid)</dd>
             <dt>lex_paper</dt><dd>Background colour you selected</dd>
+            <dt>lex_cart</dt><dd>Documents in your cart, until you order or remove them</dd>
             <dt>lex_notice</dt><dd>That you have closed the storage notice</dd>
           </dl>
-          <p>The cart is kept only in the page's memory and is emptied when you close or reload the page.</p>
           <h3>Third parties</h3>
           <p>When you pay, you are taken to the payment service of Montonio and your bank or card issuer, which may use cookies that are necessary for a secure payment. Typefaces are loaded from Google Fonts, which does not set cookies but receives your IP address.</p>
           <h3>Clearing</h3>
@@ -3156,9 +3707,9 @@
             <dt>lex_lang</dt><dd>Valitsemasi kieli</dd>
             <dt>lex_view</dt><dd>Valikoiman näkymä mobiilissa (pyyhkäisy tai ruudukko)</dd>
             <dt>lex_paper</dt><dd>Valitsemasi taustaväri</dd>
+            <dt>lex_cart</dt><dd>Ostoskorissasi olevat asiakirjat, kunnes tilaat tai poistat ne</dd>
             <dt>lex_notice</dt><dd>Tieto siitä, että olet sulkenut tallennusilmoituksen</dd>
           </dl>
-          <p>Ostoskori on vain sivun muistissa ja tyhjenee, kun suljet sivun tai lataat sen uudelleen.</p>
           <h3>Kolmannet osapuolet</h3>
           <p>Maksaessasi siirryt Montonion sekä pankkisi tai kortinmyöntäjäsi maksupalveluun, joka voi käyttää turvallisen maksamisen kannalta välttämättömiä evästeitä. Kirjasimet ladataan Google Fonts -palvelusta, joka ei aseta evästeitä mutta saa IP-osoitteesi.</p>
           <h3>Tyhjentäminen</h3>
@@ -3241,9 +3792,6 @@
     if (!legalKey) return;
     legalBody.innerHTML = `<article class="legal-doc"><h2 id="legalTitle">${L[legalKey].title}</h2><p class="legal-updated">${L.updated}</p>${L[legalKey].body}</article>`;
   }
-  function setLegalHash(hash) {
-    try { history.replaceState(null, '', hash || location.pathname + location.search); } catch(e){}
-  }
   function openLegal(key) {
     if (!LEGAL_KEYS.includes(key)) return;
     const wasOpen = legalOverlay.classList.contains('open');
@@ -3254,7 +3802,7 @@
     legalOverlay.classList.add('open');
     legalOverlay.setAttribute('aria-hidden', 'false');
     document.body.classList.add('legal-open');
-    setLegalHash('#' + key);
+    setHash('#' + key);
     const active = legalTabs.querySelector('.active');
     if (active) active.scrollIntoView({ block: 'nearest', inline: 'center' });
     if (wasOpen) { if (active) active.focus(); } else legalClose.focus();
@@ -3264,7 +3812,7 @@
     legalOverlay.classList.remove('open');
     legalOverlay.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('legal-open');
-    setLegalHash('');
+    setHash(pdpSku ? '#' + pdpSku : '');
     if (legalReturn && legalReturn.isConnected) legalReturn.focus();
   }
   legalClose.addEventListener('click', closeLegal);
@@ -3274,7 +3822,11 @@
     e.preventDefault();
     openLegal(el.dataset.legal);
   });
-  window.addEventListener('hashchange', () => openLegal(location.hash.slice(1)));
+  function routeHash() {
+    const key = location.hash.slice(1);
+    if (LEGAL_KEYS.includes(key)) openLegal(key); else openProduct(key);
+  }
+  window.addEventListener('hashchange', routeHash);
 
   // One-time storage notice
   const storeNotice = document.getElementById('storeNotice');
@@ -3289,54 +3841,8 @@
   setLang(bootLang);
 
   renderCart();
-  openLegal(location.hash.slice(1));
+  routeHash();
 
-  // =====================================================
-  // Swipe dots — track scroll position on mobile grid
-  // =====================================================
-  const productGrid = document.getElementById('productGrid');
-  const swipeNav = document.querySelector('.swipe-nav');
-  const swipeDots = document.querySelectorAll('#swipeDots .dot');
-  if (productGrid && swipeDots.length) {
-    let hasScrolled = false;
-    const updateDots = () => {
-      const cards = productGrid.querySelectorAll('.product-card');
-      const gridLeft = productGrid.getBoundingClientRect().left;
-      let activeIdx = 0;
-      let closest = Infinity;
-      cards.forEach((card, i) => {
-        const dist = Math.abs(card.getBoundingClientRect().left - gridLeft);
-        if (dist < closest) { closest = dist; activeIdx = i; }
-      });
-      swipeDots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
-      if (!hasScrolled && productGrid.scrollLeft > 20) {
-        hasScrolled = true;
-        swipeNav && swipeNav.classList.add('scrolled');
-      }
-    };
-    productGrid.addEventListener('scroll', updateDots, { passive: true });
-    window.addEventListener('resize', updateDots, { passive: true });
-  }
-
-  // Catalog view toggle (mobile): swipe strip vs. two-column grid
-  const viewBtns = document.querySelectorAll('#viewToggle .view-btn');
-  if (productGrid && viewBtns.length) {
-    const setView = (v) => {
-      productGrid.classList.toggle('view-grid', v === 'grid');
-      viewBtns.forEach(b => {
-        const on = b.dataset.view === v;
-        b.classList.toggle('active', on);
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-    };
-    let saved = 'swipe';
-    try { saved = localStorage.getItem('lex_view') || 'swipe'; } catch(e){}
-    setView(saved);
-    viewBtns.forEach(b => b.addEventListener('click', () => {
-      setView(b.dataset.view);
-      try { localStorage.setItem('lex_view', b.dataset.view); } catch(e){}
-    }));
-  }
 </script>
 
 <script>
