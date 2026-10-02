@@ -559,7 +559,7 @@
     position: absolute;
     inset: 0;
     background: url("img/hero-bg.webp") center 45% / cover no-repeat;
-    opacity: 0.42;
+    opacity: 0.5;
   }
   .hero::after {
     content: "";
@@ -567,18 +567,12 @@
     inset: 0;
     background:
       linear-gradient(180deg, var(--ink) 0%, rgba(15, 20, 25, 0) 24%),
-      linear-gradient(90deg, var(--ink) 0%, rgba(15, 20, 25, 0.78) 36%, rgba(15, 20, 25, 0.3) 100%),
+      linear-gradient(90deg, var(--ink) 0%, rgba(15, 20, 25, 0.8) 34%, rgba(15, 20, 25, 0.12) 100%),
       linear-gradient(0deg, rgba(15, 20, 25, 0.7) 0%, rgba(15, 20, 25, 0) 45%);
   }
   .hero .wrap { position: relative; z-index: 1; }
   .hero .section-h { color: var(--paper); }
   .hero .section-h em { color: var(--maroon-soft); }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 7fr 5fr;
-    gap: var(--s-5);
-    align-items: stretch;
-  }
   .hero-copy { display: flex; flex-direction: column; gap: var(--s-3); padding-bottom: var(--s-7); }
   .hero-lede {
     font-family: 'Newsreader', serif;
@@ -639,38 +633,13 @@
   }
   .hero-points li::before { content: "✓"; margin-right: 8px; color: var(--maroon-soft); }
 
-  /* Fanned document previews that bleed off the bottom edge of the hero */
-  .hero-stack { position: relative; min-height: 420px; }
-  .hero-sheet {
-    position: absolute;
-    width: 74%;
-    height: auto;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 40px 80px -20px rgba(0, 0, 0, 0.65);
-    animation: sheet-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  .hero-sheet:nth-child(1) { left: 0; top: 24%; rotate: -8deg; filter: brightness(0.8); animation-delay: 0.05s; }
-  .hero-sheet:nth-child(2) { left: 13%; top: 12%; rotate: -1.5deg; filter: brightness(0.9); animation-delay: 0.15s; }
-  .hero-sheet:nth-child(3) { left: 26%; top: 20%; rotate: 6deg; animation-delay: 0.25s; }
-  @keyframes sheet-in {
-    from { opacity: 0; translate: 0 60px; }
-    to { opacity: 1; translate: 0 0; }
-  }
-  @media (prefers-reduced-motion: reduce) { .hero-sheet { animation: none; } }
-
   @media (max-width: 900px) {
     .hero { padding: 80px 0 0; }
     .hero::after {
       background: linear-gradient(180deg, var(--ink) 0%, rgba(15, 20, 25, 0.8) 22%, rgba(15, 20, 25, 0.68) 60%, rgba(15, 20, 25, 0.5) 100%);
     }
-    .hero-grid { grid-template-columns: 1fr; gap: 0; }
-    .hero-copy { padding-bottom: var(--s-5); }
+    .hero-copy { padding-bottom: var(--s-6); }
     .hero-lede { font-size: 17px; }
-    .hero-stack { min-height: 0; height: 220px; }
-    .hero-sheet { width: 54%; }
-    .hero-sheet:nth-child(1) { left: 2%; top: 16%; }
-    .hero-sheet:nth-child(2) { left: 23%; top: 4%; }
-    .hero-sheet:nth-child(3) { left: 44%; top: 12%; }
   }
   @media (max-width: 640px) {
     .hero-cta { width: 100%; }
@@ -2270,28 +2239,21 @@
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <h1 class="section-h" data-i18n-html="hero.h1">Ready-made,<br><em>legally sound.</em></h1>
-        <p class="hero-lede" data-i18n-html="hero.lede">Documents drafted by attorneys. Pay, receive the <em>PDF by e-mail</em>, fill in and sign the same day.</p>
-        <div class="hero-actions">
-          <a class="hero-cta" href="#shop">
-            <span data-i18n="hero.cta">Browse documents</span>
-            <span class="arrow" aria-hidden="true">↓</span>
-          </a>
-          <a class="hero-link" href="#how" data-i18n="hero.link">How it works</a>
-        </div>
-        <ul class="hero-points">
-          <li data-i18n="hero.p1">PDF by e-mail in minutes</li>
-          <li data-i18n="hero.p2">Prices incl. VAT</li>
-          <li data-i18n="hero.p3">From 15 €</li>
-        </ul>
+    <div class="hero-copy">
+      <h1 class="section-h" data-i18n-html="hero.h1">Ready-made,<br><em>legally sound.</em></h1>
+      <p class="hero-lede" data-i18n-html="hero.lede">Documents drafted by attorneys. Pay, receive the <em>PDF by e-mail</em>, fill in and sign the same day.</p>
+      <div class="hero-actions">
+        <a class="hero-cta" href="#shop">
+          <span data-i18n="hero.cta">Browse documents</span>
+          <span class="arrow" aria-hidden="true">↓</span>
+        </a>
+        <a class="hero-link" href="#how" data-i18n="hero.link">How it works</a>
       </div>
-      <div class="hero-stack" aria-hidden="true">
-        <img class="hero-sheet" src="img/doc-04.webp" alt="" width="720" height="734">
-        <img class="hero-sheet" src="img/doc-01.webp" alt="" width="720" height="734">
-        <img class="hero-sheet" src="img/doc-02.webp" alt="" width="720" height="734">
-      </div>
+      <ul class="hero-points">
+        <li data-i18n="hero.p1">PDF by e-mail in minutes</li>
+        <li data-i18n="hero.p2">Prices incl. VAT</li>
+        <li data-i18n="hero.p3">From 15 €</li>
+      </ul>
     </div>
   </div>
 </section>
