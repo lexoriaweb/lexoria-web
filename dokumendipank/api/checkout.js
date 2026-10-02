@@ -14,6 +14,7 @@ const CATALOG = {
 const PDF_DIR = path.join(__dirname, '_pdfs');
 const FROM = process.env.MAIL_FROM || 'Lexoria Document Bank <onboarding@resend.dev>';
 const REPLY_TO = process.env.MAIL_REPLY_TO || 'info@lexoria.fi';
+const TERMS_URL = (process.env.SHOP_URL || 'https://lexoriashop.vercel.app') + '/#terms';
 
 const COPY = {
   fi: {
@@ -24,6 +25,8 @@ const COPY = {
     total: 'Yhteensä',
     vat: 'sis. ALV 25,5 %',
     test: 'Testitilaus · maksua ei veloitettu.',
+    consent: 'Hyväksyit tilaus- ja toimitusehdot ja pyysit välitöntä toimitusta, joten 14 päivän peruuttamisoikeus päättyi, kun tiedostot lähetettiin.',
+    terms: 'Tilaus- ja toimitusehdot',
     help: 'Tarvitsetko räätälöidyn asiakirjan? Vastaa tähän viestiin tai varaa konsultaatio osoitteessa lexoria.fi.',
     sign: 'Asianajotoimisto Lexoria Oy · Helsinki – Tallinna',
   },
@@ -35,6 +38,8 @@ const COPY = {
     total: 'Total',
     vat: 'incl. VAT 25.5%',
     test: 'Test order · no payment was charged.',
+    consent: 'You accepted the terms of sale and asked for immediate delivery, so the 14-day right of withdrawal ended when these files were sent.',
+    terms: 'Terms of sale',
     help: 'Need a bespoke document? Reply to this e-mail or book a consultation at lexoria.fi.',
     sign: 'Asianajotoimisto Lexoria Oy · Helsinki – Tallinn',
   },
@@ -69,6 +74,7 @@ function buildHtml(lang, name, items, total, orderNo) {
         </table></td></tr>
         <tr><td style="padding:28px 0 0;font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.test}</td></tr>
         <tr><td style="padding:28px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.5;color:#0F1419;">${c.help}</td></tr>
+        <tr><td style="padding:20px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:13px;line-height:1.5;color:#6B6B6B;">${c.consent} <a href="${TERMS_URL}" style="color:#5B21B6;">${c.terms}</a></td></tr>
         <tr><td style="padding:36px 0 0;font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#6B6B6B;border-top:1px solid #DDD5C5;margin-top:20px;">${c.sign}</td></tr>
       </table>
     </td></tr>
@@ -94,6 +100,11 @@ module.exports = async (req, res) => {
 
   if (!name || !emailOk || items.length === 0) {
     res.status(400).json({ ok: false, error: 'invalid_fields' });
+    return;
+  }
+  // The e-mail confirms the buyer's waiver of the withdrawal right, so it must really have been given
+  if (body.consent !== true) {
+    res.status(400).json({ ok: false, error: 'consent_required' });
     return;
   }
 
@@ -124,7 +135,7 @@ module.exports = async (req, res) => {
     reply_to: REPLY_TO,
     subject: c.subject(orderNo),
     html: buildHtml(lang, name, items, total, orderNo),
-    text: `${c.hi(name)}\n\n${c.lead}\n\n${c.items} #${orderNo}:\n${items.map((it) => `- ${it[lang]} · ${it.price} €`).join('\n')}\n${c.total}: ${total} € (${c.vat})\n\n${c.test}\n\n${c.help}\n\n${c.sign}`,
+    text: `${c.hi(name)}\n\n${c.lead}\n\n${c.items} #${orderNo}:\n${items.map((it) => `- ${it[lang]} · ${it.price} €`).join('\n')}\n${c.total}: ${total} € (${c.vat})\n\n${c.test}\n\n${c.help}\n\n${c.consent}\n${c.terms}: ${TERMS_URL}\n\n${c.sign}`,
     attachments,
     tags: [{ name: 'source', value: 'document-bank' }, { name: 'mode', value: 'test' }],
   };

@@ -61,7 +61,7 @@
     touch-action: pan-y;
     max-width: 100vw;
   }
-  body.cart-open, body.menu-open { overflow: hidden; }
+  body.cart-open, body.menu-open, body.legal-open { overflow: hidden; }
   ::selection { background: var(--maroon); color: var(--paper); }
 
   .wrap {
@@ -1445,6 +1445,255 @@
     .colophon-langs button { padding: 4px 0; }
   }
 
+  /* Footer: company, legal links, payment marks */
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1.4fr 1.1fr 1fr;
+    gap: var(--s-5);
+    padding-bottom: var(--s-5);
+    border-bottom: 1px solid rgba(236, 231, 221, 0.12);
+  }
+  .foot-grid .footer-mark { padding-bottom: 0; }
+  .foot-h {
+    display: block;
+    margin-bottom: var(--s-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon-soft);
+  }
+  .foot-addr {
+    font-style: normal;
+    font-family: 'Newsreader', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(236, 231, 221, 0.75);
+  }
+  .foot-addr .name { color: var(--paper); }
+  .foot-addr a, .foot-links a { color: inherit; text-decoration: none; transition: color 0.3s; }
+  .foot-addr a:hover, .foot-links a:hover { color: var(--maroon-soft); }
+  .foot-links { list-style: none; display: flex; flex-direction: column; }
+  .foot-links a {
+    display: inline-block;
+    padding: 4px 0;
+    font-family: 'Newsreader', serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(236, 231, 221, 0.75);
+  }
+  .pay-marks { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+  .pay-marks li {
+    padding: 6px 10px;
+    border: 1px solid rgba(236, 231, 221, 0.3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper);
+    white-space: nowrap;
+  }
+  .pay-note {
+    display: block;
+    margin-top: var(--s-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.7;
+  }
+  @media (max-width: 1024px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: var(--s-5) var(--s-4); }
+  }
+  @media (max-width: 640px) {
+    .foot-grid { grid-template-columns: 1fr; gap: var(--s-4); padding-bottom: var(--s-4); }
+    .foot-links a { display: block; padding: 9px 0; }
+  }
+
+  /* ============================================================
+     LEGAL OVERLAY (terms, privacy, cookies, refunds, payment, contact)
+     ============================================================ */
+  .legal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 160;
+    background: var(--paper);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.35s;
+  }
+  .legal-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+  .legal-overlay .menu-top { flex: 0 0 auto; }
+  .legal-actions { display: inline-flex; align-items: center; gap: var(--s-4); }
+  .legal-actions .menu-lang { font-size: 11px; }
+  .legal-tabs-wrap {
+    flex: 0 0 auto;
+    border-top: 1px solid rgba(15, 20, 25, 0.12);
+    border-bottom: 1px solid rgba(15, 20, 25, 0.12);
+  }
+  .legal-tabs {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--edge-x);
+    display: flex;
+    gap: var(--s-4);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .legal-tabs::-webkit-scrollbar { display: none; }
+  /* Flex overflow drops the trailing padding; this keeps the last tab off the edge */
+  .legal-tabs::after { content: ""; flex: 0 0 1px; }
+  .legal-tab {
+    flex: 0 0 auto;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 16px 0 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .legal-tab:hover { color: var(--ink); }
+  .legal-tab.active { color: var(--ink); border-bottom-color: var(--maroon); }
+  .legal-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .legal-doc {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--s-6) var(--edge-x) var(--s-8);
+    overflow-wrap: anywhere;
+  }
+  .legal-doc > * { max-width: 68ch; }
+  .legal-doc h2 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(34px, 4vw, 56px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--s-2);
+  }
+  .legal-doc h2 em { font-style: italic; color: var(--maroon); }
+  .legal-doc .legal-updated {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pebble);
+  }
+  .legal-doc h3 {
+    margin: var(--s-5) 0 var(--s-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    color: var(--maroon);
+  }
+  .legal-doc p, .legal-doc li, .legal-doc dd {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .legal-doc p + p, .legal-doc ul + p { margin-top: 12px; }
+  .legal-doc ul { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .legal-doc li { padding-left: var(--s-3); position: relative; }
+  .legal-doc li::before { content: "·"; position: absolute; left: 6px; color: var(--maroon); }
+  .legal-doc a { color: var(--maroon); text-underline-offset: 3px; }
+  .legal-doc a:hover { color: var(--ink); }
+  .legal-facts { display: grid; grid-template-columns: 170px 1fr; gap: 8px var(--s-3); align-items: baseline; }
+  .legal-facts dt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pebble);
+  }
+  @media (max-width: 640px) {
+    /* The tabs already name the section; the tag would push the close button off-screen */
+    .legal-overlay .menu-top { align-items: center; }
+    .legal-overlay .menu-brand .brand-tag { display: none; }
+    .legal-actions { gap: var(--s-3); }
+    .legal-actions .menu-close { padding-top: 0; }
+    .legal-tabs { gap: var(--s-3); }
+    .legal-doc { padding: var(--s-5) var(--edge-x) var(--s-7); }
+    .legal-doc h3 { margin-top: var(--s-4); }
+    .legal-facts { grid-template-columns: 1fr; gap: 2px; }
+    .legal-facts dd { margin-bottom: 10px; }
+  }
+
+  /* Checkout consent */
+  .co-consent {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 12px;
+    align-items: start;
+    margin-bottom: var(--s-3);
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .co-consent input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--maroon); cursor: pointer; }
+  .co-consent a { color: var(--maroon); text-underline-offset: 2px; }
+  .co-consent.err { color: #B3261E; }
+  .co-consent.err input { outline: 2px solid #B3261E; outline-offset: 2px; }
+
+  /* One-time storage notice (essential storage only, so no consent banner) */
+  .store-notice {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 85;
+    width: min(380px, calc(100vw - 40px));
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 14px 16px;
+    background: var(--ink);
+    color: rgba(236, 231, 221, 0.8);
+    border: 1px solid rgba(236, 231, 221, 0.18);
+    font-family: 'Newsreader', serif;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .store-notice a { color: var(--maroon-soft); text-underline-offset: 2px; white-space: nowrap; }
+  .store-notice button {
+    flex: 0 0 auto;
+    background: var(--paper);
+    color: var(--ink);
+    border: 0;
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .store-notice button:hover { background: var(--maroon-soft); }
+  @media (max-width: 768px) {
+    /* Sits above the paper toggle */
+    .store-notice { left: 16px; bottom: 72px; width: calc(100vw - 32px); }
+  }
+
   /* === TOAST === */
   .toast {
     position: fixed;
@@ -1919,23 +2168,53 @@
 <!-- FOOTER -->
 <footer class="site-foot">
   <div class="footer-inner">
-    <a class="footer-mark" href="https://lexoriaweb.vercel.app" aria-label="Lexoria">
-      <img src="lexoria-logo-white.png" alt="Lexoria">
-      <div class="footer-mark-text">
-        <span class="part-of">
-          <span class="lead" data-i18n="foot.lead">Part of</span>
-          <span class="name">Lexoria</span>
-        </span>
-        <span data-i18n="foot.meta">Attorney at law · since 2010</span>
+    <div class="foot-grid">
+      <a class="footer-mark" href="https://lexoriaweb.vercel.app" aria-label="Lexoria">
+        <img src="lexoria-logo-white.png" alt="Lexoria">
+        <div class="footer-mark-text">
+          <span class="part-of">
+            <span class="lead" data-i18n="foot.lead">Part of</span>
+            <span class="name">Lexoria</span>
+          </span>
+          <span data-i18n="foot.meta">Attorney at law · since 2010</span>
+        </div>
+      </a>
+      <div>
+        <span class="foot-h" data-i18n="foot.h.company">Seller</span>
+        <address class="foot-addr">
+          <span class="name">Asianajotoimisto Lexoria Oy</span><br>
+          <span data-i18n="foot.bid">Business ID</span> 3561005-2<br>
+          <span data-i18n="foot.vatno">VAT</span> FI35610052<br>
+          Vekarakatu 14, 13500 Hämeenlinna<br>
+          <a href="mailto:info@lexoria.fi">info@lexoria.fi</a><br>
+          <a href="tel:+358456560060">+358 45 656 0060</a>
+        </address>
       </div>
-    </a>
+      <nav aria-label="Legal">
+        <span class="foot-h" data-i18n="foot.h.legal">Terms &amp; policies</span>
+        <ul class="foot-links">
+          <li><a href="#terms" data-legal="terms" data-i18n="foot.terms">Terms of sale</a></li>
+          <li><a href="#privacy" data-legal="privacy" data-i18n="foot.privacy">Privacy policy</a></li>
+          <li><a href="#cookies" data-legal="cookies" data-i18n="foot.cookies">Cookies</a></li>
+          <li><a href="#refunds" data-legal="refunds" data-i18n="foot.refunds">Withdrawal &amp; refunds</a></li>
+          <li><a href="#payment" data-legal="payment" data-i18n="foot.payment">Payment &amp; delivery</a></li>
+          <li><a href="#contact" data-legal="contact" data-i18n="foot.contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span class="foot-h" data-i18n="foot.h.pay">Payment methods</span>
+        <ul class="pay-marks">
+          <li data-i18n="foot.bank">Online bank</li>
+          <li>Visa</li>
+          <li>Mastercard</li>
+        </ul>
+        <span class="pay-note" data-i18n="foot.paynote">Secure payment via Montonio</span>
+      </div>
+    </div>
     <div class="colophon">
-      <span data-i18n="foot.reg">© 2026 · Lexoria · Reg 0123456-7</span>
+      <span data-i18n="foot.reg">© 2026 · Asianajotoimisto Lexoria Oy</span>
       <div class="colophon-meta">
         <a href="https://lexoriaweb.vercel.app" data-i18n="foot.main">Lexoria.fi</a>
-        <a href="#" data-i18n="foot.terms">Terms</a>
-        <a href="#" data-i18n="foot.privacy">Privacy</a>
-        <a href="#" data-i18n="foot.refunds">Refunds</a>
         <span class="colophon-langs" role="group" aria-label="Language">
           <button type="button" data-lang="fi">FI</button>
           <span class="sep" aria-hidden="true">·</span>
@@ -1976,6 +2255,37 @@
     <button class="co-back" id="coBack" hidden data-i18n="co.back">← Back to cart</button>
   </div>
 </aside>
+
+<!-- LEGAL OVERLAY -->
+<div class="legal-overlay" id="legalOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="legalTitle">
+  <div class="menu-top">
+    <span class="menu-brand">
+      <img src="lexoria-logo-dark.png" alt="Lexoria">
+      <span class="brand-tag" data-i18n="legal.tag">Terms &amp; policies</span>
+    </span>
+    <div class="legal-actions">
+      <div class="menu-lang" role="group" aria-label="Language">
+        <button type="button" data-lang="fi">FI</button>
+        <span class="sep" aria-hidden="true">·</span>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button class="menu-close" id="legalClose" aria-label="Close">
+        <span data-i18n="menu.close">Close</span>
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+  </div>
+  <div class="legal-tabs-wrap">
+    <div class="legal-tabs" id="legalTabs" role="tablist"></div>
+  </div>
+  <div class="legal-body" id="legalBody"></div>
+</div>
+
+<!-- STORAGE NOTICE -->
+<div class="store-notice" id="storeNotice" role="region" aria-label="Storage notice" hidden>
+  <span data-i18n-html="notice.text">No tracking. This shop only saves your language and display choices in your browser. <a href="#cookies" data-legal="cookies">Read more</a></span>
+  <button type="button" id="storeNoticeOk" data-i18n="notice.ok">OK</button>
+</div>
 
 <!-- TOAST -->
 <div class="toast" id="toast" role="status" aria-live="polite">
@@ -2099,14 +2409,29 @@
       'co.errMail': 'Mail delivery is not configured yet.',
       'co.errTest': 'Test mode: until the lexoria.fi domain is verified, e-mails can only be delivered to the shop owner\'s address.',
       'co.errFields': 'Please fill in your name and a valid e-mail.',
+      'co.consent': 'I accept the <a href="#terms" data-legal="terms">terms of sale</a> and the <a href="#privacy" data-legal="privacy">privacy policy</a>. I ask for the PDF to be delivered immediately and understand that I lose my 14-day right of withdrawal once it has been sent.',
+      'co.errConsent': 'Please accept the terms to continue.',
+      'legal.tag': 'Terms & policies',
+      'notice.text': 'No tracking. This shop only saves your language and display choices in your browser. <a href="#cookies" data-legal="cookies">Read more</a>',
+      'notice.ok': 'OK',
       'toast.added': 'Added to cart',
       'foot.lead': 'Part of',
       'foot.meta': 'Attorney at law · since 2010',
-      'foot.reg': '© 2026 · Lexoria · Reg 0123456-7',
+      'foot.reg': '© 2026 · Asianajotoimisto Lexoria Oy',
       'foot.main': 'Lexoria.fi',
-      'foot.terms': 'Terms',
-      'foot.privacy': 'Privacy',
-      'foot.refunds': 'Refunds'
+      'foot.h.company': 'Seller',
+      'foot.h.legal': 'Terms & policies',
+      'foot.h.pay': 'Payment methods',
+      'foot.bid': 'Business ID',
+      'foot.vatno': 'VAT',
+      'foot.terms': 'Terms of sale',
+      'foot.privacy': 'Privacy policy',
+      'foot.cookies': 'Cookies',
+      'foot.refunds': 'Withdrawal & refunds',
+      'foot.payment': 'Payment & delivery',
+      'foot.contact': 'Contact',
+      'foot.bank': 'Online bank',
+      'foot.paynote': 'Secure payment via Montonio'
     },
     fi: {
       'nav.back': 'Lexoria.fi',
@@ -2219,14 +2544,29 @@
       'co.errMail': 'Sähköpostin lähetystä ei ole vielä otettu käyttöön.',
       'co.errTest': 'Testitila: kunnes lexoria.fi-verkkotunnus on vahvistettu, sähköposti toimitetaan vain kaupan omistajan osoitteeseen.',
       'co.errFields': 'Täytä nimi ja toimiva sähköpostiosoite.',
+      'co.consent': 'Hyväksyn <a href="#terms" data-legal="terms">tilaus- ja toimitusehdot</a> ja <a href="#privacy" data-legal="privacy">tietosuojaselosteen</a>. Pyydän, että PDF toimitetaan heti, ja ymmärrän, että menetän 14 päivän peruuttamisoikeuden, kun asiakirja on lähetetty.',
+      'co.errConsent': 'Hyväksy ehdot jatkaaksesi.',
+      'legal.tag': 'Ehdot ja tietosuoja',
+      'notice.text': 'Ei seurantaa. Kauppa tallentaa selaimeesi vain kieli- ja näkymävalintasi. <a href="#cookies" data-legal="cookies">Lue lisää</a>',
+      'notice.ok': 'OK',
       'toast.added': 'Lisätty koriin',
       'foot.lead': 'Osa',
       'foot.meta': 'Asianajaja · vuodesta 2010',
-      'foot.reg': '© 2026 · Lexoria · Reg 0123456-7',
+      'foot.reg': '© 2026 · Asianajotoimisto Lexoria Oy',
       'foot.main': 'Lexoria.fi',
-      'foot.terms': 'Ehdot',
-      'foot.privacy': 'Tietosuoja',
-      'foot.refunds': 'Palautukset'
+      'foot.h.company': 'Myyjä',
+      'foot.h.legal': 'Ehdot ja tietosuoja',
+      'foot.h.pay': 'Maksutavat',
+      'foot.bid': 'Y-tunnus',
+      'foot.vatno': 'ALV-numero',
+      'foot.terms': 'Tilaus- ja toimitusehdot',
+      'foot.privacy': 'Tietosuojaseloste',
+      'foot.cookies': 'Evästeet',
+      'foot.refunds': 'Peruutus ja palautukset',
+      'foot.payment': 'Maksu ja toimitus',
+      'foot.contact': 'Yhteystiedot',
+      'foot.bank': 'Verkkopankki',
+      'foot.paynote': 'Turvallinen maksu Montonion kautta'
     }
   };
 
@@ -2261,6 +2601,7 @@
     langButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
 
     renderCart();
+    renderLegal();
   }
 
   langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
@@ -2324,7 +2665,10 @@
   });
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeCart(); closeMenu(); }
+    if (e.key !== 'Escape') return;
+    // Legal sits on top of the cart; closing it must not drop the checkout underneath
+    if (legalOverlay.classList.contains('open')) { closeLegal(); return; }
+    closeCart(); closeMenu();
   });
 
   function fmtEUR(n) {
@@ -2451,7 +2795,7 @@
   const coArrow = document.getElementById('cartCheckoutArrow');
   const cartVatEl = document.querySelector('.cart-vat');
   var coStep = 'cart'; // cart | checkout | sending | done
-  var coData = { name: '', email: '' };
+  var coData = { name: '', email: '', consent: false };
 
   function t(key) { const lang = document.documentElement.dataset.lang || 'en'; return I18N[lang][key] || I18N.en[key] || key; }
   function cartTotal() { return cart.reduce((s, i) => s + i.price, 0); }
@@ -2494,13 +2838,19 @@
           <input id="coEmail" name="email" type="email" autocomplete="email" inputmode="email" value="${coData.email.replace(/"/g,'&quot;')}" required>
           <span class="hint">${t('co.emailHint')}</span>
         </div>
+        <label class="co-consent">
+          <input id="coConsent" type="checkbox"${coData.consent ? ' checked' : ''} required>
+          <span>${t('co.consent')}</span>
+        </label>
         <div class="co-test"><span class="glyph">§</span><span>${t('co.test')}</span></div>
         ${err ? `<div class="co-err">${err}</div>` : ''}
         <button type="submit" hidden></button>
       </form>`;
     const form = document.getElementById('coForm');
     form.addEventListener('submit', e => { e.preventDefault(); submitCheckout(); });
-    form.querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => { coData[inp.name] = inp.value; inp.classList.remove('err'); }));
+    form.querySelectorAll('.co-field input').forEach(inp => inp.addEventListener('input', () => { coData[inp.name] = inp.value; inp.classList.remove('err'); }));
+    const consentEl = document.getElementById('coConsent');
+    consentEl.addEventListener('change', () => { coData.consent = consentEl.checked; consentEl.parentElement.classList.remove('err'); });
     if (!coData.name) setTimeout(() => document.getElementById('coName').focus(), 350);
   }
 
@@ -2523,12 +2873,16 @@
     const name = nameEl.value.trim();
     const email = emailEl.value.trim();
     const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-    if (!name || !okEmail) {
+    const consentEl = document.getElementById('coConsent');
+    const consent = consentEl.checked;
+    if (!name || !okEmail || !consent) {
       nameEl.classList.toggle('err', !name);
       emailEl.classList.toggle('err', !okEmail);
+      consentEl.parentElement.classList.toggle('err', !consent);
+      const msg = t(!name || !okEmail ? 'co.errFields' : 'co.errConsent');
       const errEl = document.querySelector('.co-err');
-      if (errEl) errEl.textContent = t('co.errFields');
-      else document.getElementById('coForm').insertAdjacentHTML('beforeend', `<div class="co-err">${t('co.errFields')}</div>`);
+      if (errEl) errEl.textContent = msg;
+      else document.getElementById('coForm').insertAdjacentHTML('beforeend', `<div class="co-err">${msg}</div>`);
       return;
     }
     coStep = 'sending'; renderFoot();
@@ -2538,18 +2892,19 @@
       const r = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, lang, skus: items.map(i => i.sku) })
+        body: JSON.stringify({ name, email, lang, consent: true, skus: items.map(i => i.sku) })
       });
       const data = await r.json().catch(() => ({}));
       if (!r.ok || !data.ok) throw new Error(data.error || 'send_failed');
       cart.length = 0;
+      coData.consent = false;
       cartCount.textContent = '0';
       coStep = 'done';
       renderDone(email, items);
       renderFoot();
     } catch (e) {
       coStep = 'checkout';
-      renderCheckout(e.message === 'mail_not_configured' ? t('co.errMail') : e.message === 'test_recipient' ? t('co.errTest') : t('co.errGeneric'));
+      renderCheckout(e.message === 'mail_not_configured' ? t('co.errMail') : e.message === 'test_recipient' ? t('co.errTest') : e.message === 'consent_required' ? t('co.errConsent') : t('co.errGeneric'));
       renderFoot();
     }
   }
@@ -2566,11 +2921,375 @@
   });
   coBack.addEventListener('click', () => { coStep = 'cart'; renderCart(); });
 
+  // =====================================================
+  // Legal overlay — content re-rendered on language change, deep-linkable by hash
+  // =====================================================
+  const LEGAL_KEYS = ['terms', 'privacy', 'cookies', 'refunds', 'payment', 'contact'];
+  const LEGAL = {
+    en: {
+      updated: 'Updated 2 October 2026',
+      terms: {
+        tab: 'Terms',
+        title: 'Terms of <em>sale</em>',
+        body: `
+          <h3>1. Seller</h3>
+          <p>Asianajotoimisto Lexoria Oy (Business ID 3561005-2, VAT number FI35610052), Vekarakatu 14, 13500 Hämeenlinna, Finland. E-mail <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>, telephone <a href="tel:+358456560060">+358 45 656 0060</a>. These terms apply to every purchase made in the Lexoria Document Bank.</p>
+          <h3>2. Products</h3>
+          <p>The products are digital document templates in PDF format. The content of each template is described on its product card.</p>
+          <p>The templates are general models. They are not legal advice on your particular situation, and buying a template does not create an attorney–client relationship with Lexoria. You are responsible for checking that a template suits your circumstances and for completing and signing it correctly. If you need a document drafted for you, book a consultation.</p>
+          <h3>3. Prices</h3>
+          <p>Prices are in euros and include value added tax at 25.5%. There are no delivery or handling fees. The price shown at the time of the order applies.</p>
+          <h3>4. Ordering</h3>
+          <p>Add the templates to the cart, enter your name and e-mail address, accept these terms and pay. The contract is concluded when the payment has been confirmed. An order confirmation is sent by e-mail together with the documents. The buyer must be at least 18 years old.</p>
+          <h3>5. Payment</h3>
+          <p>Payments are handled by Montonio Finance UAB. Available methods and security are described under <a href="#payment" data-legal="payment">Payment &amp; delivery</a>.</p>
+          <h3>6. Delivery</h3>
+          <p>The templates are delivered as PDF attachments to the e-mail address given in the order, normally within minutes of the confirmed payment. Nothing is delivered by post.</p>
+          <h3>7. Right of withdrawal</h3>
+          <p>Because the product is digital content delivered immediately at your request, the 14-day right of withdrawal ends when the documents have been sent. See <a href="#refunds" data-legal="refunds">Withdrawal &amp; refunds</a>.</p>
+          <h3>8. Licence</h3>
+          <p>You may fill in, print and sign a purchased template as many times as you need for your own matters. You may not resell, publish or otherwise distribute the template. Copyright remains with Asianajotoimisto Lexoria Oy.</p>
+          <h3>9. Defects and liability</h3>
+          <p>If a file is defective or does not match its description, we will correct it, deliver it again or refund the price. To the extent permitted by mandatory law, Lexoria is not liable for indirect loss or for loss caused by the way a template is completed or used, and its liability is limited to the price paid. Nothing in these terms limits the rights a consumer has under mandatory law.</p>
+          <h3>10. Applicable law and disputes</h3>
+          <p>Finnish law applies. Please contact us first. A consumer may contact the Consumer Advisory Services (<a href="https://www.kuluttajaneuvonta.fi" target="_blank" rel="noopener">kuluttajaneuvonta.fi</a>) and refer the matter to the Consumer Disputes Board (<a href="https://www.kuluttajariita.fi" target="_blank" rel="noopener">kuluttajariita.fi</a>). Disputes may also be heard by the District Court of Kanta-Häme or the district court of the consumer's place of residence.</p>
+          <h3>11. Changes</h3>
+          <p>We may update these terms. The version in force at the time of the order applies to that order.</p>`
+      },
+      privacy: {
+        tab: 'Privacy',
+        title: 'Privacy <em>policy</em>',
+        body: `
+          <h3>1. Controller</h3>
+          <p>Asianajotoimisto Lexoria Oy (Business ID 3561005-2), Vekarakatu 14, 13500 Hämeenlinna, Finland. Privacy questions: <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>.</p>
+          <h3>2. What we collect</h3>
+          <ul>
+            <li>Name and e-mail address given at checkout</li>
+            <li>Order details: products, price, order number, time, and your acceptance of the terms</li>
+            <li>Payment status and payment reference received from the payment service provider</li>
+            <li>Messages you send us about an order</li>
+            <li>Technical log data created when the site is used, such as IP address and browser type</li>
+          </ul>
+          <p>We do not receive or store your card number or online banking credentials.</p>
+          <h3>3. Purposes and legal bases</h3>
+          <ul>
+            <li>Delivering the order and customer service: performance of a contract (GDPR Art. 6(1)(b))</li>
+            <li>Bookkeeping and tax: legal obligation (Art. 6(1)(c))</li>
+            <li>Security of the service, prevention of misuse and handling of legal claims: legitimate interest (Art. 6(1)(f))</li>
+          </ul>
+          <p>We do not use your data for marketing, profiling or automated decision-making.</p>
+          <h3>4. Recipients</h3>
+          <ul>
+            <li>Montonio Finance UAB (Lithuania): payment processing</li>
+            <li>Resend (United States): delivery of the order e-mail</li>
+            <li>Vercel (United States): hosting of the website</li>
+            <li>Google Fonts: the site's typefaces are loaded from Google, which receives your IP address when the page loads</li>
+            <li>Our accounting provider and, where the law requires, the authorities</li>
+          </ul>
+          <h3>5. Transfers outside the EU/EEA</h3>
+          <p>Some of these providers process data in the United States. Transfers are based on the EU–US Data Privacy Framework or the European Commission's standard contractual clauses.</p>
+          <h3>6. Retention</h3>
+          <p>Order and payment records are kept for six years from the end of the calendar year in which the financial year ended, as required by the Finnish Accounting Act. Customer service messages are kept for as long as the matter requires. Technical logs are kept for a short period.</p>
+          <h3>7. Your rights</h3>
+          <p>You may ask for access to your data, for it to be corrected or erased, for its processing to be restricted, and for it to be transferred, and you may object to processing based on legitimate interest. Send requests to <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>. You may also lodge a complaint with the Office of the Data Protection Ombudsman (<a href="https://tietosuoja.fi" target="_blank" rel="noopener">tietosuoja.fi</a>).</p>
+          <h3>8. Cookies</h3>
+          <p>The shop does not use tracking or advertising cookies. See <a href="#cookies" data-legal="cookies">Cookies</a>.</p>`
+      },
+      cookies: {
+        tab: 'Cookies',
+        title: 'Cookies &amp; <em>storage</em>',
+        body: `
+          <h3>No tracking</h3>
+          <p>The shop sets no cookies of its own and uses no analytics, advertising or social media trackers. That is why there is no cookie consent banner.</p>
+          <h3>What is saved in your browser</h3>
+          <p>To remember your choices, the shop saves these values in your browser's local storage. They are strictly necessary for the functions you asked for, and they are not sent to us.</p>
+          <dl class="legal-facts">
+            <dt>lex_lang</dt><dd>Language you selected</dd>
+            <dt>lex_view</dt><dd>Catalog view on mobile (swipe or grid)</dd>
+            <dt>lex_paper</dt><dd>Background colour you selected</dd>
+            <dt>lex_notice</dt><dd>That you have closed the storage notice</dd>
+          </dl>
+          <p>The cart is kept only in the page's memory and is emptied when you close or reload the page.</p>
+          <h3>Third parties</h3>
+          <p>When you pay, you are taken to the payment service of Montonio and your bank or card issuer, which may use cookies that are necessary for a secure payment. Typefaces are loaded from Google Fonts, which does not set cookies but receives your IP address.</p>
+          <h3>Clearing</h3>
+          <p>You can delete the saved values at any time by clearing this site's data in your browser settings.</p>`
+      },
+      refunds: {
+        tab: 'Refunds',
+        title: 'Withdrawal &amp; <em>refunds</em>',
+        body: `
+          <h3>Right of withdrawal</h3>
+          <p>In distance sales a consumer normally has 14 days to withdraw from a purchase (Finnish Consumer Protection Act, chapter 6).</p>
+          <p>The templates are digital content delivered electronically. At checkout you ask for immediate delivery and confirm that you understand you lose the right of withdrawal once delivery has taken place. After the documents have been sent to your e-mail, the purchase can therefore no longer be withdrawn (Consumer Protection Act, chapter 6, section 16). This is confirmed in your order e-mail.</p>
+          <p>If you have paid but the documents have not yet been sent, you may withdraw by e-mailing <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>.</p>
+          <h3>When we refund</h3>
+          <ul>
+            <li>The documents did not arrive and cannot be delivered</li>
+            <li>A file is defective or does not match its description</li>
+            <li>You were charged twice or the wrong amount</li>
+          </ul>
+          <h3>How to claim</h3>
+          <p>E-mail <a href="mailto:info@lexoria.fi">info@lexoria.fi</a> with your order number and a short description. We first deliver again or correct the file. If that does not solve the problem, we refund the price to the payment method you used, within 14 days of accepting the claim.</p>
+          <h3>Business buyers</h3>
+          <p>The statutory right of withdrawal applies to consumers only.</p>
+          <h3>Disputes</h3>
+          <p>If we cannot agree, a consumer may contact the Consumer Advisory Services (<a href="https://www.kuluttajaneuvonta.fi" target="_blank" rel="noopener">kuluttajaneuvonta.fi</a>) and the Consumer Disputes Board (<a href="https://www.kuluttajariita.fi" target="_blank" rel="noopener">kuluttajariita.fi</a>).</p>`
+      },
+      payment: {
+        tab: 'Payment',
+        title: 'Payment &amp; <em>delivery</em>',
+        body: `
+          <h3>Payment methods</h3>
+          <ul>
+            <li>Finnish online bank payments</li>
+            <li>Visa and Mastercard</li>
+          </ul>
+          <p>Prices are in euros and include VAT at 25.5%. The full amount is charged when you place the order. There are no additional fees.</p>
+          <h3>Payment service provider</h3>
+          <p>Payments are processed by Montonio Finance UAB, a licensed payment institution supervised by the Bank of Lithuania.</p>
+          <h3>Security</h3>
+          <p>You pay on the secure pages of Montonio and your own bank or card issuer over an encrypted connection, confirming the payment with your bank's strong authentication. Lexoria never sees or stores your card number or banking credentials.</p>
+          <h3>Delivery</h3>
+          <p>The documents are sent as PDF attachments to the e-mail address you give at checkout, normally within minutes of the confirmed payment. Delivery is free and there is no postal delivery.</p>
+          <p>If the e-mail has not arrived within an hour, check your spam folder and then contact <a href="mailto:info@lexoria.fi">info@lexoria.fi</a> with your order number. We will send the documents again.</p>
+          <h3>Receipt</h3>
+          <p>The order e-mail lists the products, the total and the VAT, and serves as your order confirmation.</p>`
+      },
+      contact: {
+        tab: 'Contact',
+        title: 'Contact <em>details</em>',
+        body: `
+          <h3>Seller</h3>
+          <dl class="legal-facts">
+            <dt>Company</dt><dd>Asianajotoimisto Lexoria Oy</dd>
+            <dt>Business ID</dt><dd>3561005-2</dd>
+            <dt>VAT number</dt><dd>FI35610052</dd>
+            <dt>Address</dt><dd>Vekarakatu 14, 13500 Hämeenlinna, Finland</dd>
+            <dt>E-mail</dt><dd><a href="mailto:info@lexoria.fi">info@lexoria.fi</a></dd>
+            <dt>Telephone</dt><dd><a href="tel:+358456560060">+358 45 656 0060</a></dd>
+          </dl>
+          <h3>Orders and complaints</h3>
+          <p>For questions about an order, e-mail us and include the order number from your order e-mail. See also <a href="#refunds" data-legal="refunds">Withdrawal &amp; refunds</a>.</p>
+          <h3>Legal services</h3>
+          <p>For a bespoke document or legal advice, book a consultation at <a href="https://lexoriaweb.vercel.app/#broneeri">Lexoria.fi</a>.</p>`
+      }
+    },
+    fi: {
+      updated: 'Päivitetty 2.10.2026',
+      terms: {
+        tab: 'Ehdot',
+        title: 'Tilaus- ja <em>toimitusehdot</em>',
+        body: `
+          <h3>1. Myyjä</h3>
+          <p>Asianajotoimisto Lexoria Oy (Y-tunnus 3561005-2, ALV-numero FI35610052), Vekarakatu 14, 13500 Hämeenlinna. Sähköposti <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>, puhelin <a href="tel:+358456560060">+358 45 656 0060</a>. Näitä ehtoja sovelletaan kaikkiin Lexorian asiakirjapankissa tehtyihin ostoihin.</p>
+          <h3>2. Tuotteet</h3>
+          <p>Tuotteet ovat sähköisiä asiakirjamalleja PDF-muodossa. Kunkin mallin sisältö on kuvattu tuotekortissa.</p>
+          <p>Mallit ovat yleisiä pohjia. Ne eivät ole juuri sinun tilanteeseesi annettua oikeudellista neuvontaa, eikä mallin ostaminen synnytä toimeksiantosuhdetta Lexorian kanssa. Vastaat itse siitä, että malli sopii tilanteeseesi ja että täytät ja allekirjoitat sen oikein. Jos tarvitset sinulle laaditun asiakirjan, varaa konsultaatio.</p>
+          <h3>3. Hinnat</h3>
+          <p>Hinnat ovat euroissa ja sisältävät arvonlisäveron 25,5 %. Toimitus- tai käsittelymaksuja ei ole. Tilaukseen sovelletaan tilaushetkellä näkyvää hintaa.</p>
+          <h3>4. Tilaaminen</h3>
+          <p>Lisää mallit ostoskoriin, anna nimesi ja sähköpostiosoitteesi, hyväksy nämä ehdot ja maksa. Sopimus syntyy, kun maksu on vahvistettu. Tilausvahvistus lähetetään sähköpostitse asiakirjojen mukana. Ostajan on oltava vähintään 18-vuotias.</p>
+          <h3>5. Maksaminen</h3>
+          <p>Maksut välittää Montonio Finance UAB. Maksutavat ja maksamisen turvallisuus on kuvattu kohdassa <a href="#payment" data-legal="payment">Maksu ja toimitus</a>.</p>
+          <h3>6. Toimitus</h3>
+          <p>Mallit toimitetaan PDF-liitteinä tilauksessa annettuun sähköpostiosoitteeseen, yleensä muutamassa minuutissa maksun vahvistumisesta. Postitoimitusta ei ole.</p>
+          <h3>7. Peruuttamisoikeus</h3>
+          <p>Koska tuote on sähköistä sisältöä, joka toimitetaan pyynnöstäsi heti, 14 päivän peruuttamisoikeus päättyy, kun asiakirjat on lähetetty. Katso <a href="#refunds" data-legal="refunds">Peruutus ja palautukset</a>.</p>
+          <h3>8. Käyttöoikeus</h3>
+          <p>Saat täyttää, tulostaa ja allekirjoittaa ostamasi mallin niin monta kertaa kuin omissa asioissasi tarvitset. Mallia ei saa myydä edelleen, julkaista eikä muuten levittää. Tekijänoikeus säilyy Asianajotoimisto Lexoria Oy:llä.</p>
+          <h3>9. Virheet ja vastuu</h3>
+          <p>Jos tiedosto on virheellinen tai ei vastaa kuvaustaan, korjaamme sen, toimitamme sen uudelleen tai palautamme hinnan. Siltä osin kuin pakottava laki sallii, Lexoria ei vastaa välillisistä vahingoista eikä vahingoista, jotka johtuvat mallin täyttämis- tai käyttötavasta, ja vastuu rajoittuu maksettuun hintaan. Nämä ehdot eivät rajoita kuluttajan pakottavan lainsäädännön mukaisia oikeuksia.</p>
+          <h3>10. Sovellettava laki ja riidat</h3>
+          <p>Sopimukseen sovelletaan Suomen lakia. Ota ensin yhteyttä meihin. Kuluttaja voi olla yhteydessä kuluttajaneuvontaan (<a href="https://www.kuluttajaneuvonta.fi" target="_blank" rel="noopener">kuluttajaneuvonta.fi</a>) ja saattaa asian kuluttajariitalautakunnan (<a href="https://www.kuluttajariita.fi" target="_blank" rel="noopener">kuluttajariita.fi</a>) ratkaistavaksi. Riita voidaan käsitellä myös Kanta-Hämeen käräjäoikeudessa tai kuluttajan asuinpaikan käräjäoikeudessa.</p>
+          <h3>11. Muutokset</h3>
+          <p>Voimme päivittää näitä ehtoja. Tilaukseen sovelletaan tilaushetkellä voimassa olevia ehtoja.</p>`
+      },
+      privacy: {
+        tab: 'Tietosuoja',
+        title: 'Tietosuoja<em>seloste</em>',
+        body: `
+          <h3>1. Rekisterinpitäjä</h3>
+          <p>Asianajotoimisto Lexoria Oy (Y-tunnus 3561005-2), Vekarakatu 14, 13500 Hämeenlinna. Tietosuoja-asiat: <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>.</p>
+          <h3>2. Kerättävät tiedot</h3>
+          <ul>
+            <li>Kassalla annettu nimi ja sähköpostiosoite</li>
+            <li>Tilaustiedot: tuotteet, hinta, tilausnumero, ajankohta ja ehtojen hyväksyminen</li>
+            <li>Maksupalveluntarjoajalta saatu maksun tila ja maksuviite</li>
+            <li>Tilausta koskevat viestit, jotka lähetät meille</li>
+            <li>Sivuston käytöstä syntyvät tekniset lokitiedot, kuten IP-osoite ja selaintyyppi</li>
+          </ul>
+          <p>Emme saa emmekä tallenna korttisi numeroa tai verkkopankkitunnuksiasi.</p>
+          <h3>3. Käyttötarkoitukset ja oikeusperusteet</h3>
+          <ul>
+            <li>Tilauksen toimittaminen ja asiakaspalvelu: sopimuksen täytäntöönpano (tietosuoja-asetuksen 6 artiklan 1 kohdan b alakohta)</li>
+            <li>Kirjanpito ja verotus: lakisääteinen velvoite (c alakohta)</li>
+            <li>Palvelun tietoturva, väärinkäytösten estäminen ja oikeusvaateiden käsittely: oikeutettu etu (f alakohta)</li>
+          </ul>
+          <p>Emme käytä tietojasi markkinointiin, profilointiin emmekä automaattiseen päätöksentekoon.</p>
+          <h3>4. Tietojen vastaanottajat</h3>
+          <ul>
+            <li>Montonio Finance UAB (Liettua): maksujen käsittely</li>
+            <li>Resend (Yhdysvallat): tilaussähköpostin toimitus</li>
+            <li>Vercel (Yhdysvallat): verkkosivuston ylläpito</li>
+            <li>Google Fonts: sivuston kirjasimet ladataan Googlelta, joka saa IP-osoitteesi sivun latautuessa</li>
+            <li>Tilitoimistomme ja lain niin vaatiessa viranomaiset</li>
+          </ul>
+          <h3>5. Siirrot EU:n ja ETA:n ulkopuolelle</h3>
+          <p>Osa näistä palveluntarjoajista käsittelee tietoja Yhdysvalloissa. Siirrot perustuvat EU:n ja Yhdysvaltojen väliseen Data Privacy Framework -järjestelyyn tai Euroopan komission vakiosopimuslausekkeisiin.</p>
+          <h3>6. Säilytysaika</h3>
+          <p>Tilaus- ja maksutiedot säilytetään kirjanpitolain edellyttämällä tavalla kuusi vuotta sen vuoden lopusta, jonka aikana tilikausi on päättynyt. Asiakaspalveluviestit säilytetään niin kauan kuin asian hoitaminen edellyttää. Tekniset lokitiedot säilytetään lyhyen ajan.</p>
+          <h3>7. Oikeutesi</h3>
+          <p>Voit pyytää pääsyä tietoihisi, niiden oikaisemista tai poistamista, käsittelyn rajoittamista ja tietojen siirtämistä sekä vastustaa oikeutettuun etuun perustuvaa käsittelyä. Lähetä pyyntö osoitteeseen <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>. Voit myös tehdä valituksen tietosuojavaltuutetun toimistolle (<a href="https://tietosuoja.fi" target="_blank" rel="noopener">tietosuoja.fi</a>).</p>
+          <h3>8. Evästeet</h3>
+          <p>Kauppa ei käytä seuranta- eikä mainosevästeitä. Katso <a href="#cookies" data-legal="cookies">Evästeet</a>.</p>`
+      },
+      cookies: {
+        tab: 'Evästeet',
+        title: 'Evästeet ja <em>tallennus</em>',
+        body: `
+          <h3>Ei seurantaa</h3>
+          <p>Kauppa ei aseta omia evästeitä eikä käytä analytiikkaa, mainontaa tai sosiaalisen median seurantaa. Siksi sivulla ei ole evästeiden suostumusikkunaa.</p>
+          <h3>Mitä selaimeesi tallennetaan</h3>
+          <p>Valintojesi muistamiseksi kauppa tallentaa selaimesi paikalliseen tallennustilaan alla olevat arvot. Ne ovat välttämättömiä pyytämiesi toimintojen kannalta, eikä niitä lähetetä meille.</p>
+          <dl class="legal-facts">
+            <dt>lex_lang</dt><dd>Valitsemasi kieli</dd>
+            <dt>lex_view</dt><dd>Valikoiman näkymä mobiilissa (pyyhkäisy tai ruudukko)</dd>
+            <dt>lex_paper</dt><dd>Valitsemasi taustaväri</dd>
+            <dt>lex_notice</dt><dd>Tieto siitä, että olet sulkenut tallennusilmoituksen</dd>
+          </dl>
+          <p>Ostoskori on vain sivun muistissa ja tyhjenee, kun suljet sivun tai lataat sen uudelleen.</p>
+          <h3>Kolmannet osapuolet</h3>
+          <p>Maksaessasi siirryt Montonion sekä pankkisi tai kortinmyöntäjäsi maksupalveluun, joka voi käyttää turvallisen maksamisen kannalta välttämättömiä evästeitä. Kirjasimet ladataan Google Fonts -palvelusta, joka ei aseta evästeitä mutta saa IP-osoitteesi.</p>
+          <h3>Tyhjentäminen</h3>
+          <p>Voit poistaa tallennetut arvot milloin tahansa tyhjentämällä tämän sivuston tiedot selaimesi asetuksista.</p>`
+      },
+      refunds: {
+        tab: 'Palautukset',
+        title: 'Peruutus ja <em>palautukset</em>',
+        body: `
+          <h3>Peruuttamisoikeus</h3>
+          <p>Etämyynnissä kuluttajalla on yleensä 14 päivää aikaa peruuttaa kauppa (kuluttajansuojalain 6 luku).</p>
+          <p>Mallit ovat sähköisesti toimitettavaa digitaalista sisältöä. Kassalla pyydät välitöntä toimitusta ja vahvistat ymmärtäväsi, että menetät peruuttamisoikeuden, kun toimitus on tehty. Kun asiakirjat on lähetetty sähköpostiisi, kauppaa ei siksi voi enää peruuttaa (kuluttajansuojalain 6 luvun 16 §). Tämä vahvistetaan tilaussähköpostissa.</p>
+          <p>Jos olet maksanut mutta asiakirjoja ei ole vielä lähetetty, voit peruuttaa kaupan lähettämällä sähköpostia osoitteeseen <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>.</p>
+          <h3>Milloin palautamme maksun</h3>
+          <ul>
+            <li>Asiakirjat eivät saapuneet eikä niitä voida toimittaa</li>
+            <li>Tiedosto on virheellinen tai ei vastaa kuvaustaan</li>
+            <li>Sinulta veloitettiin kahdesti tai väärä summa</li>
+          </ul>
+          <h3>Näin teet reklamaation</h3>
+          <p>Lähetä sähköpostia osoitteeseen <a href="mailto:info@lexoria.fi">info@lexoria.fi</a> ja kerro tilausnumero ja lyhyt kuvaus. Toimitamme ensin tiedoston uudelleen tai korjaamme sen. Jos se ei ratkaise asiaa, palautamme hinnan käyttämällesi maksutavalle 14 päivän kuluessa reklamaation hyväksymisestä.</p>
+          <h3>Yritysasiakkaat</h3>
+          <p>Lakisääteinen peruuttamisoikeus koskee vain kuluttajia.</p>
+          <h3>Erimielisyydet</h3>
+          <p>Jos emme pääse sopuun, kuluttaja voi olla yhteydessä kuluttajaneuvontaan (<a href="https://www.kuluttajaneuvonta.fi" target="_blank" rel="noopener">kuluttajaneuvonta.fi</a>) ja kuluttajariitalautakuntaan (<a href="https://www.kuluttajariita.fi" target="_blank" rel="noopener">kuluttajariita.fi</a>).</p>`
+      },
+      payment: {
+        tab: 'Maksu',
+        title: 'Maksu ja <em>toimitus</em>',
+        body: `
+          <h3>Maksutavat</h3>
+          <ul>
+            <li>Suomalaiset verkkopankkimaksut</li>
+            <li>Visa ja Mastercard</li>
+          </ul>
+          <p>Hinnat ovat euroissa ja sisältävät arvonlisäveron 25,5 %. Koko summa veloitetaan tilauksen yhteydessä. Lisämaksuja ei ole.</p>
+          <h3>Maksupalveluntarjoaja</h3>
+          <p>Maksut käsittelee Montonio Finance UAB, toimiluvan saanut maksulaitos, jota valvoo Liettuan keskuspankki.</p>
+          <h3>Turvallisuus</h3>
+          <p>Maksat Montonion ja oman pankkisi tai kortinmyöntäjäsi suojatuilla sivuilla salatun yhteyden yli ja vahvistat maksun pankkisi vahvalla tunnistautumisella. Lexoria ei näe eikä tallenna korttisi numeroa tai pankkitunnuksiasi.</p>
+          <h3>Toimitus</h3>
+          <p>Asiakirjat lähetetään PDF-liitteinä kassalla antamaasi sähköpostiosoitteeseen, yleensä muutamassa minuutissa maksun vahvistumisesta. Toimitus on maksuton, eikä postitoimitusta ole.</p>
+          <p>Jos sähköposti ei ole saapunut tunnin kuluessa, tarkista roskapostikansio ja ota sitten yhteyttä osoitteeseen <a href="mailto:info@lexoria.fi">info@lexoria.fi</a> ja kerro tilausnumerosi. Lähetämme asiakirjat uudelleen.</p>
+          <h3>Kuitti</h3>
+          <p>Tilaussähköpostissa näkyvät tuotteet, loppusumma ja arvonlisävero, ja se toimii tilausvahvistuksena.</p>`
+      },
+      contact: {
+        tab: 'Yhteystiedot',
+        title: 'Yhteys<em>tiedot</em>',
+        body: `
+          <h3>Myyjä</h3>
+          <dl class="legal-facts">
+            <dt>Yritys</dt><dd>Asianajotoimisto Lexoria Oy</dd>
+            <dt>Y-tunnus</dt><dd>3561005-2</dd>
+            <dt>ALV-numero</dt><dd>FI35610052</dd>
+            <dt>Osoite</dt><dd>Vekarakatu 14, 13500 Hämeenlinna</dd>
+            <dt>Sähköposti</dt><dd><a href="mailto:info@lexoria.fi">info@lexoria.fi</a></dd>
+            <dt>Puhelin</dt><dd><a href="tel:+358456560060">+358 45 656 0060</a></dd>
+          </dl>
+          <h3>Tilaukset ja reklamaatiot</h3>
+          <p>Jos sinulla on kysyttävää tilauksesta, lähetä meille sähköpostia ja mainitse tilaussähköpostissa oleva tilausnumero. Katso myös <a href="#refunds" data-legal="refunds">Peruutus ja palautukset</a>.</p>
+          <h3>Oikeudelliset palvelut</h3>
+          <p>Jos tarvitset räätälöidyn asiakirjan tai oikeudellista neuvontaa, varaa konsultaatio osoitteessa <a href="https://lexoriaweb.vercel.app/#broneeri">Lexoria.fi</a>.</p>`
+      }
+    }
+  };
+
+  const legalOverlay = document.getElementById('legalOverlay');
+  const legalTabs = document.getElementById('legalTabs');
+  const legalBody = document.getElementById('legalBody');
+  const legalClose = document.getElementById('legalClose');
+  var legalKey = null;
+  var legalReturn = null;
+
+  function renderLegal() {
+    const L = LEGAL[document.documentElement.dataset.lang] || LEGAL.en;
+    legalTabs.innerHTML = LEGAL_KEYS.map(k =>
+      `<button type="button" class="legal-tab${k === legalKey ? ' active' : ''}" role="tab" aria-selected="${k === legalKey}" data-legal="${k}">${L[k].tab}</button>`
+    ).join('');
+    if (!legalKey) return;
+    legalBody.innerHTML = `<article class="legal-doc"><h2 id="legalTitle">${L[legalKey].title}</h2><p class="legal-updated">${L.updated}</p>${L[legalKey].body}</article>`;
+  }
+  function setLegalHash(hash) {
+    try { history.replaceState(null, '', hash || location.pathname + location.search); } catch(e){}
+  }
+  function openLegal(key) {
+    if (!LEGAL_KEYS.includes(key)) return;
+    const wasOpen = legalOverlay.classList.contains('open');
+    if (!wasOpen) legalReturn = document.activeElement;
+    legalKey = key;
+    renderLegal();
+    legalBody.scrollTop = 0;
+    legalOverlay.classList.add('open');
+    legalOverlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('legal-open');
+    setLegalHash('#' + key);
+    const active = legalTabs.querySelector('.active');
+    if (active) active.scrollIntoView({ block: 'nearest', inline: 'center' });
+    if (wasOpen) { if (active) active.focus(); } else legalClose.focus();
+  }
+  function closeLegal() {
+    if (!legalOverlay.classList.contains('open')) return;
+    legalOverlay.classList.remove('open');
+    legalOverlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('legal-open');
+    setLegalHash('');
+    if (legalReturn && legalReturn.isConnected) legalReturn.focus();
+  }
+  legalClose.addEventListener('click', closeLegal);
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-legal]');
+    if (!el) return;
+    e.preventDefault();
+    openLegal(el.dataset.legal);
+  });
+  window.addEventListener('hashchange', () => openLegal(location.hash.slice(1)));
+
+  // One-time storage notice
+  const storeNotice = document.getElementById('storeNotice');
+  try { storeNotice.hidden = localStorage.getItem('lex_notice') === '1'; } catch(e){}
+  document.getElementById('storeNoticeOk').addEventListener('click', () => {
+    storeNotice.hidden = true;
+    try { localStorage.setItem('lex_notice', '1'); } catch(e){}
+  });
+
   // Initial language (bootstrap script set the attr already) — must run after cart refs exist
   const bootLang = document.documentElement.dataset.lang || 'en';
   setLang(bootLang);
 
   renderCart();
+  openLegal(location.hash.slice(1));
 
   // =====================================================
   // Swipe dots — track scroll position on mobile grid
