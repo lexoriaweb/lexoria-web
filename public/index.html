@@ -21,7 +21,7 @@
     try {
       var cached = localStorage.getItem('lex_lang');
       var hint = (navigator.language || 'en').toLowerCase().slice(0,2);
-      var lang = cached || (hint === 'fi' ? 'fi' : 'en');
+      var lang = cached || (hint === 'fi' || hint === 'et' ? hint : 'en');
       document.documentElement.lang = lang;
       document.documentElement.dataset.lang = lang;
     } catch(e){}
@@ -1889,6 +1889,7 @@
         <div class="aside-langs" role="group" data-i18n-aria="aside.langGroup">
           <button type="button" data-lang="fi">FI</button>
           <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="et">ET</button>
         </div>
       </div>
       <div class="aside-block aside-cta">
@@ -2256,6 +2257,8 @@
           <button type="button" data-lang="fi">FI</button>
           <span class="sep" aria-hidden="true">·</span>
           <button type="button" data-lang="en">EN</button>
+          <span class="sep" aria-hidden="true">·</span>
+          <button type="button" data-lang="et">ET</button>
         </span>
       </div>
     </div>
@@ -2606,13 +2609,183 @@ Helsingissä vuodesta 2010.
 Kysymys on aina uusi.
 Vastaus on aina teidän.`,
       'ribbon.em': ['Yksi.', 'Kaksi.', 'Kolme.', 'Neljä.', 'Miksi', 'Lexoria.']
+    },
+    et: {
+      'nav.menu': 'Menüü',
+      'nav.openMenu': 'Ava menüü',
+      'menu.close': 'Sulge',
+      'menu.closeAria': 'Sulge menüü',
+      'menu.overlayLabel': 'Peamenüü',
+      'menu.eyebrow': 'Sisukord · 01-08',
+      'menu.01.label': 'Avaleht', 'menu.01.sub': 'Praegune',
+      'menu.02.label': 'Teenused', 'menu.02.sub': 'Eraklient · Äriklient',
+      'menu.03.label': 'Dokumendipank', 'menu.03.sub': 'Alates 19 €',
+      'menu.04.label': 'Meeskond', 'menu.04.sub': 'Neli partnerit',
+      'menu.05.label': 'Meist', 'menu.05.sub': 'Aastast 2010',
+      'menu.06.label': 'Artiklid', 'menu.06.sub': 'Õigusajakiri',
+      'menu.07.label': 'Hinnakiri', 'menu.07.sub': 'Alates 120 €/h',
+      'menu.08.label': 'Broneeri', 'menu.08.sub': 'Konsultatsioon',
+      'aside.contact': 'Kontakt',
+      'aside.office': 'Büroo',
+      'aside.officeLine1': 'Helsingi · Soome',
+      'aside.officeLine2': 'Tallinn · Eesti',
+      'aside.officeLine3': 'E-R 9:00-18:00',
+      'aside.lang': 'Keel',
+      'aside.langGroup': 'Keel',
+      'aside.cta': 'Broneeri konsultatsioon <span>↗</span>',
+      'cold.footTag': 'Asianajotoimisto.<br>Advokaadibüroo.',
+      'cold.footLocations': 'Helsingi - Tallinn',
+      'cold.footCta': 'Broneeri konsultatsioon',
+      'cold.docsCta': 'Dokumendipank',
+      'cold.scroll': 'Keri',
+      'cold.member.lead': 'Liige',
+      'cold.member.meta': 'Defensor Legis · aastast 2010',
+      'pos.chapter': 'Positsioon',
+      'pos.h2': 'Õigus,<br><em>mis räägib selgelt.</em>',
+      'pos.statement': 'Hea õigusnõu ei ole kõige keerulisem - see on nõu, mis aitab teil <em>edasi liikuda.</em> Me kuulame, enne kui vastame. Ja vastame nii, et te <em>mõistate.</em>',
+      'pos.metaFoundedLabel': 'Asutatud',
+      'pos.metaPartnersLabel': 'Partnereid',
+      'pos.metaPartnersValue': 'neli',
+      'pos.metaStaffLabel': 'Töötajaid',
+      'pos.metaStaffValue': 'kaheksateist',
+      'pos.imgAlt': 'Lexoria vanempartner, portree',
+      'pos.captionLead': 'PLAAT 01 / PARTNER',
+      'pos.captionBody': 'Dagi-Liis Leivonen · Helsingi',
+      'pos.pillar1.title': 'Poolteist <em>aastakümmet</em>',
+      'pos.pillar1.body': 'Sama nimi, samad uksed. Helsingis aastast 2010.',
+      'pos.pillar2.title': 'Täis<em>teenus</em>',
+      'pos.pillar2.body': 'Eraklient, äriklient, dokumendid. Kogu õigus ühe katuse all.',
+      'pos.pillar3.title': 'Kolm <em>keelt</em>',
+      'pos.pillar3.body': 'Soome, inglise ja eesti keel. Teie keeles, teie tempos.',
+      'pos.pillar4.title': 'Diskreetne <em>nõustamine</em>',
+      'pos.pillar4.body': 'Teie asjad jäävad meie juurde. Avalikkusega räägite teie.',
+      'svc.chapter': 'Teenused',
+      'svc.h2': 'Kolm <em>radarit.</em><br>Üks meeskond.',
+      'svc.card1.eyebrow': '01 / Inimene',
+      'svc.card1.title': 'Era<em>kliendile</em>',
+      'svc.card1.desc': 'Pärand, perekond, kinnisvara, töö. Asjad, mis puudutavad teie elu - mitte ainult äri.',
+      'svc.card1.li1': 'Pärimisõigus', 'svc.card1.li2': 'Perekonnaõigus',
+      'svc.card1.li3': 'Kinnisvaratehingud', 'svc.card1.li4': 'Tööõigus',
+      'svc.card1.cta': 'Vaata teenuseid <span>→</span>',
+      'svc.card2.eyebrow': '02 / Äri',
+      'svc.card2.title': 'Ette<em>võttele</em>',
+      'svc.card2.desc': 'Äriõigus, lepingud, ühinemised ja omandamised, vaidlused, maksud. Kogu tehing - avamisest kohtuotsuseni.',
+      'svc.card2.li1': 'Äriõigus', 'svc.card2.li2': 'Lepingud',
+      'svc.card2.li3': 'Ühinemised &amp; omandamised', 'svc.card2.li4': 'Vaidlused &amp; vahekohus',
+      'svc.card2.li5': 'Maksuõigus', 'svc.card2.li6': 'Pankrot &amp; saneerimine',
+      'svc.card2.cta': 'Vaata teenuseid <span>→</span>',
+      'svc.card3.eyebrow': '03 / Pood',
+      'svc.card3.title': 'Dokumendi<em>pank</em>',
+      'svc.card3.desc': 'Valmis ja juriidiliselt korrektsed dokumendid. Täida veebis, laadi alla PDF või DOC.',
+      'svc.card3.li1': 'Töölepingud', 'svc.card3.li2': 'Üürilepingud',
+      'svc.card3.li3': 'Konfidentsiaalsus- ja koostöölepingud', 'svc.card3.li4': 'Volikirjad ja avaldused',
+      'svc.card3.price': 'Alates 19 €',
+      'svc.card3.cta': 'Sirvi dokumente <span>↗</span>',
+      'svc.practice.eyebrow': 'Tegevusvaldkonnad',
+      'svc.practice.privateTitle': 'Erakliendile.',
+      'svc.practice.p1': 'Perekonnaõigus', 'svc.practice.p2': 'Pärimine &amp; testamendid',
+      'svc.practice.p3': 'Kinnisvara &amp; omand', 'svc.practice.p4': 'Tööõigus',
+      'svc.practice.p5': 'Kriminaal- ja tsiviilasjad', 'svc.practice.p6': 'Kahju hüvitamine',
+      'svc.practice.p7': 'Maksuõigus', 'svc.practice.p8': 'Lepingud &amp; vaidlused',
+      'svc.practice.corpTitle': 'Ettevõttele.',
+      'svc.practice.c1': 'Äriõigus', 'svc.practice.c2': 'Ühinemised &amp; omandamised',
+      'svc.practice.c3': 'Lepingud', 'svc.practice.c4': 'Vaidlused &amp; vahekohus',
+      'svc.practice.c5': 'Tööõigus', 'svc.practice.c6': 'Maksuõigus',
+      'svc.practice.c7': 'Ehitus &amp; maakasutus', 'svc.practice.c8': 'Saneerimine &amp; pankrot',
+      'cinema.c1': 'RULL 01 / MANIFEST',
+      'cinema.c3': 'HELSINGI',
+      'cinema.c4': 'KESTUS 01:48<span class="blink">_</span>',
+      'team.chapter': 'Meeskond',
+      'team.h2': 'Inimesed,<br>kes <em>astuvad ruumi.</em>',
+      'team.p3.rank': 'Tegevjuht · Partner',
+      'team.p3.role': 'Tegevjuht · Advokaat · Partner',
+      'team.p3.imgAlt': 'Dagi-Liis Leivoneni portree',
+      'team.p4.rank': 'Müük & Turundus',
+      'team.p4.role': 'Müügi- ja turundusjuht',
+      'team.p4.imgAlt': 'Vivian Bergi portree',
+      'pull.body': 'Õigus on lihtne, kui loobuda vajadusest <em>näida keeruline.</em>',
+      'pull.attr': '<span class="name">A. Nõmm</span> · Juhtivpartner · Nõustamisest',
+      'price.chapter': 'Hinnakiri',
+      'price.h2': 'Selged<br><em>numbrid.</em>',
+      'price.card1.eyebrow': '01 / Eraklient',
+      'price.card1.title': 'Teie <em>elu, teie õigused.</em>',
+      'price.card1.rate': '250-300<span class="unit">€ / h</span>',
+      'price.card1.vat': 'Koos KM-ga 25,5% · 314-377 €/h',
+      'price.card1.note': 'Tunnihind sõltub ülesande keerukusest. Nõudlikuma või võõrkeelse töö puhul lepime hinna eraldi kokku.',
+      'price.card2.eyebrow': '02 / Äriklient',
+      'price.card2.title': 'Äri, <em>korras.</em>',
+      'price.card2.rate': '300-350<span class="unit">€ / h</span>',
+      'price.card2.vat': 'Koos KM-ga 25,5% · 377-439 €/h',
+      'price.card2.note': 'Igapäevased küsimused, suuremad tehingud, kohtu- ja vahekohtumenetlused. Mahukate projektide puhul - fikseeritud tasu.',
+      'price.card3.eyebrow': '03 / Riigi õigusabi',
+      'price.card3.title': 'Kui <em>sissetulek on väike.</em>',
+      'price.card3.rate': '120<span class="unit">€ / h</span>',
+      'price.card3.vat': 'Koos KM-ga 25,5% · 151 €/h',
+      'price.card3.note': 'Soome riik tasub väiksema sissetulekuga inimeste õigusabi eest. Esimesel kohtumisel selgitame menetlust ja vajalikke dokumente.',
+      'price.foot1.lead': 'Esimene konsultatsioon',
+      'price.foot1.body': 'Kuni 30 minutit tasuta. Kui kliendilepingut ei sõlmita, tasu ei võeta.',
+      'price.foot2.lead': 'Õigusabikulude kindlustus',
+      'price.foot2.body': 'Teie kodukindlustuse juurde kuuluv õigusabikulude kaitse võib hüvitada advokaaditasu ja kohtukulud.',
+      'book.chapter': 'Broneeri',
+      'book.h2': 'Broneeri<br><em>konsultatsioon.</em>',
+      'book.opt.client.label': 'Klient',
+      'book.opt.client.value': 'Eraklient <span class="sep">·</span> Äriklient',
+      'book.opt.first.label': 'Esimene',
+      'book.opt.first.value': '30 min <span class="sep">·</span> tasuta',
+      'book.opt.loc.label': 'Koht',
+      'book.opt.loc.value': 'Video <span class="sep">·</span> Büroo <span class="sep">·</span> Kliendi juures',
+      'book.opt.office.label': 'Büroo',
+      'book.opt.office.value': 'Helsingi <span class="sep">·</span> Tallinn',
+      'book.opt.phone.label': 'Telefon',
+      'book.opt.adv.label': 'Nõustaja',
+      'book.opt.adv.value': 'Dagi-Liis Leivonen <span class="sep">·</span> soome keeles',
+      'form.eyebrow': 'Saada päring · vastame 24 h jooksul',
+      'form.name.label': 'Nimi <span class="req" aria-hidden="true">*</span>',
+      'form.name.ph': 'Teie nimi',
+      'form.email.label': 'E-post <span class="req" aria-hidden="true">*</span>',
+      'form.email.ph': 'nimi@näide.ee',
+      'form.tel.label': 'Telefon <span class="opt">valikuline</span>',
+      'form.tel.ph': '+372 ...',
+      'form.info.label': 'Lisainfo',
+      'form.info.ph': 'Lühike kirjeldus teie küsimusest või soovist...',
+      'form.submit': 'Saada päring <span class="arrow">↗</span>',
+      'form.submitSending': 'Saadan... <span class="arrow">·</span>',
+      'form.note': 'Vorm on krüpteeritud. Kasutame teie andmeid ainult vastamiseks.',
+      'form.success': '<em>Aitäh.</em><br>Saime teie päringu kätte. Võtame ühendust 24 tunni jooksul.',
+      'foot.bar.lead': 'Liige',
+      'foot.bar.meta': 'Defensor Legis · aastast 2010',
+      'foot.reg': '© 2026 · Lexoria · Reg 0123456-7',
+      'foot.imprint': 'Impressum',
+      'foot.privacy': 'Privaatsus',
+      'foot.terms': 'Tingimused',
+      'ribbon': `Miks Lexoria.
+
+Üks. Selge keel.
+Õigus, mida saab lugeda
+ilma juristita kõrval.
+
+Kaks. Praktiline tulemus.
+Lahendus, mis töötab täna -
+mitte protokoll homseks.
+
+Kolm. Diskreetne nõustamine.
+Teie asjad jäävad meie juurde.
+Avalikkusega räägite teie.
+
+Neli. Viisteist aastat.
+Sama nimi. Samad uksed.
+Helsingis aastast 2010.
+
+Küsimus on alati uus.
+Vastus on alati teie.`,
+      'ribbon.em': ['Üks.', 'Kaks.', 'Kolm.', 'Neli.', 'Miks', 'Lexoria.']
     }
   };
 
   // =====================================================
   //  Language application
   // =====================================================
-  let currentLang = document.documentElement.lang === 'fi' ? 'fi' : 'en';
+  let currentLang = I18N[document.documentElement.lang] ? document.documentElement.lang : 'en';
 
   function applyLang(lang) {
     if (!I18N[lang]) lang = 'en';
@@ -2671,7 +2844,7 @@ Vastaus on aina teidän.`,
     fetch('https://ipapi.co/country/', { cache: 'no-store' })
       .then(r => r.ok ? r.text() : Promise.reject())
       .then(code => {
-        const lang = (code || '').trim().toUpperCase() === 'FI' ? 'fi' : 'en';
+        const lang = ({ FI: 'fi', EE: 'et' })[(code || '').trim().toUpperCase()] || 'en';
         setLang(lang, true);
       })
       .catch(() => {});
