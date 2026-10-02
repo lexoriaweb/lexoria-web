@@ -1015,6 +1015,7 @@
     display: flex;
     align-items: center;
   }
+  .partners-section[hidden] { display: none; }
   .partners-section > .wrap { width: 100%; }
   .partners-section::before {
     content: '';
@@ -1860,7 +1861,7 @@
         <li><a href="#hinnakiri" data-close>
           <span class="num">07</span>
           <span class="label" data-i18n="menu.07.label">Fees</span>
-          <span class="sub" data-i18n="menu.07.sub">From €110/h</span>
+          <span class="sub" data-i18n="menu.07.sub">From €120/h</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a></li>
         <li><a href="#broneeri" data-close>
@@ -1874,7 +1875,7 @@
     <aside class="menu-aside">
       <div class="aside-block">
         <div class="aside-label" data-i18n="aside.contact">Contact</div>
-        <a href="mailto:tere@lexoria.ee" class="aside-link">tere@lexoria.ee</a>
+        <a href="mailto:info@lexoria.fi" class="aside-link">info@lexoria.fi</a>
         <a href="tel:+358456560060" class="aside-link">+358 45 6560060</a>
       </div>
       <div class="aside-block">
@@ -1942,8 +1943,8 @@
         </div>
         <div class="pillar">
           <span class="pillar-num">03</span>
-          <h4 data-i18n="pos.pillar3.title">Two <em>languages</em></h4>
-          <p data-i18n="pos.pillar3.body">Finnish and English. In your language, at your pace.</p>
+          <h4 data-i18n="pos.pillar3.title">Three <em>languages</em></h4>
+          <p data-i18n="pos.pillar3.body">Finnish, English and Estonian. In your language, at your pace.</p>
         </div>
         <div class="pillar">
           <span class="pillar-num">04</span>
@@ -2043,7 +2044,7 @@
   </section>
 
   <!-- 03 / PARTNERS -->
-  <section class="partners-section" id="partnerid">
+  <section class="partners-section" id="partnerid" hidden>
     <div class="wrap">
       <div class="partners-grid">
         <div class="partner-logo"><span class="pw pw-1">LEGAL <em>500</em></span></div>
@@ -2132,22 +2133,22 @@
         <div class="pricing-card">
           <span class="pricing-eyebrow" data-i18n="price.card1.eyebrow">01 / Private</span>
           <h3 class="pricing-title" data-i18n="price.card1.title">Your <em>life, your rights.</em></h3>
-          <div class="pricing-rate" data-i18n-html="price.card1.rate">240-280<span class="unit">€ / h</span></div>
-          <div class="pricing-vat" data-i18n="price.card1.vat">Incl. VAT 25.5% · 301-351 €/h</div>
+          <div class="pricing-rate" data-i18n-html="price.card1.rate">250-300<span class="unit">€ / h</span></div>
+          <div class="pricing-vat" data-i18n="price.card1.vat">Incl. VAT 25.5% · 314-377 €/h</div>
           <p class="pricing-note" data-i18n="price.card1.note">The hourly rate depends on complexity. For more demanding or non-Finnish-language work, we agree the rate separately.</p>
         </div>
         <div class="pricing-card">
           <span class="pricing-eyebrow" data-i18n="price.card2.eyebrow">02 / Business</span>
           <h3 class="pricing-title" data-i18n="price.card2.title">Business, <em>settled.</em></h3>
-          <div class="pricing-rate" data-i18n-html="price.card2.rate">240-300<span class="unit">€ / h</span></div>
-          <div class="pricing-vat" data-i18n="price.card2.vat">Incl. VAT 25.5% · 301-376 €/h</div>
+          <div class="pricing-rate" data-i18n-html="price.card2.rate">300-350<span class="unit">€ / h</span></div>
+          <div class="pricing-vat" data-i18n="price.card2.vat">Incl. VAT 25.5% · 377-439 €/h</div>
           <p class="pricing-note" data-i18n="price.card2.note">Everyday matters, larger transactions, court and arbitration proceedings. For large-scale projects - a fixed fee.</p>
         </div>
         <div class="pricing-card">
           <span class="pricing-eyebrow" data-i18n="price.card3.eyebrow">03 / State legal aid</span>
           <h3 class="pricing-title" data-i18n="price.card3.title">When <em>income is low.</em></h3>
-          <div class="pricing-rate" data-i18n-html="price.card3.rate">110<span class="unit">€ / h</span></div>
-          <div class="pricing-vat" data-i18n="price.card3.vat">Incl. VAT 25.5% · 138 €/h</div>
+          <div class="pricing-rate" data-i18n-html="price.card3.rate">120<span class="unit">€ / h</span></div>
+          <div class="pricing-vat" data-i18n="price.card3.vat">Incl. VAT 25.5% · 151 €/h</div>
           <p class="pricing-note" data-i18n="price.card3.note">The Finnish state pays for legal help at lower income levels. At the first meeting we explain the process and required documents.</p>
         </div>
       </div>
@@ -2178,8 +2179,8 @@
       </div>
       <div class="booking-grid">
         <div class="booking-main">
-          <a href="mailto:tere@lexoria.ee" class="booking-cta">
-            tere@lexoria.ee <span class="arrow">↗</span>
+          <a href="mailto:info@lexoria.fi" class="booking-cta">
+            info@lexoria.fi <span class="arrow">↗</span>
           </a>
           <dl class="booking-options">
             <div class="row"><dt class="label" data-i18n="book.opt.client.label">Client</dt><dd data-i18n-html="book.opt.client.value">Private <span class="sep">·</span> Business</dd></div>
@@ -2279,7 +2280,7 @@
       'menu.04.label': 'Team', 'menu.04.sub': 'Four partners',
       'menu.05.label': 'About', 'menu.05.sub': 'Since 2010',
       'menu.06.label': 'Journal', 'menu.06.sub': 'Law review',
-      'menu.07.label': 'Fees', 'menu.07.sub': 'From €110/h',
+      'menu.07.label': 'Fees', 'menu.07.sub': 'From €120/h',
       'menu.08.label': 'Book', 'menu.08.sub': 'Consultation',
       'aside.contact': 'Contact',
       'aside.office': 'Office',
@@ -2311,8 +2312,8 @@
       'pos.pillar1.body': 'Same name, same doors. In Helsinki since 2010.',
       'pos.pillar2.title': 'Full <em>service</em>',
       'pos.pillar2.body': 'Private, business, documents. The whole of law under one roof.',
-      'pos.pillar3.title': 'Two <em>languages</em>',
-      'pos.pillar3.body': 'Finnish and English. In your language, at your pace.',
+      'pos.pillar3.title': 'Three <em>languages</em>',
+      'pos.pillar3.body': 'Finnish, English and Estonian. In your language, at your pace.',
       'pos.pillar4.title': 'Discreet <em>counsel</em>',
       'pos.pillar4.body': 'Your matters stay with us. You talk to the public.',
       'svc.chapter': 'Services',
@@ -2365,18 +2366,18 @@
       'price.h2': 'Clear<br><em>numbers.</em>',
       'price.card1.eyebrow': '01 / Private',
       'price.card1.title': 'Your <em>life, your rights.</em>',
-      'price.card1.rate': '240-280<span class="unit">€ / h</span>',
-      'price.card1.vat': 'Incl. VAT 25.5% · 301-351 €/h',
+      'price.card1.rate': '250-300<span class="unit">€ / h</span>',
+      'price.card1.vat': 'Incl. VAT 25.5% · 314-377 €/h',
       'price.card1.note': 'The hourly rate depends on complexity. For more demanding or non-Finnish-language work, we agree the rate separately.',
       'price.card2.eyebrow': '02 / Business',
       'price.card2.title': 'Business, <em>settled.</em>',
-      'price.card2.rate': '240-300<span class="unit">€ / h</span>',
-      'price.card2.vat': 'Incl. VAT 25.5% · 301-376 €/h',
+      'price.card2.rate': '300-350<span class="unit">€ / h</span>',
+      'price.card2.vat': 'Incl. VAT 25.5% · 377-439 €/h',
       'price.card2.note': 'Everyday matters, larger transactions, court and arbitration proceedings. For large-scale projects - a fixed fee.',
       'price.card3.eyebrow': '03 / State legal aid',
       'price.card3.title': 'When <em>income is low.</em>',
-      'price.card3.rate': '110<span class="unit">€ / h</span>',
-      'price.card3.vat': 'Incl. VAT 25.5% · 138 €/h',
+      'price.card3.rate': '120<span class="unit">€ / h</span>',
+      'price.card3.vat': 'Incl. VAT 25.5% · 151 €/h',
       'price.card3.note': 'The Finnish state pays for legal help at lower income levels. At the first meeting we explain the process and required documents.',
       'price.foot1.lead': 'First consultation',
       'price.foot1.body': 'Up to 30 minutes free. If no client agreement is signed, no fee is charged.',
@@ -2449,7 +2450,7 @@ The answer is always yours.`,
       'menu.04.label': 'Tiimi', 'menu.04.sub': 'Neljä partneria',
       'menu.05.label': 'Meistä', 'menu.05.sub': 'Vuodesta 2010',
       'menu.06.label': 'Artikkelit', 'menu.06.sub': 'Oikeuslehti',
-      'menu.07.label': 'Hinnasto', 'menu.07.sub': 'Alkaen 110 €/h',
+      'menu.07.label': 'Hinnasto', 'menu.07.sub': 'Alkaen 120 €/h',
       'menu.08.label': 'Varaa', 'menu.08.sub': 'Konsultaatio',
       'aside.contact': 'Yhteys',
       'aside.office': 'Toimisto',
@@ -2481,8 +2482,8 @@ The answer is always yours.`,
       'pos.pillar1.body': 'Sama nimi, samat ovet. Helsingissä vuodesta 2010.',
       'pos.pillar2.title': 'Täys<em>palvelu</em>',
       'pos.pillar2.body': 'Yksityinen, yritys, asiakirjat. Koko oikeus saman katon alla.',
-      'pos.pillar3.title': 'Kaksi <em>kieltä</em>',
-      'pos.pillar3.body': 'Suomi ja englanti. Teidän kielellänne, teidän tahtiinne.',
+      'pos.pillar3.title': 'Kolme <em>kieltä</em>',
+      'pos.pillar3.body': 'Suomi, englanti ja viro. Teidän kielellänne, teidän tahtiinne.',
       'pos.pillar4.title': 'Diskreetti <em>neuvonta</em>',
       'pos.pillar4.body': 'Teidän asianne pysyvät meillä. Julkisuudelle puhutte te.',
       'svc.chapter': 'Palvelut',
@@ -2535,18 +2536,18 @@ The answer is always yours.`,
       'price.h2': 'Selkeitä<br><em>lukuja.</em>',
       'price.card1.eyebrow': '01 / Yksityinen',
       'price.card1.title': 'Elämänne, <em>oikeutenne.</em>',
-      'price.card1.rate': '240-280<span class="unit">€ / h</span>',
-      'price.card1.vat': 'Sis. ALV 25,5 % · 301-351 €/h',
+      'price.card1.rate': '250-300<span class="unit">€ / h</span>',
+      'price.card1.vat': 'Sis. ALV 25,5 % · 314-377 €/h',
       'price.card1.note': 'Tuntiveloitus riippuu tehtävän vaativuudesta. Vaativammassa tai vieraskielisessä työssä sovimme veloituksesta erikseen.',
       'price.card2.eyebrow': '02 / Yritys',
       'price.card2.title': 'Liiketoiminta <em>rauhoittuu.</em>',
-      'price.card2.rate': '240-300<span class="unit">€ / h</span>',
-      'price.card2.vat': 'Sis. ALV 25,5 % · 301-376 €/h',
+      'price.card2.rate': '300-350<span class="unit">€ / h</span>',
+      'price.card2.vat': 'Sis. ALV 25,5 % · 377-439 €/h',
       'price.card2.note': 'Päivittäiset asiat, laajemmat toimeksiannot, tuomioistuin- ja välimiesmenettelyt. Suurissa projekteissa - kiinteä hinta.',
       'price.card3.eyebrow': '03 / Valtion oikeusapu',
       'price.card3.title': 'Kun <em>tulot ovat pienet.</em>',
-      'price.card3.rate': '110<span class="unit">€ / h</span>',
-      'price.card3.vat': 'Sis. ALV 25,5 % · 138 €/h',
+      'price.card3.rate': '120<span class="unit">€ / h</span>',
+      'price.card3.vat': 'Sis. ALV 25,5 % · 151 €/h',
       'price.card3.note': 'Suomen valtio korvaa juristin palkkion pienempituloisille. Ensitapaamisessa selitämme menettelyn ja tarvittavat asiakirjat.',
       'price.foot1.lead': 'Ensimmäinen konsultaatio',
       'price.foot1.body': 'Enintään 30 minuuttia maksutta. Jos toimeksiantoa ei synny, palkkiota ei peritä.',
