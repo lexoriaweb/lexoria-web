@@ -4,11 +4,11 @@ const fs = require('fs');
 const path = require('path');
 
 const CATALOG = {
-  'doc-01': { price: 29, file: 'toimeksiantosopimus.pdf', fi: 'Toimeksiantosopimus', en: 'Engagement agreement' },
-  'doc-02': { price: 39, file: 'testamentti-fi-ee.pdf', fi: 'Testamentti suomi–viro', en: 'Will, Finnish–Estonian' },
-  'doc-03': { price: 29, file: 'testamentti-luonnos.pdf', fi: 'Testamentti toimeenpanijalla', en: 'Will with executor' },
-  'doc-04': { price: 39, file: 'edunvalvontavaltuutus.pdf', fi: 'Edunvalvontavaltuutus', en: 'Continuing power of attorney' },
-  'doc-05': { price: 15, file: 'kirjepohja.pdf', fi: 'Lexorian kirjepohja', en: 'Lexoria letterhead' },
+  'doc-01': { price: 29, file: 'toimeksiantosopimus.pdf', fi: 'Toimeksiantosopimus', en: 'Engagement agreement', et: 'Kliendileping' },
+  'doc-02': { price: 39, file: 'testamentti-fi-ee.pdf', fi: 'Testamentti suomi–viro', en: 'Will, Finnish–Estonian', et: 'Testament soome–eesti' },
+  'doc-03': { price: 29, file: 'testamentti-luonnos.pdf', fi: 'Testamentti toimeenpanijalla', en: 'Will with executor', et: 'Testament täitjaga' },
+  'doc-04': { price: 39, file: 'edunvalvontavaltuutus.pdf', fi: 'Edunvalvontavaltuutus', en: 'Continuing power of attorney', et: 'Tulevikuvolikiri' },
+  'doc-05': { price: 15, file: 'kirjepohja.pdf', fi: 'Lexorian kirjepohja', en: 'Lexoria letterhead', et: 'Lexoria kirjaplank' },
 };
 
 const PDF_DIR = path.join(__dirname, '_pdfs');
@@ -43,7 +43,22 @@ const COPY = {
     help: 'Need a bespoke document? Reply to this e-mail or book a consultation at lexoria.fi.',
     sign: 'Asianajotoimisto Lexoria Oy · Helsinki – Tallinn',
   },
+  et: {
+    subject: (n) => `Sinu dokumendid Lexoria dokumendipangast (${n})`,
+    hi: (name) => `Tere, ${name}!`,
+    lead: 'Täname tellimuse eest. Ostetud dokumendid on selle kirja manuses PDF-vormingus.',
+    items: 'Tellitud dokumendid',
+    total: 'Kokku',
+    vat: 'sis. KM 25,5%',
+    test: 'Testtellimus · raha ei võetud.',
+    consent: 'Nõustusid müügitingimustega ja palusid kohest tarnet, mistõttu 14-päevane taganemisõigus lõppes failide saatmisega.',
+    terms: 'Müügitingimused',
+    help: 'Vajad just sulle koostatud dokumenti? Vasta sellele kirjale või broneeri konsultatsioon aadressil lexoria.fi.',
+    sign: 'Asianajotoimisto Lexoria Oy · Helsinki – Tallinn',
+  },
 };
+
+const SHOP_NAME = { fi: 'Asiakirjapankki', en: 'Document Bank', et: 'Dokumendipank' };
 
 function esc(s) {
   return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -61,7 +76,7 @@ function buildHtml(lang, name, items, total, orderNo) {
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ECE7DD;">
         <tr><td style="padding:0 0 28px;font-family:Menlo,Consolas,monospace;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:#0F1419;">
-          LEXORIA <span style="color:#6B6B6B;">· ${lang === 'fi' ? 'Asiakirjapankki' : 'Document Bank'}</span>
+          LEXORIA <span style="color:#6B6B6B;">· ${SHOP_NAME[lang]}</span>
         </td></tr>
         <tr><td style="font-family:Georgia,'Times New Roman',serif;font-size:28px;line-height:1.15;color:#0F1419;padding:0 0 18px;">${esc(c.hi(name))}</td></tr>
         <tr><td style="font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:1.5;color:#0F1419;padding:0 0 28px;">${c.lead}</td></tr>
@@ -93,7 +108,7 @@ module.exports = async (req, res) => {
 
   const name = String(body.name || '').trim().slice(0, 120);
   const email = String(body.email || '').trim().slice(0, 200);
-  const lang = body.lang === 'fi' ? 'fi' : 'en';
+  const lang = COPY[body.lang] ? body.lang : 'en';
   const skus = Array.isArray(body.skus) ? [...new Set(body.skus.map(String))] : [];
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
   const items = skus.filter((s) => CATALOG[s]).map((s) => ({ sku: s, ...CATALOG[s] }));

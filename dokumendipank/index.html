@@ -20,10 +20,10 @@
   (function(){
     try {
       // On lexoria.fi the shop is served under a path named in the visitor's language
-      var byPath = { asiakirjapankki: 'fi', 'document-bank': 'en' }[location.pathname.replace(/\//g, '')];
+      var byPath = { asiakirjapankki: 'fi', 'document-bank': 'en', dokumendipank: 'et' }[location.pathname.replace(/\//g, '')];
       var cached = localStorage.getItem('lex_lang');
       var hint = (navigator.language || 'en').toLowerCase().slice(0,2);
-      var lang = byPath || (cached === 'fi' || cached === 'en' ? cached : hint === 'fi' ? 'fi' : 'en');
+      var lang = byPath || (/^(fi|en|et)$/.test(cached) ? cached : /^(fi|et)$/.test(hint) ? hint : 'en');
       document.documentElement.lang = lang;
       document.documentElement.dataset.lang = lang;
     } catch(e){}
@@ -38,6 +38,7 @@
     --maroon: #5B21B6;
     --maroon-soft: #C7BEE5;
     --pebble: #6B6B6B;
+    --card: #F7F4EE;
 
     --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 32px;
     --s-5: 48px; --s-6: 64px; --s-7: 96px; --s-8: 128px;
@@ -654,17 +655,14 @@
     padding: var(--s-7) 0 var(--s-8);
     background: var(--paper);
   }
-  .shop-section .chapter-block { margin-bottom: var(--s-5); }
+  .shop-section .chapter-block { margin-bottom: var(--s-4); }
 
   .shop-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--s-3);
-    padding: var(--s-2) 0;
     margin-bottom: var(--s-4);
-    border-top: 1px solid rgba(15, 20, 25, 0.12);
-    border-bottom: 1px solid rgba(15, 20, 25, 0.12);
   }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .chip {
@@ -745,11 +743,26 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--s-5) var(--s-4);
   }
-  .product-card { display: flex; flex-direction: column; min-width: 0; }
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--card);
+    border: 1px solid rgba(15, 20, 25, 0.1);
+    box-shadow: 0 1px 2px rgba(15, 20, 25, 0.04);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.3s ease;
+  }
+  @media (hover: hover) {
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(15, 20, 25, 0.22);
+      box-shadow: 0 28px 48px -28px rgba(15, 20, 25, 0.45);
+    }
+  }
   .card-media {
     position: relative;
     display: block;
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 4 / 3;
     background: var(--paper-soft);
     overflow: hidden;
     color: inherit;
@@ -759,7 +772,7 @@
     position: absolute;
     left: 50%;
     top: 14%;
-    width: 72%;
+    width: 68%;
     height: auto;
     translate: -50% 0;
     background: #fff;
@@ -768,16 +781,16 @@
   }
   .card-tag {
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: 14px;
+    left: 14px;
     z-index: 1;
-    padding: 6px 9px;
-    background: var(--paper);
+    padding: 7px 10px;
+    background: var(--ink);
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--maroon);
+    color: var(--paper);
   }
   .card-quick {
     position: absolute;
@@ -787,8 +800,9 @@
     translate: -50% 12px;
     opacity: 0;
     padding: 11px 16px;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 8px 24px -8px rgba(15, 20, 25, 0.4);
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
@@ -797,13 +811,13 @@
     transition: opacity 0.35s, translate 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
   @media (hover: hover) {
-    .card-media:hover .card-sheet { translate: -50% -12px; }
-    .card-media:hover .card-quick,
+    .product-card:hover .card-sheet { translate: -50% -10px; }
+    .product-card:hover .card-quick,
     .card-media:focus-visible .card-quick { opacity: 1; translate: -50% 0; }
   }
-  .card-info { display: flex; flex-direction: column; flex: 1; padding-top: var(--s-2); }
+  .card-info { display: flex; flex-direction: column; flex: 1; padding: 20px; }
   .card-meta {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 9.5px;
     letter-spacing: 0.2em;
@@ -813,41 +827,32 @@
   .card-title {
     margin-bottom: 8px;
     font-family: 'Newsreader', serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
     overflow-wrap: anywhere;
   }
   .card-title a { color: inherit; text-decoration: none; }
-  .card-title em { font-style: italic; color: var(--maroon); }
+  .card-title em { font-style: italic; font-weight: 400; color: var(--maroon); }
   .card-lede {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    margin-bottom: var(--s-2);
+    margin-bottom: 20px;
     font-family: 'Newsreader', serif;
     font-weight: 300;
     font-size: 15px;
     line-height: 1.5;
     color: var(--pebble);
   }
-  .card-row {
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-2);
-    padding-top: var(--s-2);
-    border-top: 1px solid rgba(15, 20, 25, 0.12);
-  }
-  .card-price { display: flex; align-items: baseline; gap: 8px; }
+  .card-row { margin-top: auto; display: flex; flex-direction: column; gap: 14px; }
+  .card-price { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
   .card-price .amount {
     font-family: 'Newsreader', serif;
     font-weight: 400;
-    font-size: 28px;
+    font-size: 30px;
     line-height: 1;
     letter-spacing: -0.015em;
     white-space: nowrap;
@@ -855,21 +860,23 @@
   .card-price .vat {
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
+    text-align: right;
     color: var(--pebble);
-    white-space: nowrap;
   }
   .card-add {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    background: transparent;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px 16px;
+    background: var(--ink);
     border: 1px solid var(--ink);
-    color: var(--ink);
+    color: var(--paper);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -877,8 +884,9 @@
     transition: background 0.3s, color 0.3s, border-color 0.3s;
   }
   .card-add .ico { font-size: 13px; line-height: 1; }
-  .card-add:hover { background: var(--ink); color: var(--paper); }
-  .card-add.in-cart { background: var(--maroon); border-color: var(--maroon); color: var(--paper); }
+  .card-add:hover { background: var(--maroon); border-color: var(--maroon); }
+  .card-add.in-cart { background: transparent; border-color: var(--maroon); color: var(--maroon); }
+  .card-add.in-cart:hover { background: var(--maroon); color: var(--paper); }
 
   .promo-card {
     display: flex;
@@ -933,7 +941,7 @@
 
   @media (max-width: 1024px) {
     .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .shop-bar { flex-direction: column; align-items: stretch; gap: 12px; padding: 12px 0; }
+    .shop-bar { flex-direction: column; align-items: stretch; gap: 12px; }
     .shop-tools { justify-content: space-between; }
   }
   @media (max-width: 640px) {
@@ -980,12 +988,12 @@
     .view-grid .card-meta,
     .view-grid .card-lede,
     .view-grid .card-price .vat { display: none; }
-    .view-grid .card-info { padding-top: 12px; }
+    .view-grid .card-info { padding: 12px; }
     /* Narrow columns: sentence case so long Finnish compounds fit on a line */
-    .view-grid .card-title { margin-bottom: 0; font-size: 15px; letter-spacing: 0; line-height: 1.25; text-transform: none; hyphens: auto; }
-    .view-grid .card-row { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 10px; border-top: 0; }
+    .view-grid .card-title { margin-bottom: 12px; font-size: 15px; letter-spacing: 0; line-height: 1.25; hyphens: auto; }
+    .view-grid .card-row { gap: 10px; }
     .view-grid .card-price .amount { font-size: 22px; }
-    .view-grid .card-add { justify-content: center; padding: 12px 6px; font-size: 9px; letter-spacing: 0.16em; }
+    .view-grid .card-add { gap: 6px; padding: 12px 4px; font-size: 9px; letter-spacing: 0.12em; }
     .view-grid .promo-card { gap: var(--s-3); padding: var(--s-2); }
     .view-grid .promo-card .h { font-size: 20px; }
     .view-grid .promo-card .cta { font-size: 9px; letter-spacing: 0.16em; }
@@ -2007,7 +2015,10 @@
     .legal-overlay .menu-top { align-items: center; }
     .legal-overlay .menu-brand .brand-tag { display: none; }
     .legal-actions { gap: var(--s-3); }
+    /* Three languages plus a worded close button do not fit a phone header */
     .legal-actions .menu-close { padding-top: 0; }
+    .legal-actions .menu-close span:first-child { display: none; }
+    .legal-actions .menu-close [aria-hidden] { font-size: 26px; }
     .legal-tabs { gap: var(--s-3); }
     .legal-doc { padding: var(--s-5) var(--edge-x) var(--s-7); }
     .legal-doc h3 { margin-top: var(--s-4); }
@@ -2101,6 +2112,7 @@
     --paper: #FFFFFF;
     --paper-soft: #F4F4F1;
     --paper-hover: #EAEAE5;
+    --card: #FFFFFF;
   }
   .paper-toggle {
     position: fixed;
@@ -2165,6 +2177,8 @@
         <button type="button" data-lang="fi">FI</button>
         <span class="sep" aria-hidden="true">·</span>
         <button type="button" data-lang="en">EN</button>
+        <span class="sep" aria-hidden="true">·</span>
+        <button type="button" data-lang="et">ET</button>
       </span>
       <button class="nav-cart" id="cartBtn" aria-label="Open cart">
         <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2228,6 +2242,8 @@
           <button type="button" data-lang="fi">FI</button>
           <span class="sep" aria-hidden="true">·</span>
           <button type="button" data-lang="en">EN</button>
+          <span class="sep" aria-hidden="true">·</span>
+          <button type="button" data-lang="et">ET</button>
         </div>
       </div>
       <a class="menu-cta" href="https://lexoriaweb.vercel.app/#broneeri">
@@ -2439,6 +2455,8 @@
           <button type="button" data-lang="fi">FI</button>
           <span class="sep" aria-hidden="true">·</span>
           <button type="button" data-lang="en">EN</button>
+          <span class="sep" aria-hidden="true">·</span>
+          <button type="button" data-lang="et">ET</button>
         </span>
       </div>
     </div>
@@ -2497,6 +2515,8 @@
         <button type="button" data-lang="fi">FI</button>
         <span class="sep" aria-hidden="true">·</span>
         <button type="button" data-lang="en">EN</button>
+        <span class="sep" aria-hidden="true">·</span>
+        <button type="button" data-lang="et">ET</button>
       </div>
       <button class="menu-close" id="legalClose" aria-label="Close">
         <span data-i18n="menu.close">Close</span>
@@ -2880,6 +2900,171 @@
       'foot.contact': 'Yhteystiedot',
       'foot.bank': 'Verkkopankki',
       'foot.paynote': 'Turvallinen maksu Montonion kautta'
+    },
+    et: {
+      'nav.back': 'Lexoria.fi',
+      'nav.brand': 'Dokumendipank',
+      'nav.cart': 'Ostukorv',
+      'nav.menu': 'Menüü',
+      'menu.close': 'Sulge',
+      'menu.catalog': 'Valik',
+      'menu.how': 'Kuidas see toimib',
+      'menu.bespoke': 'Eritellimus',
+      'menu.main': 'Lexoria.fi',
+      'menu.lang': 'Keel',
+      'menu.book': 'Broneeri konsultatsioon',
+      'hero.chapter': 'Dokumendipank',
+      'hero.h1': 'Valmis dokumendid,<br><em>õiguslikult kindlad.</em>',
+      'hero.lede': 'Advokaatide koostatud dokumendid. Maksa, saad <em>PDF-i e-postile</em>, täida ja allkirjasta samal päeval.',
+      'shop.chapter': 'Valik',
+      'shop.h2': 'Viis dokumenti.<br><em>Üks riiul.</em>',
+      'shop.swipe': 'Libista',
+      'shop.viewSwipe': 'Libista',
+      'shop.viewGrid': 'Ruudustik',
+      'cat.engagement': 'Leping',
+      'cat.inheritance': 'Pärimine',
+      'cat.authority': 'Volitus',
+      'cat.office': 'Büroo',
+      'p1.title': 'Kliendi<em>leping</em>',
+      'p1.lede': 'Advokaadibüroo ja kliendi vaheline kliendileping (toimeksiantosopimus), nagu seda kasutavad Soome advokaadibürood. Kliendi tuvastamine, huvide konflikti kontroll, tasu ja õigusabikulude kindlustus.',
+      'p1.f1': 'Kliendi tuvastamine ja huvide konflikti kontroll',
+      'p1.f2': 'Tunnitasu, ettemaks ja arveldamine',
+      'p1.f3': 'Õigusabikulude kindlustus ja riigi õigusabi',
+      'p2.title': 'Testament <em>soome–eesti</em>',
+      'p2.lede': 'Kakskeelne testament Soomes elavale Eesti kodanikule. Eesti õiguse valik ELi pärimismääruse alusel.',
+      'p2.f1': 'Paralleelne soome- ja eestikeelne tekst',
+      'p2.f2': 'Kohaldatava õiguse valik (EL 650/2012)',
+      'p2.f3': 'Vara mõlemas riigis, tunnistajate plokk',
+      'p3.title': 'Testament <em>täitjaga</em>',
+      'p3.lede': 'Soome testament, milles määratakse üks pärija ja testamenditäitja. Välistab abikaasa õiguse varale, hõlmab digivara ja asepärijat.',
+      'p3.f1': 'Testamenditäitja volitused',
+      'p3.f2': 'Abikaasa õiguse välistamine ja asepärija',
+      'p3.f3': 'Digivara ja tunnistajate kinnitus',
+      'p4.title': 'Tuleviku<em>volikiri</em>',
+      'p4.lede': 'Edunvalvontavaltuutus: määra, kes korraldab sinu raha-, vara- ja isiklikke asju, kui sa ise enam ei suuda. Kinnitab Soome Digi- ja Rahvastikuandmete Amet (DVV).',
+      'p4.f1': 'Volinik, asevolinik ja erisoovid',
+      'p4.f2': 'Pank, kinnisvara, maksud ja ametiasutused',
+      'p4.f3': 'Digivara, terviseandmed, tunnistajad',
+      'p5.title': 'Lexoria <em>kirjaplank</em>',
+      'p5.lede': 'Asianajotoimisto Lexoria Oy ametlik kirjaplank advokatuuri märgi, aadressiploki ja jalusega.',
+      'p5.f1': 'Päis advokatuuri märgiga',
+      'p5.f2': 'Kuupäev, saaja ja teema',
+      'p5.f3': 'Allkiri ja ettevõtte jalus',
+      'price.vat15': 'Sis. KM · 11,95 € ilma',
+      'price.vat29': 'Sis. KM · 23,11 € ilma',
+      'price.vat39': 'Sis. KM · 31,08 € ilma',
+      'btn.add': 'Lisa korvi',
+      'btn.buy': 'Osta kohe',
+      'trust.k1': 'Koostaja', 'trust.v1': '<em>Advokaadid</em>',
+      'trust.k2': 'Vorming', 'trust.v2': 'Printimisvalmis <em>PDF</em>',
+      'trust.k3': 'Tarne', 'trust.v3': 'E-postile, <em>kohe</em>',
+      'trust.k4': 'Ülevaatus', 'trust.v4': 'Uuendatud <em>2026</em>',
+      'how.chapter': 'Kuidas see toimib',
+      'how.h2': 'Kolm sammu.<br><em>Allkiri täna.</em>',
+      'how.s1.num': '01 / Sirvi',
+      'how.s1.title': 'Vali <em>dokument</em>',
+      'how.s1.body': 'Viis põhja, mis katavad kõige sagedamini küsitud teemad. Loe kirjeldus enne ostu läbi.',
+      'how.s2.num': '02 / Maksa',
+      'how.s2.title': 'Kassa <em>minutiga</em>',
+      'how.s2.body': 'Nimi ja e-post, seejärel makse. Soome pangamaksed ja kaardid Montonio kaudu.',
+      'how.s3.num': '03 / Saa kätte',
+      'how.s3.title': 'PDF <em>sinu postkastis</em>',
+      'how.s3.body': 'Dokument jõuab sinu e-postile kohe pärast makset. Prindi või täida digitaalselt, allkirjasta paberil või elektrooniliselt.',
+      'custom.chapter': 'Eritellimus',
+      'custom.h2': 'Kui ei sobi,<br><em>kirjutame ise.</em>',
+      'custom.cta.book': 'Broneeri konsultatsioon',
+      'custom.cta.back': 'Lexoria.fi',
+      'cart.h': 'Sinu <em>ostukorv</em>',
+      'cart.close': 'Sulge',
+      'cart.empty.lead': 'Ostukorv on tühi',
+      'cart.empty.msg': 'Lisa dokument, <em>et alustada.</em>',
+      'cart.empty.hint': 'Viis põhja. Alates 15 €.',
+      'cart.total': 'Kokku',
+      'cart.vat': 'Sis. KM 25,5%',
+      'cart.checkout': 'Edasi kassasse',
+      'cart.remove': 'Eemalda',
+      'cart.itemMeta': 'PDF · e-postiga',
+      'co.h': 'Kas<em>sa</em>',
+      'co.name': 'Nimi',
+      'co.email': 'E-post',
+      'co.emailHint': 'PDF saadetakse sellele aadressile.',
+      'co.test': 'Testrežiim · raha ei võeta. Montonio pangamaksed ja kaardid lisanduvad järgmisena.',
+      'co.pay': 'Maksa',
+      'co.back': '← Tagasi ostukorvi',
+      'co.sending': 'Saadan…',
+      'co.done.h': 'Saadetud <em>sinu e-postile</em>',
+      'co.done.msg': 'Sinu dokumendid saadeti aadressile',
+      'co.done.hint': 'Minuti pärast ikka pole? Vaata rämpsposti kausta.',
+      'co.close': 'Sulge',
+      'co.errGeneric': 'Saatmine ebaõnnestus. Proovi uuesti või kirjuta info@lexoria.fi.',
+      'co.errMail': 'E-kirjade saatmine pole veel seadistatud.',
+      'co.errTest': 'Testrežiim: kuni lexoria.fi domeen on kinnitamata, saab e-kirju saata ainult poe omaniku aadressile.',
+      'co.errFields': 'Sisesta nimi ja kehtiv e-posti aadress.',
+      'co.consent': 'Nõustun <a href="#terms" data-legal="terms">müügitingimuste</a> ja <a href="#privacy" data-legal="privacy">privaatsusteatega</a>. Palun toimetada PDF kätte kohe ja mõistan, et kaotan 14-päevase taganemisõiguse, kui dokument on saadetud.',
+      'co.errConsent': 'Jätkamiseks nõustu tingimustega.',
+      'legal.tag': 'Tingimused ja privaatsus',
+      'notice.text': 'Jälgimist ei ole. Pood salvestab sinu brauserisse ainult keele, vaate-eelistused ja ostukorvi. <a href="#cookies" data-legal="cookies">Loe lähemalt</a>',
+      'notice.ok': 'OK',
+      'hero.cta': 'Sirvi dokumente',
+      'hero.link': 'Kuidas see toimib',
+      'hero.p1': 'PDF e-postile minutitega',
+      'hero.p2': 'Hinnad sis. KM',
+      'hero.p3': 'Alates 15 €',
+      'shop.all': 'Kõik',
+      'shop.sort': 'Järjesta',
+      'shop.footnote': 'Kõik hinnad sisaldavad käibemaksu 25,5% · tarne PDF-failina e-postile',
+      'sort.featured': 'Soovitatud',
+      'sort.priceAsc': 'Hind, odavamad enne',
+      'sort.priceDesc': 'Hind, kallimad enne',
+      'sort.name': 'Nimi, A–Ü',
+      'card.quick': 'Kiirvaade',
+      'card.page': 'lehekülg',
+      'card.pages': 'lehekülge',
+      'card.vat': 'sis. KM',
+      'btn.inCart': 'Korvis',
+      'promo.k': 'Eritellimus',
+      'promo.h': 'Vajad <em>just sulle koostatut?</em>',
+      'promo.cta': 'Broneeri konsultatsioon',
+      'pdp.preview': 'Eelvaade · lk 1/{n}',
+      'pdp.p1': 'PDF e-postile minutitega',
+      'pdp.p2': 'Advokaatide koostatud',
+      'pdp.p3': 'Turvaline makse Montonio kaudu',
+      'pdp.inside': 'Sisu',
+      'pdp.spec.format': 'Vorming',
+      'pdp.spec.formatVal': 'PDF, A4, printimisvalmis',
+      'pdp.spec.length': 'Pikkus',
+      'pdp.spec.lang': 'Keel',
+      'pdp.spec.delivery': 'Tarne',
+      'pdp.spec.deliveryVal': 'E-postile, mõne minutiga',
+      'lang.fi': 'soome',
+      'lang.fiet': 'soome ja eesti kõrvuti',
+      'pdp.acc.delivery': 'Tarne',
+      'pdp.acc.deliveryBody': 'PDF saadetakse kassas antud e-posti aadressile, tavaliselt mõne minuti jooksul pärast makset. Postiga midagi ei saadeta. <a href="#payment" data-legal="payment">Makse ja tarne</a>',
+      'pdp.acc.use': 'Kasutamine ja litsents',
+      'pdp.acc.useBody': 'Võid põhja täita, printida ja allkirjastada nii mitu korda, kui oma asjades vajad. See on üldine näidis, mitte sinu olukorra kohta antud õigusnõu, ning seda ei tohi edasi müüa ega jagada. <a href="#terms" data-legal="terms">Müügitingimused</a>',
+      'pdp.acc.refund': 'Taganemine ja tagasimaksed',
+      'pdp.acc.refundBody': 'Kuna PDF toimetatakse kätte kohe, lõpeb 14-päevane taganemisõigus siis, kui dokument on saadetud. Kui fail on vigane või ei jõua kohale, saadame selle uuesti või tagastame raha. <a href="#refunds" data-legal="refunds">Taganemine ja tagasimaksed</a>',
+      'pdp.more': 'Sulle võib veel vaja minna',
+      'cart.browse': 'Sirvi dokumente',
+      'cart.secure': 'Internetipank · Visa · Mastercard · turvaline makse Montonio kaudu',
+      'toast.added': 'Lisatud ostukorvi',
+      'foot.lead': 'Osa',
+      'foot.meta': 'Advokaat · aastast 2010',
+      'foot.reg': '© 2026 · Asianajotoimisto Lexoria Oy',
+      'foot.main': 'Lexoria.fi',
+      'foot.h.company': 'Müüja',
+      'foot.h.legal': 'Tingimused ja privaatsus',
+      'foot.h.pay': 'Makseviisid',
+      'foot.bid': 'Registrikood',
+      'foot.vatno': 'KMKR',
+      'foot.terms': 'Müügitingimused',
+      'foot.privacy': 'Privaatsusteade',
+      'foot.cookies': 'Küpsised',
+      'foot.refunds': 'Taganemine ja tagasimaksed',
+      'foot.payment': 'Makse ja tarne',
+      'foot.contact': 'Kontakt',
+      'foot.bank': 'Internetipank',
+      'foot.paynote': 'Turvaline makse Montonio kaudu'
     }
   };
 
@@ -2887,7 +3072,7 @@
   // i18n apply
   // =====================================================
   const langButtons = document.querySelectorAll('button[data-lang]');
-  const SHOP_PATHS = { fi: '/asiakirjapankki', en: '/document-bank' };
+  const SHOP_PATHS = { fi: '/asiakirjapankki', en: '/document-bank', et: '/dokumendipank' };
   // True when served through lexoria.fi's rewrite rather than on the shop's own domain
   const onMainSite = /^\/(asiakirjapankki|document-bank|dokumendipank)\/?$/.test(location.pathname);
   function setLang(lang, persist) {
@@ -2997,7 +3182,6 @@
 
   function fmtEUR(n) {
     const lang = document.documentElement.dataset.lang || 'en';
-    if (lang === 'fi') return n.toFixed(0).replace('.', ',') + ' €';
     return n.toFixed(0) + ' €';
   }
 
@@ -3103,7 +3287,7 @@
           <h3 class="card-title"><a href="#${p.sku}" data-open="${p.sku}">${pTitle(p)}</a></h3>
           <p class="card-lede">${t(p.n + '.lede')}</p>
           <div class="card-row">
-            <span class="card-price"><span class="amount">${fmtEUR(p.price)}</span><span class="vat">${t('card.vat')}</span></span>
+            <span class="card-price"><span class="amount">${fmtEUR(p.price)}</span><span class="vat">${t('price.vat' + p.price)}</span></span>
             <button type="button" class="card-add" data-add="${p.sku}"></button>
           </div>
         </div>
@@ -3764,6 +3948,155 @@
           <p>Jos sinulla on kysyttävää tilauksesta, lähetä meille sähköpostia ja mainitse tilaussähköpostissa oleva tilausnumero. Katso myös <a href="#refunds" data-legal="refunds">Peruutus ja palautukset</a>.</p>
           <h3>Oikeudelliset palvelut</h3>
           <p>Jos tarvitset räätälöidyn asiakirjan tai oikeudellista neuvontaa, varaa konsultaatio osoitteessa <a href="https://lexoriaweb.vercel.app/#broneeri">Lexoria.fi</a>.</p>`
+      }
+    },
+    et: {
+      updated: 'Uuendatud 4.10.2026',
+      terms: {
+        tab: 'Tingimused',
+        title: 'Müügi<em>tingimused</em>',
+        body: `
+          <h3>1. Müüja</h3>
+          <p>Asianajotoimisto Lexoria Oy (Soome registrikood ehk Y-tunnus 3561005-2, käibemaksukohustuslase number FI35610052), Vekarakatu 14, 13500 Hämeenlinna, Soome. E-post <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>, telefon <a href="tel:+358456560060">+358 45 656 0060</a>. Need tingimused kehtivad kõigile Lexoria dokumendipangas tehtud ostudele.</p>
+          <h3>2. Tooted</h3>
+          <p>Tooted on digitaalsed dokumendipõhjad PDF-vormingus. Iga põhja sisu on kirjeldatud tootekaardil.</p>
+          <p>Põhjad on üldised näidised. Need ei ole sinu konkreetse olukorra kohta antud õigusnõu ning põhja ostmine ei loo kliendisuhet Lexoriaga. Vastutad ise selle eest, et põhi sobib sinu olukorraga ning et täidad ja allkirjastad selle õigesti. Kui vajad just sulle koostatud dokumenti, broneeri konsultatsioon.</p>
+          <h3>3. Hinnad</h3>
+          <p>Hinnad on eurodes ja sisaldavad käibemaksu 25,5%. Tarne- ega käsitlustasusid ei ole. Tellimusele kehtib tellimise hetkel näidatud hind.</p>
+          <h3>4. Tellimine</h3>
+          <p>Lisa põhjad ostukorvi, sisesta oma nimi ja e-posti aadress, nõustu nende tingimustega ja maksa. Leping on sõlmitud, kui makse on kinnitatud. Tellimuse kinnitus saadetakse e-postiga koos dokumentidega. Ostja peab olema vähemalt 18-aastane.</p>
+          <h3>5. Maksmine</h3>
+          <p>Makseid vahendab Montonio Finance UAB. Makseviise ja maksmise turvalisust kirjeldab jaotis <a href="#payment" data-legal="payment">Makse ja tarne</a>.</p>
+          <h3>6. Tarne</h3>
+          <p>Põhjad toimetatakse kätte PDF-manustena tellimuses antud e-posti aadressile, tavaliselt mõne minuti jooksul pärast makse kinnitamist. Postiga midagi ei saadeta.</p>
+          <h3>7. Taganemisõigus</h3>
+          <p>Kuna toode on digitaalne sisu, mis toimetatakse sinu palvel kätte kohe, lõpeb 14-päevane taganemisõigus siis, kui dokumendid on saadetud. Vaata <a href="#refunds" data-legal="refunds">Taganemine ja tagasimaksed</a>.</p>
+          <h3>8. Litsents</h3>
+          <p>Võid ostetud põhja täita, printida ja allkirjastada nii mitu korda, kui oma asjades vajad. Põhja ei tohi edasi müüa, avaldada ega muul viisil levitada. Autoriõigus jääb Asianajotoimisto Lexoria Oy-le.</p>
+          <h3>9. Puudused ja vastutus</h3>
+          <p>Kui fail on vigane või ei vasta kirjeldusele, parandame selle, saadame uuesti või tagastame hinna. Niivõrd, kuivõrd kohustuslik õigus lubab, ei vastuta Lexoria kaudse kahju eest ega kahju eest, mis tuleneb põhja täitmise või kasutamise viisist, ning vastutus piirdub makstud hinnaga. Need tingimused ei piira õigusi, mis tarbijal on kohustusliku õiguse alusel.</p>
+          <h3>10. Kohaldatav õigus ja vaidlused</h3>
+          <p>Lepingule kohaldatakse Soome õigust. Palun võta kõigepealt ühendust meiega. Tarbija võib pöörduda Soome tarbijanõustamise poole (<a href="https://www.kuluttajaneuvonta.fi" target="_blank" rel="noopener">kuluttajaneuvonta.fi</a>) ja anda asja lahendada Soome tarbijavaidluste komisjonile (<a href="https://www.kuluttajariita.fi" target="_blank" rel="noopener">kuluttajariita.fi</a>). Vaidluse võib lahendada ka Kanta-Häme esimese astme kohus või tarbija elukoha kohus.</p>
+          <h3>11. Muudatused</h3>
+          <p>Võime neid tingimusi uuendada. Tellimusele kehtivad tellimise hetkel kehtinud tingimused.</p>`
+      },
+      privacy: {
+        tab: 'Privaatsus',
+        title: 'Privaatsus<em>teade</em>',
+        body: `
+          <h3>1. Vastutav töötleja</h3>
+          <p>Asianajotoimisto Lexoria Oy (Y-tunnus 3561005-2), Vekarakatu 14, 13500 Hämeenlinna, Soome. Andmekaitseküsimused: <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>.</p>
+          <h3>2. Milliseid andmeid kogume</h3>
+          <ul>
+            <li>Kassas antud nimi ja e-posti aadress</li>
+            <li>Tellimuse andmed: tooted, hind, tellimuse number, aeg ja tingimustega nõustumine</li>
+            <li>Makseteenuse pakkujalt saadud makse olek ja makseviide</li>
+            <li>Tellimust puudutavad sõnumid, mille meile saadad</li>
+            <li>Saidi kasutamisel tekkivad tehnilised logiandmed, näiteks IP-aadress ja brauseri tüüp</li>
+          </ul>
+          <p>Me ei saa ega salvesta sinu kaardinumbrit ega internetipanga tunnuseid.</p>
+          <h3>3. Eesmärgid ja õiguslikud alused</h3>
+          <ul>
+            <li>Tellimuse täitmine ja klienditeenindus: lepingu täitmine (isikuandmete kaitse üldmääruse art 6 lg 1 p b)</li>
+            <li>Raamatupidamine ja maksud: juriidiline kohustus (art 6 lg 1 p c)</li>
+            <li>Teenuse turvalisus, väärkasutuse tõkestamine ja õigusnõuete käsitlemine: õigustatud huvi (art 6 lg 1 p f)</li>
+          </ul>
+          <p>Me ei kasuta sinu andmeid turunduseks, profiilianalüüsiks ega automatiseeritud otsuste tegemiseks.</p>
+          <h3>4. Andmete saajad</h3>
+          <ul>
+            <li>Montonio Finance UAB (Leedu): maksete töötlemine</li>
+            <li>Resend (Ameerika Ühendriigid): tellimuse e-kirja edastamine</li>
+            <li>Vercel (Ameerika Ühendriigid): veebisaidi majutus</li>
+            <li>Google Fonts: saidi kirjatüübid laaditakse Google’ist, kes saab lehe laadimisel sinu IP-aadressi</li>
+            <li>Meie raamatupidamisteenuse pakkuja ja seaduse nõudel ametiasutused</li>
+          </ul>
+          <h3>5. Edastamine väljapoole ELi ja EMPd</h3>
+          <p>Osa neist teenusepakkujatest töötleb andmeid Ameerika Ühendriikides. Edastamine põhineb ELi ja USA andmekaitseraamistikul või Euroopa Komisjoni lepingu tüüptingimustel.</p>
+          <h3>6. Säilitamine</h3>
+          <p>Tellimuse ja makse andmeid säilitatakse Soome raamatupidamisseaduse kohaselt kuus aastat selle aasta lõpust, mil majandusaasta lõppes. Klienditeeninduse sõnumeid säilitatakse nii kaua, kui asja lahendamine nõuab. Tehnilisi logisid säilitatakse lühikest aega.</p>
+          <h3>7. Sinu õigused</h3>
+          <p>Võid taotleda juurdepääsu oma andmetele, nende parandamist või kustutamist, töötlemise piiramist ja andmete ülekandmist ning esitada vastuväite õigustatud huvil põhinevale töötlemisele. Saada taotlus aadressile <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>. Samuti võid esitada kaebuse Soome andmekaitseombudsmani büroole (<a href="https://tietosuoja.fi" target="_blank" rel="noopener">tietosuoja.fi</a>).</p>
+          <h3>8. Küpsised</h3>
+          <p>Pood ei kasuta jälgimis- ega reklaamiküpsiseid. Vaata <a href="#cookies" data-legal="cookies">Küpsised</a>.</p>`
+      },
+      cookies: {
+        tab: 'Küpsised',
+        title: 'Küpsised ja <em>salvestus</em>',
+        body: `
+          <h3>Jälgimist ei ole</h3>
+          <p>Pood ei sea oma küpsiseid ega kasuta analüütikat, reklaami ega sotsiaalmeedia jälgijaid. Seetõttu ei ole lehel ka küpsiste nõusolekuakent.</p>
+          <h3>Mida sinu brauserisse salvestatakse</h3>
+          <p>Sinu valikute meelespidamiseks salvestab pood brauseri kohalikku salvestusruumi allolevad väärtused. Need on sinu soovitud funktsioonide jaoks hädavajalikud ja neid ei saadeta meile.</p>
+          <dl class="legal-facts">
+            <dt>lex_lang</dt><dd>Sinu valitud keel</dd>
+            <dt>lex_view</dt><dd>Valiku vaade mobiilis (libistamine või ruudustik)</dd>
+            <dt>lex_paper</dt><dd>Sinu valitud taustavärv</dd>
+            <dt>lex_cart</dt><dd>Ostukorvis olevad dokumendid, kuni tellid või eemaldad need</dd>
+            <dt>lex_notice</dt><dd>Teave selle kohta, et oled salvestusteate sulgenud</dd>
+          </dl>
+          <h3>Kolmandad osapooled</h3>
+          <p>Maksmisel suunatakse sind Montonio ning sinu panga või kaardi väljaandja makseteenusesse, mis võib kasutada turvaliseks maksmiseks vajalikke küpsiseid. Kirjatüübid laaditakse Google Fontsist, mis küpsiseid ei sea, kuid saab sinu IP-aadressi.</p>
+          <h3>Kustutamine</h3>
+          <p>Võid salvestatud väärtused igal ajal kustutada, tühjendades selle saidi andmed oma brauseri seadetes.</p>`
+      },
+      refunds: {
+        tab: 'Tagastus',
+        title: 'Taganemine ja <em>tagasimaksed</em>',
+        body: `
+          <h3>Taganemisõigus</h3>
+          <p>Kaugmüügi korral on tarbijal tavaliselt 14 päeva aega ostust taganeda (Soome tarbijakaitseseaduse 6. peatükk).</p>
+          <p>Põhjad on elektrooniliselt kätte toimetatav digitaalne sisu. Kassas palud kohest tarnet ja kinnitad, et mõistad taganemisõiguse kaotamist pärast tarne toimumist. Kui dokumendid on sinu e-postile saadetud, ei saa ostust seetõttu enam taganeda (Soome tarbijakaitseseaduse 6. peatüki § 16). Seda kinnitab ka tellimuse e-kiri.</p>
+          <p>Kui oled maksnud, kuid dokumente ei ole veel saadetud, võid ostust taganeda, kirjutades aadressile <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>.</p>
+          <h3>Millal tagastame raha</h3>
+          <ul>
+            <li>Dokumendid ei jõudnud kohale ja neid ei ole võimalik kätte toimetada</li>
+            <li>Fail on vigane või ei vasta kirjeldusele</li>
+            <li>Sinult võeti raha kaks korda või vale summa</li>
+          </ul>
+          <h3>Kuidas pretensiooni esitada</h3>
+          <p>Kirjuta aadressile <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>, lisades tellimuse numbri ja lühikirjelduse. Kõigepealt saadame faili uuesti või parandame selle. Kui see probleemi ei lahenda, tagastame hinna sinu kasutatud makseviisile 14 päeva jooksul pretensiooni rahuldamisest.</p>
+          <h3>Ärikliendid</h3>
+          <p>Seadusest tulenev taganemisõigus kehtib ainult tarbijatele.</p>
+          <h3>Erimeelsused</h3>
+          <p>Kui me kokkuleppele ei jõua, võib tarbija pöörduda Soome tarbijanõustamise (<a href="https://www.kuluttajaneuvonta.fi" target="_blank" rel="noopener">kuluttajaneuvonta.fi</a>) ja tarbijavaidluste komisjoni (<a href="https://www.kuluttajariita.fi" target="_blank" rel="noopener">kuluttajariita.fi</a>) poole.</p>`
+      },
+      payment: {
+        tab: 'Makse',
+        title: 'Makse ja <em>tarne</em>',
+        body: `
+          <h3>Makseviisid</h3>
+          <ul>
+            <li>Soome internetipankade maksed</li>
+            <li>Visa ja Mastercard</li>
+          </ul>
+          <p>Hinnad on eurodes ja sisaldavad käibemaksu 25,5%. Kogu summa võetakse tellimuse esitamisel. Lisatasusid ei ole.</p>
+          <h3>Makseteenuse pakkuja</h3>
+          <p>Makseid töötleb Montonio Finance UAB, tegevusloaga makseasutus, mille üle teeb järelevalvet Leedu keskpank.</p>
+          <h3>Turvalisus</h3>
+          <p>Maksad Montonio ning oma panga või kaardi väljaandja turvalistel lehtedel krüpteeritud ühenduse kaudu ja kinnitad makse oma panga tugeva autentimisega. Lexoria ei näe ega salvesta sinu kaardinumbrit ega pangatunnuseid.</p>
+          <h3>Tarne</h3>
+          <p>Dokumendid saadetakse PDF-manustena kassas antud e-posti aadressile, tavaliselt mõne minuti jooksul pärast makse kinnitamist. Tarne on tasuta ja postiga midagi ei saadeta.</p>
+          <p>Kui e-kiri ei ole tunni aja jooksul saabunud, vaata rämpsposti kausta ja kirjuta seejärel aadressile <a href="mailto:info@lexoria.fi">info@lexoria.fi</a>, lisades tellimuse numbri. Saadame dokumendid uuesti.</p>
+          <h3>Kviitung</h3>
+          <p>Tellimuse e-kirjas on kirjas tooted, kogusumma ja käibemaks ning see on ühtlasi tellimuse kinnitus.</p>`
+      },
+      contact: {
+        tab: 'Kontakt',
+        title: 'Kontakt<em>andmed</em>',
+        body: `
+          <h3>Müüja</h3>
+          <dl class="legal-facts">
+            <dt>Ettevõte</dt><dd>Asianajotoimisto Lexoria Oy</dd>
+            <dt>Registrikood</dt><dd>3561005-2 (Y-tunnus)</dd>
+            <dt>KMKR</dt><dd>FI35610052</dd>
+            <dt>Aadress</dt><dd>Vekarakatu 14, 13500 Hämeenlinna, Soome</dd>
+            <dt>E-post</dt><dd><a href="mailto:info@lexoria.fi">info@lexoria.fi</a></dd>
+            <dt>Telefon</dt><dd><a href="tel:+358456560060">+358 45 656 0060</a></dd>
+          </dl>
+          <h3>Tellimused ja pretensioonid</h3>
+          <p>Kui sul on tellimuse kohta küsimusi, kirjuta meile ja lisa tellimuse e-kirjas olev tellimuse number. Vaata ka <a href="#refunds" data-legal="refunds">Taganemine ja tagasimaksed</a>.</p>
+          <h3>Õigusteenused</h3>
+          <p>Kui vajad just sulle koostatud dokumenti või õigusnõu, broneeri konsultatsioon aadressil <a href="https://lexoriaweb.vercel.app/#broneeri">Lexoria.fi</a>.</p>`
       }
     }
   };
