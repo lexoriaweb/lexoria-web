@@ -19,9 +19,11 @@
 <script>
   (function(){
     try {
+      // On lexoria.fi the shop is served under a path named in the visitor's language
+      var byPath = { asiakirjapankki: 'fi', 'document-bank': 'en' }[location.pathname.replace(/\//g, '')];
       var cached = localStorage.getItem('lex_lang');
       var hint = (navigator.language || 'en').toLowerCase().slice(0,2);
-      var lang = cached || (hint === 'fi' ? 'fi' : 'en');
+      var lang = byPath || (cached === 'fi' || cached === 'en' ? cached : hint === 'fi' ? 'fi' : 'en');
       document.documentElement.lang = lang;
       document.documentElement.dataset.lang = lang;
     } catch(e){}
@@ -2154,7 +2156,7 @@
         <span class="nav-back-label" data-i18n="nav.back">Lexoria.fi</span>
       </a>
     </div>
-    <a class="nav-brand" href="./">
+    <a class="nav-brand" href="">
       <img src="lexoria-logo-white.png" alt="Lexoria">
       <span class="brand-tag" data-i18n="nav.brand">Document Bank</span>
     </a>
@@ -2179,7 +2181,7 @@
 <!-- MENU OVERLAY -->
 <div class="menu-overlay" id="menuOverlay" aria-hidden="true" aria-label="Menu">
   <div class="menu-top">
-    <a class="menu-brand" href="./" data-menu-close>
+    <a class="menu-brand" href="" data-menu-close>
       <img src="lexoria-logo-dark.png" alt="Lexoria">
       <span class="brand-tag" data-i18n="nav.brand">Document Bank</span>
     </a>
@@ -2885,12 +2887,19 @@
   // i18n apply
   // =====================================================
   const langButtons = document.querySelectorAll('button[data-lang]');
-  function setLang(lang) {
+  const SHOP_PATHS = { fi: '/asiakirjapankki', en: '/document-bank' };
+  // True when served through lexoria.fi's rewrite rather than on the shop's own domain
+  const onMainSite = /^\/(asiakirjapankki|document-bank|dokumendipank)\/?$/.test(location.pathname);
+  function setLang(lang, persist) {
     if (!I18N[lang]) lang = 'en';
     const dict = I18N[lang];
     document.documentElement.lang = lang;
     document.documentElement.dataset.lang = lang;
-    try { localStorage.setItem('lex_lang', lang); } catch(e){}
+    // Shared with the main site, which also has Estonian: only a deliberate choice may overwrite it
+    if (persist) {
+      try { localStorage.setItem('lex_lang', lang); } catch(e){}
+      if (onMainSite) { try { history.replaceState(null, '', SHOP_PATHS[lang] + location.search + location.hash); } catch(e){} }
+    }
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const k = el.getAttribute('data-i18n');
@@ -2917,7 +2926,7 @@
     if (pdpSku) renderPdp();
   }
 
-  langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang, true)));
 
   // =====================================================
   // Cart state
@@ -3828,6 +3837,15 @@
 </script>
 
 <script>
+  // Served under lexoria.fi: links to the main site stay on the same domain (some are rendered later, so fix on click)
+  if (/^\/(asiakirjapankki|document-bank|dokumendipank)\/?$/.test(location.pathname)) {
+    ['pointerdown', 'click'].forEach(function (ev) {
+      document.addEventListener(ev, function (e) {
+        var a = e.target.closest && e.target.closest('a[href^="https://lexoriaweb.vercel.app"]');
+        if (a) a.href = a.getAttribute('href').replace('https://lexoriaweb.vercel.app', '') || '/';
+      }, true);
+    });
+  }
   // Local preview: when opened as a file, cross-site links point at the sibling local HTML instead of the live site.
   if (location.protocol === 'file:') {
     document.querySelectorAll('a[href^="https://lexoriaweb.vercel.app"]').forEach(function (a) {

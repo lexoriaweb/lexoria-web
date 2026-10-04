@@ -1771,7 +1771,7 @@
             <span data-i18n="cold.footCta">Book a consultation</span>
             <span class="icon" aria-hidden="true">↓</span>
           </a>
-          <a class="cold-cta cold-cta--alt" href="https://lexoriashop.vercel.app" target="_blank" rel="noopener">
+          <a class="cold-cta cold-cta--alt" href="/document-bank" data-shop-link>
             <span data-i18n="cold.docsCta">Document bank</span>
             <span class="icon icon--diag" aria-hidden="true">↓</span>
           </a>
@@ -1834,7 +1834,7 @@
           <span class="sub" data-i18n="menu.02.sub">Private · Business</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a></li>
-        <li><a href="https://lexoriashop.vercel.app" target="_blank" rel="noopener">
+        <li><a href="/document-bank" data-shop-link>
           <span class="num">03</span>
           <span class="label" data-i18n="menu.03.label">Document bank</span>
           <span class="sub" data-i18n="menu.03.sub">From €19</span>
@@ -2007,7 +2007,7 @@
             <li data-i18n="svc.card3.li4">Powers of attorney &amp; declarations</li>
           </ul>
           <span class="card-price" data-i18n="svc.card3.price">From €19</span>
-          <a href="https://lexoriashop.vercel.app" target="_blank" rel="noopener" class="card-cta" data-i18n-html="svc.card3.cta">Browse documents <span>↗</span></a>
+          <a href="/document-bank" data-shop-link class="card-cta" data-i18n-html="svc.card3.cta">Browse documents <span>↗</span></a>
         </div>
 
       </div>
@@ -2787,7 +2787,10 @@ Vastus on alati teie.`,
   // =====================================================
   let currentLang = I18N[document.documentElement.lang] ? document.documentElement.lang : 'en';
 
+  // The shop lives under a path named in the visitor's language
+  const SHOP_PATHS = { fi: '/asiakirjapankki', en: '/document-bank', et: '/dokumendipank' };
   function applyLang(lang) {
+    if (location.protocol !== 'file:') document.querySelectorAll('[data-shop-link]').forEach(a => { a.href = SHOP_PATHS[lang] || SHOP_PATHS.en; });
     if (!I18N[lang]) lang = 'en';
     currentLang = lang;
     const dict = I18N[lang];
@@ -2959,9 +2962,8 @@ Vastus on alati teie.`,
 <script>
   // Local preview: when opened as a file, cross-site links point at the sibling local HTML instead of the live site.
   if (location.protocol === 'file:') {
-    document.querySelectorAll('a[href^="https://lexoriashop.vercel.app"]').forEach(function (a) {
-      a.href = a.getAttribute('href').replace('https://lexoriashop.vercel.app', '../dokumendipank/index.html').replace('index.html/#', 'index.html#');
-      a.removeAttribute('target');
+    document.querySelectorAll('[data-shop-link]').forEach(function (a) {
+      a.href = '../dokumendipank/index.html';
     });
   }
 </script>
