@@ -584,8 +584,10 @@
     line-height: 1.55;
     color: rgba(236, 231, 221, 0.7);
     max-width: 44ch;
+    text-wrap: balance;
   }
-  .hero-lede em { font-style: italic; color: var(--paper); font-weight: 400; }
+  /* The emphasised phrase ("PDF-i e-postile") must never split at its hyphen */
+  .hero-lede em { font-style: italic; color: var(--paper); font-weight: 400; white-space: nowrap; }
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
