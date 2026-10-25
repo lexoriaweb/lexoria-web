@@ -121,7 +121,13 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
         </td></tr>
         <tr><td style="padding:28px 0 0;${serif}font-size:15px;line-height:1.55;color:#0F1419;">${c.help.replace('lexoria.fi', '<a href="https://www.lexoria.fi" style="color:#0F1419;">lexoria.fi</a>')}</td></tr>
         <tr><td style="padding:18px 0 0;${serif}font-size:13px;line-height:1.5;color:#6B6B6B;">${c.consent} <a href="${TERMS_URL}" style="color:#6B6B6B;">${c.terms}</a></td></tr>
-        <tr><td style="padding:40px 0 0;${mono}font-size:10px;letter-spacing:0.06em;line-height:1.8;color:#6B6B6B;">Asianajotoimisto Lexoria Oy · Vekarakatu 14, 13500 Hämeenlinna<br>+358 (0)45 656 0060 · <a href="https://www.lexoria.fi" style="color:#6B6B6B;text-decoration:none;">www.lexoria.fi</a> · Y-tunnus 3561005-2</td></tr>
+        <tr><td style="padding:40px 0 0;${mono}font-size:10px;letter-spacing:0.06em;line-height:1.9;color:#6B6B6B;">
+          <span style="color:#0F1419;">Asianajotoimisto Lexoria Oy</span><br>
+          <a href="https://maps.google.com/?q=Vekarakatu+14,+13500+H%C3%A4meenlinna" style="color:#6B6B6B;text-decoration:none;">Vekarakatu 14, 13500 Hämeenlinna</a><br>
+          <a href="tel:+358456560060" style="color:#6B6B6B;text-decoration:none;">+358 (0)45 656 0060</a><br>
+          <a href="https://www.lexoria.fi" style="color:#6B6B6B;text-decoration:none;">www.lexoria.fi</a><br>
+          Y-tunnus 3561005-2
+        </td></tr>
       </table>
     </td></tr>
   </table></body></html>`;
