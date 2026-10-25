@@ -110,7 +110,7 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
         <tr><td style="padding:28px 0 0;font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${esc(statusLine)}</td></tr>
         <tr><td style="padding:28px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.5;color:#0F1419;">${c.help}</td></tr>
         <tr><td style="padding:20px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:13px;line-height:1.5;color:#6B6B6B;">${c.consent} <a href="${TERMS_URL}" style="color:#5B21B6;">${c.terms}</a></td></tr>
-        <tr><td style="padding:36px 0 0;font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#6B6B6B;border-top:1px solid #DDD5C5;margin-top:20px;">${c.sign}</td></tr>
+        <tr><td style="padding:36px 0 0;font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#6B6B6B;">${c.sign}</td></tr>
       </table>
     </td></tr>
   </table></body></html>`;
