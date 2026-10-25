@@ -3326,12 +3326,7 @@
     sortVal.textContent = t('sort.' + shopSort);
 
     const list = visibleProducts();
-    productGrid.innerHTML = list.map(cardHtml).join('') + `
-      <a class="promo-card" href="https://lexoriaweb.vercel.app/#broneeri">
-        <span class="k">${t('promo.k')}</span>
-        <span class="h">${t('promo.h')}</span>
-        <span class="cta"><span>${t('promo.cta')}</span><span aria-hidden="true">↗</span></span>
-      </a>`;
+    productGrid.innerHTML = list.map(cardHtml).join('');
     swipeDots.innerHTML = Array.from(productGrid.children, () => '<span class="dot"></span>').join('');
     syncCartButtons();
     updateDots();
