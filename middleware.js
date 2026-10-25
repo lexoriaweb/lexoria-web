@@ -189,8 +189,10 @@ export async function middleware(req) {
 
   const next = new URL(req.url);
   next.searchParams.delete('gate');
+  // 200, not 401: link-preview crawlers (WhatsApp, Slack) drop error responses and
+  // would never see the Open Graph tags on this page; noindex keeps search engines away
   return new NextResponse(page(next.pathname + next.search, searchParams.get('gate') === 'wrong'), {
-    status: 401,
+    status: 200,
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
   });
 }
