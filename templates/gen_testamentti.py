@@ -72,9 +72,20 @@ def variant_a(c, doc):
     wordmark(c, L, top - wm_h, wm_w, WORDMARK_PURPLE)
     mk = 30
     barmark(c, W - R - mk, top - wm_h + (wm_h - mk) / 2, mk)
-    text(c, L, 46, f"{FIRM}{SEP}{ADDRESS}{SEP}{PHONE}")
-    text(c, L, 35, f"{WEB}{SEP}{YT}{SEP}{HOME}")
-    text(c, W - R, 46, page_label(doc), color=INK, align="right")
+    footer_grid(c, doc)
+
+def footer_grid(c, doc):
+    """Three aligned columns instead of a dotted run-on line; page number on the first baseline."""
+    y1, y2 = 47, 36
+    text(c, L, y1, FIRM, font="JBM-M", color=INK, track=0.3)
+    text(c, L, y2, ADDRESS, track=0.3)
+    x2 = L + 182
+    text(c, x2, y1, PHONE, track=0.3)
+    text(c, x2, y2, WEB, track=0.3)
+    x3 = L + 300
+    text(c, x3, y1, YT, track=0.3)
+    text(c, x3, y2, HOME, track=0.3)
+    text(c, W - R, y1, page_label(doc), font="JBM-M", color=INK, track=0.3, align="right")
 
 def variant_b(c, doc):
     """Centered wordmark with a tagline; the bar mark anchors the footer."""
