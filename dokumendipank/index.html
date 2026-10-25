@@ -1526,6 +1526,8 @@
     transition: color 0.3s;
   }
   .cart-close:hover { color: var(--maroon); }
+  .cart-head-actions { display: flex; align-items: center; gap: var(--s-3); }
+  .cart-head-actions .co-back { white-space: nowrap; }
 
   .cart-body {
     flex: 1 1 auto;
@@ -1698,12 +1700,13 @@
 
   /* Checkout step inside the cart drawer */
   [hidden] { display: none !important; }
-  .co-summary { display:flex; flex-direction:column; gap: 8px; padding-bottom: var(--s-2); border-bottom: 1px solid rgba(15,20,25,0.12); margin-bottom: var(--s-3); }
+  .co-summary { display:flex; flex-direction:column; gap: 6px; padding-bottom: var(--s-2); border-bottom: 1px solid rgba(15,20,25,0.12); margin-bottom: var(--s-3); }
   .co-line { display:flex; justify-content:space-between; gap: var(--s-2); font-family: 'Newsreader', serif; font-size: 16px; line-height: 1.25; }
-  .co-line em { font-style: italic; color: var(--maroon); }
+  .co-line em { font-style: normal; color: inherit; }
   .co-line .p { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--pebble); white-space: nowrap; }
   .co-line.total { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pebble); }
   .co-line.total .p { color: var(--ink); font-size: 12px; }
+  .co-line.vat { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pebble); margin-top: -4px; }
   .co-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s-2); }
   .co-top .co-h { margin: 0; }
   .co-h { font-family: 'Newsreader', serif; font-weight: 400; font-size: 26px; letter-spacing: -0.015em; line-height: 1.1; margin: 0 0 var(--s-3); }
@@ -1714,25 +1717,25 @@
   .co-field input:focus { border-bottom-color: var(--maroon); }
   .co-field input.err { border-bottom-color: #B3261E; }
   .co-field .hint { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pebble); }
-  .co-test { display:flex; gap: 10px; align-items:flex-start; padding: 0; margin-top: var(--s-2); border: 0; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; color: var(--pebble); }
+  .co-test { display:flex; gap: 8px; align-items:flex-start; padding: 0; margin-top: 10px; border: 0; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; color: var(--pebble); }
   .co-test .glyph { color: var(--maroon); font-size: 14px; line-height: 1.1; }
-  .pm { margin-top: var(--s-3); }
+  .pm { margin-top: var(--s-2); }
   .pm-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
   .pm-head label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pebble); }
   .pm-tabs { display: flex; gap: 10px; }
   .pm-tab { background: transparent; border: 0; padding: 0 0 2px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pebble); border-bottom: 1px solid transparent; }
   .pm-tab.active { color: var(--ink); border-bottom-color: var(--ink); }
-  .pm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .pm-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
   .pm-btn {
-    display: flex; align-items: center; justify-content: center; height: 50px; padding: 0 8px;
+    display: flex; align-items: center; justify-content: center; height: 42px; padding: 0 6px;
     background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(15, 20, 25, 0.16); border-radius: 2px; cursor: pointer;
     transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   }
-  .pm-btn img { display: block; max-height: 22px; max-width: 88%; object-fit: contain; filter: grayscale(1); opacity: 0.85; transition: filter 0.2s, opacity 0.2s; }
+  .pm-btn img { display: block; max-height: 18px; max-width: 86%; object-fit: contain; filter: grayscale(1); opacity: 0.85; transition: filter 0.2s, opacity 0.2s; }
   .pm-btn:hover { border-color: var(--ink); background: #fff; }
   .pm-btn:hover img, .pm-btn.active img { filter: none; opacity: 1; }
   .pm-btn.active { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); background: #fff; }
-  .pm-card { grid-column: 1 / -1; height: 46px; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
+  .pm-card { grid-column: 1 / -1; height: 38px; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
   .pm-card .sub { font-size: 9px; letter-spacing: 0.12em; color: var(--pebble); text-transform: none; }
   .pm-note { margin-top: 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; color: var(--pebble); }
   .pm.err .pm-grid { outline: 1px solid #B3261E; outline-offset: 2px; }
@@ -2087,18 +2090,18 @@
   /* Checkout consent */
   .co-consent {
     display: grid;
-    grid-template-columns: 20px 1fr;
-    gap: 12px;
+    grid-template-columns: 18px 1fr;
+    gap: 10px;
     align-items: start;
     margin-bottom: var(--s-2);
     font-family: 'Newsreader', serif;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: 13.5px;
+    line-height: 1.35;
     color: var(--ink);
     cursor: pointer;
   }
-  .co-consent input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--maroon); cursor: pointer; }
+  .co-consent input { width: 18px; height: 18px; margin: 0; accent-color: var(--maroon); cursor: pointer; }
   .co-consent a { color: var(--maroon); text-underline-offset: 2px; }
   .co-consent.err { color: #B3261E; }
   .co-consent.err input { outline: 2px solid #B3261E; outline-offset: 2px; }
@@ -2538,10 +2541,13 @@
 <aside class="cart-drawer" id="cartDrawer" aria-label="Cart" aria-hidden="true">
   <div class="cart-head">
     <h3 data-i18n-html="cart.h">Your cart</h3>
-    <button class="cart-close" id="cartClose" aria-label="Close cart">
-      <span data-i18n="cart.close">Close</span>
-      <span aria-hidden="true">×</span>
-    </button>
+    <div class="cart-head-actions">
+      <button class="co-back" id="coBack" hidden data-i18n="co.back">← Back to cart</button>
+      <button class="cart-close" id="cartClose" aria-label="Close cart">
+        <span data-i18n="cart.close">Close</span>
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
   </div>
   <div class="cart-body" id="cartBody">
     <div class="cart-empty" id="cartEmpty">
@@ -2560,7 +2566,6 @@
       <span id="cartCheckoutLabel" data-i18n="cart.checkout">Continue to checkout</span>
       <span class="arrow" id="cartCheckoutArrow">↗</span>
     </button>
-    <button class="co-back" id="coBack" hidden data-i18n="co.back">← Back to cart</button>
     <div class="cart-secure">
       <span class="cart-marks" aria-hidden="true">
         <span class="pay-mark"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M2 6.5 10 2l8 4.5H2ZM4.5 9v5M8.2 9v5M11.8 9v5M15.5 9v5M2 16.5h16"/></svg></span>
@@ -2715,7 +2720,7 @@
       'co.emailHint': 'The PDF is sent to this address.',
       'co.test': 'Test payment · Montonio sandbox. Choose the test bank, no real money moves.',
       'co.pay': 'Pay',
-      'co.back': '← Back to cart',
+      'co.back': '← Cart',
       'co.sending': 'Opening payment…',
       'co.done.h': 'Sent to your inbox',
       'co.done.msg': 'Your documents were sent to',
@@ -2735,7 +2740,7 @@
       'co.country.EE': 'Estonia',
       'co.country.LV': 'Latvia',
       'co.country.LT': 'Lithuania',
-      'co.consent': 'I accept the <a href="#terms" data-legal="terms">terms of sale</a> and the <a href="#privacy" data-legal="privacy">privacy policy</a>. I ask for the PDF to be delivered immediately and understand that I lose my 14-day right of withdrawal once it has been sent.',
+      'co.consent': 'I accept the <a href="#terms" data-legal="terms">terms of sale</a> and <a href="#privacy" data-legal="privacy">privacy policy</a>, ask for the PDF at once and waive the 14-day right of withdrawal.',
       'co.errConsent': 'Please accept the terms to continue.',
       'legal.tag': 'Terms & policies',
       'notice.text': 'No tracking. This shop only saves your language, display choices and cart in your browser. <a href="#cookies" data-legal="cookies">Read more</a>',
@@ -2891,7 +2896,7 @@
       'co.emailHint': 'PDF lähetetään tähän osoitteeseen.',
       'co.test': 'Testimaksu · Montonion testiympäristö. Valitse testipankki, oikeaa rahaa ei liiku.',
       'co.pay': 'Maksa',
-      'co.back': '← Takaisin koriin',
+      'co.back': '← Kori',
       'co.sending': 'Avataan maksu…',
       'co.done.h': 'Lähetetty sähköpostiisi',
       'co.done.msg': 'Asiakirjasi lähetettiin osoitteeseen',
@@ -2911,7 +2916,7 @@
       'co.country.EE': 'Viro',
       'co.country.LV': 'Latvia',
       'co.country.LT': 'Liettua',
-      'co.consent': 'Hyväksyn <a href="#terms" data-legal="terms">tilaus- ja toimitusehdot</a> ja <a href="#privacy" data-legal="privacy">tietosuojaselosteen</a>. Pyydän, että PDF toimitetaan heti, ja ymmärrän, että menetän 14 päivän peruuttamisoikeuden, kun asiakirja on lähetetty.',
+      'co.consent': 'Hyväksyn <a href="#terms" data-legal="terms">tilaus- ja toimitusehdot</a> ja <a href="#privacy" data-legal="privacy">tietosuojaselosteen</a>, pyydän PDF:n heti ja luovun 14 päivän peruuttamisoikeudesta.',
       'co.errConsent': 'Hyväksy ehdot jatkaaksesi.',
       'legal.tag': 'Ehdot ja tietosuoja',
       'notice.text': 'Ei seurantaa. Kauppa tallentaa selaimeesi vain kieli- ja näkymävalintasi sekä ostoskorisi. <a href="#cookies" data-legal="cookies">Lue lisää</a>',
@@ -3055,7 +3060,7 @@
       'co.emailHint': 'PDF saadetakse sellele aadressile.',
       'co.test': 'Testmakse · Montonio testkeskkond. Vali testpank, päris raha ei liigu.',
       'co.pay': 'Maksa',
-      'co.back': '← Tagasi ostukorvi',
+      'co.back': '← Ostukorv',
       'co.sending': 'Avan makse…',
       'co.done.h': 'Saadetud sinu e-postile',
       'co.done.msg': 'Sinu dokumendid saadeti aadressile',
@@ -3075,7 +3080,7 @@
       'co.country.EE': 'Eesti',
       'co.country.LV': 'Läti',
       'co.country.LT': 'Leedu',
-      'co.consent': 'Nõustun <a href="#terms" data-legal="terms">müügitingimuste</a> ja <a href="#privacy" data-legal="privacy">privaatsusteatega</a>. Palun toimetada PDF kätte kohe ja mõistan, et kaotan 14-päevase taganemisõiguse, kui dokument on saadetud.',
+      'co.consent': 'Nõustun <a href="#terms" data-legal="terms">müügitingimuste</a> ja <a href="#privacy" data-legal="privacy">privaatsusteatega</a>, palun PDF-i kohe ja loobun 14-päevasest taganemisõigusest.',
       'co.errConsent': 'Jätkamiseks nõustu tingimustega.',
       'legal.tag': 'Tingimused ja privaatsus',
       'notice.text': 'Jälgimist ei ole. Pood salvestab sinu brauserisse ainult keele, vaate-eelistused ja ostukorvi. <a href="#cookies" data-legal="cookies">Loe lähemalt</a>',
@@ -3610,6 +3615,8 @@
   const coLabel = document.getElementById('cartCheckoutLabel');
   const coArrow = document.getElementById('cartCheckoutArrow');
   const cartVatEl = document.querySelector('.cart-vat');
+  const cartHeadTitle = document.querySelector('.cart-head h3');
+  const cartSecureEl = document.querySelector('.cart-secure');
   var coStep = 'cart'; // cart | checkout | sending | done
   var coData = { name: '', email: '', consent: false, method: null, provider: null, country: null };
   var pmData = null;  // banks per country + card availability from /api/payment-methods
@@ -3621,9 +3628,11 @@
   function renderFoot() {
     const total = cartTotal();
     cartTotalEl.textContent = fmtEUR(total);
-    coBack.hidden = true;
+    coBack.hidden = coStep !== 'checkout';
     cartVatEl.hidden = coStep !== 'cart';
     cartTotalEl.parentElement.hidden = coStep !== 'cart';
+    cartHeadTitle.innerHTML = t(coStep === 'checkout' ? 'co.h' : 'cart.h');
+    cartSecureEl.hidden = coStep === 'checkout';
     cartCheckout.classList.toggle('busy', coStep === 'sending');
     if (coStep === 'cart') {
       coLabel.textContent = t('cart.checkout'); coArrow.textContent = '↗';
@@ -3643,8 +3652,7 @@
   function renderCheckout(err) {
     const lines = cart.map(i => `<div class="co-line"><span>${itemTitle(i)}</span><span class="p">${fmtEUR(i.price)}</span></div>`).join('');
     cartBody.innerHTML = `
-      <div class="co-top"><h3 class="co-h">${t('co.h')}</h3><button type="button" class="co-back" data-co-back>${t('co.back')}</button></div>
-      <div class="co-summary">${lines}<div class="co-line total"><span>${t('cart.total')} · ${t('cart.vat')}</span><span class="p">${fmtEUR(cartTotal())}</span></div></div>
+      <div class="co-summary">${lines}<div class="co-line total"${cart.length > 1 ? '' : ' hidden'}><span>${t('cart.total')}</span><span class="p">${fmtEUR(cartTotal())}</span></div><div class="co-line vat"><span>${t('cart.vat')}</span></div></div>
       <form id="coForm" novalidate>
         <div class="co-field">
           <label for="coName">${t('co.name')}</label>
@@ -3653,7 +3661,6 @@
         <div class="co-field">
           <label for="coEmail">${t('co.email')}</label>
           <input id="coEmail" name="email" type="email" autocomplete="email" inputmode="email" value="${coData.email.replace(/"/g,'&quot;')}" required>
-          <span class="hint">${t('co.emailHint')}</span>
         </div>
         <label class="co-consent">
           <input id="coConsent" type="checkbox"${coData.consent ? ' checked' : ''} required>
@@ -3807,7 +3814,6 @@
     }
   });
   coBack.addEventListener('click', () => { coStep = 'cart'; renderCart(); });
-  cartBody.addEventListener('click', e => { if (e.target.closest('[data-co-back]')) { coStep = 'cart'; renderCart(); } });
 
   // =====================================================
   // Legal overlay — content re-rendered on language change, deep-linkable by hash
