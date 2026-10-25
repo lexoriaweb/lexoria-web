@@ -25,6 +25,7 @@ for name, file in [("NR", "Newsreader-Regular.ttf"), ("NR-M", "Newsreader-Medium
 INK, PEBBLE, PAPER, MAROON = HexColor("#0F1419"), HexColor("#6B6B6B"), HexColor("#ECE7DD"), HexColor("#5B21B6")
 RULE, LINE = HexColor("#CFC9BD"), HexColor("#B9B3A6")
 WORDMARK = ImageReader(os.path.join(ROOT, "public", "lexoria-logo-dark.png"))
+WORDMARK_PURPLE = ImageReader(os.path.join(HERE, "lexoria-logo-purple.png"))
 BARMARK = ImageReader(os.path.join(ROOT, "public", "asianajaja-mark.png"))
 WM_RATIO = 377 / 1584
 
@@ -50,8 +51,8 @@ def text(c, x, y, s, font="JBM", size=6.3, color=PEBBLE, track=0.6, align="left"
     c.drawText(t); c.restoreState()
     return w
 
-def wordmark(c, x, y, width):
-    c.drawImage(WORDMARK, x, y, width, width * WM_RATIO, mask="auto")
+def wordmark(c, x, y, width, img=WORDMARK):
+    c.drawImage(img, x, y, width, width * WM_RATIO, mask="auto")
 
 def barmark(c, x, y, size):
     c.drawImage(BARMARK, x, y, size, size, mask="auto")
@@ -65,14 +66,12 @@ def page_label(doc):
 
 # ---------- header / footer variants ----------
 def variant_a(c, doc):
-    """Wordmark left, bar mark right, hairline. Two-line footer."""
+    """Purple wordmark left, bar mark right, no rules. Two-line footer."""
     top = H - 46
     wm_w = 98; wm_h = wm_w * WM_RATIO
-    wordmark(c, L, top - wm_h, wm_w)
+    wordmark(c, L, top - wm_h, wm_w, WORDMARK_PURPLE)
     mk = 30
     barmark(c, W - R - mk, top - wm_h + (wm_h - mk) / 2, mk)
-    hairline(c, top - wm_h - 16)
-    hairline(c, 60)
     text(c, L, 46, f"{FIRM}{SEP}{ADDRESS}{SEP}{PHONE}")
     text(c, L, 35, f"{WEB}{SEP}{YT}{SEP}{HOME}")
     text(c, W - R, 46, page_label(doc), color=INK, align="right")
