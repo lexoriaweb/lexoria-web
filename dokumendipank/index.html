@@ -1500,8 +1500,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--s-3) var(--s-4);
-    border-bottom: 1px solid rgba(15, 20, 25, 0.12);
+    padding: var(--s-3) var(--s-4) 0;
   }
   .cart-head h3 {
     font-family: 'Newsreader', serif;
@@ -1643,8 +1642,7 @@
   .cart-marks .pay-mark-wide { width: 72px; }
 
   .cart-foot {
-    padding: var(--s-3) var(--s-4);
-    border-top: 1px solid rgba(15, 20, 25, 0.12);
+    padding: 0 var(--s-4) var(--s-3);
     display: flex;
     flex-direction: column;
     gap: var(--s-2);
@@ -1700,7 +1698,7 @@
 
   /* Checkout step inside the cart drawer */
   [hidden] { display: none !important; }
-  .co-summary { display:flex; flex-direction:column; gap: 6px; padding-bottom: var(--s-2); border-bottom: 1px solid rgba(15,20,25,0.12); margin-bottom: var(--s-3); }
+  .co-summary { display:flex; flex-direction:column; gap: 6px; padding-bottom: 0; border-bottom: 0; margin-bottom: var(--s-3); }
   .co-line { display:flex; justify-content:space-between; gap: var(--s-2); font-family: 'Newsreader', serif; font-size: 16px; line-height: 1.25; }
   .co-line em { font-style: normal; color: inherit; }
   .co-line .p { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--pebble); white-space: nowrap; }
