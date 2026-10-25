@@ -88,15 +88,18 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
   const c = COPY[lang];
   const rows = items.map((it) => `
     <tr>
-      <td style="padding:10px 0;border-bottom:1px solid #DDD5C5;font-family:Georgia,'Times New Roman',serif;font-size:16px;color:#0F1419;">${esc(it[lang])}</td>
-      <td style="padding:10px 0;border-bottom:1px solid #DDD5C5;font-family:Menlo,Consolas,monospace;font-size:12px;color:#6B6B6B;text-align:right;white-space:nowrap;">${it.price} €</td>
+      <td style="padding:10px 0 4px;font-family:Georgia,'Times New Roman',serif;font-size:16px;color:#0F1419;">${esc(it[lang])}</td>
+      <td style="padding:10px 0 4px;font-family:Menlo,Consolas,monospace;font-size:12px;color:#6B6B6B;text-align:right;white-space:nowrap;">${it.price} €</td>
     </tr>`).join('');
   return `<!doctype html><html><body style="margin:0;padding:0;background:#ECE7DD;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ECE7DD;padding:32px 16px;">
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ECE7DD;">
-        <tr><td style="padding:0 0 28px;font-family:Menlo,Consolas,monospace;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:#0F1419;">
-          LEXORIA <span style="color:#6B6B6B;">· ${SHOP_NAME[lang]}</span>
+        <tr><td style="padding:0 0 28px;">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+            <td style="padding:0 14px 0 0;vertical-align:middle;"><img src="${SHOP_URL}/lexoria-logo-dark.png" width="112" height="27" alt="Lexoria" style="display:block;width:112px;height:auto;border:0;"></td>
+            <td style="vertical-align:middle;font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#6B6B6B;">${SHOP_NAME[lang]}</td>
+          </tr></table>
         </td></tr>
         <tr><td style="font-family:Georgia,'Times New Roman',serif;font-size:28px;line-height:1.15;color:#0F1419;padding:0 0 18px;">${esc(c.hi(name))}</td></tr>
         <tr><td style="font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:1.5;color:#0F1419;padding:0 0 28px;">${c.lead}</td></tr>
