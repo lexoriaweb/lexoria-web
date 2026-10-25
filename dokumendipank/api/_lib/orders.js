@@ -96,25 +96,25 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
             <td style="padding:9px 0;${serif}font-size:16px;line-height:1.35;color:#0F1419;">${esc(it[lang])}</td>
             <td style="padding:9px 0 9px 16px;${serif}font-size:16px;color:#0F1419;text-align:right;white-space:nowrap;">${it.price} €</td>
           </tr>`).join('');
-  return `<!doctype html><html><body style="margin:0;padding:0;background:#ECE7DD;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ECE7DD;padding:40px 16px 48px;">
+  return `<!doctype html><html><body style="margin:0;padding:0;background:#FFFFFF;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;padding:40px 16px 48px;">
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;">
         <tr><td style="padding:0 0 36px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-            <td style="vertical-align:middle;"><img src="${SHOP_URL}/lexoria-logo-dark.png" width="104" height="25" alt="Lexoria" style="display:block;width:104px;height:auto;border:0;"></td>
+            <td style="vertical-align:middle;"><img src="${SHOP_URL}/lexoria-logo-purple.png" width="104" height="25" alt="Lexoria" style="display:block;width:104px;height:auto;border:0;"></td>
             <td style="vertical-align:middle;text-align:right;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${esc(c.order)} ${orderNo}</td>
           </tr></table>
         </td></tr>
         <tr><td style="${serif}font-size:26px;line-height:1.2;color:#0F1419;padding:0 0 14px;">${esc(c.hi(name))}</td></tr>
         <tr><td style="${serif}font-size:16px;line-height:1.55;color:#0F1419;padding:0 0 28px;">${c.lead}</td></tr>
-        <tr><td style="background:#FFFFFF;padding:22px 24px 20px;">
+        <tr><td style="background:#F4F4F1;padding:22px 24px 20px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
             <tr><td colspan="2" style="padding:0 0 6px;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.items}</td></tr>
             ${rows}
             <tr>
-              <td style="padding:16px 0 0;border-top:1px solid #E5E0D5;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.total}<br><span style="letter-spacing:0.1em;">${c.vat}</span></td>
-              <td style="padding:14px 0 0 16px;border-top:1px solid #E5E0D5;${serif}font-size:26px;color:#0F1419;text-align:right;white-space:nowrap;">${total} €</td>
+              <td style="padding:16px 0 0;border-top:1px solid #DDD5C5;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.total}<br><span style="letter-spacing:0.1em;">${c.vat}</span></td>
+              <td style="padding:14px 0 0 16px;border-top:1px solid #DDD5C5;${serif}font-size:26px;color:#0F1419;text-align:right;white-space:nowrap;">${total} €</td>
             </tr>
             <tr><td colspan="2" style="padding:18px 0 0;${mono}font-size:10px;letter-spacing:0.08em;line-height:1.6;color:#6B6B6B;">${esc(statusLine)}</td></tr>
           </table>
