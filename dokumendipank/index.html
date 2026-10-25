@@ -1500,7 +1500,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--s-4) var(--s-4);
+    padding: var(--s-3) var(--s-4);
     border-bottom: 1px solid rgba(15, 20, 25, 0.12);
   }
   .cart-head h3 {
@@ -1638,14 +1638,14 @@
   }
   .cart-marks { display: flex; justify-content: center; gap: 6px; }
   .cart-marks .pay-mark { width: 40px; height: 26px; border-color: rgba(15, 20, 25, 0.2); color: var(--ink); }
-  .cart-marks .pay-mark-wide { width: 62px; }
+  .cart-marks .pay-mark-wide { width: 72px; }
 
   .cart-foot {
-    padding: var(--s-4);
+    padding: var(--s-3) var(--s-4);
     border-top: 1px solid rgba(15, 20, 25, 0.12);
     display: flex;
     flex-direction: column;
-    gap: var(--s-3);
+    gap: var(--s-2);
   }
   .cart-total {
     display: flex;
@@ -1698,19 +1698,23 @@
 
   /* Checkout step inside the cart drawer */
   [hidden] { display: none !important; }
-  .co-summary { display:flex; flex-direction:column; gap: 10px; padding-bottom: var(--s-3); border-bottom: 1px solid rgba(15,20,25,0.12); margin-bottom: var(--s-3); }
+  .co-summary { display:flex; flex-direction:column; gap: 8px; padding-bottom: var(--s-2); border-bottom: 1px solid rgba(15,20,25,0.12); margin-bottom: var(--s-3); }
   .co-line { display:flex; justify-content:space-between; gap: var(--s-2); font-family: 'Newsreader', serif; font-size: 16px; line-height: 1.25; }
   .co-line em { font-style: italic; color: var(--maroon); }
   .co-line .p { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--pebble); white-space: nowrap; }
+  .co-line.total { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pebble); }
+  .co-line.total .p { color: var(--ink); font-size: 12px; }
+  .co-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s-2); }
+  .co-top .co-h { margin: 0; }
   .co-h { font-family: 'Newsreader', serif; font-weight: 400; font-size: 26px; letter-spacing: -0.015em; line-height: 1.1; margin: 0 0 var(--s-3); }
   .co-h em { font-style: italic; color: var(--maroon); }
-  .co-field { display:flex; flex-direction:column; gap: 8px; margin-bottom: var(--s-3); }
+  .co-field { display:flex; flex-direction:column; gap: 6px; margin-bottom: var(--s-2); }
   .co-field label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--maroon); }
-  .co-field input { width: 100%; background: transparent; border: 0; border-bottom: 1px solid rgba(15,20,25,0.35); border-radius: 0; padding: 10px 0; font-family: 'Newsreader', serif; font-size: 18px; color: var(--ink); outline: none; transition: border-color .3s; -webkit-appearance: none; }
+  .co-field input { width: 100%; background: transparent; border: 0; border-bottom: 1px solid rgba(15,20,25,0.35); border-radius: 0; padding: 7px 0; font-family: 'Newsreader', serif; font-size: 17px; color: var(--ink); outline: none; transition: border-color .3s; -webkit-appearance: none; }
   .co-field input:focus { border-bottom-color: var(--maroon); }
   .co-field input.err { border-bottom-color: #B3261E; }
   .co-field .hint { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pebble); }
-  .co-test { display:flex; gap: 10px; align-items:flex-start; padding: 12px 14px; border: 1px dashed rgba(15,20,25,0.3); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; color: var(--pebble); }
+  .co-test { display:flex; gap: 10px; align-items:flex-start; padding: 0; margin-top: var(--s-2); border: 0; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; color: var(--pebble); }
   .co-test .glyph { color: var(--maroon); font-size: 14px; line-height: 1.1; }
   .pm { margin-top: var(--s-3); }
   .pm-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
@@ -2086,11 +2090,11 @@
     grid-template-columns: 20px 1fr;
     gap: 12px;
     align-items: start;
-    margin-bottom: var(--s-3);
+    margin-bottom: var(--s-2);
     font-family: 'Newsreader', serif;
     font-weight: 400;
-    font-size: 15px;
-    line-height: 1.45;
+    font-size: 14px;
+    line-height: 1.4;
     color: var(--ink);
     cursor: pointer;
   }
@@ -2562,7 +2566,7 @@
         <span class="pay-mark"><svg width="20" height="18" viewBox="0 0 20 18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M2 6.5 10 2l8 4.5H2ZM4.5 9v5M8.2 9v5M11.8 9v5M15.5 9v5M2 16.5h16"/></svg></span>
         <span class="pay-mark"><svg width="30" height="12" viewBox="0 0 30 12"><text x="15" y="10.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" font-style="italic" letter-spacing="0.5" fill="currentColor">VISA</text></svg></span>
         <span class="pay-mark"><svg width="26" height="16" viewBox="0 0 26 16"><circle cx="9" cy="8" r="7" fill="currentColor" opacity="0.9"/><circle cx="17" cy="8" r="7" fill="currentColor" opacity="0.45"/></svg></span>
-        <span class="pay-mark pay-mark-wide"><svg width="52" height="12" viewBox="0 0 52 12"><text x="26" y="10" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" letter-spacing="0.2" fill="currentColor">montonio</text></svg></span>
+        <span class="pay-mark pay-mark-wide"><svg width="60" height="12" viewBox="0 0 60 12"><text x="30" y="10" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="0.2" fill="currentColor">montonio</text></svg></span>
       </span>
       <span data-i18n="cart.secure">Secure payment via Montonio</span>
     </div>
@@ -3617,9 +3621,9 @@
   function renderFoot() {
     const total = cartTotal();
     cartTotalEl.textContent = fmtEUR(total);
-    coBack.hidden = coStep !== 'checkout';
-    cartVatEl.hidden = coStep === 'done';
-    cartTotalEl.parentElement.hidden = coStep === 'done';
+    coBack.hidden = true;
+    cartVatEl.hidden = coStep !== 'cart';
+    cartTotalEl.parentElement.hidden = coStep !== 'cart';
     cartCheckout.classList.toggle('busy', coStep === 'sending');
     if (coStep === 'cart') {
       coLabel.textContent = t('cart.checkout'); coArrow.textContent = '↗';
@@ -3639,8 +3643,8 @@
   function renderCheckout(err) {
     const lines = cart.map(i => `<div class="co-line"><span>${itemTitle(i)}</span><span class="p">${fmtEUR(i.price)}</span></div>`).join('');
     cartBody.innerHTML = `
-      <h3 class="co-h">${t('co.h')}</h3>
-      <div class="co-summary">${lines}</div>
+      <div class="co-top"><h3 class="co-h">${t('co.h')}</h3><button type="button" class="co-back" data-co-back>${t('co.back')}</button></div>
+      <div class="co-summary">${lines}<div class="co-line total"><span>${t('cart.total')} · ${t('cart.vat')}</span><span class="p">${fmtEUR(cartTotal())}</span></div></div>
       <form id="coForm" novalidate>
         <div class="co-field">
           <label for="coName">${t('co.name')}</label>
@@ -3803,6 +3807,7 @@
     }
   });
   coBack.addEventListener('click', () => { coStep = 'cart'; renderCart(); });
+  cartBody.addEventListener('click', e => { if (e.target.closest('[data-co-back]')) { coStep = 'cart'; renderCart(); } });
 
   // =====================================================
   // Legal overlay — content re-rendered on language change, deep-linkable by hash
