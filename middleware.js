@@ -31,14 +31,13 @@ function page(next, wrong) {
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
 <meta property="og:title" content="Lexoria">
-<meta property="og:description" content="Asianajotoimisto Lexoria Oy · Hämeenlinna">
 <meta property="og:site_name" content="Lexoria">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://www.lexoria.fi/og.png">
+<meta property="og:image" content="https://www.lexoria.fi/og.png?v=2">
 <meta property="og:image:width" content="400">
 <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.lexoria.fi/og.png">
+<meta name="twitter:image" content="https://www.lexoria.fi/og.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
