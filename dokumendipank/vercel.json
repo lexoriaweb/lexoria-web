@@ -1,5 +1,7 @@
 {
   "functions": {
-    "api/checkout.js": { "includeFiles": "api/_pdfs/**", "maxDuration": 15 }
+    "api/checkout.js": { "maxDuration": 15 },
+    "api/montonio-return.js": { "includeFiles": "api/_pdfs/**", "maxDuration": 15 },
+    "api/montonio-notify.js": { "includeFiles": "api/_pdfs/**", "maxDuration": 15 }
   }
 }

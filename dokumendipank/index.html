@@ -889,6 +889,25 @@
   .card-add:hover { background: var(--maroon); border-color: var(--maroon); }
   .card-add.in-cart { background: transparent; border-color: var(--maroon); color: var(--maroon); }
   .card-add.in-cart:hover { background: var(--maroon); color: var(--paper); }
+  /* One product: no category chips, sort or view toggle */
+  .shop-bar { display: none; }
+  .ed-pick { display: flex; flex-direction: column; gap: 8px; }
+  .ed-pick .k { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pebble); }
+  .ed-btns { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(15, 20, 25, 0.22); }
+  .ed-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 9px 4px 8px; background: transparent; border: 0; border-left: 1px solid rgba(15, 20, 25, 0.22);
+    cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: var(--ink);
+    transition: background 0.2s, color 0.2s;
+  }
+  .ed-btn:first-child { border-left: 0; }
+  .ed-btn span { font-family: 'Newsreader', serif; font-style: italic; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--pebble); line-height: 1; }
+  .ed-btn:hover { background: rgba(91, 33, 182, 0.07); }
+  .ed-btn.active { background: var(--ink); color: var(--paper); }
+  .ed-btn.active span { color: var(--maroon-soft); }
+  .pdp-info .ed-pick { margin-bottom: var(--s-2); }
+  .co-done .order { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pebble); margin-top: 10px; }
+  .co-done .note { margin-top: 14px; font-family: 'Newsreader', serif; font-size: 15px; line-height: 1.4; color: var(--ink); }
 
   .promo-card {
     display: flex;
@@ -2600,8 +2619,8 @@
       'hero.meta.updated': 'Reviewed',
       'hero.meta.updatedVal': '2026 <span class="sep">·</span> updated with the law',
       'shop.chapter': 'Catalog',
-      'shop.h2': 'Five documents.<br><em>One shelf.</em>',
-      'shop.eyebrow': '<em>5</em> documents · Finland &amp; Estonia',
+      'shop.h2': 'One will.<br><em>Three languages.</em>',
+      'shop.eyebrow': '<em>1</em> document · 3 languages',
       'shop.note': 'All prices incl. <em>VAT 25.5%</em>',
       'shop.swipe': 'Swipe',
       'shop.viewSwipe': 'Swipe',
@@ -2610,31 +2629,20 @@
       'cat.inheritance': 'Inheritance',
       'cat.authority': 'Authority',
       'cat.office': 'Office',
-      'p1.title': 'Engagement <em>agreement</em>',
-      'p1.lede': 'Attorney–client engagement agreement (toimeksiantosopimus) as used by Finnish law firms. Client identification, conflict check, fees and legal expenses cover.',
-      'p1.f1': 'Client ID & conflict-of-interest check',
-      'p1.f2': 'Hourly fee, advance & invoicing terms',
-      'p1.f3': 'Legal expenses insurance & legal aid',
-      'p2.title': 'Will, <em>Finnish–Estonian</em>',
-      'p2.lede': 'Bilingual will for an Estonian citizen living in Finland. Choice of Estonian law under the EU Succession Regulation.',
-      'p2.f1': 'Parallel Finnish and Estonian text',
-      'p2.f2': 'Choice of law (EU 650/2012)',
-      'p2.f3': 'Assets in both countries, witness block',
-      'p3.title': 'Will with <em>executor</em>',
-      'p3.lede': 'Finnish will naming a sole heir and an executor. Excludes marital rights, covers digital assets and a substitute heir.',
-      'p3.f1': 'Executor\'s powers',
-      'p3.f2': 'Marital-right exclusion & substitute heir',
-      'p3.f3': 'Digital assets & witness attestation',
-      'p4.title': 'Continuing <em>power of attorney</em>',
-      'p4.lede': 'Edunvalvontavaltuutus: appoint someone to manage your finances, property and personal matters if you lose capacity. Confirmed by the DVV.',
-      'p4.f1': 'Attorney, substitute & special wishes',
-      'p4.f2': 'Banking, property, tax & authorities',
-      'p4.f3': 'Digital assets, health data, witnesses',
-      'p5.title': 'Lexoria <em>letterhead</em>',
-      'p5.lede': 'Official Asianajotoimisto Lexoria Oy letter template with the bar-association mark, address block and footer.',
-      'p5.f1': 'Header with bar mark',
-      'p5.f2': 'Date, recipient & subject lines',
-      'p5.f3': 'Signature & company footer',
+      'p1.title': 'Will, <em>basic template</em>',
+      'p1.lede': 'A clear Finnish-law will leaving your entire estate to one beneficiary. Revokes earlier wills, excludes the spouse\'s marital right and includes the witness attestation.',
+      'p1.f1': 'Sole beneficiary with full ownership',
+      'p1.f2': 'Revocation of earlier wills & marital-right exclusion',
+      'p1.f3': 'Signature block & two-witness attestation',
+      'ed.label': 'Document language',
+      'ed.fi': 'Finnish',
+      'ed.en': 'English',
+      'ed.et': 'Estonian',
+      'co.errPay': 'Payment was not completed. You can try again.',
+      'co.errPayInit': 'Could not start the payment. Please try again or e-mail info@lexoria.fi.',
+      'co.pending': 'Payment is still being confirmed. The PDF will be e-mailed as soon as the bank confirms it.',
+      'co.done.mailFail': 'Payment received, but the e-mail could not be sent. Write to info@lexoria.fi and quote your order number.',
+      'co.done.order': 'Order',
       'price.vat': 'Incl. VAT · 15.14 € net',
       'price.vat15': 'Incl. VAT · 11.95 € net',
       'price.vat29': 'Incl. VAT · 23.11 € net',
@@ -2665,7 +2673,7 @@
       'cart.close': 'Close',
       'cart.empty.lead': 'Cart is empty',
       'cart.empty.msg': 'Add a document to <em>start.</em>',
-      'cart.empty.hint': 'Five templates. From €15.',
+      'cart.empty.hint': 'Will template in Finnish, English or Estonian. €29.',
       'cart.total': 'Total',
       'cart.vat': 'Incl. VAT 25.5%',
       'cart.checkout': 'Continue to checkout',
@@ -2675,10 +2683,10 @@
       'co.name': 'Name',
       'co.email': 'E-mail',
       'co.emailHint': 'The PDF is sent to this address.',
-      'co.test': 'Test mode · no money is charged. Montonio bank payments and cards go live next.',
+      'co.test': 'Test payment · Montonio sandbox. Choose the test bank, no real money moves.',
       'co.pay': 'Pay',
       'co.back': '← Back to cart',
-      'co.sending': 'Sending…',
+      'co.sending': 'Opening payment…',
       'co.done.h': 'Sent to <em>your inbox</em>',
       'co.done.msg': 'Your documents were sent to',
       'co.done.hint': 'Not there in a minute? Check the spam folder.',
@@ -2777,8 +2785,8 @@
       'hero.meta.updated': 'Tarkastettu',
       'hero.meta.updatedVal': '2026 <span class="sep">·</span> päivitetty lain mukaan',
       'shop.chapter': 'Valikoima',
-      'shop.h2': 'Viisi asiakirjaa.<br><em>Yksi hylly.</em>',
-      'shop.eyebrow': '<em>5</em> asiakirjaa · Suomi &amp; Viro',
+      'shop.h2': 'Yksi testamentti.<br><em>Kolme kieltä.</em>',
+      'shop.eyebrow': '<em>1</em> asiakirja · 3 kieltä',
       'shop.note': 'Kaikki hinnat sis. <em>ALV 25,5 %</em>',
       'shop.swipe': 'Pyyhkäise',
       'shop.viewSwipe': 'Pyyhkäise',
@@ -2787,31 +2795,20 @@
       'cat.inheritance': 'Perintö',
       'cat.authority': 'Valtuutus',
       'cat.office': 'Toimisto',
-      'p1.title': 'Toimeksianto<em>sopimus</em>',
-      'p1.lede': 'Asianajotoimiston ja asiakkaan välinen toimeksiantosopimus. Asiakkaan tunnistaminen, esteellisyystarkastus, palkkio ja oikeusturva.',
-      'p1.f1': 'Asiakkaan tunnistaminen & esteellisyys',
-      'p1.f2': 'Tuntipalkkio, ennakko & laskutus',
-      'p1.f3': 'Oikeusturvavakuutus & oikeusapu',
-      'p2.title': 'Testamentti <em>suomi–viro</em>',
-      'p2.lede': 'Kaksikielinen testamentti Suomessa asuvalle Viron kansalaiselle. Viron lain valinta EU:n perintöasetuksen mukaan.',
-      'p2.f1': 'Rinnakkainen suomen- ja vironkielinen teksti',
-      'p2.f2': 'Lainvalinta (EU 650/2012)',
-      'p2.f3': 'Omaisuus molemmissa maissa, todistajat',
-      'p3.title': 'Testamentti <em>toimeenpanijalla</em>',
-      'p3.lede': 'Suomalainen testamentti, jossa yksi perillinen ja toimeenpanija. Avio-oikeuden poissulkeminen, digitaalinen omaisuus ja sijaantulomääräys.',
-      'p3.f1': 'Toimeenpanijan valtuudet',
-      'p3.f2': 'Avio-oikeuden poissulkeminen & sijaantulo',
-      'p3.f3': 'Digitaalinen omaisuus & todistuslauseke',
-      'p4.title': 'Edunvalvonta<em>valtuutus</em>',
-      'p4.lede': 'Määrää, kuka hoitaa talous-, omaisuus- ja henkilöasiasi, jos et itse kykene. Vahvistetaan Digi- ja väestötietovirastossa.',
-      'p4.f1': 'Valtuutettu, varavaltuutettu & erityinen tahto',
-      'p4.f2': 'Pankki-, kiinteistö-, vero- & viranomaisasiat',
-      'p4.f3': 'Digitaalinen omaisuus, terveystiedot, todistajat',
-      'p5.title': 'Lexorian <em>kirjepohja</em>',
-      'p5.lede': 'Asianajotoimisto Lexoria Oy:n virallinen kirjepohja asianajajaliiton merkillä, osoitetiedoilla ja alatunnisteella.',
-      'p5.f1': 'Ylätunniste ja liiton merkki',
-      'p5.f2': 'Päiväys, vastaanottaja & asia',
-      'p5.f3': 'Allekirjoitus & yrityksen alatunniste',
+      'p1.title': 'Testamentti, <em>perusmalli</em>',
+      'p1.lede': 'Selkeä testamentti, jolla koko omaisuus määrätään yhdelle saajalle. Peruuttaa aiemmat testamentit, sulkee pois avio-oikeuden ja sisältää todistuslausekkeen.',
+      'p1.f1': 'Yksi saaja täydellä omistusoikeudella',
+      'p1.f2': 'Aiempien testamenttien peruutus & avio-oikeuden poissulkeminen',
+      'p1.f3': 'Allekirjoitukset & kahden todistajan todistuslauseke',
+      'ed.label': 'Asiakirjan kieli',
+      'ed.fi': 'suomi',
+      'ed.en': 'englanti',
+      'ed.et': 'viro',
+      'co.errPay': 'Maksua ei suoritettu loppuun. Voit yrittää uudelleen.',
+      'co.errPayInit': 'Maksun aloitus epäonnistui. Yritä uudelleen tai lähetä sähköpostia info@lexoria.fi.',
+      'co.pending': 'Maksua vahvistetaan vielä. PDF lähetetään heti, kun pankki vahvistaa maksun.',
+      'co.done.mailFail': 'Maksu vastaanotettu, mutta sähköpostin lähetys epäonnistui. Ota yhteyttä info@lexoria.fi ja mainitse tilausnumero.',
+      'co.done.order': 'Tilaus',
       'price.vat': 'Sis. ALV · 15,14 € netto',
       'price.vat15': 'Sis. ALV · 11,95 € netto',
       'price.vat29': 'Sis. ALV · 23,11 € netto',
@@ -2842,7 +2839,7 @@
       'cart.close': 'Sulje',
       'cart.empty.lead': 'Kori on tyhjä',
       'cart.empty.msg': 'Lisää asiakirja <em>aloittaaksesi.</em>',
-      'cart.empty.hint': 'Viisi mallia. Alkaen 15 €.',
+      'cart.empty.hint': 'Testamentti suomeksi, englanniksi tai viroksi. 29 €.',
       'cart.total': 'Yhteensä',
       'cart.vat': 'Sis. ALV 25,5 %',
       'cart.checkout': 'Siirry kassalle',
@@ -2852,10 +2849,10 @@
       'co.name': 'Nimi',
       'co.email': 'Sähköposti',
       'co.emailHint': 'PDF lähetetään tähän osoitteeseen.',
-      'co.test': 'Testitila · rahaa ei veloiteta. Montonion pankkimaksut ja kortit tulevat seuraavaksi.',
+      'co.test': 'Testimaksu · Montonion testiympäristö. Valitse testipankki, oikeaa rahaa ei liiku.',
       'co.pay': 'Maksa',
       'co.back': '← Takaisin koriin',
-      'co.sending': 'Lähetetään…',
+      'co.sending': 'Avataan maksu…',
       'co.done.h': 'Lähetetty <em>sähköpostiisi</em>',
       'co.done.msg': 'Asiakirjasi lähetettiin osoitteeseen',
       'co.done.hint': 'Eikö näy minuutissa? Tarkista roskaposti.',
@@ -2946,7 +2943,7 @@
       'hero.h1': 'Valmis dokumendid,<br><em>õiguslikult kindlad.</em>',
       'hero.lede': 'Advokaatide koostatud dokumendid. Maksa, saad <em>PDF-i e-postile</em>, täida ja allkirjasta samal päeval.',
       'shop.chapter': 'Valik',
-      'shop.h2': 'Viis dokumenti.<br><em>Üks riiul.</em>',
+      'shop.h2': 'Üks testament.<br><em>Kolm keelt.</em>',
       'shop.swipe': 'Libista',
       'shop.viewSwipe': 'Libista',
       'shop.viewGrid': 'Ruudustik',
@@ -2954,31 +2951,20 @@
       'cat.inheritance': 'Pärimine',
       'cat.authority': 'Volitus',
       'cat.office': 'Büroo',
-      'p1.title': 'Kliendi<em>leping</em>',
-      'p1.lede': 'Advokaadibüroo ja kliendi vaheline kliendileping (toimeksiantosopimus), nagu seda kasutavad Soome advokaadibürood. Kliendi tuvastamine, huvide konflikti kontroll, tasu ja õigusabikulude kindlustus.',
-      'p1.f1': 'Kliendi tuvastamine ja huvide konflikti kontroll',
-      'p1.f2': 'Tunnitasu, ettemaks ja arveldamine',
-      'p1.f3': 'Õigusabikulude kindlustus ja riigi õigusabi',
-      'p2.title': 'Testament <em>soome–eesti</em>',
-      'p2.lede': 'Kakskeelne testament Soomes elavale Eesti kodanikule. Eesti õiguse valik ELi pärimismääruse alusel.',
-      'p2.f1': 'Paralleelne soome- ja eestikeelne tekst',
-      'p2.f2': 'Kohaldatava õiguse valik (EL 650/2012)',
-      'p2.f3': 'Vara mõlemas riigis, tunnistajate plokk',
-      'p3.title': 'Testament <em>täitjaga</em>',
-      'p3.lede': 'Soome testament, milles määratakse üks pärija ja testamenditäitja. Välistab abikaasa õiguse varale, hõlmab digivara ja asepärijat.',
-      'p3.f1': 'Testamenditäitja volitused',
-      'p3.f2': 'Abikaasa õiguse välistamine ja asepärija',
-      'p3.f3': 'Digivara ja tunnistajate kinnitus',
-      'p4.title': 'Tuleviku<em>volikiri</em>',
-      'p4.lede': 'Edunvalvontavaltuutus: määra, kes korraldab sinu raha-, vara- ja isiklikke asju, kui sa ise enam ei suuda. Kinnitab Soome Digi- ja Rahvastikuandmete Amet (DVV).',
-      'p4.f1': 'Volinik, asevolinik ja erisoovid',
-      'p4.f2': 'Pank, kinnisvara, maksud ja ametiasutused',
-      'p4.f3': 'Digivara, terviseandmed, tunnistajad',
-      'p5.title': 'Lexoria <em>kirjaplank</em>',
-      'p5.lede': 'Asianajotoimisto Lexoria Oy ametlik kirjaplank advokatuuri märgi, aadressiploki ja jalusega.',
-      'p5.f1': 'Päis advokatuuri märgiga',
-      'p5.f2': 'Kuupäev, saaja ja teema',
-      'p5.f3': 'Allkiri ja ettevõtte jalus',
+      'p1.title': 'Testament, <em>põhimall</em>',
+      'p1.lede': 'Selge Soome õiguse järgi koostatud testament, millega kogu vara läheb ühele pärijale. Tühistab varasemad testamendid, välistab abikaasa varaõiguse ja sisaldab tunnistajate kinnitust.',
+      'p1.f1': 'Üks pärija täieliku omandiõigusega',
+      'p1.f2': 'Varasemate testamentide tühistamine ja abikaasa varaõiguse välistamine',
+      'p1.f3': 'Allkirjaplokk ja kahe tunnistaja kinnitus',
+      'ed.label': 'Dokumendi keel',
+      'ed.fi': 'soome',
+      'ed.en': 'inglise',
+      'ed.et': 'eesti',
+      'co.errPay': 'Makse jäi lõpetamata. Võid uuesti proovida.',
+      'co.errPayInit': 'Makse alustamine ebaõnnestus. Proovi uuesti või kirjuta info@lexoria.fi.',
+      'co.pending': 'Makset alles kinnitatakse. PDF saadetakse kohe, kui pank makse kinnitab.',
+      'co.done.mailFail': 'Makse laekus, kuid e-kirja saatmine ebaõnnestus. Kirjuta info@lexoria.fi ja lisa tellimuse number.',
+      'co.done.order': 'Tellimus',
       'price.vat15': 'Sis. KM · 11,95 € ilma',
       'price.vat29': 'Sis. KM · 23,11 € ilma',
       'price.vat39': 'Sis. KM · 31,08 € ilma',
@@ -3007,7 +2993,7 @@
       'cart.close': 'Sulge',
       'cart.empty.lead': 'Ostukorv on tühi',
       'cart.empty.msg': 'Lisa dokument, <em>et alustada.</em>',
-      'cart.empty.hint': 'Viis põhja. Alates 15 €.',
+      'cart.empty.hint': 'Testament soome, inglise või eesti keeles. 29 €.',
       'cart.total': 'Kokku',
       'cart.vat': 'Sis. KM 25,5%',
       'cart.checkout': 'Edasi kassasse',
@@ -3017,10 +3003,10 @@
       'co.name': 'Nimi',
       'co.email': 'E-post',
       'co.emailHint': 'PDF saadetakse sellele aadressile.',
-      'co.test': 'Testrežiim · raha ei võeta. Montonio pangamaksed ja kaardid lisanduvad järgmisena.',
+      'co.test': 'Testmakse · Montonio testkeskkond. Vali testpank, päris raha ei liigu.',
       'co.pay': 'Maksa',
       'co.back': '← Tagasi ostukorvi',
-      'co.sending': 'Saadan…',
+      'co.sending': 'Avan makse…',
       'co.done.h': 'Saadetud <em>sinu e-postile</em>',
       'co.done.msg': 'Sinu dokumendid saadeti aadressile',
       'co.done.hint': 'Minuti pärast ikka pole? Vaata rämpsposti kausta.',
@@ -3241,14 +3227,13 @@
     cartCheckout.disabled = false;
     let html = '';
     cart.forEach((item, idx) => {
-      const titleKey = item.sku.replace('doc-0', 'p') + '.title';
-      const title = dict[titleKey] || item.title;
+      const title = pTitle(prod(item.sku));
       html += `
         <div class="cart-item">
-          <span class="doc-thumb"><img src="img/${item.sku}.webp" alt=""></span>
+          <span class="doc-thumb"><img src="img/doc-${item.sku}.webp" alt=""></span>
           <div>
             <div class="cart-item-title">${title}</div>
-            <div class="cart-item-meta">${dict['cart.itemMeta']}</div>
+            <div class="cart-item-meta">${dict['cart.itemMeta']} · ${edTitle(item.sku)}</div>
             <button class="cart-remove" data-remove="${idx}">${dict['cart.remove']} ×</button>
           </div>
           <div class="cart-item-price">${fmtEUR(item.price)}</div>
@@ -3271,13 +3256,19 @@
   // =====================================================
   // Catalog — cards, filters and sort rendered from PRODUCTS
   // =====================================================
+  // One product sold in three language editions; a SKU is `${id}-${edition}` (will-fi, will-en, will-et)
+  const EDITIONS = ['fi', 'en', 'et'];
   const PRODUCTS = [
-    { sku: 'doc-01', n: 'p1', price: 29, cat: 'engagement', pages: 4, langs: 'fi' },
-    { sku: 'doc-02', n: 'p2', price: 39, cat: 'inheritance', pages: 3, langs: 'fiet' },
-    { sku: 'doc-03', n: 'p3', price: 29, cat: 'inheritance', pages: 3, langs: 'fi' },
-    { sku: 'doc-04', n: 'p4', price: 39, cat: 'authority', pages: 5, langs: 'fi' },
-    { sku: 'doc-05', n: 'p5', price: 15, cat: 'office', pages: 1, langs: 'fi' }
+    { id: 'will', n: 'p1', price: 29, cat: 'inheritance', pages: 2 }
   ];
+  var edSel = {};  // product id -> edition picked in the UI
+  function edOf(sku) { const ed = String(sku).split('-')[1]; return EDITIONS.includes(ed) ? ed : null; }
+  function edFor(p) { const ui = document.documentElement.dataset.lang; return edSel[p.id] || (EDITIONS.includes(ui) ? ui : 'fi'); }
+  function skuOf(p) { return p.id + '-' + edFor(p); }
+  function edPickHtml(p) {
+    const cur = edFor(p);
+    return `<div class="ed-pick"><span class="k">${t('ed.label')}</span><div class="ed-btns" role="group" aria-label="${t('ed.label')}">${EDITIONS.map(e => `<button type="button" class="ed-btn${e === cur ? ' active' : ''}" data-ed="${p.id}:${e}" aria-pressed="${e === cur}">${e.toUpperCase()}<span>${t('ed.' + e)}</span></button>`).join('')}</div></div>`;
+  }
   const CATS = ['engagement', 'inheritance', 'authority', 'office'];
   const SORTS = ['featured', 'priceAsc', 'priceDesc', 'name'];
   const productGrid = document.getElementById('productGrid');
@@ -3289,11 +3280,12 @@
   var shopCat = 'all';
   var shopSort = 'featured';
 
-  function prod(sku) { return PRODUCTS.find(p => p.sku === sku); }
+  function prod(sku) { const id = String(sku).split('-')[0]; return PRODUCTS.find(p => p.id === id); }
   function inCart(sku) { return cart.some(i => i.sku === sku); }
   function pTitle(p) { return t(p.n + '.title'); }
   function plain(html) { return html.replace(/<[^>]+>/g, ''); }
   function pagesLabel(p) { return p.pages + ' ' + t(p.pages === 1 ? 'card.page' : 'card.pages'); }
+  function edTitle(sku) { return t('ed.' + (edOf(sku) || 'fi')); }
 
   function visibleProducts() {
     const list = PRODUCTS.filter(p => shopCat === 'all' || p.cat === shopCat);
@@ -3304,20 +3296,22 @@
   }
 
   function cardHtml(p) {
+    const sku = skuOf(p);
     return `
-      <article class="product-card" data-sku="${p.sku}">
-        <a class="card-media" href="#${p.sku}" data-open="${p.sku}" aria-label="${plain(pTitle(p))}">
+      <article class="product-card" data-sku="${sku}">
+        <a class="card-media" href="#${p.id}" data-open="${p.id}" aria-label="${plain(pTitle(p))}">
           <span class="card-tag">${t('cat.' + p.cat)}</span>
-          <img class="card-sheet" src="img/${p.sku}.webp" alt="" width="720" height="734" loading="lazy">
+          <img class="card-sheet" src="img/doc-${sku}.webp" alt="" width="720" height="734" loading="lazy">
           <span class="card-quick">${t('card.quick')}</span>
         </a>
         <div class="card-info">
-          <span class="card-meta">PDF · ${pagesLabel(p)}</span>
-          <h3 class="card-title"><a href="#${p.sku}" data-open="${p.sku}">${pTitle(p)}</a></h3>
+          <span class="card-meta">PDF · ${pagesLabel(p)} · ${edTitle(sku)}</span>
+          <h3 class="card-title"><a href="#${p.id}" data-open="${p.id}">${pTitle(p)}</a></h3>
           <p class="card-lede">${t(p.n + '.lede')}</p>
           <div class="card-row">
+            ${edPickHtml(p)}
             <span class="card-price"><span class="amount">${fmtEUR(p.price)}</span><span class="vat">${t('price.vat' + p.price)}</span></span>
-            <button type="button" class="card-add" data-add="${p.sku}"></button>
+            <button type="button" class="card-add" data-add="${sku}"></button>
           </div>
         </div>
       </article>`;
@@ -3359,13 +3353,13 @@
   try {
     JSON.parse(localStorage.getItem('lex_cart') || '[]').forEach(sku => {
       const p = prod(sku);
-      if (p && !inCart(sku)) cart.push({ sku, price: p.price });
+      if (p && edOf(sku) && !inCart(sku)) cart.push({ sku, price: p.price });
     });
   } catch(e){}
 
   function addToCart(sku, quiet) {
     const p = prod(sku);
-    if (!p || inCart(sku)) return;
+    if (!p || !edOf(sku) || inCart(sku)) return;
     cart.push({ sku, price: p.price });
     cartChanged();
     renderCart();
@@ -3443,23 +3437,25 @@
   function renderPdp() {
     const p = prod(pdpSku);
     if (!p) return;
+    const sku = skuOf(p);
     const actions = `
-      <button type="button" class="pdp-btn pdp-add" data-add="${p.sku}"></button>
-      <button type="button" class="pdp-btn pdp-buy" data-buy="${p.sku}"><span>${t('btn.buy')}</span><span aria-hidden="true">→</span></button>`;
+      <button type="button" class="pdp-btn pdp-add" data-add="${sku}"></button>
+      <button type="button" class="pdp-btn pdp-buy" data-buy="${sku}"><span>${t('btn.buy')}</span><span aria-hidden="true">→</span></button>`;
     // Same category first, then the rest
     const others = PRODUCTS.filter(o => o !== p).sort((a, b) => (b.cat === p.cat) - (a.cat === p.cat)).slice(0, 3);
     const acc = k => `<details class="pdp-acc"><summary>${t('pdp.acc.' + k)}</summary><p>${t('pdp.acc.' + k + 'Body')}</p></details>`;
     pdpScroll.innerHTML = `
       <div class="pdp-grid">
         <div class="pdp-media"><div class="pdp-media-in">
-          <img class="pdp-sheet" src="img/${p.sku}.webp" alt="${plain(pTitle(p))}" width="720" height="734">
+          <img class="pdp-sheet" src="img/doc-${sku}.webp" alt="${plain(pTitle(p))}" width="720" height="734">
           <span class="pdp-cap">${t('pdp.preview').replace('{n}', p.pages)}</span>
         </div></div>
         <div class="pdp-info">
-          <span class="pdp-cat">${p.sku.slice(-2)} · ${t('cat.' + p.cat)}</span>
+          <span class="pdp-cat">${String(PRODUCTS.indexOf(p) + 1).padStart(2, '0')} · ${t('cat.' + p.cat)}</span>
           <h2 class="pdp-title" id="pdpTitle">${pTitle(p)}</h2>
           <div class="pdp-price"><span class="amount">${fmtEUR(p.price)}</span><span class="vat">${t('price.vat' + p.price)}</span></div>
           <p class="pdp-lede">${t(p.n + '.lede')}</p>
+          ${edPickHtml(p)}
           <div class="pdp-actions">${actions}</div>
           <ul class="pdp-points"><li>${t('pdp.p1')}</li><li>${t('pdp.p2')}</li><li>${t('pdp.p3')}</li></ul>
           <h3 class="pdp-h">${t('pdp.inside')}</h3>
@@ -3467,19 +3463,19 @@
           <dl class="pdp-specs">
             <dt>${t('pdp.spec.format')}</dt><dd>${t('pdp.spec.formatVal')}</dd>
             <dt>${t('pdp.spec.length')}</dt><dd>${pagesLabel(p)}</dd>
-            <dt>${t('pdp.spec.lang')}</dt><dd>${t('lang.' + p.langs)}</dd>
+            <dt>${t('pdp.spec.lang')}</dt><dd>${edTitle(sku)}</dd>
             <dt>${t('pdp.spec.delivery')}</dt><dd>${t('pdp.spec.deliveryVal')}</dd>
           </dl>
           ${acc('delivery')}${acc('use')}${acc('refund')}
-          <div class="pdp-more">
+          ${others.length ? `<div class="pdp-more">
             <h3 class="pdp-h">${t('pdp.more')}</h3>
             ${others.map(o => `
-              <a class="more-item" href="#${o.sku}" data-open="${o.sku}">
-                <span class="doc-thumb"><img src="img/${o.sku}.webp" alt="" loading="lazy"></span>
+              <a class="more-item" href="#${o.id}" data-open="${o.id}">
+                <span class="doc-thumb"><img src="img/doc-${skuOf(o)}.webp" alt="" loading="lazy"></span>
                 <span class="t">${pTitle(o)}</span>
                 <span class="p">${fmtEUR(o.price)}</span>
               </a>`).join('')}
-          </div>
+          </div>` : ''}
         </div>
       </div>`;
     pdpBar.innerHTML = `<span class="amount">${fmtEUR(p.price)}</span>${actions}`;
@@ -3490,17 +3486,19 @@
     try { history.replaceState(null, '', hash || location.pathname + location.search); } catch(e){}
   }
   function openProduct(sku) {
-    if (!prod(sku)) return;
+    const p = prod(sku);
+    if (!p) return;
+    if (edOf(sku)) edSel[p.id] = edOf(sku);
     const wasOpen = pdp.classList.contains('open');
     if (!wasOpen) pdpReturn = document.activeElement;
-    pdpSku = sku;
+    pdpSku = p.id;
     renderPdp();
     pdpScroll.scrollTop = 0;
     pdp.classList.add('open');
     pdpBackdrop.classList.add('open');
     pdp.setAttribute('aria-hidden', 'false');
     document.body.classList.add('pdp-open');
-    setHash('#' + sku);
+    setHash('#' + p.id);
     pdpClose.focus();
   }
   function closeProduct() {
@@ -3524,6 +3522,16 @@
     }
     const buy = e.target.closest('[data-buy]');
     if (buy) { buyNow(buy.dataset.buy); return; }
+    const ed = e.target.closest('[data-ed]');
+    if (ed) {
+      const [id, edition] = ed.dataset.ed.split(':');
+      edSel[id] = edition;
+      const sl = productGrid.scrollLeft;
+      renderCatalog();
+      productGrid.scrollLeft = sl;
+      if (pdpSku) { const st = pdpScroll.scrollTop; renderPdp(); pdpScroll.scrollTop = st; }
+      return;
+    }
     const open = e.target.closest('[data-open]');
     if (open) { e.preventDefault(); openProduct(open.dataset.open); return; }
     const chip = e.target.closest('[data-cat]');
@@ -3542,7 +3550,7 @@
   });
 
   // =====================================================
-  // Checkout (simulated payment; Montonio to be wired in)
+  // Checkout — Montonio hosted payment; the PDFs are e-mailed after payment
   // =====================================================
   const coBack = document.getElementById('coBack');
   const coLabel = document.getElementById('cartCheckoutLabel');
@@ -3553,7 +3561,7 @@
 
   function t(key) { const lang = document.documentElement.dataset.lang || 'en'; return I18N[lang][key] || I18N.en[key] || key; }
   function cartTotal() { return cart.reduce((s, i) => s + i.price, 0); }
-  function itemTitle(item) { return t(item.sku.replace('doc-0', 'p') + '.title'); }
+  function itemTitle(item) { return pTitle(prod(item.sku)) + ' · ' + edTitle(item.sku); }
 
   function renderFoot() {
     const total = cartTotal();
@@ -3608,7 +3616,7 @@
     if (!coData.name) setTimeout(() => document.getElementById('coName').focus(), 350);
   }
 
-  function renderDone(email, items) {
+  function renderDone(email, items, orderNo, note) {
     const list = items.map(i => `<li>${itemTitle(i)}</li>`).join('');
     cartBody.innerHTML = `
       <div class="co-done">
@@ -3616,7 +3624,9 @@
         <h3 class="co-h">${t('co.done.h')}</h3>
         <div class="msg">${t('co.done.msg')}</div>
         <div class="addr">${email}</div>
+        ${orderNo ? `<div class="order">${t('co.done.order')} #${orderNo}</div>` : ''}
         <ul>${list}</ul>
+        ${note ? `<div class="note">${note}</div>` : ''}
         <div class="hint">${t('co.done.hint')}</div>
       </div>`;
   }
@@ -3643,25 +3653,43 @@
     const lang = document.documentElement.dataset.lang || 'en';
     const items = cart.slice();
     try {
+      // The cart stays in localStorage until Montonio reports the payment, so a failed
+      // or abandoned payment brings the buyer back to a full cart
+      try { localStorage.setItem('lex_order', JSON.stringify({ name, email })); } catch(e){}
       const r = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, lang, consent: true, skus: items.map(i => i.sku) })
+        body: JSON.stringify({ name, email, lang, consent: true, skus: items.map(i => i.sku), back: location.origin + location.pathname })
       });
       const data = await r.json().catch(() => ({}));
-      if (!r.ok || !data.ok) throw new Error(data.error || 'send_failed');
-      cart.length = 0;
-      coData.consent = false;
-      cartChanged();
-      cartCount.textContent = '0';
-      coStep = 'done';
-      renderDone(email, items);
-      renderFoot();
+      if (!r.ok || !data.ok || !data.paymentUrl) throw new Error(data.error || 'payment_failed');
+      location.assign(data.paymentUrl);
     } catch (e) {
       coStep = 'checkout';
-      renderCheckout(e.message === 'mail_not_configured' ? t('co.errMail') : e.message === 'test_recipient' ? t('co.errTest') : e.message === 'consent_required' ? t('co.errConsent') : t('co.errGeneric'));
+      renderCheckout(e.message === 'consent_required' ? t('co.errConsent') : e.message === 'invalid_fields' ? t('co.errFields') : t('co.errPayInit'));
       renderFoot();
     }
+  }
+
+  // Back from Montonio: /path?order=LX…&status=paid|pending|failed[&email=…]
+  function returnFromPayment() {
+    const q = new URLSearchParams(location.search);
+    const status = q.get('status'), orderNo = q.get('order');
+    if (!status || !orderNo) return;
+    try { history.replaceState(null, '', location.pathname + location.hash); } catch(e){}
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem('lex_order') || '{}'); } catch(e){}
+    coData.name = saved.name || ''; coData.email = saved.email || '';
+    const email = q.get('email') || coData.email;
+    if (status === 'failed') {
+      coStep = 'checkout'; openCart(); renderCheckout(t('co.errPay')); renderFoot();
+      return;
+    }
+    const items = cart.slice();
+    cart.length = 0; coData.consent = false; cartChanged();
+    try { localStorage.removeItem('lex_order'); } catch(e){}
+    const note = status === 'pending' ? t('co.pending') : status === 'paid' ? '' : t('co.done.mailFail');
+    coStep = 'done'; openCart(); renderDone(email, items, orderNo, note); renderFoot();
   }
 
   cartCheckout.addEventListener('click', () => {
@@ -4195,6 +4223,7 @@
 
   renderCart();
   routeHash();
+  returnFromPayment();
 
 </script>
 
