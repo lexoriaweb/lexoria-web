@@ -129,7 +129,7 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;">
         <tr><td style="padding:0 0 36px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-            <td style="vertical-align:middle;"><img class="logo-light" src="${SHOP_URL}/lexoria-logo-dark.png" width="104" height="25" alt="Lexoria" style="display:block;width:104px;height:auto;border:0;"><!--[if !mso]><!--><img class="logo-dark" src="${SHOP_URL}/lexoria-logo-white.png" width="104" height="25" alt="" style="display:none;width:104px;max-height:0;height:auto;overflow:hidden;border:0;mso-hide:all;"><!--<![endif]--></td>
+            <td style="vertical-align:middle;"><img class="logo-light" src="${SHOP_URL}/lexoria-logo-chip.png" width="150" height="58" alt="Lexoria" style="display:block;width:150px;height:auto;border:0;margin-left:-24px;border-radius:4px;"><!--[if !mso]><!--><img class="logo-dark" src="${SHOP_URL}/lexoria-logo-white.png" width="104" height="25" alt="" style="display:none;width:104px;max-height:0;height:auto;overflow:hidden;border:0;mso-hide:all;"><!--<![endif]--></td>
             <td class="mu" style="vertical-align:middle;text-align:right;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${esc(c.order)} ${orderNo}</td>
           </tr></table>
         </td></tr>
