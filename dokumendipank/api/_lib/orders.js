@@ -29,6 +29,7 @@ const ORDER_SECRET = process.env.ORDER_SECRET || MONTONIO.secretKey;
 
 const COPY = {
   fi: {
+    order: 'Tilaus',
     subject: (n) => `Asiakirjasi Lexorian asiakirjapankista (${n})`,
     hi: (name) => `Hei ${name},`,
     lead: 'Kiitos tilauksestasi. Ostamasi asiakirjat ovat tämän viestin liitteinä PDF-muodossa.',
@@ -43,6 +44,7 @@ const COPY = {
     sign: 'Asianajotoimisto Lexoria Oy · Hämeenlinna',
   },
   en: {
+    order: 'Order',
     subject: (n) => `Your documents from the Lexoria Document Bank (${n})`,
     hi: (name) => `Hello ${name},`,
     lead: 'Thank you for your order. The documents you purchased are attached to this e-mail as PDF files.',
@@ -57,6 +59,7 @@ const COPY = {
     sign: 'Asianajotoimisto Lexoria Oy · Hämeenlinna',
   },
   et: {
+    order: 'Tellimus',
     subject: (n) => `Sinu dokumendid Lexoria dokumendipangast (${n})`,
     hi: (name) => `Tere, ${name}!`,
     lead: 'Täname tellimuse eest. Ostetud dokumendid on selle kirja manuses PDF-vormingus.',
@@ -86,34 +89,39 @@ function totalOf(items) {
 
 function buildHtml(lang, name, items, total, orderNo, statusLine) {
   const c = COPY[lang];
+  const serif = "font-family:Georgia,'Times New Roman',serif;";
+  const mono = "font-family:Menlo,Consolas,monospace;";
   const rows = items.map((it) => `
-    <tr>
-      <td style="padding:10px 0 4px;font-family:Georgia,'Times New Roman',serif;font-size:16px;color:#0F1419;">${esc(it[lang])}</td>
-      <td style="padding:10px 0 4px;font-family:Menlo,Consolas,monospace;font-size:12px;color:#6B6B6B;text-align:right;white-space:nowrap;">${it.price} €</td>
-    </tr>`).join('');
+          <tr>
+            <td style="padding:9px 0;${serif}font-size:16px;line-height:1.35;color:#0F1419;">${esc(it[lang])}</td>
+            <td style="padding:9px 0 9px 16px;${serif}font-size:16px;color:#0F1419;text-align:right;white-space:nowrap;">${it.price} €</td>
+          </tr>`).join('');
   return `<!doctype html><html><body style="margin:0;padding:0;background:#ECE7DD;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ECE7DD;padding:32px 16px;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ECE7DD;padding:40px 16px 48px;">
     <tr><td align="center">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ECE7DD;">
-        <tr><td style="padding:0 0 28px;">
-          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-            <td style="padding:0 14px 0 0;vertical-align:middle;"><img src="${SHOP_URL}/lexoria-logo-dark.png" width="112" height="27" alt="Lexoria" style="display:block;width:112px;height:auto;border:0;"></td>
-            <td style="vertical-align:middle;font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#6B6B6B;">${SHOP_NAME[lang]}</td>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;">
+        <tr><td style="padding:0 0 36px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td style="vertical-align:middle;"><img src="${SHOP_URL}/lexoria-logo-dark.png" width="104" height="25" alt="Lexoria" style="display:block;width:104px;height:auto;border:0;"></td>
+            <td style="vertical-align:middle;text-align:right;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${esc(c.order)} ${orderNo}</td>
           </tr></table>
         </td></tr>
-        <tr><td style="font-family:Georgia,'Times New Roman',serif;font-size:28px;line-height:1.15;color:#0F1419;padding:0 0 18px;">${esc(c.hi(name))}</td></tr>
-        <tr><td style="font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:1.5;color:#0F1419;padding:0 0 28px;">${c.lead}</td></tr>
-        <tr><td style="font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:#5B21B6;padding:0 0 6px;border-bottom:1px solid #0F1419;">${c.items} · #${orderNo}</td></tr>
-        <tr><td><table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rows}
-          <tr>
-            <td style="padding:14px 0 0;font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:#5B21B6;">${c.total} <span style="color:#6B6B6B;letter-spacing:0.12em;">· ${c.vat}</span></td>
-            <td style="padding:14px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;color:#0F1419;text-align:right;">${total} €</td>
-          </tr>
-        </table></td></tr>
-        <tr><td style="padding:28px 0 0;font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${esc(statusLine)}</td></tr>
-        <tr><td style="padding:28px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.5;color:#0F1419;">${c.help}</td></tr>
-        <tr><td style="padding:20px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:13px;line-height:1.5;color:#6B6B6B;">${c.consent} <a href="${TERMS_URL}" style="color:#5B21B6;">${c.terms}</a></td></tr>
-        <tr><td style="padding:36px 0 0;font-family:Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#6B6B6B;">${c.sign}</td></tr>
+        <tr><td style="${serif}font-size:26px;line-height:1.2;color:#0F1419;padding:0 0 14px;">${esc(c.hi(name))}</td></tr>
+        <tr><td style="${serif}font-size:16px;line-height:1.55;color:#0F1419;padding:0 0 28px;">${c.lead}</td></tr>
+        <tr><td style="background:#FFFFFF;padding:22px 24px 20px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            <tr><td colspan="2" style="padding:0 0 6px;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.items}</td></tr>
+            ${rows}
+            <tr>
+              <td style="padding:16px 0 0;border-top:1px solid #E5E0D5;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.total}<br><span style="letter-spacing:0.1em;">${c.vat}</span></td>
+              <td style="padding:14px 0 0 16px;border-top:1px solid #E5E0D5;${serif}font-size:26px;color:#0F1419;text-align:right;white-space:nowrap;">${total} €</td>
+            </tr>
+            <tr><td colspan="2" style="padding:18px 0 0;${mono}font-size:10px;letter-spacing:0.08em;line-height:1.6;color:#6B6B6B;">${esc(statusLine)}</td></tr>
+          </table>
+        </td></tr>
+        <tr><td style="padding:28px 0 0;${serif}font-size:15px;line-height:1.55;color:#0F1419;">${c.help.replace('lexoria.fi', '<a href="https://www.lexoria.fi" style="color:#0F1419;">lexoria.fi</a>')}</td></tr>
+        <tr><td style="padding:18px 0 0;${serif}font-size:13px;line-height:1.5;color:#6B6B6B;">${c.consent} <a href="${TERMS_URL}" style="color:#6B6B6B;">${c.terms}</a></td></tr>
+        <tr><td style="padding:40px 0 0;${mono}font-size:10px;letter-spacing:0.06em;line-height:1.8;color:#6B6B6B;">Asianajotoimisto Lexoria Oy · Vekarakatu 14, 13500 Hämeenlinna<br>+358 (0)45 656 0060 · <a href="https://www.lexoria.fi" style="color:#6B6B6B;text-decoration:none;">www.lexoria.fi</a> · Y-tunnus 3561005-2</td></tr>
       </table>
     </td></tr>
   </table></body></html>`;
