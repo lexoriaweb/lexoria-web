@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 // shows a password page until a cookie proves the password from SITE_PASSWORD was
 // given. No password configured means locked, not open.
 const COOKIE = 'lex_gate';
-const OPEN = ['/lexoria-logo-white.png', '/favicon.svg'];
+const OPEN = ['/lexoria-logo-white.png', '/favicon.svg', '/favicon-32.png', '/apple-touch-icon.png', '/og.png'];
 
 async function token(password) {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('lexoria-gate:' + password));
@@ -28,7 +28,17 @@ function page(next, wrong) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Lexoria</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+<meta property="og:title" content="Lexoria">
+<meta property="og:description" content="Asianajotoimisto Lexoria Oy · Hämeenlinna">
+<meta property="og:site_name" content="Lexoria">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.lexoria.fi/og.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.lexoria.fi/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
