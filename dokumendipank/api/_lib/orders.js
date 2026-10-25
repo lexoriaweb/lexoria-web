@@ -112,7 +112,11 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
       .rule { border-top-color: #2E343C !important; }
       a.tx { color: #ECE7DD !important; }
       a.mu { color: #A39F96 !important; }
+      .logo-light { display: none !important; }
+      .logo-dark { display: block !important; max-height: none !important; }
     }
+    [data-ogsc] .logo-light { display: none !important; }
+    [data-ogsc] .logo-dark { display: block !important; max-height: none !important; }
     [data-ogsc] .bg, [data-ogsb] .bg { background-color: #0F1419 !important; }
     [data-ogsc] .card, [data-ogsb] .card { background-color: #1A1F26 !important; }
     [data-ogsc] .tx { color: #ECE7DD !important; }
@@ -125,7 +129,7 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;">
         <tr><td style="padding:0 0 36px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-            <td style="vertical-align:middle;"><img src="${SHOP_URL}/lexoria-logo-purple.png" width="104" height="25" alt="Lexoria" style="display:block;width:104px;height:auto;border:0;"></td>
+            <td style="vertical-align:middle;"><img class="logo-light" src="${SHOP_URL}/lexoria-logo-purple.png" width="104" height="25" alt="Lexoria" style="display:block;width:104px;height:auto;border:0;"><!--[if !mso]><!--><img class="logo-dark" src="${SHOP_URL}/lexoria-logo-white.png" width="104" height="25" alt="" style="display:none;width:104px;max-height:0;height:auto;overflow:hidden;border:0;mso-hide:all;"><!--<![endif]--></td>
             <td class="mu" style="vertical-align:middle;text-align:right;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${esc(c.order)} ${orderNo}</td>
           </tr></table>
         </td></tr>
