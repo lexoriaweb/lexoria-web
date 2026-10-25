@@ -1599,20 +1599,24 @@
     line-height: 1;
   }
   .cart-remove {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background: transparent;
-    border: 0;
-    padding: 0;
-    margin-top: 6px;
+    border: 1px solid rgba(15, 20, 25, 0.28);
+    border-radius: 2px;
+    padding: 7px 11px;
+    margin-top: 12px;
     cursor: pointer;
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--pebble);
-    text-align: right;
-    transition: color 0.3s;
+    color: var(--ink);
+    line-height: 1;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
   }
-  .cart-remove:hover { color: var(--maroon); }
+  .cart-remove:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
   .cart-browse {
     align-self: center;
     margin-top: var(--s-3);
@@ -3301,7 +3305,7 @@
           <div>
             <div class="cart-item-title">${title}</div>
             <div class="cart-item-meta">${dict['cart.itemMeta']} · ${edTitle(item.sku)}</div>
-            <button class="cart-remove" data-remove="${idx}">${dict['cart.remove']} ×</button>
+            <button type="button" class="cart-remove" data-remove="${idx}" aria-label="${dict['cart.remove']}"><span>${dict['cart.remove']}</span><span aria-hidden="true">×</span></button>
           </div>
           <div class="cart-item-price">${fmtEUR(item.price)}</div>
         </div>`;
