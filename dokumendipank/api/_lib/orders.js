@@ -93,39 +93,62 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
   const mono = "font-family:Menlo,Consolas,monospace;";
   const rows = items.map((it) => `
           <tr>
-            <td style="padding:9px 0;${serif}font-size:16px;line-height:1.35;color:#0F1419;">${esc(it[lang])}</td>
-            <td style="padding:9px 0 9px 16px;${serif}font-size:16px;color:#0F1419;text-align:right;white-space:nowrap;">${it.price} €</td>
+            <td class="tx" style="padding:9px 0;${serif}font-size:16px;line-height:1.35;color:#0F1419;">${esc(it[lang])}</td>
+            <td class="tx" style="padding:9px 0 9px 16px;${serif}font-size:16px;color:#0F1419;text-align:right;white-space:nowrap;">${it.price} €</td>
           </tr>`).join('');
-  return `<!doctype html><html><body style="margin:0;padding:0;background:#FFFFFF;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;padding:40px 16px 48px;">
+  return `<!doctype html><html lang="${lang}"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <style>
+    :root { color-scheme: light dark; supported-color-schemes: light dark; }
+    /* Clients that honour dark mode get an intentional dark version instead of an inverted light one */
+    @media (prefers-color-scheme: dark) {
+      .bg, .bg td.bg { background-color: #0F1419 !important; }
+      .card { background-color: #1A1F26 !important; }
+      .tx { color: #ECE7DD !important; }
+      .mu { color: #A39F96 !important; }
+      .rule { border-top-color: #2E343C !important; }
+      a.tx { color: #ECE7DD !important; }
+      a.mu { color: #A39F96 !important; }
+    }
+    [data-ogsc] .bg, [data-ogsb] .bg { background-color: #0F1419 !important; }
+    [data-ogsc] .card, [data-ogsb] .card { background-color: #1A1F26 !important; }
+    [data-ogsc] .tx { color: #ECE7DD !important; }
+    [data-ogsc] .mu { color: #A39F96 !important; }
+    [data-ogsc] .rule { border-top-color: #2E343C !important; }
+  </style>
+  </head><body class="bg" style="margin:0;padding:0;background:#FFFFFF;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="bg" style="background:#FFFFFF;padding:40px 16px 48px;">
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;">
         <tr><td style="padding:0 0 36px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
             <td style="vertical-align:middle;"><img src="${SHOP_URL}/lexoria-logo-purple.png" width="104" height="25" alt="Lexoria" style="display:block;width:104px;height:auto;border:0;"></td>
-            <td style="vertical-align:middle;text-align:right;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${esc(c.order)} ${orderNo}</td>
+            <td class="mu" style="vertical-align:middle;text-align:right;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${esc(c.order)} ${orderNo}</td>
           </tr></table>
         </td></tr>
-        <tr><td style="${serif}font-size:26px;line-height:1.2;color:#0F1419;padding:0 0 14px;">${esc(c.hi(name))}</td></tr>
-        <tr><td style="${serif}font-size:16px;line-height:1.55;color:#0F1419;padding:0 0 28px;">${c.lead}</td></tr>
-        <tr><td style="background:#F4F4F1;padding:22px 24px 20px;">
+        <tr><td class="tx" style="${serif}font-size:26px;line-height:1.2;color:#0F1419;padding:0 0 14px;">${esc(c.hi(name))}</td></tr>
+        <tr><td class="tx" style="${serif}font-size:16px;line-height:1.55;color:#0F1419;padding:0 0 28px;">${c.lead}</td></tr>
+        <tr><td class="card" style="background:#F4F4F1;padding:22px 24px 20px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-            <tr><td colspan="2" style="padding:0 0 6px;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.items}</td></tr>
+            <tr><td colspan="2" class="mu" style="padding:0 0 6px;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.items}</td></tr>
             ${rows}
             <tr>
-              <td style="padding:16px 0 0;border-top:1px solid #DDD5C5;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.total}<br><span style="letter-spacing:0.1em;">${c.vat}</span></td>
-              <td style="padding:14px 0 0 16px;border-top:1px solid #DDD5C5;${serif}font-size:26px;color:#0F1419;text-align:right;white-space:nowrap;">${total} €</td>
+              <td class="mu rule" style="padding:16px 0 0;border-top:1px solid #DDD5C5;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.total}<br><span style="letter-spacing:0.1em;">${c.vat}</span></td>
+              <td class="tx rule" style="padding:14px 0 0 16px;border-top:1px solid #DDD5C5;${serif}font-size:26px;color:#0F1419;text-align:right;white-space:nowrap;">${total} €</td>
             </tr>
-            <tr><td colspan="2" style="padding:18px 0 0;${mono}font-size:10px;letter-spacing:0.08em;line-height:1.6;color:#6B6B6B;">${esc(statusLine)}</td></tr>
+            <tr><td colspan="2" class="mu" style="padding:18px 0 0;${mono}font-size:10px;letter-spacing:0.08em;line-height:1.6;color:#6B6B6B;">${esc(statusLine)}</td></tr>
           </table>
         </td></tr>
-        <tr><td style="padding:28px 0 0;${serif}font-size:15px;line-height:1.55;color:#0F1419;">${c.help.replace('lexoria.fi', '<a href="https://www.lexoria.fi" style="color:#0F1419;">lexoria.fi</a>')}</td></tr>
-        <tr><td style="padding:18px 0 0;${serif}font-size:13px;line-height:1.5;color:#6B6B6B;">${c.consent} <a href="${TERMS_URL}" style="color:#6B6B6B;">${c.terms}</a></td></tr>
-        <tr><td style="padding:40px 0 0;${mono}font-size:10px;letter-spacing:0.06em;line-height:1.9;color:#6B6B6B;">
-          <span style="color:#0F1419;">Asianajotoimisto Lexoria Oy</span><br>
-          <a href="https://maps.google.com/?q=Vekarakatu+14,+13500+H%C3%A4meenlinna" style="color:#6B6B6B;text-decoration:none;">Vekarakatu 14, 13500 Hämeenlinna</a><br>
-          <a href="tel:+358456560060" style="color:#6B6B6B;text-decoration:none;">+358 (0)45 656 0060</a><br>
-          <a href="https://www.lexoria.fi" style="color:#6B6B6B;text-decoration:none;">www.lexoria.fi</a><br>
+        <tr><td class="tx" style="padding:28px 0 0;${serif}font-size:15px;line-height:1.55;color:#0F1419;">${c.help.replace('lexoria.fi', '<a href="https://www.lexoria.fi" class="tx" style="color:#0F1419;">lexoria.fi</a>')}</td></tr>
+        <tr><td class="mu" style="padding:18px 0 0;${serif}font-size:13px;line-height:1.5;color:#6B6B6B;">${c.consent} <a href="${TERMS_URL}" class="mu" style="color:#6B6B6B;">${c.terms}</a></td></tr>
+        <tr><td class="mu" style="padding:40px 0 0;${mono}font-size:10px;letter-spacing:0.06em;line-height:1.9;color:#6B6B6B;">
+          <span class="tx" style="color:#0F1419;">Asianajotoimisto Lexoria Oy</span><br>
+          <a href="https://maps.google.com/?q=Vekarakatu+14,+13500+H%C3%A4meenlinna" class="mu" style="color:#6B6B6B;text-decoration:none;">Vekarakatu 14, 13500 Hämeenlinna</a><br>
+          <a href="tel:+358456560060" class="mu" style="color:#6B6B6B;text-decoration:none;">+358 (0)45 656 0060</a><br>
+          <a href="https://www.lexoria.fi" class="mu" style="color:#6B6B6B;text-decoration:none;">www.lexoria.fi</a><br>
           Y-tunnus 3561005-2
         </td></tr>
       </table>
