@@ -10,7 +10,7 @@ const nextConfig = {
         { source: '/:slug(asiakirjapankki|document-bank|dokumendipank)', destination: `${SHOP}/` },
         // The shop page loads these relative to the site root
         { source: '/img/:file(doc-[a-z0-9-]+\\.webp|hero-bg\\.webp)', destination: `${SHOP}/img/:file` },
-        { source: '/api/checkout', destination: `${SHOP}/api/checkout` },
+        { source: '/api/:fn(checkout|payment-methods)', destination: `${SHOP}/api/:fn` },
       ],
     };
   },

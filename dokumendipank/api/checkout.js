@@ -38,6 +38,12 @@ module.exports = async (req, res) => {
   const back = safeBack(body.back) || `${SHOP_URL}/`;
   const orderToken = signOrder({ orderNo, name, email, lang, skus: items.map((it) => it.sku), back });
 
+  // Method picked in the drawer: a bank (BIC + country) goes straight to that bank,
+  // 'card' to Montonio's card page; nothing picked falls back to Montonio's own selection page
+  const provider = /^[A-Z0-9]{8,11}$/.test(String(body.provider || '')) ? body.provider : null;
+  const country = /^[A-Z]{2}$/.test(String(body.country || '')) ? body.country : COUNTRY[lang];
+  const card = body.method === 'card';
+
   const parts = name.split(/\s+/);
   const payload = {
     accessKey: MONTONIO.accessKey,
@@ -50,10 +56,18 @@ module.exports = async (req, res) => {
     locale: lang,
     billingAddress: { firstName: parts[0], lastName: parts.slice(1).join(' ') || parts[0], email, country: COUNTRY[lang] },
     lineItems: items.map((it) => ({ name: it[lang], quantity: 1, finalPrice: it.price })),
-    payment: {
+    payment: card ? {
+      method: 'cardPayments',
+      methodDisplay: DESC[lang],
+      amount: total,
+      currency: 'EUR',
+    } : {
       method: 'paymentInitiation',
       methodDisplay: DESC[lang],
-      methodOptions: { preferredCountry: COUNTRY[lang], preferredLocale: lang, paymentDescription: `${DESC[lang]} ${orderNo}` },
+      methodOptions: Object.assign(
+        { preferredCountry: country, preferredLocale: lang, paymentDescription: `${DESC[lang]} ${orderNo}` },
+        provider ? { preferredProvider: provider } : {}
+      ),
       amount: total,
       currency: 'EUR',
     },

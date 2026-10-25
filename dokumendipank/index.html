@@ -1712,6 +1712,26 @@
   .co-field .hint { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pebble); }
   .co-test { display:flex; gap: 10px; align-items:flex-start; padding: 12px 14px; border: 1px dashed rgba(15,20,25,0.3); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; color: var(--pebble); }
   .co-test .glyph { color: var(--maroon); font-size: 14px; line-height: 1.1; }
+  .pm { margin-top: var(--s-3); }
+  .pm-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+  .pm-head label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pebble); }
+  .pm-tabs { display: flex; gap: 10px; }
+  .pm-tab { background: transparent; border: 0; padding: 0 0 2px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pebble); border-bottom: 1px solid transparent; }
+  .pm-tab.active { color: var(--ink); border-bottom-color: var(--ink); }
+  .pm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .pm-btn {
+    display: flex; align-items: center; justify-content: center; height: 50px; padding: 0 8px;
+    background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(15, 20, 25, 0.16); border-radius: 2px; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  }
+  .pm-btn img { display: block; max-height: 22px; max-width: 88%; object-fit: contain; filter: grayscale(1); opacity: 0.85; transition: filter 0.2s, opacity 0.2s; }
+  .pm-btn:hover { border-color: var(--ink); background: #fff; }
+  .pm-btn:hover img, .pm-btn.active img { filter: none; opacity: 1; }
+  .pm-btn.active { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); background: #fff; }
+  .pm-card { grid-column: 1 / -1; height: 46px; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
+  .pm-card .sub { font-size: 9px; letter-spacing: 0.12em; color: var(--pebble); text-transform: none; }
+  .pm-note { margin-top: 8px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; color: var(--pebble); }
+  .pm.err .pm-grid { outline: 1px solid #B3261E; outline-offset: 2px; }
   .co-err { margin-top: var(--s-2); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; color: #B3261E; }
   .co-back { background: transparent; border: 0; padding: 0; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pebble); text-align: left; transition: color .3s; }
   .co-back:hover { color: var(--maroon); }
@@ -2701,6 +2721,16 @@
       'co.errMail': 'Mail delivery is not configured yet.',
       'co.errTest': 'Test mode: until the lexoria.fi domain is verified, e-mails can only be delivered to the shop owner\'s address.',
       'co.errFields': 'Please fill in your name and a valid e-mail.',
+      'co.method': 'Payment method',
+      'co.card': 'Card',
+      'co.cardSub': 'Visa · Mastercard',
+      'co.pmLoading': 'Loading payment methods…',
+      'co.pmFail': 'Payment methods could not be loaded. You can still pay: Montonio will ask for the bank on the next page.',
+      'co.errMethod': 'Choose a bank or card to continue.',
+      'co.country.FI': 'Finland',
+      'co.country.EE': 'Estonia',
+      'co.country.LV': 'Latvia',
+      'co.country.LT': 'Lithuania',
       'co.consent': 'I accept the <a href="#terms" data-legal="terms">terms of sale</a> and the <a href="#privacy" data-legal="privacy">privacy policy</a>. I ask for the PDF to be delivered immediately and understand that I lose my 14-day right of withdrawal once it has been sent.',
       'co.errConsent': 'Please accept the terms to continue.',
       'legal.tag': 'Terms & policies',
@@ -2867,6 +2897,16 @@
       'co.errMail': 'Sähköpostin lähetystä ei ole vielä otettu käyttöön.',
       'co.errTest': 'Testitila: kunnes lexoria.fi-verkkotunnus on vahvistettu, sähköposti toimitetaan vain kaupan omistajan osoitteeseen.',
       'co.errFields': 'Täytä nimi ja toimiva sähköpostiosoite.',
+      'co.method': 'Maksutapa',
+      'co.card': 'Kortti',
+      'co.cardSub': 'Visa · Mastercard',
+      'co.pmLoading': 'Ladataan maksutapoja…',
+      'co.pmFail': 'Maksutapoja ei voitu ladata. Voit silti maksaa: Montonio kysyy pankin seuraavalla sivulla.',
+      'co.errMethod': 'Valitse pankki tai kortti jatkaaksesi.',
+      'co.country.FI': 'Suomi',
+      'co.country.EE': 'Viro',
+      'co.country.LV': 'Latvia',
+      'co.country.LT': 'Liettua',
       'co.consent': 'Hyväksyn <a href="#terms" data-legal="terms">tilaus- ja toimitusehdot</a> ja <a href="#privacy" data-legal="privacy">tietosuojaselosteen</a>. Pyydän, että PDF toimitetaan heti, ja ymmärrän, että menetän 14 päivän peruuttamisoikeuden, kun asiakirja on lähetetty.',
       'co.errConsent': 'Hyväksy ehdot jatkaaksesi.',
       'legal.tag': 'Ehdot ja tietosuoja',
@@ -3021,6 +3061,16 @@
       'co.errMail': 'E-kirjade saatmine pole veel seadistatud.',
       'co.errTest': 'Testrežiim: kuni lexoria.fi domeen on kinnitamata, saab e-kirju saata ainult poe omaniku aadressile.',
       'co.errFields': 'Sisesta nimi ja kehtiv e-posti aadress.',
+      'co.method': 'Makseviis',
+      'co.card': 'Kaart',
+      'co.cardSub': 'Visa · Mastercard',
+      'co.pmLoading': 'Laen makseviise…',
+      'co.pmFail': 'Makseviise ei õnnestunud laadida. Maksta saab ikka: Montonio küsib panga järgmisel lehel.',
+      'co.errMethod': 'Jätkamiseks vali pank või kaart.',
+      'co.country.FI': 'Soome',
+      'co.country.EE': 'Eesti',
+      'co.country.LV': 'Läti',
+      'co.country.LT': 'Leedu',
       'co.consent': 'Nõustun <a href="#terms" data-legal="terms">müügitingimuste</a> ja <a href="#privacy" data-legal="privacy">privaatsusteatega</a>. Palun toimetada PDF kätte kohe ja mõistan, et kaotan 14-päevase taganemisõiguse, kui dokument on saadetud.',
       'co.errConsent': 'Jätkamiseks nõustu tingimustega.',
       'legal.tag': 'Tingimused ja privaatsus',
@@ -3557,7 +3607,8 @@
   const coArrow = document.getElementById('cartCheckoutArrow');
   const cartVatEl = document.querySelector('.cart-vat');
   var coStep = 'cart'; // cart | checkout | sending | done
-  var coData = { name: '', email: '', consent: false };
+  var coData = { name: '', email: '', consent: false, method: null, provider: null, country: null };
+  var pmData = null;  // banks per country + card availability from /api/payment-methods
 
   function t(key) { const lang = document.documentElement.dataset.lang || 'en'; return I18N[lang][key] || I18N.en[key] || key; }
   function cartTotal() { return cart.reduce((s, i) => s + i.price, 0); }
@@ -3604,6 +3655,7 @@
           <input id="coConsent" type="checkbox"${coData.consent ? ' checked' : ''} required>
           <span>${t('co.consent')}</span>
         </label>
+        <div class="pm" id="coPm"><div class="pm-note">${t('co.pmLoading')}</div></div>
         <div class="co-test"><span class="glyph">§</span><span>${t('co.test')}</span></div>
         ${err ? `<div class="co-err">${err}</div>` : ''}
         <button type="submit" hidden></button>
@@ -3614,6 +3666,51 @@
     const consentEl = document.getElementById('coConsent');
     consentEl.addEventListener('change', () => { coData.consent = consentEl.checked; consentEl.parentElement.classList.remove('err'); });
     if (!coData.name) setTimeout(() => document.getElementById('coName').focus(), 350);
+    loadPaymentMethods();
+  }
+
+  // Bank grid per country plus a card option; the choice is sent with the order so Montonio
+  // sends the buyer straight to that bank instead of its own selection page
+  function loadPaymentMethods() {
+    if (pmData) { renderPaymentMethods(); return; }
+    fetch('/api/payment-methods').then(r => r.json()).then(d => {
+      if (!d || !d.ok) throw new Error('pm');
+      pmData = d;
+      renderPaymentMethods();
+    }).catch(() => {
+      const box = document.getElementById('coPm');
+      if (box) box.innerHTML = `<div class="pm-note">${t('co.pmFail')}</div>`;
+      pmData = { banks: {}, cards: false, failed: true };
+    });
+  }
+  function renderPaymentMethods() {
+    const box = document.getElementById('coPm');
+    if (!box || !pmData) return;
+    const countries = Object.keys(pmData.banks || {});
+    if (!countries.length && !pmData.cards) { box.innerHTML = `<div class="pm-note">${t('co.pmFail')}</div>`; return; }
+    const ui = document.documentElement.dataset.lang;
+    if (!coData.country || !countries.includes(coData.country)) coData.country = countries.includes(ui === 'et' ? 'EE' : 'FI') ? (ui === 'et' ? 'EE' : 'FI') : countries[0];
+    const banks = pmData.banks[coData.country] || [];
+    box.innerHTML = `
+      <div class="pm-head">
+        <label>${t('co.method')}</label>
+        <div class="pm-tabs" role="tablist">${countries.map(c => `<button type="button" class="pm-tab${c === coData.country ? ' active' : ''}" data-pm-country="${c}">${t('co.country.' + c)}</button>`).join('')}</div>
+      </div>
+      <div class="pm-grid">
+        ${banks.map(b => `<button type="button" class="pm-btn${coData.method === 'bank' && coData.provider === b.code ? ' active' : ''}" data-pm-bank="${b.code}" title="${b.name}" aria-label="${b.name}"><img src="${b.logo}" alt="" loading="lazy"></button>`).join('')}
+        ${pmData.cards ? `<button type="button" class="pm-btn pm-card${coData.method === 'card' ? ' active' : ''}" data-pm-card><span>${t('co.card')}</span><span class="sub">${t('co.cardSub')}</span></button>` : ''}
+      </div>`;
+    box.classList.remove('err');
+    box.querySelectorAll('[data-pm-country]').forEach(b => b.addEventListener('click', () => {
+      coData.country = b.dataset.pmCountry;
+      if (coData.method === 'bank') { coData.method = null; coData.provider = null; }
+      renderPaymentMethods();
+    }));
+    box.querySelectorAll('[data-pm-bank]').forEach(b => b.addEventListener('click', () => {
+      coData.method = 'bank'; coData.provider = b.dataset.pmBank; renderPaymentMethods();
+    }));
+    const card = box.querySelector('[data-pm-card]');
+    if (card) card.addEventListener('click', () => { coData.method = 'card'; coData.provider = null; renderPaymentMethods(); });
   }
 
   function renderDone(email, items, orderNo, note) {
@@ -3639,11 +3736,14 @@
     const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
     const consentEl = document.getElementById('coConsent');
     const consent = consentEl.checked;
-    if (!name || !okEmail || !consent) {
+    const needMethod = pmData && !pmData.failed && !coData.method;
+    if (!name || !okEmail || !consent || needMethod) {
       nameEl.classList.toggle('err', !name);
       emailEl.classList.toggle('err', !okEmail);
       consentEl.parentElement.classList.toggle('err', !consent);
-      const msg = t(!name || !okEmail ? 'co.errFields' : 'co.errConsent');
+      const pmBox = document.getElementById('coPm');
+      if (pmBox) pmBox.classList.toggle('err', !!needMethod);
+      const msg = t(!name || !okEmail ? 'co.errFields' : !consent ? 'co.errConsent' : 'co.errMethod');
       const errEl = document.querySelector('.co-err');
       if (errEl) errEl.textContent = msg;
       else document.getElementById('coForm').insertAdjacentHTML('beforeend', `<div class="co-err">${msg}</div>`);
@@ -3659,7 +3759,7 @@
       const r = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, lang, consent: true, skus: items.map(i => i.sku), back: location.origin + location.pathname })
+        body: JSON.stringify({ name, email, lang, consent: true, skus: items.map(i => i.sku), back: location.origin + location.pathname, method: coData.method, provider: coData.provider, country: coData.country })
       });
       const data = await r.json().catch(() => ({}));
       if (!r.ok || !data.ok || !data.paymentUrl) throw new Error(data.error || 'payment_failed');
