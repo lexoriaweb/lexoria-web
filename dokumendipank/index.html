@@ -897,7 +897,7 @@
   }
   .ed-btn:hover { border-color: var(--ink); }
   .ed-btn.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-  .pdp-info .ed-pick { margin-bottom: var(--s-2); }
+  .pdp-info .ed-pick { margin-bottom: 18px; }
   .co-done .order { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pebble); margin-top: 10px; }
   .co-done .note { margin-top: 14px; font-family: 'Newsreader', serif; font-size: 15px; line-height: 1.4; color: var(--ink); }
 
@@ -1188,8 +1188,8 @@
   .pdp-points {
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px var(--s-3);
+    flex-direction: column;
+    gap: 8px;
     margin-bottom: var(--s-4);
     font-family: 'JetBrains Mono', monospace;
     font-size: 9.5px;
@@ -1208,16 +1208,15 @@
     text-transform: uppercase;
     color: var(--maroon);
   }
-  .pdp-features { list-style: none; margin-bottom: var(--s-4); border-bottom: 1px solid rgba(15, 20, 25, 0.1); }
+  .pdp-features { list-style: none; margin-bottom: var(--s-4); }
   .pdp-features li {
     position: relative;
-    padding: 10px 0 10px var(--s-3);
-    border-top: 1px solid rgba(15, 20, 25, 0.1);
+    padding: 5px 0 5px 20px;
     font-family: 'Newsreader', serif;
     font-size: 16px;
     line-height: 1.45;
   }
-  .pdp-features li::before { content: "·"; position: absolute; left: 6px; color: var(--maroon); }
+  .pdp-features li::before { content: "–"; position: absolute; left: 0; color: var(--maroon); }
   .pdp-specs {
     display: grid;
     grid-template-columns: 120px 1fr;
@@ -3437,9 +3436,9 @@
           <span class="pdp-cap">${t('pdp.preview').replace('{n}', p.pages)}</span>
         </div></div>
         <div class="pdp-info">
-          <span class="pdp-cat">${String(PRODUCTS.indexOf(p) + 1).padStart(2, '0')} · ${t('cat.' + p.cat)}</span>
+          <span class="pdp-cat">PDF · ${pagesLabel(p)}</span>
           <h2 class="pdp-title" id="pdpTitle">${pTitle(p)}</h2>
-          <div class="pdp-price"><span class="amount">${fmtEUR(p.price)}</span><span class="vat">${t('price.vat' + p.price)}</span></div>
+          <div class="pdp-price"><span class="amount">${fmtEUR(p.price)}</span><span class="vat">${t('cart.vat')}</span></div>
           <p class="pdp-lede">${t(p.n + '.lede')}</p>
           ${edPickHtml(p)}
           <div class="pdp-actions">${actions}</div>
