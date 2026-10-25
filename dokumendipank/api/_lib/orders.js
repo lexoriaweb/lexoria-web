@@ -113,10 +113,10 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
       a.tx { color: #ECE7DD !important; }
       a.mu { color: #A39F96 !important; }
       .logo-light { display: none !important; }
-      .logo-dark { display: block !important; max-height: none !important; margin: 18px 0; }
+      .logo-dark { display: block !important; max-height: none !important; }
     }
     [data-ogsc] .logo-light { display: none !important; }
-    [data-ogsc] .logo-dark { display: block !important; max-height: none !important; margin: 18px 0; }
+    [data-ogsc] .logo-dark { display: block !important; max-height: none !important; }
     [data-ogsc] .bg, [data-ogsb] .bg { background-color: #0F1419 !important; }
     [data-ogsc] .card, [data-ogsb] .card { background-color: #1A1F26 !important; }
     [data-ogsc] .tx { color: #ECE7DD !important; }
@@ -127,8 +127,8 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="bg" style="background:#FFFFFF;padding:40px 16px 48px;">
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;">
-        <tr><td style="padding:0 0 20px;">
-          <img class="logo-light" src="${SHOP_URL}/lexoria-logo-chip.png" width="540" height="61" alt="Lexoria" style="display:block;width:100%;max-width:540px;height:auto;border:0;"><!--[if !mso]><!--><img class="logo-dark" src="${SHOP_URL}/lexoria-logo-white.png" width="104" height="25" alt="" style="display:none;width:104px;max-height:0;height:auto;overflow:hidden;border:0;mso-hide:all;"><!--<![endif]-->
+        <tr><td style="padding:0 0 32px;">
+          <img class="logo-light" src="${SHOP_URL}/lexoria-logo-purple.png" width="140" height="33" alt="Lexoria" style="display:block;width:140px;height:auto;border:0;"><!--[if !mso]><!--><img class="logo-dark" src="${SHOP_URL}/lexoria-logo-white.png" width="140" height="33" alt="" style="display:none;width:140px;max-height:0;height:auto;overflow:hidden;border:0;mso-hide:all;"><!--<![endif]-->
         </td></tr>
         <tr><td class="tx" style="${serif}font-size:26px;line-height:1.2;color:#0F1419;padding:0 0 14px;">${esc(c.hi(name))}</td></tr>
         <tr><td class="tx" style="${serif}font-size:16px;line-height:1.55;color:#0F1419;padding:0 0 28px;">${c.lead}</td></tr>
