@@ -28,8 +28,8 @@ function page(next, wrong) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Lexoria</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
 <meta property="og:title" content="Lexoria">
 <meta property="og:site_name" content="Lexoria">
 <meta property="og:type" content="website">
