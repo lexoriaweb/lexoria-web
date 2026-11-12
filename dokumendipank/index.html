@@ -3808,7 +3808,7 @@
     cart.length = 0; coData.consent = false; cartChanged();
     try { localStorage.removeItem('lex_order'); } catch(e){}
     const note = status === 'pending' ? t('co.pending') : status === 'paid' ? '' : t('co.done.mailFail');
-    coStep = 'done'; openCart(); renderDone(email, items, orderNo, note); renderFoot();
+    openCart(); coStep = 'done'; renderDone(email, items, orderNo, note); renderFoot();
   }
 
   cartCheckout.addEventListener('click', () => {

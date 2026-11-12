@@ -193,6 +193,9 @@ async function sendOrderEmail(order, payment) {
   });
   if (!r.ok) {
     const detail = await r.text().catch(() => '');
+    // The return handler and the webhook often arrive in the same instant; Resend answers the
+    // loser with 409 while the winner's send is still running, so the mail is on its way.
+    if (r.status === 409 && /concurrent_idempotent_requests/.test(detail)) return {};
     console.error('resend error', r.status, detail);
     if (r.status === 403 && /own email address/i.test(detail)) throw new Error('test_recipient');
     throw new Error('send_failed');
