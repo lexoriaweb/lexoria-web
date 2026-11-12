@@ -3270,7 +3270,7 @@
 
   function fmtEUR(n) {
     const lang = document.documentElement.dataset.lang || 'en';
-    return n.toFixed(0) + ' €';
+    return (Number.isInteger(n) ? n.toFixed(0) : n.toFixed(2).replace('.', lang === 'en' ? '.' : ',')) + ' €';
   }
 
   function renderCart() {
@@ -3332,7 +3332,7 @@
   // One product sold in three language editions; a SKU is `${id}-${edition}` (will-fi, will-en, will-et)
   const EDITIONS = ['fi', 'en', 'et'];
   const PRODUCTS = [
-    { id: 'will', n: 'p1', price: 29, cat: 'inheritance', pages: 2 }
+    { id: 'will', n: 'p1', price: 0.1, cat: 'inheritance', pages: 2 }
   ];
   var edSel = {};  // product id -> edition picked in the UI
   function edOf(sku) { const ed = String(sku).split('-')[1]; return EDITIONS.includes(ed) ? ed : null; }

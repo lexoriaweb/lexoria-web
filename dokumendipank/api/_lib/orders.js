@@ -6,9 +6,9 @@ const path = require('path');
 const { sign, verify } = require('./jwt');
 
 const CATALOG = {
-  'will-fi': { price: 29, file: 'testamentti-perusmalli-fi.pdf', fi: 'Testamentti · suomeksi', en: 'Will · in Finnish', et: 'Testament · soome keeles' },
-  'will-en': { price: 29, file: 'testamentti-perusmalli-en.pdf', fi: 'Testamentti · englanniksi', en: 'Will · in English', et: 'Testament · inglise keeles' },
-  'will-et': { price: 29, file: 'testamentti-perusmalli-et.pdf', fi: 'Testamentti · viroksi', en: 'Will · in Estonian', et: 'Testament · eesti keeles' },
+  'will-fi': { price: 0.1, file: 'testamentti-perusmalli-fi.pdf', fi: 'Testamentti · suomeksi', en: 'Will · in Finnish', et: 'Testament · soome keeles' },
+  'will-en': { price: 0.1, file: 'testamentti-perusmalli-en.pdf', fi: 'Testamentti · englanniksi', en: 'Will · in English', et: 'Testament · inglise keeles' },
+  'will-et': { price: 0.1, file: 'testamentti-perusmalli-et.pdf', fi: 'Testamentti · viroksi', en: 'Will · in Estonian', et: 'Testament · eesti keeles' },
 };
 const LANGS = ['fi', 'en', 'et'];
 
@@ -84,7 +84,7 @@ function itemsOf(skus) {
   return [...new Set((skus || []).map(String))].filter((s) => CATALOG[s]).map((s) => ({ sku: s, ...CATALOG[s] }));
 }
 function totalOf(items) {
-  return items.reduce((s, it) => s + it.price, 0);
+  return Math.round(items.reduce((s, it) => s + it.price, 0) * 100) / 100;
 }
 
 function buildHtml(lang, name, items, total, orderNo, statusLine) {
