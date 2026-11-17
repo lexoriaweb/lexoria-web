@@ -1198,44 +1198,6 @@
   }
 
   /* ============================================================
-     06 / PULL QUOTE
-     ============================================================ */
-  .pullquote-section {
-    background: var(--paper);
-    color: var(--ink);
-    padding: var(--s-8) 0;
-  }
-  .pullquote-stack {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--s-4);
-    max-width: 1080px;
-  }
-  .pullquote-body {
-    font-family: 'Newsreader', serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(32px, 4vw, 64px);
-    line-height: 1.18;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-  }
-  .pullquote-body em { color: var(--maroon); font-weight: 400; }
-  .pullquote-attr {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--pebble);
-    line-height: 1.7;
-  }
-  .pullquote-attr .name { color: var(--ink); }
-  @media (max-width: 900px) {
-    .pullquote-section { padding: var(--s-7) 0; }
-  }
-
-  /* ============================================================
      06.5 / HINNAKIRI
      ============================================================ */
   .pricing-section {
@@ -1343,7 +1305,28 @@
     color: var(--ink);
     max-width: 42ch;
   }
+  .pricing-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    margin-top: var(--s-6);
+    padding: 20px 28px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .pricing-cta .icon { transition: transform 0.3s; }
+  .pricing-cta:hover { background: var(--maroon); }
+  .pricing-cta:hover .icon { transform: translateX(4px); }
   @media (max-width: 900px) {
+    .pricing-cta { display: flex; margin-top: var(--s-5); }
     .pricing-section { padding: var(--s-7) 0; }
     .pricing-grid { grid-template-columns: 1fr; gap: var(--s-5); margin-top: var(--s-5); }
     .pricing-rate { font-size: 40px; }
@@ -1751,7 +1734,7 @@
     <div class="cold-stack">
       <img class="cold-logo" src="lexoria-logo-white.png" alt="Lexoria">
       <div class="cold-info">
-        <span class="cold-tag" data-i18n-html="cold.footTag">Asianajotoimisto.<br>Attorney-at-law.</span>
+        <span class="cold-tag" data-i18n-html="cold.footTag">Asianajotoimisto<br>Attorney-at-law</span>
         <span class="cold-locations" data-i18n="cold.footLocations">Helsinki - Tallinn</span>
         <div class="cold-ctas">
           <a class="cold-cta cold-cta--primary" href="#broneeri">
@@ -2090,20 +2073,6 @@
     </div>
   </section>
 
-  <!-- 06 / PULL QUOTE -->
-  <section class="pullquote-section">
-    <div class="wrap">
-      <div class="pullquote-stack">
-        <blockquote class="pullquote-body" data-i18n="pull.body">
-          Law is simple, once you let go of the need <em>to look complicated.</em>
-        </blockquote>
-        <div class="pullquote-attr" data-i18n-html="pull.attr">
-          <span class="name">A. Nõmm</span> · Managing partner · On counsel
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 06.5 / HINNAKIRI -->
   <section class="pricing-section" id="hinnakiri">
     <div class="wrap">
@@ -2149,6 +2118,10 @@
           <span class="pricing-hint-body" data-i18n="price.foot2.body">The legal-expenses cover that comes with your home insurance may reimburse the lawyer's fee and court costs.</span>
         </div>
       </div>
+      <a class="pricing-cta" href="/fees" data-price-link>
+        <span data-i18n="price.cta">View the price list</span>
+        <span class="icon" aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
@@ -2277,7 +2250,7 @@
       'aside.lang': 'Language',
       'aside.langGroup': 'Language',
       'aside.cta': 'Book a consultation <span>↗</span>',
-      'cold.footTag': 'Asianajotoimisto.<br>Attorney-at-law.',
+      'cold.footTag': 'Asianajotoimisto<br>Attorney-at-law',
       'cold.footLocations': 'Helsinki - Tallinn',
       'cold.footCta': 'Book a consultation',
       'cold.docsCta': 'Document bank',
@@ -2342,8 +2315,6 @@
       'team.p4.rank': 'Sales & Marketing',
       'team.p4.role': 'Sales & Marketing Manager',
       'team.p4.imgAlt': 'Vivian Berg portrait',
-      'pull.body': 'Law is simple, once you let go of the need <em>to look complicated.</em>',
-      'pull.attr': '<span class="name">A. Nõmm</span> · Managing partner · On counsel',
       'price.chapter': 'Fees',
       'price.h2': 'Clear<br><em>numbers.</em>',
       'price.card1.eyebrow': '01 / Private',
@@ -2363,6 +2334,7 @@
       'price.card3.note': 'The Finnish state pays for legal help at lower income levels. At the first meeting we explain the process and required documents.',
       'price.foot1.lead': 'First consultation',
       'price.foot1.body': 'Up to 30 minutes free. If no client agreement is signed, no fee is charged.',
+      'price.cta': 'View the price list',
       'price.foot2.lead': 'Legal expenses insurance',
       'price.foot2.body': "The legal-expenses cover that comes with your home insurance may reimburse the lawyer's fee and court costs.",
       'book.chapter': 'Book',
@@ -2442,7 +2414,7 @@ The answer is always yours.`,
       'aside.lang': 'Kieli',
       'aside.langGroup': 'Kieli',
       'aside.cta': 'Varaa konsultaatio <span>↗</span>',
-      'cold.footTag': 'Asianajotoimisto.<br>Attorney-at-law.',
+      'cold.footTag': 'Asianajotoimisto<br>Attorney-at-law',
       'cold.footLocations': 'Helsinki - Tallinna',
       'cold.footCta': 'Varaa konsultaatio',
       'cold.docsCta': 'Asiakirjapankki',
@@ -2507,8 +2479,6 @@ The answer is always yours.`,
       'team.p4.rank': 'Myynti & Markkinointi',
       'team.p4.role': 'Myynti- ja markkinointipäällikkö',
       'team.p4.imgAlt': 'Vivian Berg muotokuva',
-      'pull.body': 'Oikeus on yksinkertaista, kun luovutte tarpeesta <em>näyttää monimutkaiselta.</em>',
-      'pull.attr': '<span class="name">A. Nõmm</span> · Johtava partneri · Neuvonnasta',
       'price.chapter': 'Hinnasto',
       'price.h2': 'Selkeitä<br><em>lukuja.</em>',
       'price.card1.eyebrow': '01 / Yksityinen',
@@ -2528,6 +2498,7 @@ The answer is always yours.`,
       'price.card3.note': 'Suomen valtio korvaa juristin palkkion pienempituloisille. Ensitapaamisessa selitämme menettelyn ja tarvittavat asiakirjat.',
       'price.foot1.lead': 'Ensimmäinen konsultaatio',
       'price.foot1.body': 'Enintään 30 minuuttia maksutta. Jos toimeksiantoa ei synny, palkkiota ei peritä.',
+      'price.cta': 'Katso hinnasto',
       'price.foot2.lead': 'Oikeusturvavakuutus',
       'price.foot2.body': 'Kotivakuutukseenne kuuluva oikeusturvaosa voi korvata juristin palkkion ja oikeudenkäyntikulut.',
       'book.chapter': 'Varaa',
@@ -2607,7 +2578,7 @@ Vastaus on aina teidän.`,
       'aside.lang': 'Keel',
       'aside.langGroup': 'Keel',
       'aside.cta': 'Broneeri konsultatsioon <span>↗</span>',
-      'cold.footTag': 'Asianajotoimisto.<br>Advokaadibüroo.',
+      'cold.footTag': 'Asianajotoimisto<br>Advokaadibüroo',
       'cold.footLocations': 'Helsingi - Tallinn',
       'cold.footCta': 'Broneeri konsultatsioon',
       'cold.docsCta': 'Dokumendipank',
@@ -2672,8 +2643,6 @@ Vastaus on aina teidän.`,
       'team.p4.rank': 'Müük & Turundus',
       'team.p4.role': 'Müügi- ja turundusjuht',
       'team.p4.imgAlt': 'Vivian Bergi portree',
-      'pull.body': 'Õigus on lihtne, kui loobuda vajadusest <em>näida keeruline.</em>',
-      'pull.attr': '<span class="name">A. Nõmm</span> · Juhtivpartner · Nõustamisest',
       'price.chapter': 'Hinnakiri',
       'price.h2': 'Selged<br><em>numbrid.</em>',
       'price.card1.eyebrow': '01 / Eraklient',
@@ -2693,6 +2662,7 @@ Vastaus on aina teidän.`,
       'price.card3.note': 'Soome riik tasub väiksema sissetulekuga inimeste õigusabi eest. Esimesel kohtumisel selgitame menetlust ja vajalikke dokumente.',
       'price.foot1.lead': 'Esimene konsultatsioon',
       'price.foot1.body': 'Kuni 30 minutit tasuta. Kui kliendilepingut ei sõlmita, tasu ei võeta.',
+      'price.cta': 'Vaata hinnakirja',
       'price.foot2.lead': 'Õigusabikulude kindlustus',
       'price.foot2.body': 'Teie kodukindlustuse juurde kuuluv õigusabikulude kaitse võib hüvitada advokaaditasu ja kohtukulud.',
       'book.chapter': 'Broneeri',
@@ -2758,7 +2728,9 @@ Vastus on alati teie.`,
 
   // The shop lives under a path named in the visitor's language
   const SHOP_PATHS = { fi: '/asiakirjapankki', en: '/document-bank', et: '/dokumendipank' };
+  const PRICE_PATHS = { fi: '/hinnasto', en: '/fees', et: '/hinnakiri' };
   function applyLang(lang) {
+    if (location.protocol !== 'file:') document.querySelectorAll('[data-price-link]').forEach(a => { a.href = PRICE_PATHS[lang] || PRICE_PATHS.en; });
     if (location.protocol !== 'file:') document.querySelectorAll('[data-shop-link]').forEach(a => { a.href = SHOP_PATHS[lang] || SHOP_PATHS.en; });
     if (!I18N[lang]) lang = 'en';
     currentLang = lang;
@@ -2933,6 +2905,9 @@ Vastus on alati teie.`,
   if (location.protocol === 'file:') {
     document.querySelectorAll('[data-shop-link]').forEach(function (a) {
       a.href = '../dokumendipank/index.html';
+    });
+    document.querySelectorAll('[data-price-link]').forEach(function (a) {
+      a.href = 'hinnasto.html';
     });
   }
 </script>

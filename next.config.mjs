@@ -6,6 +6,8 @@ const nextConfig = {
     return {
       beforeFiles: [
         { source: '/', destination: '/index.html' },
+        // Price list under a path named in each language
+        { source: '/:slug(hinnasto|fees|hinnakiri)', destination: '/hinnasto.html' },
         // Document bank under a path named in each language; the shop itself is a separate Vercel project
         { source: '/:slug(asiakirjapankki|document-bank|dokumendipank)', destination: `${SHOP}/` },
         // The shop page loads these relative to the site root

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hinnasto · Lexoria</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+<meta name="description" content="Asianajotoimisto Lexoria Oy · Hinnasto">
+<meta property="og:title" content="Lexoria · Hinnasto">
+<meta property="og:description" content="Asianajotoimisto Lexoria Oy · Hinnasto">
+<meta property="og:site_name" content="Lexoria">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.lexoria.fi/og.png?v=3">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    try {
+      var cached = localStorage.getItem('lex_lang');
+      var hint = (navigator.language || 'en').toLowerCase().slice(0,2);
+      var lang = cached || (hint === 'fi' || hint === 'et' ? hint : 'en');
+      document.documentElement.lang = lang;
+      if (localStorage.getItem('lex_paper') === 'white') document.documentElement.classList.add('theme-white');
+    } catch(e){}
+  })();
+</script>
+<style>
+  :root {
+    --paper: #ECE7DD;
+    --paper-soft: #E5E0D5;
+    --ink: #0F1419;
+    --maroon: #5B21B6;
+    --maroon-soft: #C7BEE5;
+    --pebble: #6B6B6B;
+    --rule: rgba(15, 20, 25, 0.14);
+
+    --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 32px;
+    --s-5: 48px; --s-6: 64px; --s-7: 96px; --s-8: 128px;
+
+    --container-max: 1400px;
+    --edge-x: var(--s-5);
+  }
+  html.theme-white { --paper: #FFFFFF; --paper-soft: #F4F4F1; }
+  @media (max-width: 768px) { :root { --edge-x: 24px; } }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { overflow-x: hidden; }
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper-soft);
+    color: var(--ink);
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--maroon); color: var(--paper); }
+  .wrap {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-left: var(--edge-x);
+    padding-right: var(--edge-x);
+  }
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* === TOP BAR === */
+  .top { padding: var(--s-3) 0; }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+  .top-logo img { height: 26px; width: auto; display: block; }
+  .top-back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 8px 0;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .top-back:hover { opacity: 1; color: var(--maroon); }
+
+  /* === HEAD === */
+  main { flex: 1; padding: var(--s-7) 0 var(--s-8); }
+  .chapter {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--s-3);
+    margin-bottom: var(--s-5);
+    line-height: 1;
+    color: var(--maroon);
+  }
+  .chapter .glyph {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  h1 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(40px, 5.2vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+  }
+  h1 em { font-style: italic; color: var(--maroon); }
+  .lede { margin-top: var(--s-4); max-width: 52ch; font-size: 18px; }
+
+  /* === FEE LIST === */
+  .fees { list-style: none; margin-top: var(--s-7); border-top: 1px solid var(--rule); }
+  .fee {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    column-gap: var(--s-3);
+    align-items: baseline;
+    padding: var(--s-4) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .fee-num { color: var(--maroon); font-weight: 500; letter-spacing: 0.12em; }
+  .fee-name {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    overflow-wrap: anywhere;
+  }
+  .fee-prices { text-align: right; }
+  .fee-price {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3vw, 44px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .fee-price .from {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .fee-vat { margin-top: 10px; letter-spacing: 0.18em; color: var(--pebble); }
+
+  /* === FOOT NOTE + CTAS === */
+  .after { margin-top: var(--s-6); display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-4); }
+  .note { max-width: 56ch; font-size: 16px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); align-items: center; }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding: 20px 28px;
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .cta:hover { background: var(--maroon); }
+  .cta-alt {
+    display: inline-flex;
+    gap: var(--s-2);
+    padding: 12px 0;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .cta-alt:hover { color: var(--maroon); }
+  .cta-alt span { color: var(--maroon); }
+
+  /* === FOOTER === */
+  footer { background: var(--ink); color: rgba(236, 231, 221, 0.55); padding: var(--s-4) 0; }
+  .colophon { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--s-2) var(--s-4); font-size: 10px; }
+  .langs { display: inline-flex; gap: var(--s-2); align-items: center; }
+  .langs button {
+    background: transparent;
+    border: 0;
+    padding: 6px 0;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+    letter-spacing: 0.22em;
+    opacity: 0.55;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .langs button:hover { opacity: 1; }
+  .langs button.active { opacity: 1; color: #ECE7DD; }
+  .langs .sep { opacity: 0.35; }
+
+  @media (max-width: 768px) {
+    main { padding: var(--s-5) 0 var(--s-7); }
+    .chapter { margin-bottom: var(--s-4); gap: var(--s-2); }
+    .chapter .glyph { font-size: 18px; }
+    .lede { font-size: 16px; }
+    .fees { margin-top: var(--s-5); }
+    .fee { grid-template-columns: 32px minmax(0, 1fr); column-gap: var(--s-2); row-gap: var(--s-2); padding: var(--s-3) 0; }
+    .fee-prices { grid-column: 2; text-align: left; }
+    .fee-price { font-size: 30px; }
+    .fee-vat { font-size: 10px; letter-spacing: 0.14em; }
+    .after { margin-top: var(--s-5); }
+    .ctas { flex-direction: column; align-items: stretch; width: 100%; }
+    .colophon { flex-direction: column-reverse; align-items: flex-start; gap: var(--s-2); }
+    .colophon > span { font-size: 9px; line-height: 1.8; }
+    .langs { font-size: 12px; gap: var(--s-3); }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="/" class="top-logo" data-home aria-label="Lexoria">
+      <img src="lexoria-logo-dark.png" alt="Lexoria">
+    </a>
+    <a href="/" class="top-back mono" data-home>
+      <span aria-hidden="true">←</span>
+      <span data-i18n="back">Etusivu</span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="chapter mono">
+      <span class="glyph">§</span>
+      <span data-i18n="chapter">Hinnasto</span>
+    </div>
+    <h1 data-i18n="h1">Kiinteät<br><em>hinnat.</em></h1>
+    <p class="lede" data-i18n="lede"></p>
+
+    <ol class="fees" id="fees"></ol>
+
+    <div class="after">
+      <p class="note" data-i18n="note"></p>
+      <div class="ctas">
+        <a class="cta mono" href="/#broneeri" data-home="#broneeri">
+          <span data-i18n="cta">Varaa konsultaatio</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <a class="cta-alt mono" href="/#hinnakiri" data-home="#hinnakiri" data-i18n="hourly">Tuntihinnat <span>↗</span></a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap colophon mono">
+    <span data-i18n="reg">© 2026 · Lexoria · Y-tunnus 3561005-2</span>
+    <span class="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="fi">FI</button>
+      <span class="sep" aria-hidden="true">·</span>
+      <button type="button" data-lang="en">EN</button>
+      <span class="sep" aria-hidden="true">·</span>
+      <button type="button" data-lang="et">ET</button>
+    </span>
+  </div>
+</footer>
+
+<script>
+  // Net price in euros; gross = net × 1.255 (Finnish VAT 25.5 %)
+  const FEES = [
+    { fi: 'Avioehtosopimus', en: 'Prenuptial agreement', et: 'Abieluvaraleping', net: 340, gross: 426.7 },
+    { fi: 'Edunvalvontavaltakirja', en: 'Continuing power of attorney', et: 'Tulevikuvolikiri', net: 340, gross: 426.7 },
+    { fi: 'Testamentti', en: 'Will', et: 'Testament', net: 500, gross: 627.5 },
+    { fi: 'Keskinäinen testamentti', en: 'Mutual will', et: 'Vastastikune testament', net: 600, gross: 753 },
+    { fi: 'Kansainvälinen testamentti', en: 'International will', et: 'Rahvusvaheline testament', net: 600, gross: 753 },
+    { fi: 'Perunkirjoitus', en: 'Estate inventory', et: 'Pärandvara inventuur', net: 1000, gross: 1255 },
+    { fi: 'Ositussopimus', en: 'Division of property agreement', et: 'Abieluvara jagamise leping', net: 1000, gross: 1255 },
+  ];
+  const I18N = {
+    fi: {
+      title: 'Hinnasto · Lexoria', back: 'Etusivu', chapter: 'Hinnasto',
+      h1: 'Kiinteät<br><em>hinnat.</em>',
+      lede: 'Yleisimmät asiakirjat ja toimeksiannot kiinteään alkaen-hintaan.',
+      from: 'alkaen', vat: 'Sis. ALV 25,5 %',
+      note: 'Hinnat ovat alkaen-hintoja. Lopullinen hinta riippuu tehtävän laajuudesta.',
+      cta: 'Varaa konsultaatio', hourly: 'Tuntihinnat <span>↗</span>',
+      reg: '© 2026 · Lexoria · Y-tunnus 3561005-2',
+    },
+    en: {
+      title: 'Price list · Lexoria', back: 'Home', chapter: 'Price list',
+      h1: 'Fixed<br><em>prices.</em>',
+      lede: 'The most common documents and assignments at a fixed starting price.',
+      from: 'from', vat: 'Incl. VAT 25.5%',
+      note: 'These are starting prices. The final price depends on the scope of the work.',
+      cta: 'Book a consultation', hourly: 'Hourly rates <span>↗</span>',
+      reg: '© 2026 · Lexoria · Reg 3561005-2',
+    },
+    et: {
+      title: 'Hinnakiri · Lexoria', back: 'Avaleht', chapter: 'Hinnakiri',
+      h1: 'Kindlad<br><em>hinnad.</em>',
+      lede: 'Levinumad dokumendid ja tööd kindla alghinnaga.',
+      from: 'alates', vat: 'Koos KM-ga 25,5%',
+      note: 'Hinnad on alghinnad. Lõplik hind sõltub töö mahust.',
+      cta: 'Broneeri konsultatsioon', hourly: 'Tunnihinnad <span>↗</span>',
+      reg: '© 2026 · Lexoria · Reg 3561005-2',
+    },
+  };
+  const LOCALES = { fi: 'fi-FI', en: 'en-GB', et: 'et-EE' };
+
+  function money(n, lang) {
+    const digits = Number.isInteger(n) ? 0 : 2;
+    return new Intl.NumberFormat(LOCALES[lang], { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(n) + ' €';
+  }
+
+  function applyLang(lang) {
+    if (!I18N[lang]) lang = 'en';
+    const t = I18N[lang];
+    document.documentElement.lang = lang;
+    document.title = t.title;
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.innerHTML = t[el.dataset.i18n]; });
+    document.getElementById('fees').innerHTML = FEES.map((f, i) => `
+      <li class="fee">
+        <span class="fee-num mono">${String(i + 1).padStart(2, '0')}</span>
+        <h2 class="fee-name">${f[lang]}</h2>
+        <div class="fee-prices">
+          <div class="fee-price"><span class="from">${t.from}</span>${money(f.net, lang)}</div>
+          <div class="fee-vat mono">${t.vat} · ${money(f.gross, lang)}</div>
+        </div>
+      </li>`).join('');
+    document.querySelectorAll('[data-lang]').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+  }
+
+  document.querySelectorAll('[data-lang]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      try { localStorage.setItem('lex_lang', btn.dataset.lang); } catch(e){}
+      applyLang(btn.dataset.lang);
+    });
+  });
+  applyLang(document.documentElement.lang);
+
+  // Local preview: when opened as a file, links point at the sibling local HTML.
+  if (location.protocol === 'file:') {
+    document.querySelectorAll('[data-home]').forEach(a => { a.href = 'index.html' + a.dataset.home; });
+  }
+</script>
+</body>
+</html>
