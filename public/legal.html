@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiedot · Lexoria</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+<meta name="description" content="Asianajotoimisto Lexoria Oy · Yritystiedot, tietosuoja ja ehdot">
+<meta property="og:title" content="Lexoria">
+<meta property="og:description" content="Asianajotoimisto Lexoria Oy · Yritystiedot, tietosuoja ja ehdot">
+<meta property="og:site_name" content="Lexoria">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.lexoria.fi/og.png?v=3">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    try {
+      var cached = localStorage.getItem('lex_lang');
+      var hint = (navigator.language || 'en').toLowerCase().slice(0,2);
+      var lang = cached || (hint === 'fi' || hint === 'et' ? hint : 'en');
+      document.documentElement.lang = lang;
+      if (localStorage.getItem('lex_paper') === 'white') document.documentElement.classList.add('theme-white');
+    } catch(e){}
+  })();
+</script>
+<style>
+  :root {
+    --paper: #ECE7DD;
+    --paper-soft: #E5E0D5;
+    --ink: #0F1419;
+    --maroon: #5B21B6;
+    --pebble: #6B6B6B;
+    --rule: rgba(15, 20, 25, 0.14);
+
+    --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 32px;
+    --s-5: 48px; --s-6: 64px; --s-7: 96px; --s-8: 128px;
+
+    --container-max: 1400px;
+    --edge-x: var(--s-5);
+  }
+  html.theme-white { --paper: #FFFFFF; --paper-soft: #F4F4F1; }
+  @media (max-width: 768px) { :root { --edge-x: 24px; } }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { overflow-x: hidden; scroll-behavior: smooth; }
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper-soft);
+    color: var(--ink);
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--maroon); color: var(--paper); }
+  .wrap {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-left: var(--edge-x);
+    padding-right: var(--edge-x);
+  }
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* === TOP BAR === */
+  .top { padding: var(--s-3) 0; }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+  .top-logo img { height: 26px; width: auto; display: block; }
+  .top-back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 8px 0;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .top-back:hover { opacity: 1; color: var(--maroon); }
+
+  /* === SECTION INDEX === */
+  main { flex: 1; padding: var(--s-6) 0 var(--s-8); }
+  .index { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-4); padding-bottom: var(--s-3); border-bottom: 1px solid var(--rule); }
+  .index a { padding: 8px 0; color: var(--ink); text-decoration: none; transition: color 0.3s; }
+  .index a:hover { color: var(--maroon); }
+  .updated { margin-top: var(--s-3); color: var(--pebble); font-size: 10px; }
+
+  /* === SECTIONS === */
+  .doc { padding-top: var(--s-7); scroll-margin-top: 0; }
+  .doc h1 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(36px, 4.4vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    overflow-wrap: anywhere;
+  }
+  .doc h1 em { font-style: italic; color: var(--maroon); }
+  .doc-body { margin-top: var(--s-5); max-width: 68ch; }
+  .doc-body h3 {
+    margin: var(--s-5) 0 var(--s-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+  .doc-body h3:first-child { margin-top: 0; }
+  .doc-body p + p { margin-top: var(--s-2); }
+  .doc-body ul { padding-left: 1.2em; }
+  .doc-body li + li { margin-top: 6px; }
+  .doc-body ul + p { margin-top: var(--s-2); }
+  .doc-body a { color: var(--maroon); text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px var(--s-4); }
+  .facts dt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pebble);
+    padding-top: 5px;
+  }
+  .facts dd { overflow-wrap: anywhere; }
+
+  /* === FOOTER === */
+  footer { background: var(--ink); color: rgba(236, 231, 221, 0.55); padding: var(--s-4) 0; }
+  .colophon { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--s-2) var(--s-4); font-size: 10px; }
+  .langs { display: inline-flex; gap: var(--s-2); align-items: center; }
+  .langs button {
+    background: transparent;
+    border: 0;
+    padding: 6px 0;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+    letter-spacing: 0.22em;
+    opacity: 0.55;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .langs button:hover { opacity: 1; }
+  .langs button.active { opacity: 1; color: #ECE7DD; }
+  .langs .sep { opacity: 0.35; }
+
+  @media (max-width: 768px) {
+    body { font-size: 16px; }
+    main { padding: var(--s-4) 0 var(--s-7); }
+    .index { flex-direction: column; gap: 0; }
+    .index a { padding: 10px 0; }
+    .doc { padding-top: var(--s-6); }
+    .doc-body { margin-top: var(--s-4); }
+    .facts { grid-template-columns: 1fr; gap: 2px; }
+    .facts dd { margin-bottom: 12px; }
+    .colophon { flex-direction: column-reverse; align-items: flex-start; gap: var(--s-2); }
+    .colophon > span { font-size: 9px; line-height: 1.8; }
+    .langs { font-size: 12px; gap: var(--s-3); }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="/" class="top-logo" data-home aria-label="Lexoria">
+      <img src="lexoria-logo-dark.png" alt="Lexoria">
+    </a>
+    <a href="/" class="top-back mono" data-home>
+      <span aria-hidden="true">←</span>
+      <span data-t="back">Etusivu</span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <nav class="index mono" id="index"></nav>
+    <div class="updated mono" data-t="updated"></div>
+    <div id="docs"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap colophon mono">
+    <span data-t="reg">© 2026 · Lexoria · Y-tunnus 3561005-2</span>
+    <span class="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="fi">FI</button>
+      <span class="sep" aria-hidden="true">·</span>
+      <button type="button" data-lang="en">EN</button>
+      <span class="sep" aria-hidden="true">·</span>
+      <button type="button" data-lang="et">ET</button>
+    </span>
+  </div>
+</footer>
+
+<script>
+  const MAIL = '<a href="mailto:info@lexoria.fi">info@lexoria.fi</a>';
+  const TEL = '<a href="tel:+358456560060">+358 45 656 0060</a>';
+  const BAR = '<a href="https://asianajajaliitto.fi" target="_blank" rel="noopener">asianajajaliitto.fi</a>';
+  const DPA = '<a href="https://tietosuoja.fi" target="_blank" rel="noopener">tietosuoja.fi</a>';
+  // The shop keeps its own terms; these pages cover the main site only
+  const SHOP_TERMS = { fi: '/asiakirjapankki#terms', en: '/document-bank#terms', et: '/dokumendipank#terms' };
+
+  const I18N = {
+    fi: {
+      title: 'Tiedot · Lexoria', back: 'Etusivu', updated: 'Päivitetty 17.11.2026',
+      reg: '© 2026 · Lexoria · Y-tunnus 3561005-2',
+      docs: {
+        company: {
+          tab: 'Yritystiedot', title: 'Yritys<em>tiedot</em>',
+          body: `
+            <dl class="facts">
+              <dt>Yritys</dt><dd>Asianajotoimisto Lexoria Oy</dd>
+              <dt>Y-tunnus</dt><dd>3561005-2</dd>
+              <dt>Osoite</dt><dd>Vekarakatu 14, 13500 Hämeenlinna</dd>
+              <dt>Sähköposti</dt><dd>${MAIL}</dd>
+              <dt>Puhelin</dt><dd>${TEL}</dd>
+            </dl>
+            <h3>Asianajajat</h3>
+            <p>Toimiston asianajajat ovat Suomen Asianajajaliiton jäseniä. Ammattinimike asianajaja on myönnetty Suomessa. Toimintaa valvoo Suomen Asianajajaliitto (${BAR}), ja siihen sovelletaan asianajajalakia ja hyvää asianajajatapaa koskevia ohjeita.</p>`
+        },
+        privacy: {
+          tab: 'Tietosuoja', title: 'Tietosuoja<em>seloste</em>',
+          body: `
+            <h3>1. Rekisterinpitäjä</h3>
+            <p>Asianajotoimisto Lexoria Oy (Y-tunnus 3561005-2), Vekarakatu 14, 13500 Hämeenlinna. Sähköposti ${MAIL}, puhelin ${TEL}.</p>
+            <h3>2. Mitä tietoja käsittelemme</h3>
+            <ul>
+              <li>Yhteydenotossa antamasi tiedot: nimi, sähköpostiosoite, puhelinnumero ja viestin sisältö</li>
+              <li>Sivuston käytöstä syntyvät tekniset lokitiedot, kuten IP-osoite ja selaintyyppi</li>
+            </ul>
+            <h3>3. Käyttötarkoitukset ja oikeusperusteet</h3>
+            <ul>
+              <li>Yhteydenottoon vastaaminen ja toimeksiannon valmistelu: sopimusta edeltävät toimet pyynnöstäsi (tietosuoja-asetuksen 6 artiklan 1 kohdan b alakohta)</li>
+              <li>Sivuston tietoturva ja väärinkäytösten estäminen: oikeutettu etu (f alakohta)</li>
+            </ul>
+            <p>Emme käytä tietojasi markkinointiin, profilointiin emmekä automaattiseen päätöksentekoon.</p>
+            <h3>4. Tietojen vastaanottajat</h3>
+            <ul>
+              <li>Vercel (Yhdysvallat): verkkosivuston ylläpito</li>
+              <li>Google Fonts: sivuston kirjasimet ladataan Googlelta, joka saa IP-osoitteesi sivun latautuessa</li>
+              <li>ipapi.co: ensimmäisellä käynnillä kysymme palvelulta maasi kielen valitsemiseksi, ja palvelu saa IP-osoitteesi</li>
+            </ul>
+            <h3>5. Siirrot EU:n ja ETA:n ulkopuolelle</h3>
+            <p>Osa näistä palveluntarjoajista käsittelee tietoja Yhdysvalloissa. Siirrot perustuvat EU:n ja Yhdysvaltojen väliseen Data Privacy Framework -järjestelyyn tai Euroopan komission vakiosopimuslausekkeisiin.</p>
+            <h3>6. Säilytysaika</h3>
+            <p>Yhteydenottoviestit säilytetään niin kauan kuin asian hoitaminen edellyttää. Jos yhteydenotosta syntyy toimeksianto, tiedot säilytetään asianajotoimintaa koskevien säilytysvelvoitteiden mukaisesti. Tekniset lokitiedot säilytetään lyhyen ajan.</p>
+            <h3>7. Oikeutesi</h3>
+            <p>Voit pyytää pääsyä tietoihisi, niiden oikaisemista tai poistamista, käsittelyn rajoittamista ja tietojen siirtämistä sekä vastustaa oikeutettuun etuun perustuvaa käsittelyä. Lähetä pyyntö osoitteeseen ${MAIL}. Voit myös tehdä valituksen tietosuojavaltuutetun toimistolle (${DPA}).</p>
+            <h3>8. Evästeet ja tallennus</h3>
+            <p>Sivusto ei käytä analytiikkaa, mainontaa eikä seurantaevästeitä. Valintojesi muistamiseksi selaimesi paikalliseen tallennustilaan tallennetaan valitsemasi kieli (lex_lang) ja taustaväri (lex_paper). Niitä ei lähetetä meille, ja voit poistaa ne tyhjentämällä sivuston tiedot selaimesi asetuksista.</p>`
+        },
+        terms: {
+          tab: 'Ehdot', title: 'Käyttö<em>ehdot</em>',
+          body: (lang) => `
+            <h3>1. Sivuston sisältö</h3>
+            <p>Sivuston sisältö on yleistä tietoa toimistosta ja sen palveluista. Se ei ole oikeudellista neuvontaa eikä korvaa asiantuntijan arviota yksittäisessä asiassa.</p>
+            <h3>2. Toimeksianto</h3>
+            <p>Yhteydenotto lomakkeella, sähköpostilla tai puhelimitse ei vielä synnytä toimeksiantoa. Toimeksianto alkaa, kun siitä on erikseen sovittu.</p>
+            <h3>3. Hinnat</h3>
+            <p>Sivustolla esitetyt hinnat ovat tuntihintoja ja alkaen-hintoja. Lopullinen palkkio määräytyy toimeksiannon laajuuden mukaan.</p>
+            <h3>4. Asiakirjapankki</h3>
+            <p>Asiakirjapankin ostoihin sovelletaan <a href="${SHOP_TERMS[lang]}">asiakirjapankin tilaus- ja toimitusehtoja</a>.</p>
+            <h3>5. Tekijänoikeudet</h3>
+            <p>Sivuston tekstit, kuvat ja ulkoasu kuuluvat Asianajotoimisto Lexoria Oy:lle tai sen yhteistyökumppaneille. Niitä ei saa kopioida tai julkaista ilman lupaa.</p>
+            <h3>6. Sovellettava laki</h3>
+            <p>Sivustoon ja näihin ehtoihin sovelletaan Suomen lakia.</p>`
+        }
+      }
+    },
+    en: {
+      title: 'Legal · Lexoria', back: 'Home', updated: 'Updated 17 November 2026',
+      reg: '© 2026 · Lexoria · Reg 3561005-2',
+      docs: {
+        company: {
+          tab: 'Company details', title: 'Company <em>details</em>',
+          body: `
+            <dl class="facts">
+              <dt>Company</dt><dd>Asianajotoimisto Lexoria Oy</dd>
+              <dt>Business ID</dt><dd>3561005-2</dd>
+              <dt>Address</dt><dd>Vekarakatu 14, 13500 Hämeenlinna, Finland</dd>
+              <dt>E-mail</dt><dd>${MAIL}</dd>
+              <dt>Telephone</dt><dd>${TEL}</dd>
+            </dl>
+            <h3>Attorneys</h3>
+            <p>The firm's attorneys are members of the Finnish Bar Association. The professional title asianajaja (attorney-at-law) was granted in Finland. The Finnish Bar Association (${BAR}) supervises the practice, which is governed by the Finnish Attorneys Act and the Code of Conduct for attorneys.</p>`
+        },
+        privacy: {
+          tab: 'Privacy', title: 'Privacy <em>notice</em>',
+          body: `
+            <h3>1. Controller</h3>
+            <p>Asianajotoimisto Lexoria Oy (Business ID 3561005-2), Vekarakatu 14, 13500 Hämeenlinna, Finland. E-mail ${MAIL}, telephone ${TEL}.</p>
+            <h3>2. What data we process</h3>
+            <ul>
+              <li>What you give us when you get in touch: name, e-mail address, telephone number and the content of your message</li>
+              <li>Technical log data from use of the site, such as IP address and browser type</li>
+            </ul>
+            <h3>3. Purposes and legal bases</h3>
+            <ul>
+              <li>Replying to your enquiry and preparing an assignment: steps taken at your request before a contract (GDPR Article 6(1)(b))</li>
+              <li>Site security and preventing misuse: legitimate interest (Article 6(1)(f))</li>
+            </ul>
+            <p>We do not use your data for marketing, profiling or automated decision-making.</p>
+            <h3>4. Recipients</h3>
+            <ul>
+              <li>Vercel (United States): website hosting</li>
+              <li>Google Fonts: the site's fonts load from Google, which receives your IP address when the page loads</li>
+              <li>ipapi.co: on your first visit we ask this service for your country to choose the language, and it receives your IP address</li>
+            </ul>
+            <h3>5. Transfers outside the EU and EEA</h3>
+            <p>Some of these providers process data in the United States. Transfers rely on the EU-US Data Privacy Framework or the European Commission's standard contractual clauses.</p>
+            <h3>6. Retention</h3>
+            <p>Enquiries are kept for as long as handling the matter requires. If an enquiry leads to an assignment, the data is kept as the retention duties that apply to attorneys require. Technical log data is kept for a short time.</p>
+            <h3>7. Your rights</h3>
+            <p>You may ask for access to your data, for it to be corrected or erased, for processing to be restricted and for your data to be transferred, and you may object to processing based on legitimate interest. Send your request to ${MAIL}. You may also lodge a complaint with the Office of the Data Protection Ombudsman (${DPA}).</p>
+            <h3>8. Cookies and storage</h3>
+            <p>The site uses no analytics, advertising or tracking cookies. To remember your choices, your browser's local storage keeps the language (lex_lang) and background colour (lex_paper) you chose. They are not sent to us, and you can remove them by clearing this site's data in your browser settings.</p>`
+        },
+        terms: {
+          tab: 'Terms', title: 'Terms of <em>use</em>',
+          body: (lang) => `
+            <h3>1. Site content</h3>
+            <p>The content of this site is general information about the firm and its services. It is not legal advice and does not replace an expert's assessment of an individual matter.</p>
+            <h3>2. Assignments</h3>
+            <p>Contacting us by form, e-mail or telephone does not yet create an assignment. An assignment begins once it has been separately agreed.</p>
+            <h3>3. Prices</h3>
+            <p>The prices shown on the site are hourly rates and starting prices. The final fee depends on the scope of the assignment.</p>
+            <h3>4. Document bank</h3>
+            <p>Purchases in the document bank are governed by the <a href="${SHOP_TERMS[lang]}">document bank's terms of sale</a>.</p>
+            <h3>5. Copyright</h3>
+            <p>The texts, images and design of the site belong to Asianajotoimisto Lexoria Oy or its partners. They may not be copied or published without permission.</p>
+            <h3>6. Governing law</h3>
+            <p>Finnish law applies to the site and to these terms.</p>`
+        }
+      }
+    },
+    et: {
+      title: 'Teave · Lexoria', back: 'Avaleht', updated: 'Uuendatud 17.11.2026',
+      reg: '© 2026 · Lexoria · Reg 3561005-2',
+      docs: {
+        company: {
+          tab: 'Ettevõtte andmed', title: 'Ettevõtte <em>andmed</em>',
+          body: `
+            <dl class="facts">
+              <dt>Ettevõte</dt><dd>Asianajotoimisto Lexoria Oy</dd>
+              <dt>Registrikood</dt><dd>3561005-2 (Soome Y-tunnus)</dd>
+              <dt>Aadress</dt><dd>Vekarakatu 14, 13500 Hämeenlinna, Soome</dd>
+              <dt>E-post</dt><dd>${MAIL}</dd>
+              <dt>Telefon</dt><dd>${TEL}</dd>
+            </dl>
+            <h3>Advokaadid</h3>
+            <p>Büroo advokaadid on Soome Advokatuuri (Suomen Asianajajaliitto) liikmed. Kutsenimetus asianajaja on antud Soomes. Tegevuse üle teeb järelevalvet Soome Advokatuur (${BAR}) ning sellele kohalduvad Soome advokaadiseadus ja advokaadi kutse-eetika juhised.</p>`
+        },
+        privacy: {
+          tab: 'Privaatsus', title: 'Privaatsus<em>teade</em>',
+          body: `
+            <h3>1. Vastutav töötleja</h3>
+            <p>Asianajotoimisto Lexoria Oy (Y-tunnus 3561005-2), Vekarakatu 14, 13500 Hämeenlinna, Soome. E-post ${MAIL}, telefon ${TEL}.</p>
+            <h3>2. Milliseid andmeid töötleme</h3>
+            <ul>
+              <li>Ühendust võttes antud andmed: nimi, e-posti aadress, telefoninumber ja sõnumi sisu</li>
+              <li>Lehe kasutamisel tekkivad tehnilised logiandmed, näiteks IP-aadress ja brauseri tüüp</li>
+            </ul>
+            <h3>3. Eesmärgid ja õiguslikud alused</h3>
+            <ul>
+              <li>Päringule vastamine ja kliendisuhte ettevalmistamine: lepingueelsed toimingud sinu taotlusel (isikuandmete kaitse üldmääruse artikli 6 lõike 1 punkt b)</li>
+              <li>Lehe turvalisus ja väärkasutuse ennetamine: õigustatud huvi (punkt f)</li>
+            </ul>
+            <p>Me ei kasuta sinu andmeid turunduseks, profiilianalüüsiks ega automaatsete otsuste tegemiseks.</p>
+            <h3>4. Andmete saajad</h3>
+            <ul>
+              <li>Vercel (Ameerika Ühendriigid): veebilehe majutus</li>
+              <li>Google Fonts: lehe kirjatüübid laaditakse Google'ist, kes saab lehe laadimisel sinu IP-aadressi</li>
+              <li>ipapi.co: esimesel külastusel küsime teenuselt keele valimiseks sinu riiki ja teenus saab sinu IP-aadressi</li>
+            </ul>
+            <h3>5. Edastamine väljapoole EL-i ja EMP-d</h3>
+            <p>Osa neist teenusepakkujatest töötleb andmeid Ameerika Ühendriikides. Edastamine tugineb EL-i ja USA andmekaitseraamistikule (Data Privacy Framework) või Euroopa Komisjoni lepingu tüüptingimustele.</p>
+            <h3>6. Säilitamine</h3>
+            <p>Päringuid säilitatakse nii kaua, kui asja lahendamine nõuab. Kui päringust kasvab välja kliendisuhe, säilitatakse andmeid advokaaditegevusele kehtivate säilitamiskohustuste järgi. Tehnilisi logiandmeid säilitatakse lühikest aega.</p>
+            <h3>7. Sinu õigused</h3>
+            <p>Võid taotleda juurdepääsu oma andmetele, nende parandamist või kustutamist, töötlemise piiramist ja andmete ülekandmist ning esitada vastuväite õigustatud huvil põhinevale töötlemisele. Saada taotlus aadressile ${MAIL}. Sul on ka õigus esitada kaebus Soome andmekaitseombudsmani büroole (${DPA}).</p>
+            <h3>8. Küpsised ja salvestus</h3>
+            <p>Leht ei kasuta analüütikat, reklaami ega jälgimisküpsiseid. Valikute meelespidamiseks salvestatakse sinu brauseri kohalikku mällu valitud keel (lex_lang) ja taustavärv (lex_paper). Neid ei saadeta meile ja saad need eemaldada, kustutades brauseri seadetes selle lehe andmed.</p>`
+        },
+        terms: {
+          tab: 'Tingimused', title: 'Kasutus<em>tingimused</em>',
+          body: (lang) => `
+            <h3>1. Lehe sisu</h3>
+            <p>Lehe sisu on üldine teave büroo ja selle teenuste kohta. See ei ole õigusnõu ega asenda asjatundja hinnangut konkreetses asjas.</p>
+            <h3>2. Kliendisuhe</h3>
+            <p>Ühenduse võtmine vormi, e-posti või telefoni teel ei tekita veel kliendisuhet. Kliendisuhe algab siis, kui selles on eraldi kokku lepitud.</p>
+            <h3>3. Hinnad</h3>
+            <p>Lehel toodud hinnad on tunnihinnad ja alghinnad. Lõplik tasu sõltub töö mahust.</p>
+            <h3>4. Dokumendipank</h3>
+            <p>Dokumendipanga ostudele kohalduvad <a href="${SHOP_TERMS[lang]}">dokumendipanga müügitingimused</a>.</p>
+            <h3>5. Autoriõigus</h3>
+            <p>Lehe tekstid, pildid ja kujundus kuuluvad Asianajotoimisto Lexoria Oy-le või tema partneritele. Neid ei tohi loata kopeerida ega avaldada.</p>
+            <h3>6. Kohalduv õigus</h3>
+            <p>Lehele ja nendele tingimustele kohaldub Soome õigus.</p>`
+        }
+      }
+    }
+  };
+
+  function applyLang(lang) {
+    if (!I18N[lang]) lang = 'en';
+    const t = I18N[lang];
+    document.documentElement.lang = lang;
+    document.title = t.title;
+    document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t[el.dataset.t]; });
+    const ids = Object.keys(t.docs);
+    document.getElementById('index').innerHTML = ids.map(id => `<a href="#${id}">${t.docs[id].tab}</a>`).join('');
+    document.getElementById('docs').innerHTML = ids.map(id => {
+      const d = t.docs[id];
+      return `<section class="doc" id="${id}"><h1>${d.title}</h1><div class="doc-body">${typeof d.body === 'function' ? d.body(lang) : d.body}</div></section>`;
+    }).join('');
+    document.querySelectorAll('[data-lang]').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+  }
+
+  document.querySelectorAll('[data-lang]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      try { localStorage.setItem('lex_lang', btn.dataset.lang); } catch(e){}
+      applyLang(btn.dataset.lang);
+    });
+  });
+  applyLang(document.documentElement.lang);
+
+  // Sections are rendered after load, so the browser's own jump to the hash finds nothing
+  const target = location.hash && document.getElementById(location.hash.slice(1));
+  if (target) target.scrollIntoView({ behavior: 'instant' });
+
+  // Local preview: when opened as a file, links point at the sibling local HTML.
+  if (location.protocol === 'file:') {
+    document.querySelectorAll('[data-home]').forEach(a => { a.href = 'index.html'; });
+  }
+</script>
+</body>
+</html>

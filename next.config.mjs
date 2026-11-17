@@ -8,6 +8,8 @@ const nextConfig = {
         { source: '/', destination: '/index.html' },
         // Price list under a path named in each language
         { source: '/:slug(hinnasto|fees|hinnakiri)', destination: '/hinnasto.html' },
+        // Company details, privacy notice and terms of use of the main site
+        { source: '/:slug(tiedot|legal|teave)', destination: '/legal.html' },
         // Document bank under a path named in each language; the shop itself is a separate Vercel project
         { source: '/:slug(asiakirjapankki|document-bank|dokumendipank)', destination: `${SHOP}/` },
         // The shop page loads these relative to the site root

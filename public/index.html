@@ -2207,9 +2207,9 @@
     <div class="colophon">
       <span data-i18n="foot.reg">© 2026 · Lexoria · Reg 3561005-2</span>
       <div class="colophon-meta">
-        <a href="#" data-i18n="foot.imprint">Imprint</a>
-        <a href="#" data-i18n="foot.privacy">Privacy</a>
-        <a href="#" data-i18n="foot.terms">Terms</a>
+        <a href="/legal#company" data-legal-link="#company" data-i18n="foot.imprint">Company details</a>
+        <a href="/legal#privacy" data-legal-link="#privacy" data-i18n="foot.privacy">Privacy</a>
+        <a href="/legal#terms" data-legal-link="#terms" data-i18n="foot.terms">Terms</a>
         <span class="colophon-langs" role="group" data-i18n-aria="aside.langGroup">
           <button type="button" data-lang="fi">FI</button>
           <span class="sep" aria-hidden="true">·</span>
@@ -2366,7 +2366,7 @@
       'foot.bar.lead': 'Member',
       'foot.bar.meta': 'Defensor Legis · since 2010',
       'foot.reg': '© 2026 · Lexoria · Reg 3561005-2',
-      'foot.imprint': 'Imprint',
+      'foot.imprint': 'Company details',
       'foot.privacy': 'Privacy',
       'foot.terms': 'Terms',
       'ribbon': `Why Lexoria.
@@ -2530,7 +2530,7 @@ The answer is always yours.`,
       'foot.bar.lead': 'Jäsen',
       'foot.bar.meta': 'Defensor Legis · vuodesta 2010',
       'foot.reg': '© 2026 · Lexoria · Y-tunnus 3561005-2',
-      'foot.imprint': 'Impressum',
+      'foot.imprint': 'Yritystiedot',
       'foot.privacy': 'Tietosuoja',
       'foot.terms': 'Ehdot',
       'ribbon': `Miksi Lexoria.
@@ -2694,7 +2694,7 @@ Vastaus on aina teidän.`,
       'foot.bar.lead': 'Liige',
       'foot.bar.meta': 'Defensor Legis · aastast 2010',
       'foot.reg': '© 2026 · Lexoria · Reg 3561005-2',
-      'foot.imprint': 'Impressum',
+      'foot.imprint': 'Ettevõtte andmed',
       'foot.privacy': 'Privaatsus',
       'foot.terms': 'Tingimused',
       'ribbon': `Miks Lexoria.
@@ -2729,7 +2729,9 @@ Vastus on alati teie.`,
   // The shop lives under a path named in the visitor's language
   const SHOP_PATHS = { fi: '/asiakirjapankki', en: '/document-bank', et: '/dokumendipank' };
   const PRICE_PATHS = { fi: '/hinnasto', en: '/fees', et: '/hinnakiri' };
+  const LEGAL_PATHS = { fi: '/tiedot', en: '/legal', et: '/teave' };
   function applyLang(lang) {
+    if (location.protocol !== 'file:') document.querySelectorAll('[data-legal-link]').forEach(a => { a.href = (LEGAL_PATHS[lang] || LEGAL_PATHS.en) + a.dataset.legalLink; });
     if (location.protocol !== 'file:') document.querySelectorAll('[data-price-link]').forEach(a => { a.href = PRICE_PATHS[lang] || PRICE_PATHS.en; });
     if (location.protocol !== 'file:') document.querySelectorAll('[data-shop-link]').forEach(a => { a.href = SHOP_PATHS[lang] || SHOP_PATHS.en; });
     if (!I18N[lang]) lang = 'en';
@@ -2908,6 +2910,9 @@ Vastus on alati teie.`,
     });
     document.querySelectorAll('[data-price-link]').forEach(function (a) {
       a.href = 'hinnasto.html';
+    });
+    document.querySelectorAll('[data-legal-link]').forEach(function (a) {
+      a.href = 'legal.html' + a.dataset.legalLink;
     });
   }
 </script>
