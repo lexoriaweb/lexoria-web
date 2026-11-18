@@ -1492,30 +1492,31 @@
     gap: var(--s-3);
   }
   .form-submit {
-    margin-top: var(--s-3);
+    margin-top: var(--s-4);
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
+    font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--ink);
-    background: transparent;
+    color: var(--paper);
+    background: var(--ink);
     border: 0;
-    border-bottom: 1px solid rgba(15, 20, 25, 0.35);
-    padding: 16px 0;
+    padding: 22px 28px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--s-2);
     width: 100%;
-    transition: border-color 0.35s ease, letter-spacing 0.35s ease;
+    transition: background 0.3s ease;
     border-radius: 0;
   }
-  .form-submit:hover { border-bottom-color: var(--ink); letter-spacing: 0.24em; }
+  .form-submit:hover { background: var(--maroon); }
+  .form-submit:focus-visible { outline: 2px solid var(--maroon); outline-offset: 3px; }
   .form-submit:disabled { opacity: 0.5; cursor: wait; }
   .form-submit .arrow {
     font-family: 'JetBrains Mono', monospace;
-    color: var(--maroon);
+    color: var(--paper);
     font-size: 18px;
     line-height: 1;
     transition: transform 0.35s ease;
