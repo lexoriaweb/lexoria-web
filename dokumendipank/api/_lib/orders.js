@@ -14,7 +14,7 @@ const LANGS = ['fi', 'en', 'et'];
 
 const PDF_DIR = path.join(__dirname, '..', '_pdfs');
 const FROM = process.env.MAIL_FROM || 'Lexoria Document Bank <onboarding@resend.dev>';
-const REPLY_TO = process.env.MAIL_REPLY_TO || 'info@lexoria.fi';
+const REPLY_TO = process.env.MAIL_REPLY_TO || 'liisa@lexoria.fi';
 const SHOP_URL = (process.env.SHOP_URL || 'https://lexoriashop.vercel.app').replace(/\/$/, '');
 const TERMS_URL = SHOP_URL + '/#terms';
 
@@ -41,7 +41,7 @@ const COPY = {
     consent: 'Hyväksyit tilaus- ja toimitusehdot ja pyysit välitöntä toimitusta, joten 14 päivän peruuttamisoikeus päättyi, kun tiedostot lähetettiin.',
     terms: 'Tilaus- ja toimitusehdot',
     help: 'Tarvitsetko räätälöidyn asiakirjan? Vastaa tähän viestiin tai varaa konsultaatio osoitteessa lexoria.fi.',
-    sign: 'Asianajotoimisto Lexoria Oy · Hämeenlinna',
+    sign: 'Asianajotoimisto Lexoria Oy · Helsinki',
   },
   en: {
     order: 'Order',
@@ -56,7 +56,7 @@ const COPY = {
     consent: 'You accepted the terms of sale and asked for immediate delivery, so the 14-day right of withdrawal ended when these files were sent.',
     terms: 'Terms of sale',
     help: 'Need a bespoke document? Reply to this e-mail or book a consultation at lexoria.fi.',
-    sign: 'Asianajotoimisto Lexoria Oy · Hämeenlinna',
+    sign: 'Asianajotoimisto Lexoria Oy · Helsinki',
   },
   et: {
     order: 'Tellimus',
@@ -71,7 +71,7 @@ const COPY = {
     consent: 'Nõustusid müügitingimustega ja palusid kohest tarnet, mistõttu 14-päevane taganemisõigus lõppes failide saatmisega.',
     terms: 'Müügitingimused',
     help: 'Vajad just sulle koostatud dokumenti? Vasta sellele kirjale või broneeri konsultatsioon aadressil lexoria.fi.',
-    sign: 'Asianajotoimisto Lexoria Oy · Hämeenlinna',
+    sign: 'Asianajotoimisto Lexoria Oy · Helsinki',
   },
 };
 const SHOP_NAME = { fi: 'Asiakirjapankki', en: 'Document Bank', et: 'Dokumendipank' };
@@ -147,7 +147,7 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
         <tr><td class="mu" style="padding:18px 0 0;${serif}font-size:13px;line-height:1.5;color:#6B6B6B;">${c.consent} <a href="${TERMS_URL}" class="mu" style="color:#6B6B6B;">${c.terms}</a></td></tr>
         <tr><td class="mu" style="padding:40px 0 0;${mono}font-size:10px;letter-spacing:0.06em;line-height:1.9;color:#6B6B6B;">
           <span class="tx" style="color:#0F1419;">Asianajotoimisto Lexoria Oy</span><br>
-          <a href="https://maps.google.com/?q=Vekarakatu+14,+13500+H%C3%A4meenlinna" class="mu" style="color:#6B6B6B;text-decoration:none;">Vekarakatu 14, 13500 Hämeenlinna</a><br>
+          Helsinki<br>
           <a href="tel:+358456560060" class="mu" style="color:#6B6B6B;text-decoration:none;">+358 (0)45 656 0060</a><br>
           <a href="https://www.lexoria.fi" class="mu" style="color:#6B6B6B;text-decoration:none;">www.lexoria.fi</a><br>
           Y-tunnus 3561005-2

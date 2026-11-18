@@ -7,9 +7,9 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
-<meta name="description" content="Asianajotoimisto Lexoria Oy · Hämeenlinna">
+<meta name="description" content="Asianajotoimisto Lexoria Oy · Helsinki">
 <meta property="og:title" content="Lexoria">
-<meta property="og:description" content="Asianajotoimisto Lexoria Oy · Hämeenlinna">
+<meta property="og:description" content="Asianajotoimisto Lexoria Oy · Helsinki">
 <meta property="og:site_name" content="Lexoria">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.lexoria.fi/">
@@ -18,7 +18,7 @@
 <meta property="og:image:height" content="240">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lexoria">
-<meta name="twitter:description" content="Asianajotoimisto Lexoria Oy · Hämeenlinna">
+<meta name="twitter:description" content="Asianajotoimisto Lexoria Oy · Helsinki">
 <meta name="twitter:image" content="https://www.lexoria.fi/og.png?v=3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1845,7 +1845,7 @@
     <aside class="menu-aside">
       <div class="aside-block">
         <div class="aside-label" data-i18n="aside.contact">Contact</div>
-        <a href="mailto:info@lexoria.fi" class="aside-link">info@lexoria.fi</a>
+        <a href="mailto:liisa@lexoria.fi" class="aside-link">liisa@lexoria.fi</a>
         <a href="tel:+358456560060" class="aside-link">+358 45 6560060</a>
       </div>
       <div class="aside-block">
@@ -2137,8 +2137,8 @@
       </div>
       <div class="booking-grid">
         <div class="booking-main">
-          <a href="mailto:info@lexoria.fi" class="booking-cta">
-            info@lexoria.fi <span class="arrow">↗</span>
+          <a href="mailto:liisa@lexoria.fi" class="booking-cta">
+            liisa@lexoria.fi <span class="arrow">↗</span>
           </a>
           <dl class="booking-options">
             <div class="row"><dt class="label" data-i18n="book.opt.client.label">Client</dt><dd data-i18n-html="book.opt.client.value">Private <span class="sep">·</span> Business</dd></div>
@@ -2178,6 +2178,7 @@
               </label>
               <textarea class="form-textarea" id="cf-info" name="info" data-i18n-ph="form.info.ph" placeholder="A short description of your question or wish..."></textarea>
             </div>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
             <button class="form-submit" type="submit" data-i18n-html="form.submit">
               Send enquiry <span class="arrow">↗</span>
             </button>
@@ -2361,6 +2362,7 @@
       'form.info.ph': 'A short description of your question or wish...',
       'form.submit': 'Send enquiry <span class="arrow">↗</span>',
       'form.submitSending': 'Sending... <span class="arrow">·</span>',
+      'form.error': 'Sending failed. Please e-mail us at liisa@lexoria.fi.',
       'form.note': 'The form is encrypted. We use your details only to reply.',
       'form.success': '<em>Thank you.</em><br>We received your enquiry. We\'ll be in touch within 24 hours.',
       'foot.bar.lead': 'Member',
@@ -2525,6 +2527,7 @@ The answer is always yours.`,
       'form.info.ph': 'Lyhyt kuvaus kysymyksestänne tai toiveestanne...',
       'form.submit': 'Lähetä kysely <span class="arrow">↗</span>',
       'form.submitSending': 'Lähetetään... <span class="arrow">·</span>',
+      'form.error': 'Lähetys epäonnistui. Lähettäkää meille sähköpostia: liisa@lexoria.fi.',
       'form.note': 'Lomake on salattu. Käytämme tietojanne vain vastaamiseen.',
       'form.success': '<em>Kiitos.</em><br>Saimme kyselynne. Otamme yhteyttä 24 tunnin kuluessa.',
       'foot.bar.lead': 'Jäsen',
@@ -2689,6 +2692,7 @@ Vastaus on aina teidän.`,
       'form.info.ph': 'Lühike kirjeldus teie küsimusest või soovist...',
       'form.submit': 'Saada päring <span class="arrow">↗</span>',
       'form.submitSending': 'Saadan... <span class="arrow">·</span>',
+      'form.error': 'Saatmine ebaõnnestus. Palun kirjutage meile: liisa@lexoria.fi.',
       'form.note': 'Vorm on krüpteeritud. Kasutame teie andmeid ainult vastamiseks.',
       'form.success': '<em>Aitäh.</em><br>Saime teie päringu kätte. Võtame ühendust 24 tunni jooksul.',
       'foot.bar.lead': 'Liige',
@@ -2861,12 +2865,31 @@ Vastus on alati teie.`,
         return;
       }
       const btn = contactForm.querySelector('.form-submit');
+      const note = contactForm.querySelector('.form-note');
       btn.disabled = true;
       btn.innerHTML = I18N[currentLang]['form.submitSending'];
-      setTimeout(() => {
-        contactForm.classList.add('is-sent');
-        contactForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 600);
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: nimi.value, email: email.value,
+          tel: contactForm.querySelector('#cf-tel').value,
+          message: contactForm.querySelector('#cf-info').value,
+          website: contactForm.elements.website.value,
+          lang: currentLang,
+        }),
+      })
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(d => {
+          if (!d.ok) throw new Error();
+          contactForm.classList.add('is-sent');
+          contactForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.innerHTML = I18N[currentLang]['form.submit'];
+          note.textContent = I18N[currentLang]['form.error'];
+        });
     });
   }
 
