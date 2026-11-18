@@ -7,10 +7,13 @@ const { COPY, MONTONIO, SHOP_URL, itemsOf, totalOf, signOrder } = require('./_li
 const COUNTRY = { fi: 'FI', et: 'EE', en: 'FI' };
 const DESC = { fi: 'Lexoria asiakirjapankki', en: 'Lexoria document bank', et: 'Lexoria dokumendipank' };
 
+const BACK_HOSTS = ['www.lexoria.fi', 'lexoria.fi', 'lexoriaweb.vercel.app', 'lexoriashop.vercel.app', new URL(SHOP_URL).hostname];
+// The return address comes from the browser, so only our own pages are accepted
 function safeBack(value) {
   try {
     const u = new URL(String(value || ''));
-    if (u.protocol !== 'https:' && u.hostname !== 'localhost') return null;
+    if (u.hostname === 'localhost') return u.origin + u.pathname;
+    if (u.protocol !== 'https:' || !BACK_HOSTS.includes(u.hostname)) return null;
     return u.origin + u.pathname;
   } catch (e) { return null; }
 }

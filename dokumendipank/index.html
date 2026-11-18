@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document Bank · LEXORIA</title>
+<link rel="canonical" href="https://www.lexoria.fi/asiakirjapankki">
 <link rel="icon" type="image/svg+xml" href="favicon.svg?v=4">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=4">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
@@ -2176,49 +2177,7 @@
   .toast .glyph { color: var(--maroon-soft); font-size: 14px; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
 
-  /* === PAPER TOGGLE (beige / white comparison) === */
-  html.theme-white {
-    --paper: #FFFFFF;
-    --paper-soft: #F4F4F1;
-    --paper-hover: #EAEAE5;
-    --card: #FFFFFF;
-  }
-  .paper-toggle {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 90;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    background: var(--ink);
-    color: var(--paper);
-    border: 1px solid rgba(236, 231, 221, 0.18);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-  .paper-toggle button {
-    background: transparent;
-    border: 0;
-    padding: 0;
-    color: inherit;
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-    cursor: pointer;
-    opacity: 0.45;
-    transition: opacity 0.3s;
-  }
-  .paper-toggle button:hover { opacity: 0.8; }
-  .paper-toggle button.active { opacity: 1; color: var(--maroon-soft); }
-  .paper-toggle .sep { opacity: 0.35; }
 </style>
-<script>
-  (function(){ try { if (localStorage.getItem('lex_paper') === 'white') document.documentElement.classList.add('theme-white'); } catch(e){} })();
-</script>
 </head>
 <body>
 
@@ -3908,7 +3867,6 @@
           <dl class="legal-facts">
             <dt>lex_lang</dt><dd>Language you selected</dd>
             <dt>lex_view</dt><dd>Catalog view on mobile (swipe or grid)</dd>
-            <dt>lex_paper</dt><dd>Background colour you selected</dd>
             <dt>lex_cart</dt><dd>Documents in your cart, until you order or remove them</dd>
             <dt>lex_notice</dt><dd>That you have closed the storage notice</dd>
           </dl>
@@ -4057,7 +4015,6 @@
           <dl class="legal-facts">
             <dt>lex_lang</dt><dd>Valitsemasi kieli</dd>
             <dt>lex_view</dt><dd>Valikoiman näkymä mobiilissa (pyyhkäisy tai ruudukko)</dd>
-            <dt>lex_paper</dt><dd>Valitsemasi taustaväri</dd>
             <dt>lex_cart</dt><dd>Ostoskorissasi olevat asiakirjat, kunnes tilaat tai poistat ne</dd>
             <dt>lex_notice</dt><dd>Tieto siitä, että olet sulkenut tallennusilmoituksen</dd>
           </dl>
@@ -4206,7 +4163,6 @@
           <dl class="legal-facts">
             <dt>lex_lang</dt><dd>Sinu valitud keel</dd>
             <dt>lex_view</dt><dd>Valiku vaade mobiilis (libistamine või ruudustik)</dd>
-            <dt>lex_paper</dt><dd>Sinu valitud taustavärv</dd>
             <dt>lex_cart</dt><dd>Ostukorvis olevad dokumendid, kuni tellid või eemaldad need</dd>
             <dt>lex_notice</dt><dd>Teave selle kohta, et oled salvestusteate sulgenud</dd>
           </dl>
@@ -4363,21 +4319,6 @@
       a.removeAttribute('target');
     });
   }
-</script>
-<div class="paper-toggle" role="group" aria-label="Background colour">
-  <button type="button" data-paper="beige">Beige</button><span class="sep">·</span><button type="button" data-paper="white">White</button>
-</div>
-<script>
-  (function(){
-    var root = document.documentElement, btns = document.querySelectorAll('.paper-toggle button');
-    function sync(){ var w = root.classList.contains('theme-white'); btns.forEach(function(b){ b.classList.toggle('active', (b.dataset.paper === 'white') === w); }); }
-    btns.forEach(function(b){ b.addEventListener('click', function(){
-      root.classList.toggle('theme-white', b.dataset.paper === 'white');
-      try { localStorage.setItem('lex_paper', b.dataset.paper); } catch(e){}
-      sync();
-    }); });
-    sync();
-  })();
 </script>
 </body>
 </html>

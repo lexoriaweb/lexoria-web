@@ -36,6 +36,8 @@ const COPY = {
     items: 'Tilatut asiakirjat',
     total: 'Yhteensä',
     vat: 'sis. ALV 25,5 %',
+    vatAmount: 'josta ALV',
+    date: 'Päivämäärä',
     paid: 'Maksettu Montonion kautta',
     test: 'Testitilaus · Montonion testiympäristö, rahaa ei veloitettu.',
     consent: 'Hyväksyit tilaus- ja toimitusehdot ja pyysit välitöntä toimitusta, joten 14 päivän peruuttamisoikeus päättyi, kun tiedostot lähetettiin.',
@@ -51,6 +53,8 @@ const COPY = {
     items: 'Ordered documents',
     total: 'Total',
     vat: 'incl. VAT 25.5%',
+    vatAmount: 'of which VAT',
+    date: 'Date',
     paid: 'Paid via Montonio',
     test: 'Test order · Montonio sandbox, no money was charged.',
     consent: 'You accepted the terms of sale and asked for immediate delivery, so the 14-day right of withdrawal ended when these files were sent.',
@@ -66,6 +70,8 @@ const COPY = {
     items: 'Tellitud dokumendid',
     total: 'Kokku',
     vat: 'sis. KM 25,5%',
+    vatAmount: 'sellest KM',
+    date: 'Kuupäev',
     paid: 'Makstud Montonio kaudu',
     test: 'Testtellimus · Montonio testkeskkond, raha ei võetud.',
     consent: 'Nõustusid müügitingimustega ja palusid kohest tarnet, mistõttu 14-päevane taganemisõigus lõppes failide saatmisega.',
@@ -85,6 +91,16 @@ function itemsOf(skus) {
 }
 function totalOf(items) {
   return Math.round(items.reduce((s, it) => s + it.price, 0) * 100) / 100;
+}
+
+const VAT_RATE = 0.255;
+const LOCALE = { fi: 'fi-FI', en: 'en-GB', et: 'et-EE' };
+// The order e-mail is the buyer's receipt, so it carries the VAT share and the date of sale
+function vatOf(total, lang) {
+  return (total - total / (1 + VAT_RATE)).toLocaleString(LOCALE[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function dateOf(lang) {
+  return new Date().toLocaleDateString(LOCALE[lang], { timeZone: 'Europe/Helsinki', day: 'numeric', month: 'numeric', year: 'numeric' });
 }
 
 function buildHtml(lang, name, items, total, orderNo, statusLine) {
@@ -137,10 +153,10 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
             <tr><td colspan="2" class="mu" style="padding:0 0 6px;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.items} · ${orderNo}</td></tr>
             ${rows}
             <tr>
-              <td class="mu rule" style="padding:16px 0 0;border-top:1px solid #DDD5C5;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.total}<br><span style="letter-spacing:0.1em;">${c.vat}</span></td>
+              <td class="mu rule" style="padding:16px 0 0;border-top:1px solid #DDD5C5;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.total}<br><span style="letter-spacing:0.1em;">${c.vat} · ${c.vatAmount} ${vatOf(total, lang)} €</span></td>
               <td class="tx rule" style="padding:14px 0 0 16px;border-top:1px solid #DDD5C5;${serif}font-size:26px;color:#0F1419;text-align:right;white-space:nowrap;">${total} €</td>
             </tr>
-            <tr><td colspan="2" class="mu" style="padding:18px 0 0;${mono}font-size:10px;letter-spacing:0.08em;line-height:1.6;color:#6B6B6B;">${esc(statusLine)}</td></tr>
+            <tr><td colspan="2" class="mu" style="padding:18px 0 0;${mono}font-size:10px;letter-spacing:0.08em;line-height:1.6;color:#6B6B6B;">${c.date} ${dateOf(lang)} · ${esc(statusLine)}</td></tr>
           </table>
         </td></tr>
         <tr><td class="tx" style="padding:28px 0 0;${serif}font-size:15px;line-height:1.55;color:#0F1419;">${c.help.replace('lexoria.fi', '<a href="https://www.lexoria.fi" class="tx" style="color:#0F1419;">lexoria.fi</a>')}</td></tr>
@@ -180,7 +196,7 @@ async function sendOrderEmail(order, payment) {
     reply_to: REPLY_TO,
     subject: c.subject(orderNo),
     html: buildHtml(lang, name, items, total, orderNo, statusLine),
-    text: `${c.hi(name)}\n\n${c.lead}\n\n${c.items} #${orderNo}:\n${items.map((it) => `- ${it[lang]} · ${it.price} €`).join('\n')}\n${c.total}: ${total} € (${c.vat})\n\n${statusLine}\n\n${c.help}\n\n${c.consent}\n${c.terms}: ${TERMS_URL}\n\n${c.sign}`,
+    text: `${c.hi(name)}\n\n${c.lead}\n\n${c.items} #${orderNo}:\n${items.map((it) => `- ${it[lang]} · ${it.price} €`).join('\n')}\n${c.total}: ${total} € (${c.vat}, ${c.vatAmount} ${vatOf(total, lang)} €)\n\n${c.date} ${dateOf(lang)} · ${statusLine}\n\n${c.help}\n\n${c.consent}\n${c.terms}: ${TERMS_URL}\n\n${c.sign}`,
     attachments,
     tags: [{ name: 'source', value: 'document-bank' }, { name: 'mode', value: MONTONIO.sandbox ? 'sandbox' : 'live' }],
   };
@@ -220,6 +236,9 @@ function readMontonioToken(token, order) {
   if (!t) return null;
   if (t.accessKey !== MONTONIO.accessKey) return null;
   if (t.merchantReference !== order.orderNo) return null;
+  // Never deliver for less than the catalogue price or in another currency
+  if (t.currency && t.currency !== 'EUR') return null;
+  if (t.grandTotal != null && Number(t.grandTotal) < totalOf(itemsOf(order.skus)) - 0.001) return null;
   return t;
 }
 

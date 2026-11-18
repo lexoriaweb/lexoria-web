@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEXORIA</title>
+<title>Lexoria · Asianajotoimisto</title>
+<link rel="canonical" href="https://www.lexoria.fi/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
@@ -1629,7 +1630,7 @@
   .colophon-langs button.active { opacity: 1; color: var(--paper); }
   .colophon-langs .sep { opacity: 0.35; }
   @media (max-width: 768px) {
-    footer { padding: var(--s-6) 0 calc(var(--s-4) + 56px); }
+    footer { padding: var(--s-6) 0 var(--s-4); }
     .footer-mark { gap: var(--s-3); padding-bottom: var(--s-4); }
     .footer-mark img { width: 56px; height: 56px; }
     .colophon {
@@ -1673,49 +1674,7 @@
     .colophon-langs button { padding: 4px 0; }
   }
 
-  /* === PAPER TOGGLE (beige / white comparison) === */
-  html.theme-white {
-    --paper: #FFFFFF;
-    --paper-soft: #F4F4F1;
-    --paper-hover: #EAEAE5;
-    --nav-bg: rgba(255, 255, 255, 0.65);
-  }
-  .paper-toggle {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 90;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    background: var(--ink);
-    color: var(--paper);
-    border: 1px solid rgba(236, 231, 221, 0.18);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-  .paper-toggle button {
-    background: transparent;
-    border: 0;
-    padding: 0;
-    color: inherit;
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-    cursor: pointer;
-    opacity: 0.45;
-    transition: opacity 0.3s;
-  }
-  .paper-toggle button:hover { opacity: 0.8; }
-  .paper-toggle button.active { opacity: 1; color: var(--maroon-soft); }
-  .paper-toggle .sep { opacity: 0.35; }
 </style>
-<script>
-  (function(){ try { if (localStorage.getItem('lex_paper') === 'white') document.documentElement.classList.add('theme-white'); } catch(e){} })();
-</script>
 </head>
 <body>
 
@@ -1790,7 +1749,7 @@
   </div>
   <div class="menu-grid">
     <div class="menu-list">
-      <div class="menu-eyebrow" data-i18n="menu.eyebrow">Contents · 01-08</div>
+      <div class="menu-eyebrow" data-i18n="menu.eyebrow">Contents · 01-07</div>
       <ol>
         <li class="active"><a href="#" data-close>
           <span class="num">01</span>
@@ -1822,20 +1781,14 @@
           <span class="sub" data-i18n="menu.05.sub">Since 2010</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a></li>
-        <li><a href="#" data-close>
-          <span class="num">06</span>
-          <span class="label" data-i18n="menu.06.label">Journal</span>
-          <span class="sub" data-i18n="menu.06.sub">Law review</span>
-          <span class="arrow" aria-hidden="true">→</span>
-        </a></li>
         <li><a href="#hinnakiri" data-close>
-          <span class="num">07</span>
+          <span class="num">06</span>
           <span class="label" data-i18n="menu.07.label">Fees</span>
           <span class="sub" data-i18n="menu.07.sub">From €120/h</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a></li>
         <li><a href="#broneeri" data-close>
-          <span class="num">08</span>
+          <span class="num">07</span>
           <span class="label" data-i18n="menu.08.label">Book</span>
           <span class="sub" data-i18n="menu.08.sub">Consultation</span>
           <span class="arrow" aria-hidden="true">→</span>
@@ -2234,13 +2187,12 @@
       'menu.close': 'Close',
       'menu.closeAria': 'Close menu',
       'menu.overlayLabel': 'Primary menu',
-      'menu.eyebrow': 'Contents · 01-08',
+      'menu.eyebrow': 'Contents · 01-07',
       'menu.01.label': 'Home', 'menu.01.sub': 'Current',
       'menu.02.label': 'Services', 'menu.02.sub': 'Private · Business',
       'menu.03.label': 'Document bank', 'menu.03.sub': 'From €199',
       'menu.04.label': 'Team', 'menu.04.sub': 'Two partners',
       'menu.05.label': 'About', 'menu.05.sub': 'Since 2010',
-      'menu.06.label': 'Journal', 'menu.06.sub': 'Law review',
       'menu.07.label': 'Fees', 'menu.07.sub': 'From €120/h',
       'menu.08.label': 'Book', 'menu.08.sub': 'Consultation',
       'aside.contact': 'Contact',
@@ -2399,13 +2351,12 @@ The answer is always yours.`,
       'menu.close': 'Sulje',
       'menu.closeAria': 'Sulje valikko',
       'menu.overlayLabel': 'Päävalikko',
-      'menu.eyebrow': 'Sisältö · 01-08',
+      'menu.eyebrow': 'Sisältö · 01-07',
       'menu.01.label': 'Etusivu', 'menu.01.sub': 'Nykyinen',
       'menu.02.label': 'Palvelut', 'menu.02.sub': 'Yksityinen · Yritys',
       'menu.03.label': 'Asiakirjapankki', 'menu.03.sub': 'Alkaen 199 €',
       'menu.04.label': 'Tiimi', 'menu.04.sub': 'Kaksi partneria',
       'menu.05.label': 'Meistä', 'menu.05.sub': 'Vuodesta 2010',
-      'menu.06.label': 'Artikkelit', 'menu.06.sub': 'Oikeuslehti',
       'menu.07.label': 'Hinnasto', 'menu.07.sub': 'Alkaen 120 €/h',
       'menu.08.label': 'Varaa', 'menu.08.sub': 'Konsultaatio',
       'aside.contact': 'Yhteys',
@@ -2564,13 +2515,12 @@ Vastaus on aina teidän.`,
       'menu.close': 'Sulge',
       'menu.closeAria': 'Sulge menüü',
       'menu.overlayLabel': 'Peamenüü',
-      'menu.eyebrow': 'Sisukord · 01-08',
+      'menu.eyebrow': 'Sisukord · 01-07',
       'menu.01.label': 'Avaleht', 'menu.01.sub': 'Praegune',
       'menu.02.label': 'Teenused', 'menu.02.sub': 'Eraklient · Äriklient',
       'menu.03.label': 'Dokumendipank', 'menu.03.sub': 'Alates 199 €',
       'menu.04.label': 'Meeskond', 'menu.04.sub': 'Kaks partnerit',
       'menu.05.label': 'Meist', 'menu.05.sub': 'Aastast 2010',
-      'menu.06.label': 'Artiklid', 'menu.06.sub': 'Õigusajakiri',
       'menu.07.label': 'Hinnakiri', 'menu.07.sub': 'Alates 120 €/h',
       'menu.08.label': 'Broneeri', 'menu.08.sub': 'Konsultatsioon',
       'aside.contact': 'Kontakt',
@@ -2938,21 +2888,6 @@ Vastus on alati teie.`,
       a.href = 'legal.html' + a.dataset.legalLink;
     });
   }
-</script>
-<div class="paper-toggle" role="group" aria-label="Background colour">
-  <button type="button" data-paper="beige">Beige</button><span class="sep">·</span><button type="button" data-paper="white">White</button>
-</div>
-<script>
-  (function(){
-    var root = document.documentElement, btns = document.querySelectorAll('.paper-toggle button');
-    function sync(){ var w = root.classList.contains('theme-white'); btns.forEach(function(b){ b.classList.toggle('active', (b.dataset.paper === 'white') === w); }); }
-    btns.forEach(function(b){ b.addEventListener('click', function(){
-      root.classList.toggle('theme-white', b.dataset.paper === 'white');
-      try { localStorage.setItem('lex_paper', b.dataset.paper); } catch(e){}
-      sync();
-    }); });
-    sync();
-  })();
 </script>
 </body>
 </html>

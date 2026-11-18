@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tiedot · Lexoria</title>
+<link rel="canonical" href="https://www.lexoria.fi/tiedot">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
@@ -24,7 +25,6 @@
       var hint = (navigator.language || 'en').toLowerCase().slice(0,2);
       var lang = cached || (hint === 'fi' || hint === 'et' ? hint : 'en');
       document.documentElement.lang = lang;
-      if (localStorage.getItem('lex_paper') === 'white') document.documentElement.classList.add('theme-white');
     } catch(e){}
   })();
 </script>
@@ -43,7 +43,6 @@
     --container-max: 1400px;
     --edge-x: var(--s-5);
   }
-  html.theme-white { --paper: #FFFFFF; --paper-soft: #F4F4F1; }
   @media (max-width: 768px) { :root { --edge-x: 24px; } }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -263,7 +262,7 @@
             <h3>7. Oikeutesi</h3>
             <p>Voit pyytää pääsyä tietoihisi, niiden oikaisemista tai poistamista, käsittelyn rajoittamista ja tietojen siirtämistä sekä vastustaa oikeutettuun etuun perustuvaa käsittelyä. Lähetä pyyntö osoitteeseen ${MAIL}. Voit myös tehdä valituksen tietosuojavaltuutetun toimistolle (${DPA}).</p>
             <h3>8. Evästeet ja tallennus</h3>
-            <p>Sivusto ei käytä analytiikkaa, mainontaa eikä seurantaevästeitä. Valintojesi muistamiseksi selaimesi paikalliseen tallennustilaan tallennetaan valitsemasi kieli (lex_lang) ja taustaväri (lex_paper). Niitä ei lähetetä meille, ja voit poistaa ne tyhjentämällä sivuston tiedot selaimesi asetuksista.</p>`
+            <p>Sivusto ei käytä analytiikkaa, mainontaa eikä seurantaevästeitä. Valintojesi muistamiseksi selaimesi paikalliseen tallennustilaan tallennetaan valitsemasi kieli (lex_lang). Sitä ei lähetetä meille, ja voit poistaa sen tyhjentämällä sivuston tiedot selaimesi asetuksista.</p>`
         },
         terms: {
           tab: 'Ehdot', title: 'Käyttö<em>ehdot</em>',
@@ -331,7 +330,7 @@
             <h3>7. Your rights</h3>
             <p>You may ask for access to your data, for it to be corrected or erased, for processing to be restricted and for your data to be transferred, and you may object to processing based on legitimate interest. Send your request to ${MAIL}. You may also lodge a complaint with the Office of the Data Protection Ombudsman (${DPA}).</p>
             <h3>8. Cookies and storage</h3>
-            <p>The site uses no analytics, advertising or tracking cookies. To remember your choices, your browser's local storage keeps the language (lex_lang) and background colour (lex_paper) you chose. They are not sent to us, and you can remove them by clearing this site's data in your browser settings.</p>`
+            <p>The site uses no analytics, advertising or tracking cookies. To remember your choices, your browser's local storage keeps the language you chose (lex_lang). It is not sent to us, and you can remove it by clearing this site's data in your browser settings.</p>`
         },
         terms: {
           tab: 'Terms', title: 'Terms of <em>use</em>',
@@ -399,7 +398,7 @@
             <h3>7. Sinu õigused</h3>
             <p>Võid taotleda juurdepääsu oma andmetele, nende parandamist või kustutamist, töötlemise piiramist ja andmete ülekandmist ning esitada vastuväite õigustatud huvil põhinevale töötlemisele. Saada taotlus aadressile ${MAIL}. Sul on ka õigus esitada kaebus Soome andmekaitseombudsmani büroole (${DPA}).</p>
             <h3>8. Küpsised ja salvestus</h3>
-            <p>Leht ei kasuta analüütikat, reklaami ega jälgimisküpsiseid. Valikute meelespidamiseks salvestatakse sinu brauseri kohalikku mällu valitud keel (lex_lang) ja taustavärv (lex_paper). Neid ei saadeta meile ja saad need eemaldada, kustutades brauseri seadetes selle lehe andmed.</p>`
+            <p>Leht ei kasuta analüütikat, reklaami ega jälgimisküpsiseid. Valikute meelespidamiseks salvestatakse sinu brauseri kohalikku mällu valitud keel (lex_lang). Seda ei saadeta meile ja saad selle eemaldada, kustutades brauseri seadetes selle lehe andmed.</p>`
         },
         terms: {
           tab: 'Tingimused', title: 'Kasutus<em>tingimused</em>',
