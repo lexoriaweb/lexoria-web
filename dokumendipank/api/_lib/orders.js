@@ -160,10 +160,10 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
             <tr><td colspan="2" class="mu" style="padding:0 0 6px;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.items} · ${orderNo}</td></tr>
             ${rows}
             <tr>
-              <td class="mu rule" style="padding:16px 0 0;border-top:1px solid #DDD5C5;${mono}font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6B6B;">${c.total}<br><span style="letter-spacing:0.1em;">${c.vat} · ${c.vatAmount} ${vatOf(total, lang)} €</span></td>
+              <td class="mu rule" style="padding:16px 0 0;border-top:1px solid #DDD5C5;${mono}font-size:10px;letter-spacing:0.16em;line-height:1.8;text-transform:uppercase;color:#6B6B6B;">${c.total}<br><span style="letter-spacing:0.1em;">${c.vat}<br>${c.vatAmount} ${vatOf(total, lang)} €</span></td>
               <td class="tx rule" style="padding:14px 0 0 16px;border-top:1px solid #DDD5C5;${serif}font-size:26px;color:#0F1419;text-align:right;white-space:nowrap;">${total} €</td>
             </tr>
-            <tr><td colspan="2" class="mu" style="padding:18px 0 0;${mono}font-size:10px;letter-spacing:0.08em;line-height:1.6;color:#6B6B6B;">${c.date} ${dateOf(lang)} · ${esc(statusLine)}</td></tr>
+            <tr><td colspan="2" class="mu" style="padding:18px 0 0;${mono}font-size:10px;letter-spacing:0.08em;line-height:1.8;text-align:left;color:#6B6B6B;">${c.date} ${dateOf(lang)}<br>${esc(statusLine)}</td></tr>
           </table>
         </td></tr>
         <tr><td class="tx" style="padding:28px 0 0;${serif}font-size:15px;line-height:1.55;color:#0F1419;">${c.help.replace('lexoria.fi', '<a href="https://www.lexoria.fi" class="tx" style="color:#0F1419;">lexoria.fi</a>')}</td></tr>
@@ -187,7 +187,7 @@ async function sendOrderEmail(order, payment) {
   const items = itemsOf(order.skus);
   const total = totalOf(items);
   const c = COPY[lang];
-  const statusLine = MONTONIO.sandbox ? c.test : `${c.paid}${payment && c.methods[payment.method] ? ' · ' + c.methods[payment.method] : ''}`;
+  const statusLine = MONTONIO.sandbox ? c.test : `${c.paid}${payment && c.methods[payment.method] ? ', ' + c.methods[payment.method] : ''}`;
 
   const attachments = items.map((it) => ({
     filename: `Lexoria-${it.file}`,
@@ -203,7 +203,7 @@ async function sendOrderEmail(order, payment) {
     reply_to: REPLY_TO,
     subject: c.subject(orderNo),
     html: buildHtml(lang, name, items, total, orderNo, statusLine),
-    text: `${c.hi(name)}\n\n${c.lead}\n\n${c.items} #${orderNo}:\n${items.map((it) => `- ${it[lang]} · ${it.price} €`).join('\n')}\n${c.total}: ${total} € (${c.vat}, ${c.vatAmount} ${vatOf(total, lang)} €)\n\n${c.date} ${dateOf(lang)} · ${statusLine}\n\n${c.help}\n\n${c.consent}\n${c.terms}: ${termsUrl(lang)}\n\n${c.sign}`,
+    text: `${c.hi(name)}\n\n${c.lead}\n\n${c.items} #${orderNo}:\n${items.map((it) => `- ${it[lang]} · ${it.price} €`).join('\n')}\n${c.total}: ${total} € (${c.vat}, ${c.vatAmount} ${vatOf(total, lang)} €)\n\n${c.date} ${dateOf(lang)}\n${statusLine}\n\n${c.help}\n\n${c.consent}\n${c.terms}: ${termsUrl(lang)}\n\n${c.sign}`,
     attachments,
     tags: [{ name: 'source', value: 'document-bank' }, { name: 'mode', value: MONTONIO.sandbox ? 'sandbox' : 'live' }],
   };
