@@ -16,7 +16,9 @@ const PDF_DIR = path.join(__dirname, '..', '_pdfs');
 const FROM = process.env.MAIL_FROM || 'Lexoria Document Bank <onboarding@resend.dev>';
 const REPLY_TO = process.env.MAIL_REPLY_TO || 'liisa@lexoria.fi';
 const SHOP_URL = (process.env.SHOP_URL || 'https://lexoriashop.vercel.app').replace(/\/$/, '');
-const TERMS_URL = SHOP_URL + '/#terms';
+// Terms open in the shop as it is served on the main domain, in the buyer's language
+const TERMS_PATH = { fi: '/asiakirjapankki', en: '/document-bank', et: '/dokumendipank' };
+const termsUrl = (lang) => `https://www.lexoria.fi${TERMS_PATH[lang]}#terms`;
 
 const MONTONIO = {
   sandbox: process.env.MONTONIO_ENV !== 'live',
@@ -165,11 +167,11 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
           </table>
         </td></tr>
         <tr><td class="tx" style="padding:28px 0 0;${serif}font-size:15px;line-height:1.55;color:#0F1419;">${c.help.replace('lexoria.fi', '<a href="https://www.lexoria.fi" class="tx" style="color:#0F1419;">lexoria.fi</a>')}</td></tr>
-        <tr><td class="mu" style="padding:18px 0 0;${serif}font-size:13px;line-height:1.5;color:#6B6B6B;">${c.consent} <a href="${TERMS_URL}" class="mu" style="color:#6B6B6B;">${c.terms}</a></td></tr>
+        <tr><td class="mu" style="padding:18px 0 0;${serif}font-size:13px;line-height:1.5;color:#6B6B6B;">${c.consent} <a href="${termsUrl(lang)}" class="mu" style="color:#6B6B6B;">${c.terms}</a></td></tr>
         <tr><td class="mu" style="padding:40px 0 0;${mono}font-size:10px;letter-spacing:0.06em;line-height:1.9;color:#6B6B6B;">
           <span class="tx" style="color:#0F1419;">Asianajotoimisto Lexoria Oy</span><br>
           Helsinki<br>
-          <a href="tel:+358456560060" class="mu" style="color:#6B6B6B;text-decoration:none;">+358 (0)45 656 0060</a><br>
+          <a href="tel:+358456560060" class="mu" style="color:#6B6B6B;text-decoration:none;">+358 45 656 0060</a><br>
           <a href="https://www.lexoria.fi" class="mu" style="color:#6B6B6B;text-decoration:none;">www.lexoria.fi</a><br>
           Y-tunnus 3561005-2
         </td></tr>
@@ -201,7 +203,7 @@ async function sendOrderEmail(order, payment) {
     reply_to: REPLY_TO,
     subject: c.subject(orderNo),
     html: buildHtml(lang, name, items, total, orderNo, statusLine),
-    text: `${c.hi(name)}\n\n${c.lead}\n\n${c.items} #${orderNo}:\n${items.map((it) => `- ${it[lang]} · ${it.price} €`).join('\n')}\n${c.total}: ${total} € (${c.vat}, ${c.vatAmount} ${vatOf(total, lang)} €)\n\n${c.date} ${dateOf(lang)} · ${statusLine}\n\n${c.help}\n\n${c.consent}\n${c.terms}: ${TERMS_URL}\n\n${c.sign}`,
+    text: `${c.hi(name)}\n\n${c.lead}\n\n${c.items} #${orderNo}:\n${items.map((it) => `- ${it[lang]} · ${it.price} €`).join('\n')}\n${c.total}: ${total} € (${c.vat}, ${c.vatAmount} ${vatOf(total, lang)} €)\n\n${c.date} ${dateOf(lang)} · ${statusLine}\n\n${c.help}\n\n${c.consent}\n${c.terms}: ${termsUrl(lang)}\n\n${c.sign}`,
     attachments,
     tags: [{ name: 'source', value: 'document-bank' }, { name: 'mode', value: MONTONIO.sandbox ? 'sandbox' : 'live' }],
   };
