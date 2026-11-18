@@ -1017,7 +1017,9 @@
     .view-grid .promo-card { gap: var(--s-3); padding: var(--s-2); }
     .view-grid .promo-card .h { font-size: 20px; }
     .view-grid .promo-card .cta { font-size: 9px; letter-spacing: 0.16em; }
-    .product-grid.view-grid + .swipe-nav { display: none; }
+    .product-grid.view-grid + .swipe-nav,
+    .product-grid.single + .swipe-nav { display: none; }
+    .product-grid.single > * { flex-basis: 100%; }
 
     .swipe-nav {
       display: flex;
@@ -1056,7 +1058,9 @@
       transition: background 0.3s, width 0.3s;
     }
     .swipe-dots .dot.active { background: var(--maroon); width: 20px; }
-    .shop-note { margin-top: var(--s-4); font-size: 9px; }
+    .shop-note { margin-top: var(--s-4); font-size: 10px; letter-spacing: 0.16em; line-height: 1.9; }
+    .shop-note span { display: block; }
+    .shop-note .sep { display: none; }
   }
 
   /* ============================================================
@@ -2298,7 +2302,7 @@
       <ul class="hero-points">
         <li data-i18n="hero.p1">PDF by e-mail in minutes</li>
         <li data-i18n="hero.p2">Prices incl. VAT</li>
-        <li data-i18n="hero.p3">From 15 €</li>
+        <li data-i18n="hero.p3">199 €</li>
       </ul>
     </div>
   </div>
@@ -2344,7 +2348,7 @@
       <div class="swipe-dots" id="swipeDots"></div>
     </div>
 
-    <p class="shop-note" data-i18n="shop.footnote">All prices incl. VAT 25.5% · delivered as PDF by e-mail</p>
+    <p class="shop-note" data-i18n-html="shop.footnote"><span>All prices incl. VAT 25.5%</span><span class="sep"> · </span><span>delivered as PDF by e-mail</span></p>
   </div>
 </section>
 
@@ -2386,7 +2390,7 @@
       <div class="step">
         <span class="step-num" data-i18n="how.s1.num">01 / Browse</span>
         <h4 data-i18n-html="how.s1.title">Pick the <em>document</em></h4>
-        <p data-i18n="how.s1.body">Five templates covering the questions we get asked most. Read the description before you buy.</p>
+        <p data-i18n="how.s1.body">A will template in Finnish, English or Estonian. Read the description before you buy.</p>
       </div>
       <div class="step">
         <span class="step-num" data-i18n="how.s2.num">02 / Fill in</span>
@@ -2520,7 +2524,7 @@
     <div class="cart-empty" id="cartEmpty">
       <span class="lead" data-i18n="cart.empty.lead">Cart is empty</span>
       <span class="msg" data-i18n-html="cart.empty.msg">Add a document to <em>start.</em></span>
-      <span class="hint" data-i18n="cart.empty.hint">Five templates. From €15.</span>
+      <span class="hint" data-i18n="cart.empty.hint">Will template in Finnish, English or Estonian. €199.</span>
     </div>
   </div>
   <div class="cart-foot">
@@ -2660,7 +2664,7 @@
       'how.h2': 'Three steps.<br><em>Signed today.</em>',
       'how.s1.num': '01 / Browse',
       'how.s1.title': 'Pick the <em>document</em>',
-      'how.s1.body': 'Five templates covering the questions we get asked most. Read the description before you buy.',
+      'how.s1.body': 'A will template in Finnish, English or Estonian. Read the description before you buy.',
       'how.s2.num': '02 / Pay',
       'how.s2.title': 'Checkout in <em>a minute</em>',
       'how.s2.body': 'Name and e-mail, then pay. Finnish bank payments and cards via Montonio.',
@@ -2716,10 +2720,10 @@
       'hero.link': 'How it works',
       'hero.p1': 'PDF by e-mail in minutes',
       'hero.p2': 'Prices incl. VAT',
-      'hero.p3': 'From 15 €',
+      'hero.p3': '199 €',
       'shop.all': 'All',
       'shop.sort': 'Sort',
-      'shop.footnote': 'All prices incl. VAT 25.5% · delivered as PDF by e-mail',
+      'shop.footnote': '<span>All prices incl. VAT 25.5%</span><span class="sep"> · </span><span>delivered as PDF by e-mail</span>',
       'sort.featured': 'Featured',
       'sort.priceAsc': 'Price, low to high',
       'sort.priceDesc': 'Price, high to low',
@@ -2836,7 +2840,7 @@
       'how.h2': 'Kolme askelta.<br><em>Allekirjoita tänään.</em>',
       'how.s1.num': '01 / Selaa',
       'how.s1.title': 'Valitse <em>asiakirja</em>',
-      'how.s1.body': 'Viisi mallia, jotka kattavat useimmin kysytyt asiat. Lue kuvaus ennen ostoa.',
+      'how.s1.body': 'Testamenttimalli suomeksi, englanniksi tai viroksi. Lue kuvaus ennen ostoa.',
       'how.s2.num': '02 / Maksa',
       'how.s2.title': 'Kassa <em>minuutissa</em>',
       'how.s2.body': 'Nimi ja sähköposti, sitten maksu. Suomalaiset pankkimaksut ja kortit Montonion kautta.',
@@ -2892,10 +2896,10 @@
       'hero.link': 'Näin se toimii',
       'hero.p1': 'PDF sähköpostiin minuuteissa',
       'hero.p2': 'Hinnat sis. ALV',
-      'hero.p3': 'Alkaen 15 €',
+      'hero.p3': '199 €',
       'shop.all': 'Kaikki',
       'shop.sort': 'Järjestä',
-      'shop.footnote': 'Kaikki hinnat sis. ALV 25,5 % · toimitus PDF-tiedostona sähköpostiin',
+      'shop.footnote': '<span>Kaikki hinnat sis. ALV 25,5 %</span><span class="sep"> · </span><span>toimitus PDF-tiedostona sähköpostiin</span>',
       'sort.featured': 'Suositellut',
       'sort.priceAsc': 'Hinta, halvin ensin',
       'sort.priceDesc': 'Hinta, kallein ensin',
@@ -3000,7 +3004,7 @@
       'how.h2': 'Kolm sammu.<br><em>Allkiri täna.</em>',
       'how.s1.num': '01 / Sirvi',
       'how.s1.title': 'Vali <em>dokument</em>',
-      'how.s1.body': 'Viis põhja, mis katavad kõige sagedamini küsitud teemad. Loe kirjeldus enne ostu läbi.',
+      'how.s1.body': 'Testamendipõhi soome, inglise või eesti keeles. Loe kirjeldus enne ostu läbi.',
       'how.s2.num': '02 / Maksa',
       'how.s2.title': 'Kassa <em>minutiga</em>',
       'how.s2.body': 'Nimi ja e-post, seejärel makse. Soome pangamaksed ja kaardid Montonio kaudu.',
@@ -3056,10 +3060,10 @@
       'hero.link': 'Kuidas see toimib',
       'hero.p1': 'PDF e-postile minutitega',
       'hero.p2': 'Hinnad sis. KM',
-      'hero.p3': 'Alates 15 €',
+      'hero.p3': '199 €',
       'shop.all': 'Kõik',
       'shop.sort': 'Järjesta',
-      'shop.footnote': 'Kõik hinnad sisaldavad käibemaksu 25,5% · tarne PDF-failina e-postile',
+      'shop.footnote': '<span>Kõik hinnad sisaldavad käibemaksu 25,5%</span><span class="sep"> · </span><span>tarne PDF-failina e-postile</span>',
       'sort.featured': 'Soovitatud',
       'sort.priceAsc': 'Hind, odavamad enne',
       'sort.priceDesc': 'Hind, kallimad enne',
@@ -3359,6 +3363,7 @@
     const list = visibleProducts();
     productGrid.innerHTML = list.map(cardHtml).join('');
     swipeDots.innerHTML = Array.from(productGrid.children, () => '<span class="dot"></span>').join('');
+    productGrid.classList.toggle('single', productGrid.children.length < 2);
     syncCartButtons();
     updateDots();
   }
