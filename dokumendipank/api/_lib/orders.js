@@ -39,6 +39,7 @@ const COPY = {
     vatAmount: 'josta ALV',
     date: 'Päivämäärä',
     paid: 'Maksettu Montonion kautta',
+    methods: { paymentInitiation: 'pankkimaksu', cardPayments: 'korttimaksu' },
     test: 'Testitilaus · Montonion testiympäristö, rahaa ei veloitettu.',
     consent: 'Hyväksyit tilaus- ja toimitusehdot ja pyysit välitöntä toimitusta, joten 14 päivän peruuttamisoikeus päättyi, kun tiedostot lähetettiin.',
     terms: 'Tilaus- ja toimitusehdot',
@@ -56,6 +57,7 @@ const COPY = {
     vatAmount: 'of which VAT',
     date: 'Date',
     paid: 'Paid via Montonio',
+    methods: { paymentInitiation: 'bank payment', cardPayments: 'card payment' },
     test: 'Test order · Montonio sandbox, no money was charged.',
     consent: 'You accepted the terms of sale and asked for immediate delivery, so the 14-day right of withdrawal ended when these files were sent.',
     terms: 'Terms of sale',
@@ -73,6 +75,7 @@ const COPY = {
     vatAmount: 'sellest KM',
     date: 'Kuupäev',
     paid: 'Makstud Montonio kaudu',
+    methods: { paymentInitiation: 'pangamakse', cardPayments: 'kaardimakse' },
     test: 'Testtellimus · Montonio testkeskkond, raha ei võetud.',
     consent: 'Nõustusid müügitingimustega ja palusid kohest tarnet, mistõttu 14-päevane taganemisõigus lõppes failide saatmisega.',
     terms: 'Müügitingimused',
@@ -103,6 +106,8 @@ function dateOf(lang) {
   return new Date().toLocaleDateString(LOCALE[lang], { timeZone: 'Europe/Helsinki', day: 'numeric', month: 'numeric', year: 'numeric' });
 }
 
+// The wordmark is one mid violet that reads on white and on dark: Gmail's apps darken the
+// mail but ignore the dark-mode styles, so the logo swap in the template never runs there.
 function buildHtml(lang, name, items, total, orderNo, statusLine) {
   const c = COPY[lang];
   const serif = "font-family:Georgia,'Times New Roman',serif;";
@@ -144,7 +149,7 @@ function buildHtml(lang, name, items, total, orderNo, statusLine) {
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;">
         <tr><td style="padding:0 0 32px;">
-          <img class="logo-light" src="${SHOP_URL}/lexoria-logo-purple.png" width="140" height="33" alt="Lexoria" style="display:block;width:140px;height:auto;border:0;"><!--[if !mso]><!--><img class="logo-dark" src="${SHOP_URL}/lexoria-logo-white.png" width="140" height="33" alt="" style="display:none;width:140px;max-height:0;height:auto;overflow:hidden;border:0;mso-hide:all;"><!--<![endif]-->
+          <img class="logo-light" src="${SHOP_URL}/lexoria-logo-mail.png" width="140" height="33" alt="Lexoria" style="display:block;width:140px;height:auto;border:0;"><!--[if !mso]><!--><img class="logo-dark" src="${SHOP_URL}/lexoria-logo-white.png" width="140" height="33" alt="" style="display:none;width:140px;max-height:0;height:auto;overflow:hidden;border:0;mso-hide:all;"><!--<![endif]-->
         </td></tr>
         <tr><td class="tx" style="${serif}font-size:26px;line-height:1.2;color:#0F1419;padding:0 0 14px;">${esc(c.hi(name))}</td></tr>
         <tr><td class="tx" style="${serif}font-size:16px;line-height:1.55;color:#0F1419;padding:0 0 28px;">${c.lead}</td></tr>
@@ -180,7 +185,7 @@ async function sendOrderEmail(order, payment) {
   const items = itemsOf(order.skus);
   const total = totalOf(items);
   const c = COPY[lang];
-  const statusLine = MONTONIO.sandbox ? c.test : `${c.paid}${payment && payment.method ? ' · ' + payment.method : ''}`;
+  const statusLine = MONTONIO.sandbox ? c.test : `${c.paid}${payment && c.methods[payment.method] ? ' · ' + c.methods[payment.method] : ''}`;
 
   const attachments = items.map((it) => ({
     filename: `Lexoria-${it.file}`,
