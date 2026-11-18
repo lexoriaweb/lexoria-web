@@ -45,7 +45,7 @@ const COPY = {
     test: 'Testitilaus · Montonion testiympäristö, rahaa ei veloitettu.',
     consent: 'Hyväksyit tilaus- ja toimitusehdot ja pyysit välitöntä toimitusta, joten 14 päivän peruuttamisoikeus päättyi, kun tiedostot lähetettiin.',
     terms: 'Tilaus- ja toimitusehdot',
-    help: 'Tarvitsetko räätälöidyn asiakirjan? Vastaa tähän viestiin tai varaa konsultaatio osoitteessa lexoria.fi.',
+    help: 'Tarvitsetko räätälöidyn asiakirjan? Vastaa tai varaa aika: lexoria.fi.',
     sign: 'Asianajotoimisto Lexoria Oy · Helsinki',
   },
   en: {
@@ -63,7 +63,7 @@ const COPY = {
     test: 'Test order · Montonio sandbox, no money was charged.',
     consent: 'You accepted the terms of sale and asked for immediate delivery, so the 14-day right of withdrawal ended when these files were sent.',
     terms: 'Terms of sale',
-    help: 'Need a bespoke document? Reply to this e-mail or book a consultation at lexoria.fi.',
+    help: 'Need a bespoke document? Reply or book a consultation at lexoria.fi.',
     sign: 'Asianajotoimisto Lexoria Oy · Helsinki',
   },
   et: {
@@ -81,7 +81,7 @@ const COPY = {
     test: 'Testtellimus · Montonio testkeskkond, raha ei võetud.',
     consent: 'Nõustusid müügitingimustega ja palusid kohest tarnet, mistõttu 14-päevane taganemisõigus lõppes failide saatmisega.',
     terms: 'Müügitingimused',
-    help: 'Vajad just sulle koostatud dokumenti? Vasta sellele kirjale või broneeri konsultatsioon aadressil lexoria.fi.',
+    help: 'Vajad eraldi koostatud dokumenti? Vasta või broneeri aeg: lexoria.fi.',
     sign: 'Asianajotoimisto Lexoria Oy · Helsinki',
   },
 };
