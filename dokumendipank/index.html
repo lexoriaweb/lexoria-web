@@ -2716,7 +2716,7 @@
       'cart.close': 'Close',
       'cart.empty.lead': 'Cart is empty',
       'cart.empty.msg': 'Add a document to <em>start.</em>',
-      'cart.empty.hint': 'Will template in Finnish, English or Estonian. €29.',
+      'cart.empty.hint': 'Will template in Finnish, English or Estonian. €199.',
       'cart.total': 'Total',
       'cart.vat': 'Incl. VAT 25.5%',
       'cart.checkout': 'Continue to checkout',
@@ -2892,7 +2892,7 @@
       'cart.close': 'Sulje',
       'cart.empty.lead': 'Kori on tyhjä',
       'cart.empty.msg': 'Lisää asiakirja <em>aloittaaksesi.</em>',
-      'cart.empty.hint': 'Testamentti suomeksi, englanniksi tai viroksi. 29 €.',
+      'cart.empty.hint': 'Testamentti suomeksi, englanniksi tai viroksi. 199 €.',
       'cart.total': 'Yhteensä',
       'cart.vat': 'Sis. ALV 25,5 %',
       'cart.checkout': 'Siirry kassalle',
@@ -3056,7 +3056,7 @@
       'cart.close': 'Sulge',
       'cart.empty.lead': 'Ostukorv on tühi',
       'cart.empty.msg': 'Lisa dokument, <em>et alustada.</em>',
-      'cart.empty.hint': 'Testament soome, inglise või eesti keeles. 29 €.',
+      'cart.empty.hint': 'Testament soome, inglise või eesti keeles. 199 €.',
       'cart.total': 'Kokku',
       'cart.vat': 'Sis. KM 25,5%',
       'cart.checkout': 'Edasi kassasse',
@@ -3332,7 +3332,7 @@
   // One product sold in three language editions; a SKU is `${id}-${edition}` (will-fi, will-en, will-et)
   const EDITIONS = ['fi', 'en', 'et'];
   const PRODUCTS = [
-    { id: 'will', n: 'p1', price: 0.1, cat: 'inheritance', pages: 2 }
+    { id: 'will', n: 'p1', price: 199, cat: 'inheritance', pages: 2 }
   ];
   var edSel = {};  // product id -> edition picked in the UI
   function edOf(sku) { const ed = String(sku).split('-')[1]; return EDITIONS.includes(ed) ? ed : null; }

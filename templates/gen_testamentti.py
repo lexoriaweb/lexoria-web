@@ -35,11 +35,9 @@ W, H = A4
 L = R = 56
 FIRM = "Asianajotoimisto Lexoria Oy"
 FIRM_EN = "Attorneys Lexoria Ltd"
-ADDRESS = "Vekarakatu 14, 13500 Hämeenlinna"
 PHONE = "+358 (0)45 656 0060"
 WEB = "www.lexoria.fi"
 YT = "Y-tunnus 3561005-2"
-HOME = "Kotipaikka Hämeenlinna"
 SEP = "  ·  "
 
 
@@ -176,16 +174,14 @@ def variant_a(c, doc):
     footer_grid(c, doc)
 
 def footer_grid(c, doc):
-    """Three aligned columns instead of a dotted run-on line; page number on the first baseline."""
+    """Two aligned columns instead of a dotted run-on line; page number on the first baseline.
+    The street address and domicile are left out at the firm's request."""
     y1, y2 = 47, 36
     text(c, L, y1, FIRM, font="JBM-M", color=INK, track=0.3)
-    text(c, L, y2, ADDRESS, track=0.3)
+    text(c, L, y2, YT, track=0.3)
     x2 = L + 182
     text(c, x2, y1, PHONE, track=0.3)
     text(c, x2, y2, WEB, track=0.3)
-    x3 = L + 300
-    text(c, x3, y1, YT, track=0.3)
-    text(c, x3, y2, HOME, track=0.3)
     text(c, W - R, y1, page_label(doc), font="JBM-M", color=INK, track=0.3, align="right")
 
 def variant_b(c, doc):
@@ -195,8 +191,8 @@ def variant_b(c, doc):
     text(c, W / 2, H - 44 - wm_h - 13, "ASIANAJOTOIMISTO  ·  ATTORNEYS AT LAW", size=5.6, track=1.5, align="center")
     mk = 20
     barmark(c, (W - mk) / 2, 60, mk)
-    text(c, W / 2, 46, f"{FIRM}{SEP}{ADDRESS}{SEP}{PHONE}", align="center")
-    text(c, W / 2, 35, f"{WEB}{SEP}{YT}{SEP}{HOME}{SEP}{page_label(doc)}", align="center")
+    text(c, W / 2, 46, f"{FIRM}{SEP}{PHONE}", align="center")
+    text(c, W / 2, 35, f"{WEB}{SEP}{YT}{SEP}{page_label(doc)}", align="center")
 
 def variant_c(c, doc):
     """Typographic header (firm name in mono caps), bar mark right; wordmark lives in the footer."""
@@ -209,8 +205,8 @@ def variant_c(c, doc):
     hairline(c, 60)
     wm_w = 62
     wordmark(c, L, 36, wm_w)
-    text(c, W - R, 46, f"{ADDRESS}{SEP}{PHONE}{SEP}{WEB}", align="right")
-    text(c, W - R, 35, f"{YT}{SEP}{HOME}{SEP}{page_label(doc)}", align="right")
+    text(c, W - R, 46, f"{PHONE}{SEP}{WEB}", align="right")
+    text(c, W - R, 35, f"{YT}{SEP}{page_label(doc)}", align="right")
 
 def variant_d(c, doc):
     """Paper-tone bands top and bottom carrying the marks and the firm details."""
@@ -222,8 +218,8 @@ def variant_d(c, doc):
     wordmark(c, L, H - 33 - wm_h / 2, wm_w)
     mk = 28
     barmark(c, W - R - mk, H - 33 - mk / 2, mk)
-    text(c, L, 34, f"{FIRM}{SEP}{ADDRESS}{SEP}{PHONE}", color=INK)
-    text(c, L, 23, f"{WEB}{SEP}{YT}{SEP}{HOME}")
+    text(c, L, 34, f"{FIRM}{SEP}{PHONE}", color=INK)
+    text(c, L, 23, f"{WEB}{SEP}{YT}")
     text(c, W - R, 34, page_label(doc), color=INK, align="right")
 
 VARIANTS = {
